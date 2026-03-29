@@ -1,0 +1,209 @@
+main {
+  margin-top: 98px;
+}
+
+main,
+section:not(.main-bg) {
+  width: 100%;
+  max-width: 1100px;
+  padding: 40px 20px;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+main div {
+  max-width: 520px;
+}
+
+main span {
+  color: var(--pink-highlight);
+}
+
+main img {
+  width: 580px;
+  height: 420px;
+  border-radius: var(--radius-md);
+  background: var(--ghost-purple);
+}
+
+/* Text */
+
+p {
+  color: var(--gray-text);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+/* Buttons */
+
+button {
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--purple-secondary);
+  box-shadow: 0 0 12px var(--ghost-pink-60);
+  transform: translateY(-2px);
+}
+
+/* Sections */
+
+section {
+  text-align: center;
+}
+
+/* Sequences (How it works / Gamified) */
+
+.sequence-container {
+  display: flex;
+  gap: 24px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 64px;
+}
+
+.sequence-unit {
+  max-width: 260px;
+  padding: 20px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--ghost-purple);
+  transition: 0.2s;
+}
+
+.sequence-unit:hover {
+  transform: translateY(-4px);
+  border: 1px solid var(--purple-primary);
+  box-shadow: 0 0 16px var(--purple-primary);
+}
+
+.sequence-square {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 16px;
+  border-radius: var(--radius-xs);
+  background: var(--purple-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Prints */
+
+.prints-row {
+  display: flex;
+  gap: 16px;
+  margin-top: 32px;
+  justify-content: center;
+}
+
+.prints-row img {
+  width: 440px;
+  height: 240px;
+  border-radius: var(--radius-sm);
+  background: var(--ghost-purple);
+}
+
+/* Games */
+
+.game-row {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin: 32px 0 48px 0;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.game-card {
+  width: 200px;
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  background: var(--black-bg);
+  border: 1px solid var(--ghost-purple);
+  text-align: left;
+  transition: 0.2s;
+}
+
+.game-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 18px var(--purple-primary);
+  border: 2px solid var(--purple-primary);
+}
+
+.game-card img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-xs);
+  background: var(--ghost-purple);
+  margin-bottom: 12px;
+}
+
+.game-title {
+  font-family: var(--russo-one);
+  margin-bottom: 8px;
+}
+
+.game-discount {
+  color: var(--success);
+  font-size: 0.9rem;
+}
+
+.game-old-price {
+  text-decoration: line-through;
+  color: var(--ghost-white-60);
+  margin-left: 6px;
+}
+
+.game-price {
+  display: block;
+  margin-top: 4px;
+  font-weight: bold;
+}
+
+/* Community */
+
+.community-row {
+  display: flex;
+  gap: 32px;
+  margin-top: 32px;
+  margin-bottom: 48px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.community-row img {
+  width: 460px;
+  height: 380px;
+  border-radius: var(--radius-md);
+  background: var(--black-bg);
+}
+
+.community-list {
+  max-width: 400px;
+  text-align: left;
+}
+
+.community-list-item {
+  margin-bottom: 20px;
+}
+
+/* Subtle Glow Layer */
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, var(--ghost-pink-60), transparent 40%),
+    radial-gradient(circle at 80% 60%, var(--ghost-purple), transparent 50%);
+  opacity: 0.2;
+  z-index: -1;
+}
