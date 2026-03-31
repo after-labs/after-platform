@@ -67,6 +67,7 @@ h2,
 h3 {
   color: var(--white);
   font-family: var(--russo-one);
+  text-align: center;
 }
 
 h1 {
