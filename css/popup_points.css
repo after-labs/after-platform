@@ -1,0 +1,119 @@
+.points-container {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  background-color: var(--black-bg);
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--purple-primary);
+  box-shadow: 0 0 14px rgba(247, 193, 85, 0.8);
+
+  max-width: 400px;
+}
+
+.points-title {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 600;
+
+  background: linear-gradient(90deg, #f7ffb9, #e8d5ff, #feeaac, #fff1ca);
+  font-family: var(--font-family);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 14px #c2aeffaa;
+}
+
+.points-description {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--ghost-white-80);
+}
+
+.level-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 1.5rem 0 2rem 0;
+}
+
+.level-unit {
+  display: flex;
+  flex-direction: column;
+}
+.level-unit > span:first-of-type {
+  color: var(--ghost-white-80);
+}
+
+.level-unit > span:last-of-type {
+  font-size: 1.3rem;
+  font-weight: 600;
+
+  background: linear-gradient(90deg, #f7ffb9, #e8d5ff, #feeaac, #fff1ca);
+  font-family: var(--font-family);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 14px #c2aeffaa;
+}
+
+.progress-container {
+  width: 100%;
+  background-color: var(--black-bg);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--purple-primary);
+  overflow: hidden;
+
+  margin: 16px 0;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
+}
+
+.progress-container:hover {
+  outline: none;
+  border: 1px solid var(--white);
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.8);
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+}
+
+.progress-labels > span:last-of-type {
+  background: linear-gradient(90deg, #f7ffb9, #e8d5ff, #feeaac, #fff1ca);
+  font-family: var(--font-family);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 14px #c2aeffaa;
+}
+
+.progress-fill {
+  height: 24px;
+  background-color: var(--purple-primary);
+  width: 0%;
+  color: var(--white);
+  text-align: center;
+  line-height: 24px;
+  transition: width 0.5s ease-in-out;
+}
+
+.reward-unit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reward-unit > span:last-of-type {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.3rem;
+  color: var(--white);
+
+  background: linear-gradient(90deg, #f7ffb9, #e8d5ff, #feeaac, #fff1ca);
+  font-family: var(--font-family);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 14px #c2aeffaa;
+}
