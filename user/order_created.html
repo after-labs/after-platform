@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main class="confirmation-page">
+        <h1 class="confirmation-page_title">Order Created!</h1>
+
+        <nav class="stepper">
+            <div class="stepper_completed">
+                <span class="stepper_number">1</span>
+                <span class="stepper_label">Shopping cart</span>
+            </div>
+            <div class="stepper_completed">
+                <span class="stepper_number">2</span>
+                <span class="stepper_label">Checkout details</span>
+            </div>
+            <div class="stepper__item stepper_item--current">
+                <span class="stepper_number">3</span>
+                <span class="stepper_label">Order complete</span>
+            </div>
+        </nav>
+
+        <section class="order-card">
+            <header class="order-card_header">
+                <p class="order-card_thanks">Thank you! 🎉</p>
+                <h2 class="order-card_headline">Your order has been received</h2>
+                <p class="order-card_instruction">
+                    In a few minutes, check the email sent for 
+                    <span class="order-card_email">&lt;emailName&gt;</span> 
+                    for your access keys
+                </p>
+            </header>
+
+            <div class="order-card_items-preview">
+                <div class="order-card_item-thumb"></div>
+                <div class="order-card_item-thumb"></div>
+                <div class="order-card_item-thumb"></div>
+            </div>
+
+            <div class="order_info">
+                <div class="order-info_row">
+                    <span class="order-info_label">Order ID:</span>
+                    <span class="order-info_value">OR-0000-0001</span>
+                </div>
+                <div class="order-info__row">
+                    <span class="order-info_label">Date:</span>
+                    <span class="order-info_value">October 19, 2023</span>
+                </div>
+                <div class="order-info_row">
+                    <span class="order-info_label">Total Price:</span>
+                    <span class="order-info_value">$400.00</span>
+                </div>
+                <div class="order-info_row">
+                    <span class="order-info_label">Payment method:</span>
+                    <span class="order-info_value">Credit Card</span>
+                </div>
+            </div>
+
+            <footer class="order-card_actions">
+                <a href="#" class="btn btn-outline">Back to Shop</a>
+                <a href="#" class="btn btn-primary">My Orders</a>
+            </footer>
+        </section>
+    </main>
+</body>
+</html>
