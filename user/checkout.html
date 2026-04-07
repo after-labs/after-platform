@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<main class="checkout-container">
+    <nav class="checkout-stepper">
+        <div class="step completed">
+            <span class="step-number">1</span>
+            <span class="step-label">Shopping cart</span>
+        </div>
+        <div class="step active">
+            <span class="step-number">2</span>
+            <span class="step-label">Checkout details</span>
+        </div>
+        <div class="step">
+            <span class="step-number">3</span>
+            <span class="step-label">Order complete</span>
+        </div>
+    </nav>
+
+    <div class="checkout-content">
+        <section class="payment-methods">
+            <h2 class="section-title">Payment method</h2>
+            
+            <form id="payment-form">
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="payment" value="credit-card" checked>
+                        <span>Pay by Credit Card</span>
+                        <i class="icon-card"></i>
+                    </label>
+                    
+                    <label class="radio-option">
+                        <input type="radio" name="payment" value="pix">
+                        <span>PIX</span>
+                    </label>
+                </div>
+
+                <div class="card-details">
+                    <div class="input-field">
+                        <label for="card-number">CARD NUMBER</label>
+                        <input type="text" id="card-number" placeholder="1234 1234 1234">
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label for="expiry">EXPIRATION DATE</label>
+                            <input type="text" id="expiry" placeholder="MM/YY">
+                        </div>
+                        <div class="input-field">
+                            <label for="cvc">CVC</label>
+                            <input type="text" id="cvc" placeholder="CVC code">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-place-order">Place Order</button>
+            </form>
+        </section>
+
+        <aside class="order-summary">
+            <h2 class="section-title">Order summary</h2>
+            
+            <ul class="cart-items">
+                <li class="cart-item">
+                    <div class="item-thumb"></div>
+                    <div class="item-info">
+                        <span class="item-name">Big Hops</span>
+                        <span class="item-price">$19.00</span>
+                    </div>
+                    <button class="remove-item">&times;</button>
+                </li>
+                <li class="cart-item">
+                    <div class="item-thumb"></div>
+                    <div class="item-info">
+                        <span class="item-name">Hollow Knight</span>
+                        <span class="item-price">$24.00</span>
+                    </div>
+                    <button class="remove-item">&times;</button>
+                </li>
+                <li class="cart-item">
+                    <div class="item-thumb"></div>
+                    <div class="item-info">
+                        <span class="item-name">Aerial_Knight's Drop Shot</span>
+                        <span class="item-price">$19.00</span>
+                    </div>
+                    <button class="remove-item">&times;</button>
+                </li>
+            </ul>
+
+            <div class="promo-section">
+                <div class="promo-input">
+                    <input type="text" placeholder="Apply Coins!">
+                    <button class="btn-apply">Apply</button>
+                </div>
+                <div class="promo-input">
+                    <input type="text" placeholder="Enter coupon code">
+                    <button class="btn-apply">Apply</button>
+                </div>
+            </div>
+
+            <div class="applied-coupons">
+                <div class="coupon-tag">
+                    <span>AFTER25</span>
+                    <span class="discount-value">-$25.00 [Remove]</span>
+                </div>
+            </div>
+
+            <footer class="summary-totals">
+                <div class="total-row">
+                    <span>Coins Discount</span>
+                    <span>$7.00</span>
+                </div>
+                <div class="total-row">
+                    <span>Subtotal</span>
+                    <span>$62.00</span>
+                </div>
+                <div class="total-row grand-total">
+                    <span>Total</span>
+                    <span>$30.00</span>
+                </div>
+            </footer>
+        </aside>
+    </div>
+</main>
+</body>
+</html>
