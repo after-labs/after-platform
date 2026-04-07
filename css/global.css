@@ -94,7 +94,7 @@ button {
   all: unset;
 
   background-color: var(--purple-primary);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   border: 1px solid var(--white);
   padding: 12px 24px;
 
