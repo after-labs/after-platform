@@ -8,7 +8,7 @@
 }
 
 body {
-  background: #1e1e1e;
+  background: linear-gradient(90deg, #0f021a 0%, #1a0533 50%, #0f021a 100%);
 }
 
 /* CENTRALIZA */
