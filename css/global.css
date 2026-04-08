@@ -39,6 +39,12 @@
   --radius-sm: 16px;
   --radius-md: 24px;
   --radius-lg: 32px;
+
+  --transition: all 0.2s ease;
+  --box-shadow-purple: 0 0 16px var(--purple-primary);
+  --box-shadow-white: 0 0 16px var(---white);
+  --border-purple: 2px solid var(--purple-primary);
+  --border-white: 2px solid var(--white);
 }
 
 * {
@@ -110,4 +116,8 @@ a {
   text-decoration: none;
   cursor: pointer;
   color: var(--accent);
+}
+
+ul {
+  list-style: none;
 }
