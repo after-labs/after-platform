@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #1e1e1e;
+}
+
+/* CENTRALIZA */
+.wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+/* CARD */
+.game-card {
+  width: 950px;
+  background: #050010;
+  border-radius: 18px;
+  padding: 30px;
+  border: 2px solid #7a3cff;
+  box-shadow:
+    0 0 10px #7a3cff,
+    0 0 30px rgba(122, 60, 255, 0.6);
+  position: relative;
+}
+
+/* CLOSE */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+}
+
+/* TITLE */
+h2 {
+  margin-bottom: 20px;
+}
+
+h2 span {
+  color: #b88cff;
+}
+
+/* GRID */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+/* INPUTS */
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+
+  border-radius: 8px;
+  border: 1px solid #7a3cff;
+
+  background: #0d001f;
+  color: white;
+}
+
+/* TEXTAREAS */
+.textarea-group {
+  margin-top: 15px;
+}
+
+textarea {
+  height: 90px;
+}
+
+/* IMAGES HEADER */
+.images-header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* ADD BUTTON */
+.add-btn {
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 6px 15px;
+  background: transparent;
+  color: white;
+}
+
+/* GRID IMAGENS */
+.images-grid {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+/* CARD IMAGEM */
+.image-card {
+  width: 140px;
+  height: 90px;
+  background: #1a0033;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 15px #7a3cff;
+  position: relative;
+}
+
+.image-card.video {
+  background: #2a0055;
+}
+
+/* ÍCONES */
+.image-card .edit {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  font-size: 12px;
+}
+
+.image-card .close {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  font-size: 12px;
+}
+
+/* ACTIONS */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.delete {
+  background: red;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 8px;
+  color: white;
+}
+
+.save {
+  background: 6101E1;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 8px;
+  color: white;
+}

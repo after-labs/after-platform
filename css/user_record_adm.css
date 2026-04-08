@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top, #1a0033, #070010);
+  color: white;
+  height: 810px;
+  }
+
+
+/* CENTRALIZA */
+.wrapper {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+/* CARD */
+.user-card {
+  width: 650px;
+  background: #050010;
+  border-radius: 18px;
+  padding: 30px;
+  border: 2px solid #7a3cff;
+  box-shadow:
+    0 0 10px #7a3cff,
+    0 0 25px rgba(122, 60, 255, 0.6);
+  position: relative;
+}
+
+/* X */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+/* AVATAR */
+.avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin: 0 auto 15px;
+  margin: 0 auto 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar-inner {
+  width: 55px;
+  height: 55px;
+  background: #050010;
+  border-radius: 50%;
+  position: relative;
+}
+
+.avatar-inner::after {
+  content: "";
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 85px;
+  height: 50px;
+  background: #050010;
+  border-radius: 50%;
+}
+
+/* TITLE */
+h2 {
+  text-align: left;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+h2 span {
+  color: #b88cff;
+}
+
+/* GRID */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+/* FULL WIDTH */
+.full {
+  grid-column: span 2;
+}
+
+/* LABEL */
+label {
+  font-size: 12px;
+  color: #b88cff;
+}
+
+/* INPUT */
+input, select {
+  width: 100%;
+  padding: 10px;
+
+  border-radius: 8px;
+  border: 1px solid #7a3cff;
+
+  background: #0d001f;
+  color: white;
+
+  margin-top: 5px;
+}
+
+/* PHONE */
+.phone-input {
+  display: flex;
+  gap: 10px;
+}
+
+.code {
+  width: 60px;
+}
+
+/* SELECT SETA */
+select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, white 50%),
+                    linear-gradient(135deg, white 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) calc(50% - 3px),
+    calc(100% - 15px) calc(50% - 3px);
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+
+/* FOCUS */
+input:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 8px #7a3cff;
+}
+
+/* BOTÕES */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.delete {
+  border: 1px solid red;
+  background: transparent;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+
+.save {
+  background: #6101E1;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: white;
+}

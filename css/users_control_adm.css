@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top, #1a0033, #070010);
+  color: white;
+}
+
+/* TITLE */
+main {
+  padding: 20px 60px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+/* CARD */
+.card {
+  border: 1px solid #7a3cff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 0 20px rgba(122, 60, 255, 0.4);
+}
+
+/* SEARCH */
+.search-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.search-row input {
+  width: 65%;
+  padding: 12px 18px;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  background: #120026;
+  color: white;
+}
+
+.total {
+  color: #b88cff;
+}
+
+/* BUTTONS */
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 1px solid #7a3cff;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: rgba(122, 60, 255, 0.2);
+}
+
+.btn.active {
+  background: linear-gradient(90deg, #ff4df0, #7a3cff);
+  border: none;
+}
+
+.create {
+  margin-left: auto;
+}
+
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #0d001f;
+}
+
+th {
+  font-size: 12px;
+  color: #b88cff;
+  padding: 12px;
+}
+
+td {
+  padding: 14px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+tbody tr {
+  transition: 0.2s;
+}
+
+tbody tr:hover {
+  background: rgba(122, 60, 255, 0.15);
+}
+
+/* SELECT STYLE */
+.select {
+  color: #d3b3ff;
+  cursor: pointer;
+}
+
+/* PAGINATION */
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  color: #b88cff;
+}
+
+.page {
+  cursor: pointer;
+}
+
+.page.active {
+  color: #ff4df0;
+}

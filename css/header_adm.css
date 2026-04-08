@@ -1,0 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #1e1e1e; 
+    margin-top: 0;
+}
+
+/* Header principal */
+.main-header {
+    background: linear-gradient(90deg, #0f021a 0%, #1a0533 50%, #0f021a 100%);
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    padding: 30px 50px; /* Controla a altura do header */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    z-index: 100;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-weight: 900;
+    font-size: 24px;
+    letter-spacing: 1px;
+    font-style: italic;
+}
+
+.logo-icon {
+    margin-right: 8px;
+    letter-spacing: -2px;
+}
+
+/* Menu de Navegação */
+.nav-menu ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+     color: #ff00ff; /* Rosa neon da imagem */
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    transition: 0.3s;
+     color: #ffffff; /* Rosa neon da imagem */
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+    
+}
+
+.nav-menu a:hover{
+    color: #ff00ff;
+}
+
+/* Lado direito (Ícones) */
+.user-actions {
+    display: flex;
+    gap: 20px;
+    
+}
+
+.icon-btn{
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    
+    
+}
+
+.icon-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
