@@ -14,7 +14,7 @@ main {
   width: 88%;
   max-width: 900px;
   height: 2.3rem;
-  background-color: var(--purple-gradient-bg);
+  background-color: var(--purple-primary);
   border-radius: var(--radius-md);
 }
 
@@ -95,7 +95,8 @@ main {
   transition: all 0.2s ease;
 }
 
-.highlights-card:hover {
+.highlights-card:hover,
+.highlights-card-active {
   transform: translateY(-6px);
   box-shadow: 0 0 18px var(--purple-primary);
   border: 2px solid var(--white);
