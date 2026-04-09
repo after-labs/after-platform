@@ -8,7 +8,7 @@
   --purple-primary: #6101e1;
   --purple-secondary: #6f02d0;
   --dark-purple: #101010;
-  --ghost-purple: #3c0071;
+  --ghost-purple: #6101e180;
   --ghost-pink-60: #ff5cfd60;
   --pink-highlight: #ff5cfd;
   --dark-pink: #9e04c6;
@@ -24,10 +24,28 @@
     var(--dark-purple-bg) 49%,
     var(--dark-purple) 100%
   );
+  --top-banner-gradient-bg: linear-gradient(
+    90deg,
+    #00000000 0%,
+    var(--dark-purple-bg) 15%,
+    var(--purple-primary) 50%,
+    var(--dark-purple-bg) 85%,
+    #00000000 100%
+  );
+
+  --highlight-gradient-bg: linear-gradient(
+    90deg,
+    var(--black-bg) 0%,
+    var(--ghost-black-80) 40%,
+    #00000000 100%
+  );
 
   --white: #eee0ff;
   --ghost-white-80: #eee0ff80;
   --ghost-white-60: #eee0ff60;
+  --ghost-black-80: #10101080;
+  --ghost-black-60: #10101060;
+
   --gray-text: #c0b3ce;
   --alert: #ff0000;
   --success: #5cff8a;
@@ -44,6 +62,7 @@
   --box-shadow-purple: 0 0 16px var(--purple-primary);
   --box-shadow-white: 0 0 16px var(---white);
   --border-purple: 2px solid var(--purple-primary);
+  --border-ghost-purple: 3px solid var(--ghost-purple);
   --border-white: 2px solid var(--white);
 }
 

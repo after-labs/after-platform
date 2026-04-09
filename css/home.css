@@ -1,5 +1,7 @@
 main {
   width: 100%;
+  max-width: 1200px;
+  padding: 0 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,11 +13,10 @@ main {
   align-items: center;
   margin: 2rem 0 3rem 0;
 
-  width: 88%;
-  max-width: 900px;
-  height: 2.3rem;
-  background-color: var(--purple-primary);
-  border-radius: var(--radius-md);
+  width: 100%;
+  height: 2.6rem;
+  background: var(--top-banner-gradient-bg);
+  border-radius: var(--radius-xs);
 }
 
 .top-banner > p {
@@ -23,32 +24,53 @@ main {
   font-size: 1.2rem;
 }
 
+/* Highlight area (inside Main) for the featured games and annoucements of the page */
+
 .highlights {
-  display: flex;
-  justify-content: center;
-  width: 88%;
-  max-width: 1100px;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: 4fr 2fr;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
 }
+
+/* Big highlight card with the actual content from the card list on the right */
 
 .highlights-main {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+
+  background-color: transparent;
+  border-radius: var(--radius-md);
   gap: 1.2rem;
   align-items: flex-start;
-
+  position: relative;
   width: 100%;
-  max-width: 700px;
-  min-height: fit-content;
-  height: 450px;
-  padding: 2rem;
-  background-color: var(--black-bg);
-  border-radius: var(--radius-md);
+  overflow: hidden;
+
+  background: var(--highlight-gradient-bg);
+  border: var(--border-ghost-purple);
+  transition: var(--transition);
 }
 
-.highlights-main > p {
-  max-width: 25ch;
+.highlights-main:hover {
+  background: var(--highlight-gradient-bg);
+  box-shadow: 0 0 18px var(--purple-primary);
+  border: 2px solid var(--white);
+}
+
+.highlights-main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 0.5rem;
+
+  width: 100%;
+  max-width: 410px;
+  height: 100%;
+
+  margin: 1.2rem;
 }
 
 .highlights-main-buttons {
@@ -69,13 +91,22 @@ main {
   background-color: #d7b5ff30;
 }
 
-.highlights-cards {
+.bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 300px;
-  max-height: 450px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* Small cards on the right inside Main */
+
+.highlights-cards {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 1rem;
 }
 
 .highlights-card {
@@ -92,6 +123,7 @@ main {
   height: 100px;
   background-color: transparent;
   border-radius: var(--radius-md);
+  border: var(--border-ghost-purple);
   transition: all 0.2s ease;
 }
 
@@ -100,10 +132,6 @@ main {
   transform: translateY(-6px);
   box-shadow: 0 0 18px var(--purple-primary);
   border: 2px solid var(--white);
-}
-
-.highlights-card > p {
-  max-width: 3rem;
 }
 
 .highlights-card img {
@@ -116,21 +144,15 @@ section {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 1100px;
+  max-width: 1200px;
   margin-top: 3rem;
   padding: 0 2rem;
 }
 
 .title-container {
   width: 100%;
-  padding: 0 2rem;
   display: flex;
   justify-content: flex-start;
-}
-
-section > h2 {
-  margin-left: 2rem;
-  text-align: start;
 }
 
 .catalog-btn {
@@ -146,20 +168,19 @@ section > h2 {
 }
 
 .game-row {
-  display: flex;
-  flex-direction: row;
+  display: grid;
   gap: 16px;
   margin: 1rem 0 48px 0;
   justify-content: center;
-  flex-wrap: wrap;
+
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
 .game-card {
-  width: 200px;
   padding: 16px;
   border-radius: var(--radius-sm);
   background: var(--black-bg);
-  border: 1px solid var(--ghost-purple);
+  border: var(--border-ghost-purple);
   text-align: left;
   transition: 0.2s;
 }
