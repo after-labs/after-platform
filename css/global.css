@@ -129,6 +129,7 @@ button {
   justify-content: center;
   font-weight: 600;
   font-family: var(--russo-one);
+  transition: var(--transition);
 }
 
 a {

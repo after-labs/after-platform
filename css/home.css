@@ -139,6 +139,8 @@ main {
   height: 100%;
 }
 
+/* Section with the Game Rows */
+
 section {
   display: flex;
   flex-direction: column;
@@ -149,10 +151,28 @@ section {
   padding: 0 2rem;
 }
 
-.title-container {
+.section-header {
   width: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-arrows {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.arrow-btn {
+  all: unset;
+  height: 43px;
+  transition: var(--transition);
+}
+
+.arrow-btn:hover {
+  cursor: pointer;
+  box-shadow: var(--box-shadow-purple);
 }
 
 .catalog-btn {
@@ -174,7 +194,7 @@ section {
   justify-content: center;
   width: 100%;
 
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
 }
 
 .game-card {
@@ -220,4 +240,11 @@ section {
   display: block;
   margin-top: 4px;
   font-weight: bold;
+}
+
+@media (max-width: 700px) {
+  .highlights {
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+  }
 }
