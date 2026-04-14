@@ -9,71 +9,73 @@
     <main class="cart-page">
         <h1 class="cart-page_title">Cart</h1>
 
-        <div class="stepper">
-            <div class="stepper_item stepper_item--active">
-                <span class="stepper_number">1</span>
-                <span class="stepper_text">Shopping cart</span>
+        <nav class="stepper">
+            <div class="cart-stepper">
+                <div class="stepper-active">
+                    <span class="stepper-number">1</span>
+                    <span class="stepper-text">Shopping cart</span>
+                </div>
+                <div class="stepper-item">
+                    <span class="stepper-number">2</span>
+                    <span class="stepper-text">Checkout details</span>
+                </div>
+                <div class="stepper-item">
+                    <span class="stepper-number">3</span>
+                    <span class="stepper-text">Order complete</span>
+                </div>
             </div>
-            <div class="stepper_item">
-                <span class="stepper_number">2</span>
-                <span class="stepper_text">Checkout details</span>
-            </div>
-            <div class="stepper_item">
-                <span class="stepper_number">3</span>
-                <span class="stepper_text">Order complete</span>
-            </div>
-        </div>
+        </nav>
 
         <div class="cart-container">
             <section class="cart-items">
-                <h2 class="cart-items_heading">Games on the Cart</h2>
+                <h2 class="cart-items-heading">Games on the Cart</h2>
                 
-                <div class="cart-items_list">
+                <div class="cart-items-list">
                     <article class="cart-item">
-                        <div class="cart-item_image-placeholder"></div>
-                        <div class="cart-item_details">
-                            <h3 class="cart-item_name">Hollow Knight (STEAM)</h3>
-                            <div class="cart-item_prices">
-                                <span class="cart-item_price-original">$99.99</span>
-                                <span class="cart-item_price-discount">$99.99</span>
+                        <div class="cart-item-image-placeholder"></div>
+                        <div class="cart-item-details">
+                            <h3 class="cart-item-name">Hollow Knight (STEAM)</h3>
+                            <div class="cart-item-prices">
+                                <span class="cart-item-price-original">$99.99</span>
+                                <span class="cart-item-price-discount">$99.99</span>
                             </div>
                         </div>
-                        <div class="cart-item_actions">
-                            <button class="cart-item_remove-btn">Remove</button>
-                            <span class="cart-item_total">$25.98</span>
+                        <div class="cart-item-actions">
+                            <button class="cart-item-remove-btn">Remove</button>
+                            <span class="cart-item-total">$25.98</span>
                         </div>
                     </article>
                     </div>
             </section>
 
             <aside class="order-summary">
-                <h2 class="order-summary_title">Order Summary</h2>
+                <h2 class="order-summary-title">Order Summary</h2>
                 
-                <div class="order-summary_row">
+                <div class="order-summary-row">
                     <span>Items total</span>
                     <span>$128.78</span>
                 </div>
-                <div class="order-summary_row">
+                <div class="order-summary-row">
                     <span>Items quantity</span>
                     <span>$128.78</span>
                 </div>
                 
-                <hr class="order-summary_divider">
+                <hr class="order-summary-divider">
 
-                <div class="order-summary_total-row">
+                <div class="order-summary-total-row">
                     <span>Subtotal</span>
                     <span>$134.56</span>
                 </div>
 
                 <button class="checkout-button">
-                    <span class="checkout-button_icon">💳</span>
-                    <span class="checkout-button_text">Checkout</span>
-                    <span class="checkout-button_amount">$134.56</span>
+                    <span class="checkout-button-icon">💳</span>
+                    <span class="checkout-button-text">Checkout</span>
+                    <span class="checkout-button-amount">$134.56</span>
                 </button>
             </aside>
         </div>
 
-        <section class="you_may_like">
+        <section class="you-may-like">
         <h2>You may like</h2>
         <div class="game-card">
             <img src="#game-IMG" alt="" class="game-img">
