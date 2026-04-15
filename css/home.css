@@ -11,6 +11,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 6px;
   margin: 2rem 0 3rem 0;
 
   width: 100%;
@@ -20,8 +21,14 @@ main {
 }
 
 .top-banner > p {
+  display: flex;
   font-weight: 600;
   font-size: 1.2rem;
+  gap: 1.2rem;
+}
+
+.top-banner img {
+  height: 28px;
 }
 
 /* Highlight area (inside Main) for the featured games and annoucements of the page */
@@ -83,12 +90,20 @@ main {
   background-color: var(--white);
   color: var(--black-bg);
 }
+.highlights-main-buttons > button:first-of-type:hover {
+  box-shadow: var(--box-shadow-purple);
+}
 
 .highlights-main-buttons > button:last-of-type {
   padding: 0.5rem 0.5rem;
   border-radius: var(--radius-sm);
   border: none;
   background-color: #d7b5ff30;
+  transition: all 0.3s ease;
+}
+
+.highlights-main-buttons > button:last-of-type:hover {
+  background-color: #d7b5ff60;
 }
 
 .highlights-main-buttons > button:last-of-type > img {
@@ -406,10 +421,6 @@ section {
   section {
     padding: 0 0.5rem;
     margin: 1.5rem 0;
-  }
-
-  .section-header {
-    align-items: flex-start;
   }
 
   .game-row {
