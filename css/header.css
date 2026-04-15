@@ -1,7 +1,6 @@
 header {
   background-color: none;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  position: sticky;
   top: 0;
   z-index: 100;
 
@@ -13,8 +12,8 @@ header {
 }
 
 header .container {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  display: flex;
+  justify-content: space-between;
   padding: 15px 20px;
   gap: 1.3rem;
   width: 100%;
@@ -23,14 +22,11 @@ header .container {
 .logo {
   display: flex;
   justify-content: center;
+  width: 260px;
 }
 
-.logo h1 {
-  font-size: 1.5rem;
-  color: var(--primary-color);
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
+.logo img {
+  width: 100%;
 }
 
 nav {
@@ -39,20 +35,73 @@ nav {
   align-items: center;
 }
 
-nav ul {
+nav ul:not(.icon-group) {
   display: flex;
   gap: 20px;
+}
+
+nav li {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 nav a {
   color: var(--dark-color);
   font-weight: 500;
   padding: 5px;
+
+  display: flex;
+  align-items: center;
 }
 
 nav a:hover,
 nav a.active {
   color: var(--pink-highlight);
+}
+
+nav img {
+  height: 30px;
+  color: var(--white);
+}
+
+nav img:hover {
+  color: var(--pink-highlight);
+}
+
+.icon-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Search Bar */
+
+.search-container {
+  display: flex;
+  align-items: center;
+  border: var(--border-white);
+  border-radius: var(--radius-md);
+  padding: 5px 15px;
+  width: 100%;
+  max-width: 400px;
+  background-color: var(--dark-purple-bg);
+}
+
+.search-container input {
+  border: none;
+  outline: none;
+  flex: 1;
+  padding: 5px;
+  color: var(--white);
+  background-color: transparent;
+}
+
+.search-container img {
+  width: 18px;
+  height: 18px;
+  order: 2;
+  margin-left: 10px;
 }
 
 /* Button Styles */
@@ -94,6 +143,8 @@ header .btn-outline:hover {
 
 /* Responsive Styles */
 
+/* Testes para ajustes na responsibilidade dos headers
+
 @media (max-width: 904px) {
   header .container {
     flex-direction: column;
@@ -104,3 +155,5 @@ header .btn-outline:hover {
     justify-content: center;
   }
 }
+
+*/

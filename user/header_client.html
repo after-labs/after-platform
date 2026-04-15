@@ -1,29 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/header.css" />
+  </head>
+  <body>
     <header>
+      <div class="container">
         <div class="logo">
-            <img src="#" alt="">
+          <img src="../icons/after_logomarca_branco.svg" alt="after-logo" />
         </div>
-        <div class="search-bar">
-            <input type="text" id="searchInput"></input>
-            <button id="searchBtn">🔍</button>
+        <div class="search-container">
+          <img src="../icons/search-icon.svg" alt="" class="search-icon" />
+          <input type="text" placeholder="Search..." class="search-input" />
         </div>
         <nav>
-            <li><a href="#store">Store</a></li>
-            <li><a href="#orders">My Orders</a></li>
-            <p>|</p>
-            <li><a href="#coins">5000 🔍</a></li>
-            <p>|</p>
-            <li><a href="#cart">🛒</a></li>
-            <li><a href="#notification">🔔</a></li>
-            <li><a href="#profile">👤</a></li>
+          <ul>
+            <li><a href="#">Store</a></li>
+            <li><a href="#">My Orders</a></li>
+            <li>
+              <a href="#">5000</a>
+              <img src="../icons/coin_icon.svg" alt="" />
+            </li>
+            <ul class="icon-group">
+              <li>
+                <a href="#"><img src="../icons/cart-icon.svg" alt="" /></a>
+              </li>
+              <li>
+                <a href="#"><img src="../icons/bell-icon.svg" alt="" /></a>
+              </li>
+              <li>
+                <a href="#"><img src="../icons/user-icon.svg" alt="" /></a>
+              </li>
+            </ul>
+          </ul>
         </nav>
+      </div>
     </header>
-</body>
+  </body>
 </html>
