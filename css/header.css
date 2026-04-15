@@ -1,3 +1,6 @@
+body {
+  background: none;
+}
 header {
   background-color: none;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -22,7 +25,7 @@ header .container {
 .logo {
   display: flex;
   justify-content: center;
-  width: 260px;
+  width: 210px;
 }
 
 .logo img {

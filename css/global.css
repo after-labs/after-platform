@@ -103,7 +103,7 @@ h1 {
 h2 {
   font-size: 1.875rem; /* 30px */
   font-weight: 700;
-  margin: 8px 0 16px 0;
+  margin: 8px 0 1.5rem 0;
 }
 h3 {
   font-size: 1.5rem; /* 24px */
@@ -120,7 +120,6 @@ button {
 
   background-color: var(--purple-primary);
   border-radius: var(--radius-lg);
-  border: 1px solid var(--white);
   padding: 12px 24px;
 
   cursor: pointer;

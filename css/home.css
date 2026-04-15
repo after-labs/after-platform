@@ -63,7 +63,7 @@ main {
 .highlights-main:hover {
   background: var(--highlight-gradient-bg);
   box-shadow: 0 0 18px var(--purple-primary);
-  border: 2px solid var(--white);
+  border: var(--border-white);
 }
 
 .highlights-main-content {

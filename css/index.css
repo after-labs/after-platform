@@ -1,5 +1,5 @@
 main {
-  margin-top: 98px;
+  margin: 58px 0;
 }
 
 main,
@@ -18,10 +18,20 @@ main {
 
 main div {
   max-width: 520px;
+  text-align: start;
+}
+
+main h1 {
+  font-size: 3rem;
+  text-align: start;
 }
 
 main span {
   color: var(--pink-highlight);
+}
+
+main button {
+  margin-top: 1rem;
 }
 
 main img {
@@ -29,6 +39,14 @@ main img {
   height: 420px;
   border-radius: var(--radius-md);
   background: var(--ghost-purple);
+
+  border: var(--border-ghost-purple);
+  transition: var(--transition);
+}
+
+main img:hover {
+  box-shadow: 0 0 18px var(--purple-primary);
+  border: var(--border-white);
 }
 
 /* Text */
@@ -36,25 +54,28 @@ main img {
 p {
   color: var(--gray-text);
   line-height: 1.6;
-  margin-bottom: 16px;
+  margin-bottom: 1.2rem;
 }
 
 /* Buttons */
 
 button {
-  transition: all 0.2s ease;
+  transition: var(--transition);
 }
 
 button:hover {
-  background-color: var(--purple-secondary);
-  box-shadow: 0 0 12px var(--ghost-pink-60);
-  transform: translateY(-2px);
+  box-shadow: var(--box-shadow-white);
+  border: var(--border-white);
 }
 
 /* Sections */
 
 section {
   text-align: center;
+}
+
+section p:not(main) {
+  font-size: 1.1rem;
 }
 
 /* Sequences (How it works / Gamified) */
@@ -72,7 +93,7 @@ section {
   max-width: 260px;
   padding: 20px;
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--purple-bg);
   border: 1px solid var(--ghost-purple);
   transition: 0.2s;
 }
