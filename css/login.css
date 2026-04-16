@@ -59,7 +59,7 @@ input:focus {
 
 /* Botão principal */
 button:first-of-type {
-  margin-top: 10px;
+  margin: 0.9rem 0; 
   padding: 12px;
   border: none;
   border-radius: 999px;
