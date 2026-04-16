@@ -10,8 +10,8 @@
   --dark-purple: #101010;
   --ghost-purple: #6101e180;
   --ghost-pink-60: #ff5cfd60;
-  --pink-highlight: #ff5cfd;
-  --dark-pink: #9e04c6;
+  --pink-highlight: #ff52fc;
+  --dark-pink: #9800be;
 
   --purple-gradient-bg: linear-gradient(
     360deg,
@@ -64,6 +64,8 @@
   --border-purple: 2px solid var(--purple-primary);
   --border-ghost-purple: 3px solid var(--ghost-purple);
   --border-white: 2px solid var(--white);
+  --border-pink: 2px solid var(--pink-highlight);
+  --border-dark-pink: 2px solid var(--dark-pink);
 }
 
 * {
@@ -89,29 +91,32 @@ body {
 
 h1,
 h2,
-h3 {
+h3, h4 {
   color: var(--white);
-  font-family: var(--russo-one);
   text-align: center;
 }
 
 h1 {
   font-size: 2rem; /* 32px */
   font-weight: 800;
+  font-family: var(--russo-one);
   margin-bottom: 1.25rem; /* 20px */
 }
 h2 {
   font-size: 1.875rem; /* 30px */
   font-weight: 700;
+  font-family: var(--russo-one);
   margin: 8px 0 1.5rem 0;
 }
 h3 {
   font-size: 1.5rem; /* 24px */
   font-weight: 600;
+  font-family: var(--quantico);
   margin-bottom: 0.75rem; /* 12px */
 }
 h4 {
   font-size: 1.0625rem; /* 17px */
+  font-family: var(--quantico);
   margin-bottom: 0.625rem; /* 10px */
 }
 
