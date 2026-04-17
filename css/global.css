@@ -91,7 +91,8 @@ body {
 
 h1,
 h2,
-h3, h4 {
+h3,
+h4 {
   color: var(--white);
   text-align: center;
 }
@@ -144,4 +145,11 @@ a {
 
 ul {
   list-style: none;
+}
+
+/*  Scroll Bars across the Platform */
+
+* {
+  scrollbar-width: 20px;
+  scrollbar-color: var(--ghost-purple) transparent;
 }
