@@ -6,13 +6,11 @@
 }
 
 body {
-    background-color: #1e1e1e; 
     margin-top: 0;
 }
 
 /* Header principal */
 .main-header {
-    background: linear-gradient(90deg, #0f021a 0%, #1a0533 50%, #0f021a 100%);
     width: 100%;
     height: auto;
     display: flex;
