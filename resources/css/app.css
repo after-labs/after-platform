@@ -1,11 +1,155 @@
-@import 'tailwindcss';
+@import url("https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&family=Russo+One&display=swap");
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+:root {
+    --purple-bg: #2c024c;
+    --dark-purple-bg: #1b0037;
+    --black-bg: #101010;
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --purple-primary: #6101e1;
+    --purple-secondary: #6f02d0;
+    --dark-purple: #101010;
+    --ghost-purple: #6101e180;
+    --ghost-pink-60: #ff5cfd60;
+    --pink-highlight: #ff52fc;
+    --dark-pink: #9800be;
+
+    --purple-gradient-bg: linear-gradient(
+        360deg,
+        var(--dark-purple-bg) 0%,
+        var(--purple-primary) 100%
+    );
+    --dark-purple-gradient-bg: linear-gradient(
+        180deg,
+        var(--dark-purple) 0%,
+        var(--dark-purple-bg) 49%,
+        var(--dark-purple) 100%
+    );
+    --top-banner-gradient-bg: linear-gradient(
+        90deg,
+        #00000000 0%,
+        var(--dark-purple-bg) 15%,
+        var(--purple-primary) 50%,
+        var(--dark-purple-bg) 85%,
+        #00000000 100%
+    );
+
+    --highlight-gradient-bg: linear-gradient(
+        90deg,
+        var(--black-bg) 0%,
+        var(--ghost-black-80) 40%,
+        #00000000 100%
+    );
+
+    --white: #eee0ff;
+    --ghost-white-80: #eee0ff80;
+    --ghost-white-60: #eee0ff60;
+    --ghost-black-80: #10101080;
+    --ghost-black-60: #10101060;
+
+    --gray-text: #c0b3ce;
+    --alert: #ff0000;
+    --success: #5cff8a;
+
+    --russo-one: "Russo One", sans-serif;
+    --quantico: "Quantico", sans-serif;
+
+    --radius-xs: 8px;
+    --radius-sm: 16px;
+    --radius-md: 24px;
+    --radius-lg: 32px;
+
+    --transition: all 0.3s ease;
+    --box-shadow-purple: 0 0 16px var(--purple-primary);
+    --box-shadow-white: 0 0 16px var(---white);
+    --border-purple: 2px solid var(--purple-primary);
+    --border-ghost-purple: 3px solid var(--ghost-purple);
+    --border-white: 2px solid var(--white);
+    --border-pink: 2px solid var(--pink-highlight);
+    --border-dark-pink: 2px solid var(--dark-pink);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 16px;
+    font: inherit;
+    vertical-align: baseline;
+    list-style: none;
+}
+
+body {
+    background: var(--dark-purple-gradient-bg);
+    font-family: var(--quantico);
+    min-height: 100vh;
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    color: var(--white);
+    text-align: center;
+}
+
+h1 {
+    font-size: 2rem; /* 32px */
+    font-weight: 800;
+    font-family: var(--russo-one);
+    margin-bottom: 1.25rem; /* 20px */
+}
+h2 {
+    font-size: 1.875rem; /* 30px */
+    font-weight: 700;
+    font-family: var(--russo-one);
+    margin: 8px 0 1.5rem 0;
+}
+h3 {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 600;
+    font-family: var(--quantico);
+    margin-bottom: 0.75rem; /* 12px */
+}
+h4 {
+    font-size: 1.0625rem; /* 17px */
+    font-family: var(--quantico);
+    margin-bottom: 0.625rem; /* 10px */
+}
+
+button {
+    all: unset;
+
+    background-color: var(--purple-primary);
+    border-radius: var(--radius-lg);
+    padding: 12px 24px;
+
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-family: var(--russo-one);
+    transition: var(--transition);
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--accent);
+}
+
+ul {
+    list-style: none;
+}
+
+/*  Scroll Bars across the Platform */
+
+* {
+    scrollbar-width: 20px;
+    scrollbar-color: var(--ghost-purple) transparent;
 }
