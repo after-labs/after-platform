@@ -1,18 +1,36 @@
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
-import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: [
+                "resources/css/app.css",
+                "resources/js/app.js",
+                "resources/css/index.css",
+                "resources/css/frontend/home.css",
+                "resources/css/frontend/games/catalog.css",
+                "resources/css/frontend/games/show.css",
+                "resources/css/auth/login.css",
+                "resources/css/auth/signup.css",
+                "resources/css/auth/reset_password.css",
+                "resources/css/auth/verify_code.css",
+                "resources/css/auth/new_password.css",
+                "resources/css/backend/games/index.css",
+                "resources/css/backend/games/create.css",
+                "resources/css/backend/games/edit.css",
+                "resources/css/components/header.css",
+                "resources/css/components/header_adm.css",
+                "resources/css/components/footer.css",
+            ],
             refresh: true,
         }),
         tailwindcss(),
     ],
     server: {
         watch: {
-            ignored: ['**/storage/framework/views/**'],
+            ignored: ["**/storage/framework/views/**"],
         },
     },
 });
