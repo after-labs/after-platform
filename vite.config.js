@@ -12,6 +12,7 @@ export default defineConfig({
                 "resources/css/frontend/home.css",
                 "resources/css/frontend/games/catalog.css",
                 "resources/css/frontend/games/show.css",
+                "resources/css/frontend/account/account.css",
                 "resources/css/auth/login.css",
                 "resources/css/auth/signup.css",
                 "resources/css/auth/reset_password.css",
