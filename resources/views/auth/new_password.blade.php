@@ -4,8 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>New Password</title>
-    <link rel="stylesheet" href="../css/global.css" />
-    <link rel="stylesheet" href="../css/new_password.css" />
+      @vite(['resources/css/app.css', 'resources/css/auth/new_password.css'])
   </head>
   <body>
     <div class="container">
