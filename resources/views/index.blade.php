@@ -7,10 +7,7 @@
      @vite(['resources/css/app.css', 'resources/css/index.css'])
   </head>
   <body>
-    <iframe
-      src="header_guest.html"
-      style="border: none; width: 100%; height: 100px"
-    ></iframe>
+   @include('components/header_guest')
     <section class="main-bg">
       <main>
         <div>
@@ -23,7 +20,7 @@
           </p>
           <button class="btn-cta">Start & See Games</button>
         </div>
-        <img src="../img/hollow_knight.png" alt="" />
+        <img src="{{ asset('imgs/hollow-knight.png') }}" alt="" />
       </main>
     </section>
     <section>
@@ -35,7 +32,7 @@
       <div class="sequence-container">
         <div class="sequence-unit">
           <div class="sequence-square">
-            <img src="../icons/cursor-click-icon.svg" alt="" />
+            <img src="{{ asset('icons/cursor-click-icon.svg') }}" alt="" />
           </div>
           <p>1. Select your Game</p>
           <p>
@@ -45,14 +42,14 @@
         </div>
         <div class="sequence-unit">
           <div class="sequence-square">
-            <img src="../icons/cart-icon.svg" alt="" />
+            <img src="{{ asset('icons/cart-icon.svg') }}" alt="" />
           </div>
           <p>2. Purchase</p>
           <p>Buy quickly and easily, enjoying frequent special discounts</p>
         </div>
         <div class="sequence-unit">
           <div class="sequence-square">
-            <img src="../icons/access-key-icon.svg" alt="" />
+            <img src="{{ asset('icons/access-key-icon.svg') }}" alt="" />
           </div>
           <p>3. Get Your Access Keys</p>
           <p>
@@ -72,7 +69,7 @@
       <div class="sequence-container">
         <div class="sequence-unit">
           <div class="sequence-square">
-            <img src="../icons/level-up-icon.svg" alt="" />
+            <img src="{{ asset('icons/level-up-icon.svg') }}" alt="" />
           </div>
           <p>1. Earn Points and Level Up</p>
           <p>
@@ -82,14 +79,14 @@
         </div>
         <div class="sequence-unit">
           <div class="sequence-square">
-            <img src="../icons/coin_icon.svg" alt="" />
+            <img src="{{ asset('icons/coin-icon.svg') }}" alt="" />
           </div>
           <p>2. Earn Discounts</p>
           <p>Spend your coins as DISCOUNTS and enjoy frequent special discounts</p>
         </div>
         <div class="sequence-unit">
           <div class="sequence-square">
-            <img src="../icons/repeat-icon.svg" alt="" />
+            <img src="{{ asset('icons/repeat-icon.svg') }}" alt="" />
           </div>
           <p>3. Repeat</p>
           <p>
@@ -99,78 +96,78 @@
         </div>
       </div>
       <div class="prints-row">
-        <img src="../img/after-print1.png" alt="" />
-        <img src="../img/after-print2.png" alt="" />
+        <img src="{{ asset('imgs/after-print1.png') }}" alt="" />
+        <img src="{{ asset('imgs/after-print2.png') }}" alt="" />
       </div>
     </section>
     <section>
       <h2>Available Games</h2>
       <div class="game-row">
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" />
           <p class="game-title">Replaced</p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" />
           <p class="game-title">Replaced</p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" />
           <p class="game-title">Replaced</p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+         <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" />
           <p class="game-title"></p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" />
           <p class="game-title">Replaced</p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" />
           <p class="game-title">Replaced</p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" />
           <p class="game-title">Replaced</p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" />
           <p class="game-title">Replaced</p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+         <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" />
           <p class="game-title">Replaced</p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" />
           <p class="game-title">Replaced</p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
@@ -208,12 +205,12 @@
               </p>
             </div>
           </div>
-          <img src="../img/after-logo-roxa.png" alt="" />
+          <img src="{{ asset('imgs/after-logo-roxa.png') }}" alt="" />
         </div>
 
       </div>
       <button class="btn-cta btn-last">Start & See Games</button>
     </section>
-    <iframe src="footer.html" style="width: 100%; height: 400px"></iframe>
+      @include('components/footer')
   </body>
 </html>

@@ -1,17 +1,8 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="../css/global.css" />
-    <link rel="stylesheet" href="../css/header.css" />
-  </head>
-  <body>
     <header>
+      @vite(['resources/css/components/header.css'])
       <div class="container">
         <div class="logo">
-          <img src="../icons/after_logomarca_branco.svg" alt="after-logo" />
+          <img src="{{ asset('icons/after-logomarca-branco.svg') }}" alt="after-logo" />
         </div>
         <nav>
           <ul>
@@ -28,5 +19,3 @@
         </div>
       </div>
     </header>
-  </body>
-</html>
