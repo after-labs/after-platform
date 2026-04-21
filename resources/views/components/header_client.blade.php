@@ -1,20 +1,11 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="../css/global.css" />
-    <link rel="stylesheet" href="../css/header.css" />
-  </head>
-  <body>
     <header>
+         @vite(['resources/css/components/header.css'])
       <div class="container">
         <div class="logo">
-          <img src="../icons/after_logomarca_branco.svg" alt="after-logo" />
+          <img src="{{ asset('icons/after-logomarca-branco.svg') }}" alt="after-logo" />
         </div>
         <div class="search-container">
-          <img src="../icons/search-icon.svg" alt="" class="search-icon" />
+          <img src="{{ asset('icons/search-icon.svg') }}" alt="" class="search-icon" />
           <input type="text" placeholder="Search..." class="search-input" />
         </div>
         <nav>
@@ -23,20 +14,20 @@
             <li><a href="#">My Orders</a></li>
             <li>
               <a href="#" class="points-trigger" onclick="togglePoints()"
-                >5000<img src="../icons/coin_icon.svg" alt=""
+                >5000<img src="{{ asset('icons/coin-icon.svg') }}" alt=""
               /></a>
             </li>
             <ul class="icon-group">
               <li>
-                <a href="#"><img src="../icons/cart-icon.svg" alt="" /></a>
+                <a href="#"><img src="{{ asset('icons/cart-icon.svg') }}" alt="" /></a>
               </li>
               <li>
                 <a href="#" class="notif-trigger" onclick="toggleNotif()"
-                  ><img src="../icons/bell-icon.svg" alt=""
+                  ><img src="{{ asset('icons/bell-icon.svg') }}" alt=""
                 /></a>
               </li>
               <li>
-                <a href="#"><img src="../icons/user-icon.svg" alt="" /></a>
+                <a href="#"><img src="{{ asset('icons/user-icon.svg') }}" alt="" /></a>
               </li>
             </ul>
           </ul>
@@ -48,7 +39,7 @@
 
     <div class="points-container hidden">
       <button onclick="togglePoints()" class="btn-close-points">
-        <img src="../icons/close_icon.svg" alt="close-button" />
+        <img src="{{ asset('icons/close-icon.svg') }}" alt="close-button" />
       </button>
       <h4 class="points-title">Pontuation System</h4>
       <p class="points-description">
@@ -77,7 +68,7 @@
         </div>
         <div class="reward-unit">
           <span>Next Level Reward</span>
-          <span>250 Coins <img src="../icons/coin_icon.svg" alt="" /></span>
+          <span>250 Coins <img src="{{ asset('icons/coin-icon.svg') }}" alt="" /></span>
         </div>
       </div>
     </div>
@@ -88,7 +79,7 @@
       <div class="notif-header">
         <span>Notifications</span>
         <button onclick="toggleNotif()">
-          <img src="../icons/close_icon.svg" alt="close-button" />
+          <img src="{{ asset('icons/close-icon.svg') }}" alt="close-button" />
         </button>
       </div>
       <div id="notif-list" class="notif-list"></div>
@@ -145,5 +136,3 @@
 
       renderNotifications()
     </script>
-  </body>
-</html>

@@ -7,12 +7,9 @@
     @vite(['resources/css/app.css', 'resources/css/frontend/home.css'])
   </head>
   <body>
-    <iframe
-      src="header_guest.html"
-      style="border: none; width: 100%; height: 100px"
-    ></iframe>
+    @include('components/header_guest')
     <main>
-      <div class="top-banner">
+     <div class="top-banner">
         <p>Welcome to After. Create an account & enjoy our games!</p>
       </div>
       <div class="highlights">
@@ -27,27 +24,27 @@
             <div class="highlights-main-buttons">
               <button>Buy Now</button>
               <button>
-                <img src="../icons/bookmark_icon.svg" alt="bookmark-icon" />
+                <img src="{{ asset('icons/bookmark-icon.svg') }}" alt="bookmark-icon" />
               </button>
             </div>
           </div>
-          <img src="../img/replaced_large_banner.png" alt="" class="bg-image" />
+          <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" class="bg-image" />
         </div>
         <div class="highlights-cards">
           <div class="highlights-card">
-            <img src="../img/replaced-banner.png" alt="" />
+            <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
             <p>Replaced 60% Off</p>
           </div>
           <div class="highlights-card">
-            <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
             <p>Offer Example</p>
           </div>
           <div class="highlights-card">
-            <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
             <p>New Game</p>
           </div>
           <div class="highlights-card">
-            <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
             <p>Announcement</p>
           </div>
         </div>
@@ -58,44 +55,51 @@
         <h2>Popular</h2>
         <div class="section-arrows">
           <button class="arrow-btn">
-            <img src="../icons/arrow_left.svg" alt="arrow-left-icon" />
+            <img src="{{ asset('icons/arrow-left.svg') }}" alt="arrow-left-icon" />
           </button>
           <button class="arrow-btn">
-            <img src="../icons/arrow_right.svg" alt="arrow-right-icon" />
+            <img src="{{ asset('icons/arrow-right.svg') }}" alt="arrow-right-icon" />
           </button>
         </div>
       </div>
       <div class="game-row">
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title"></p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title"></p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title"></p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title"></p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
+          <p class="game-title"></p>
+          <span class="game-discount">60%</span>
+          <span class="game-old-price">$40.00</span>
+          <span class="game-price">$24.00</span>
+        </div>
+        <div class="game-card">
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title"></p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
@@ -106,44 +110,51 @@
         <h2>Free Demos</h2>
         <div class="section-arrows">
           <button class="arrow-btn">
-            <img src="../icons/arrow_left.svg" alt="arrow-left-icon" />
+            <img src="{{ asset('icons/arrow-left.svg') }}" alt="arrow-left-icon" />
           </button>
           <button class="arrow-btn">
-            <img src="../icons/arrow_right.svg" alt="arrow-right-icon" />
+            <img src="{{ asset('icons/arrow-right.svg') }}" alt="arrow-right-icon" />
           </button>
         </div>
       </div>
       <div class="game-row">
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title"></p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title"></p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title"></p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title"></p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
+          <p class="game-title"></p>
+          <span class="game-discount">60%</span>
+          <span class="game-old-price">$40.00</span>
+          <span class="game-price">$24.00</span>
+        </div>
+        <div class="game-card">
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title"></p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
@@ -154,45 +165,51 @@
         <h2>On Sale</h2>
         <div class="section-arrows">
           <button class="arrow-btn">
-            <img src="../icons/arrow_left.svg" alt="arrow-left-icon" />
+            <img src="{{ asset('icons/arrow-left.svg') }}" alt="arrow-left-icon" />
           </button>
           <button class="arrow-btn">
-            <img src="../icons/arrow_right.svg" alt="arrow-right-icon" />
+            <img src="{{ asset('icons/arrow-right.svg') }}" alt="arrow-right-icon" />
           </button>
         </div>
       </div>
-
       <div class="game-row">
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title"></p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title"></p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title"></p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title"></p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="../img/replaced-banner.png" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
+          <p class="game-title"></p>
+          <span class="game-discount">60%</span>
+          <span class="game-old-price">$40.00</span>
+          <span class="game-price">$24.00</span>
+        </div>
+        <div class="game-card">
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title"></p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
@@ -201,6 +218,6 @@
       </div>
       <button class="catalog-btn">See Full Catalog</button>
     </section>
-    <iframe src="footer.html" style="width: 100%; height: 400px"></iframe>
+   @include('components/footer')
   </body>
 </html>

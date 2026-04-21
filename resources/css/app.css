@@ -151,5 +151,6 @@ ul {
 
 * {
     scrollbar-width: 20px;
-    scrollbar-color: var(--ghost-purple) transparent;
+    scrollbar-color: var(--ghost-purple) var(--black-bg);
+    overscroll-behavior-y: none;
 }
