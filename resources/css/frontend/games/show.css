@@ -1,136 +1,148 @@
 .store-container {
     display: grid;
-    grid-template-columns: 1fr 400px;
-    gap: 40px;
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
+    grid-template-columns: 1fr 420px;
+    gap: 48px;
+    max-width: 1280px;
+    margin: 8rem auto 3rem;
+    padding: 0 24px;
 }
 
-/* --- COLUNA DA ESQUERDA (Mídia e Descrição) --- */
 .content-left {
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 24px;
 }
 
 .main-preview {
     position: relative;
-    width: 100%;
-    border-radius: var(--radius-sm);
+    border-radius: 10px;
     overflow: hidden;
-    border: var(--border-ghost-purple);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .featured-image {
     width: 100%;
-    display: block;
+    height: 100%;
+    object-fit: cover;
 }
 
 .nav-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: var(--ghost-black-80);
-    padding: 15px;
-    cursor: pointer;
+    background: #d7b5ff37;
+    width: 62px;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%;
-    font-family: var(--russo-one);
+    cursor: pointer;
 }
 
-.nav-arrow.prev { 
-    left: 10px;
+.nav-arrow svg {
+    width: 35px;
+    height: 35px;
+    fill: var(--white);
 }
 
-.nav-arrow.next { 
-    right: 10px;
+.nav-arrow.prev {
+    left: 16px;
+}
+.nav-arrow.next {
+    right: 16px;
 }
 
 .thumbnail-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-top: 16px;
+    gap: 10px;
 }
 
 .thumb img {
     width: 100%;
-    border-radius: var(--radius-xs);
+    border-radius: 6px;
     opacity: 0.6;
     cursor: pointer;
+    border: 2px solid transparent;
     transition: var(--transition);
 }
 
-.thumb.active img, .thumb:hover img {
+.thumb img:hover {
     opacity: 1;
-    border: 2px solid var(--pink-highlight);
+    border-color: var(--white);
+}
+
+.thumb.active img {
+    opacity: 1;
+    border: var(--border-purple);
 }
 
 .about-section {
-    background: var(--ghost-black-60);
     padding: 24px;
-    border-radius: var(--radius-sm);
-    text-align: left;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.4);
 }
 
-.about-section h2 { text-align: left; }
+.description-text {
+    margin-top: 12px;
+}
 
 .description-text p {
-    margin-bottom: 16px;
+    color: #b3b3b3;
     line-height: 1.6;
-    color: var(--gray-text);
+    font-size: 0.95rem;
 }
 
 .toggle-more {
-    background: transparent;
-    border: none;
+    margin-top: 10px;
     color: var(--pink-highlight);
-    padding: 0;
-    font-size: 0.9rem;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
-/* --- SIDEBAR DA DIREITA (Compra e Info) --- */
 .sidebar-right {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
 }
 
-.game-header { 
-    text-align: left;
+.game-header h1 {
+    font-size: 1.8rem;
+    margin: 6px 0;
+    width: fit-content;
+    max-width: 100%;
 }
-.game-header h1 { 
-    text-align: left;
-    margin-top: 8px;
+
+.game-subtitle {
+    font-size: 0.9rem;
+    color: #aaa;
 }
 
 .badge-popular {
+    font-size: 0.7rem;
     color: var(--pink-highlight);
     text-transform: uppercase;
-    font-size: 0.8rem;
-    font-weight: bold;
 }
 
 .price-container {
     display: flex;
-    align-items: baseline;
-    gap: 15px;
-    font-size: 1.5rem;
-    font-family: var(--russo-one);
+    gap: 12px;
+    align-items: center;
+    font-size: 1.6rem;
 }
 
 .original-price {
     text-decoration: line-through;
-    color: var(--ghost-white-60);
-    font-size: 1.1rem;
+    font-size: 1rem;
+    color: #888;
 }
 
-/* Timer de Oferta */
 .offer-timer {
-    background: var(--ghost-black-80);
     padding: 16px;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--purple-primary);
+    border-radius: 10px;
+    border: 1px solid #7c3aed;
 }
 
 .timer-grid {
@@ -141,41 +153,54 @@
 }
 
 .timer-unit {
-    background: var(--purple-primary);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background: #7c3aed;
+    text-align: center;
     padding: 8px;
-    border-radius: var(--radius-xs);
+    border-radius: 6px;
 }
 
-.time-val { 
-    font-family: var(--russo-one);
+.time-val {
     font-size: 1.2rem;
 }
 
-.time-label { font-size: 0.7rem;
-    color: var(--gray-text);
+.time-label {
+    font-size: 0.7rem;
+    color: #ddd;
 }
 
-/* Plataformas */
+.game-meta {
+    font-size: 0.85rem;
+    color: #bbb;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.platform-section .platform-title {
+    font-size: 1.3rem;
+}
+
+.platform-section span {
+    font-size: 0.9rem;
+}
+
 .platform-options {
     display: flex;
-    gap: 12px;
-    margin-top: 12px;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 .platform-card {
-    flex: 1;
-    background: var(--ghost-black-80);
-    border: 1px solid var(--ghost-white-60);
-    padding: 12px;
-    border-radius: var(--radius-sm);
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 12px;
     align-items: center;
-    gap: 8px;
+    border-radius: 8px;
+    text-align: center;
     cursor: pointer;
+    transition: var(--transition);
 }
 
 .platform-card.active {
@@ -183,107 +208,96 @@
     background: var(--purple-secondary);
 }
 
-/* Botões de Ação */
-.purchase-actions { 
+.purchase-actions {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
-.action-row-top { 
+.action-row-top {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 10px;
 }
 
-.btn-wishlist { 
-    background: transparent;
+.btn {
+    padding: 10px;
+    border-radius: var(--radius-xs);
+    cursor: pointer;
+}
+
+.btn-wishlist {
     border: 1px solid var(--white);
+    background: transparent;
+}
+
+.btn-cart {
+    background: var(--white);
+    color: var(--black-bg);
 }
 
 .btn-buy-now {
-    background: var(--purple-primary);
+    background: var(--purple-secondary);
+    box-sizing: border-box;
     width: 100%;
-    box-shadow: var(--box-shadow-purple);
 }
 
-
-.game-card{
-  width:100%;
-  transition:var(--transition);
+.you-may-like-wrapper {
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto 4rem;
+    padding: 0 24px;
 }
 
-.game-card:hover{
-  transform:translateY(-5px);
+.you-may-like-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+    gap: 1.3rem;
+    margin-top: 20px;
 }
 
-.game-cover{
-  width:100%;
-  aspect-ratio:0.74 / 1;
-  border-radius:8px;
-  overflow:hidden;
-  border:var(--border-ghost-purple);
-  background:#14071e;
+.game-card {
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    background: var(--black-bg);
+    border: var(--border-ghost-purple);
+    text-align: left;
+    transition: 0.2s;
 }
 
-.game-cover img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+.game-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 18px var(--purple-primary);
+    border: 2px solid var(--purple-primary);
 }
 
-.game-info{
-  margin-top:7px;
+.game-card img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-xs);
+    background: var(--ghost-purple);
+    margin-bottom: 12px;
 }
 
-.game-title{
-  font-family:var(--russo-one);
-  font-size:.92rem;
-  margin-bottom:4px;
-  line-height:1.2;
+.game-title {
+    font-family: var(--russo-one);
+    margin-bottom: 8px;
 }
 
-.price-row{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  flex-wrap:wrap;
+.game-discount {
+    color: var(--success);
+    font-size: 0.9rem;
 }
 
-.discount{
-  background:var(--pink-highlight);
-  color:#fff;
-  font-size:.62rem;
-  padding:2px 7px;
-  border-radius:30px;
-  font-weight:700;
+.game-old-price {
+    text-decoration: line-through;
+    color: var(--ghost-white-60);
+    margin-left: 6px;
 }
 
-.old-price{
-  color:var(--ghost-white-60);
-  text-decoration:line-through;
-  font-size:.82rem;
+.game-price {
+    display: block;
+    margin-top: 4px;
+    font-weight: bold;
 }
-
-.new-price{
-  color:var(--white);
-  font-size:.88rem;
-}
-
-.you_may_like_grid {
-  display: grid;
-  /* Cria 4 colunas de tamanhos iguais */
-  grid-template-columns: repeat(4, 1fr); 
-  gap: 20px;
-  width: 100%;
-  max-width: 1200px; /* Ajuste conforme o seu layout global */
-  margin: 0 auto; 
-}
-
-/*
-.you_may_like_grid {
-  display: grid;
-  /* Tenta colocar colunas de 200px. Se não couber, quebra pra linha de baixo */
-  /*grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));*/
-  /*gap: 20px;*/
-/*}*/
