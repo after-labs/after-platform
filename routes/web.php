@@ -6,6 +6,13 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('lang/{locale}', function (string $locale) {
+    if (in_array($locale, ['en', 'pt'])) {
+        session(['locale' => $locale]);
+    }
+    return redirect(url()->previous('/'));
+})->name('lang.switch');
+
 // Guest Page Test Route
 
 Route::get('/home_guest', function () {

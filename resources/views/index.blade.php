@@ -12,6 +12,7 @@
       <main>
         <div>
           <h1><span>AFTER</span> Indie Gaming Marketplace</h1>
+          <h2>{{ __('messages.welcome') }}</h2>
           <p>
             From indie game developers and studios to players interested in
             support the community while having fun, explore a collaborative

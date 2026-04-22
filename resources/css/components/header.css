@@ -381,6 +381,41 @@ header .btn-outline:hover {
     margin-top: 4px;
 }
 
+/* Language Select */
+
+.language-select {
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.95rem;
+    border: var(--border-white);
+    background-color: transparent;
+    color: var(--white);
+    font-family: var(--quantico);
+    appearance: none;
+    padding-right: 36px;
+}
+
+.language-select:hover {
+    background-color: var(--white);
+    color: var(--black-bg);
+    border: var(--border-white);
+}
+
+.language-select:focus {
+    outline: none;
+    border: var(--border-purple);
+    box-shadow: var(--box-shadow-purple);
+}
+
+.language-select option {
+    background-color: var(--black-bg);
+    color: var(--white);
+    padding: 8px;
+}
+
 .hidden {
     display: none;
 }
