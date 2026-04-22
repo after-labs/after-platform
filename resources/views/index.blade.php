@@ -104,70 +104,70 @@
       <h2>Available Games</h2>
       <div class="game-row">
         <div class="game-card">
-          <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title">Replaced</p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title">Replaced</p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title">Replaced</p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-         <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" />
+         <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title"></p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title">Replaced</p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title">Replaced</p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title">Replaced</p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title">Replaced</p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-         <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" />
+         <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title">Replaced</p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
           <span class="game-price">$24.00</span>
         </div>
         <div class="game-card">
-          <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" />
+          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
           <p class="game-title">Replaced</p>
           <span class="game-discount">60%</span>
           <span class="game-old-price">$40.00</span>
