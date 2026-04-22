@@ -1,85 +1,104 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('index');
+    return view('redirect');
 });
 
-// Guest Page Test Route
+    Route::get('/', function () {
+        return view('index');
+    });
 
-Route::get('/home_guest', function () {
-    return view('home_guest');
-});
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Client Pages Test Routes
+    Route::middleware('auth')->group(function () {
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
 
-Route::get('/home_client', function () {
-    return view('frontend.home');
-});
+    require __DIR__.'/auth.php';
 
-Route::get('/catalog', function () {
-    return view('frontend.games.catalog');
-});
+    // Guest Page Test Route
 
-Route::get('/catalog_type', function () {
-    return view('frontend.games.catalog_type');
-});
+    Route::get('/home_guest', function () {
+        return view('home_guest');
+    });
 
-Route::get('/game_show', function () {
-    return view('frontend.games.show');
-});
+    // Client Pages Test Routes
 
-Route::get('/account', function () {
-    return view('frontend.account.account');
-});
+    Route::get('/home_client', function () {
+        return view('frontend.home');
+    });
 
+    Route::get('/catalog', function () {
+        return view('frontend.games.catalog');
+    });
 
+    Route::get('/catalog_type', function () {
+        return view('frontend.games.catalog_type');
+    });
 
-// Auth Pages Test Routes
+    Route::get('/game_show', function () {
+        return view('frontend.games.show');
+    });
 
-Route::get('/login', function () {
-    return view('auth.login');
-});
-Route::get('/signup', function () {
-    return view('auth.signup');
-});
-Route::get('/reset_password', function () {
-    return view('auth.reset_password');
-});
-Route::get('/verify_code', function () {
-    return view('auth.verify_code');
-});
-Route::get('/new_password', function () {
-    return view('auth.new_password');
-});
+    Route::get('/account', function () {
+        return view('frontend.account.account');
+    });
 
-// Admin Pages Test Routes
+    // Auth Pages Test Routes
 
-Route::get('/admin_orders', function () {
-    return view('backend.orders');
-});
+    Route::get('/login', function () {
+        return view('auth.login');
+    });
 
-Route::get('/admin_users', function () {
-    return view('backend.users');
-});
+    Route::get('/signup', function () {
+        return view('auth.signup');
+    });
 
-Route::get('/admin_users_create', function () {
-    return view('backend.users.create');
-});
+    Route::get('/reset_password', function () {
+        return view('auth.reset_password');
+    });
 
-Route::get('/admin_users_edit', function () {
-    return view('backend.users.edit');
-});
+    Route::get('/verify_code', function () {
+        return view('auth.verify_code');
+    });
 
-Route::get('/admin_games', function () {
-    return view('backend.games');
-});
+    Route::get('/new_password', function () {
+        return view('auth.new_password');
+    });
 
-Route::get('/admin_games_create', function () {
-    return view('backend.games.create');
-});
+    // Admin Pages Test Routes
 
-Route::get('/admin_games_edit', function () {
-    return view('backend.games.edit');
-});
+    Route::get('/admin_orders', function () {
+        return view('backend.orders');
+    });
+
+    Route::get('/admin_users', function () {
+        return view('backend.users');
+    });
+
+    Route::get('/admin_users_create', function () {
+        return view('backend.users.create');
+    });
+
+    Route::get('/admin_users_edit', function () {
+        return view('backend.users.edit');
+    });
+
+    Route::get('/admin_games', function () {
+        return view('backend.games');
+    });
+
+    Route::get('/admin_games_create', function () {
+        return view('backend.games.create');
+    });
+
+    Route::get('/admin_games_edit', function () {
+        return view('backend.games.edit');
+    });
