@@ -8,38 +8,37 @@
   </head>
   <body>
     <div class="container">
-      <h1>Sign Up!</h1>
+      <h1>{{ __('Sign Up!') }}</h1>
       <p>
-        Ready to see what comes After? Fill in the details below, and let the
-        journey begin!
+        {{ __('Ready to see what comes After? Fill in the details below, and let the journey begin!') }}
       </p>
       <form method="post" action="">
         @csrf
 
-        <label for="username">Username</label>
+        <label for="username">{{ __('Username') }}</label>
         <input type="text" name="username" id="username" />
 
-        <label for="email">Email</label>
+        <label for="email">{{ __('Email') }}</label>
         <input type="email" name="email" id="email" />
 
-        <p>Your password must include:</p>
+        <p>{{ __('Your password must include:') }}</p>
         <ul>
-          <li>One capital letter & one small letter at least</li>
-          <li>One special character</li>
-          <li>Minimum 8 digits long</li>
+          <li>{{ __('One capital letter & one small letter at least') }}</li>
+          <li>{{ __('One special character') }}</li>
+          <li>{{ __('Minimum 8 digits long') }}</li>
         </ul>
-        <label for="password">Password</label>
+        <label for="password">{{ __('Password') }}</label>
         <input type="password" name="password" id="password" />
 
-        <label for="confirm_password">Confirm Password</label>
+        <label for="confirm_password">{{ __('Confirm Password') }}</label>
         <input type="password" name="confirm_password" id="confirm_password" />
 
-        <button type="submit">Sign Up</button>
-        <span>or</span>
-        <button>Log In</button>
+        <button type="submit">{{ __('Sign Up') }}</button>
+        <span>{{ __('or') }}</span>
+        <button>{{ __('Log In') }}</button>
         <div class="footer-actions">
-          <span>Already have an account? <a href="">Login</a></span>
-          <a href="">Contact Support</a>
+          <span>{{ __('Already have an account?') }} <a href="">{{ __('Login') }}</a></span>
+          <a href="">{{ __('Contact Support') }}</a>
         </div>
       </form>
     </div>

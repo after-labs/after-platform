@@ -8,22 +8,22 @@
   </head>
   <body>
     <div class="container">
-      <h1>Login</h1>
-      <p>Login quickly and start exploring indie worlds!</p>
+      <h1>{{ __('Login') }}</h1>
+      <p>{{ __('Login quickly and start exploring indie worlds!') }}</p>
       <form method="post" action="">
         @csrf
 
-        <label for="email">Email</label>
+        <label for="email">{{ __('Email') }}</label>
         <input type="email" name="email" id="email" />
 
-        <label for="password">Password</label>
+        <label for="password">{{ __('Password') }}</label>
         <input type="password" name="password" id="" />
 
-        <button type="submit">Log In</button>
+        <button type="submit">{{ __('Log In') }}</button>
       </form>
       <div class="footer-actions">
-        <span>Don't have an account? <a href="">Sign Up</a></span>
-        <a href="">Contact Support</a>
+        <span>{{ __('Don\'t have an account?') }} <a href="">{{ __('Sign Up') }}</a></span>
+        <a href="">{{ __('Contact Support') }}</a>
       </div>
     </div>
   </body>

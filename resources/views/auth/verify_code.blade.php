@@ -8,10 +8,9 @@
   </head>
   <body>
     <div class="container">
-      <h1>Verify Code</h1>
+      <h1>{{ __('Verify Code') }}</h1>
       <p>
-        Enter the passcode you just received on your email address ending with
-        ********in@gmail.com.
+        {{ __('Enter the passcode you just received on your email address ending with ********in@gmail.com.') }}
       </p>
       <form method="post" action="">
         @csrf
@@ -25,8 +24,8 @@
           <input type="text" name="code[]" maxlength="1" class="code-input" />
         </div>
 
-        <button>Verify Code</button>
-        <a>Send Code Again</a>
+        <button>{{ __('Verify Code') }}</button>
+        <a>{{ __('Send Code Again') }}</a>
       </form>
     </div>
   </body>
