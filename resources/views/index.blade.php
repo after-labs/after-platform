@@ -11,88 +11,78 @@
     <section class="main-bg">
       <main>
         <div>
-          <h1><span>AFTER</span> Indie Gaming Marketplace</h1>
-          <h2>{{ __('messages.welcome') }}</h2>
+          <h1><span>AFTER</span> {{ __('Indie Gaming Marketplace') }}</h1>
           <p>
-            From indie game developers and studios to players interested in
-            support the community while having fun, explore a collaborative
-            marketplace with dozens of games and opportunities for creators who
-            want their games to get on the hands of people
+            {{ __('From indie game developers and studios to players interested in support the community while having fun, explore a collaborative marketplace with dozens of games and opportunities for creators who want their games to get on the hands of people') }}
           </p>
-          <button class="btn-cta">Start & See Games</button>
+          <button class="btn-cta">{{ __('Start & See Games') }}</button>
         </div>
         <img src="{{ asset('imgs/hollow-knight.png') }}" alt="" />
       </main>
     </section>
     <section>
-      <h2>How It Works?</h2>
+      <h2>{{ __('How It Works?') }}</h2>
       <p>
-        Enjoy support the unique world of indie games with fair prices and
-        special discounts
+        {{ __('Enjoy and support the unique world of indie games with fair prices and special discounts') }}
       </p>
       <div class="sequence-container">
         <div class="sequence-unit">
           <div class="sequence-square">
             <img src="{{ asset('icons/cursor-click-icon.svg') }}" alt="" />
           </div>
-          <p>1. Select your Game</p>
+          <p>{{ __('1. Select your Game') }}</p>
           <p>
-            Choose many titles from our catalog, considering the platform you
-            want to play them!
+            {{ __('Choose many titles from our catalog, considering the platform you want to play them!') }}
           </p>
         </div>
         <div class="sequence-unit">
           <div class="sequence-square">
             <img src="{{ asset('icons/cart-icon.svg') }}" alt="" />
           </div>
-          <p>2. Purchase</p>
-          <p>Buy quickly and easily, enjoying frequent special discounts</p>
+          <p>{{ __('2. Purchase') }}</p>
+          <p>{{ __('Buy quickly and easily, enjoying frequent special discounts') }}</p>
         </div>
         <div class="sequence-unit">
           <div class="sequence-square">
             <img src="{{ asset('icons/access-key-icon.svg') }}" alt="" />
           </div>
-          <p>3. Get Your Access Keys</p>
+          <p>{{ __('3. Get Your Access Keys') }}</p>
           <p>
-            Receive your access keys on email for the chosen games and start
-            playing right away!
+            {{ __('Receive your access keys on email for the chosen games and start playing right away!') }}
           </p>
         </div>
       </div>
-      <button class="btn-tutorial">Doubts? See Our Tutorial</button>
+      <button class="btn-tutorial">{{ __('Doubts? See Our Tutorial') }}</button>
     </section>
     <section>
-      <h2>Our Gamified Approach</h2>
+      <h2>{{ ('Our Gamified Approach') }}</h2>
       <p>
-        Enjoy ! support the unique world of indie games with fair prices and
-        special discounts
+        {{ ('Enjoy and support the unique world of indie games with fair prices and special discounts') }}
       </p>
       <div class="sequence-container">
         <div class="sequence-unit">
           <div class="sequence-square">
             <img src="{{ asset('icons/level-up-icon.svg') }}" alt="" />
           </div>
-          <p>1. Earn Points and Level Up</p>
+          <p>{{ __('1. Earn Points and Level Up') }}</p>
           <p>
-            Choose many titles from our catalog, considering the platform you
-            want to play them!
+            {{ __('As you buy new games (even free ones!), you level up and earn coins.') }}
           </p>
         </div>
         <div class="sequence-unit">
           <div class="sequence-square">
             <img src="{{ asset('icons/coin-icon.svg') }}" alt="" />
           </div>
-          <p>2. Earn Discounts</p>
-          <p>Spend your coins as DISCOUNTS and enjoy frequent special discounts</p>
+          <p>{{ __('2. Earn Discounts') }}</p>
+          <p>{{ __('Spend your coins as DISCOUNTS and enjoy frequent special discounts.') }}</p>
         </div>
         <div class="sequence-unit">
           <div class="sequence-square">
             <img src="{{ asset('icons/repeat-icon.svg') }}" alt="" />
           </div>
-          <p>3. Repeat</p>
+          <p>{{ __('3. Repeat') }}</p>
           <p>
-            Receive your access keys on email for the chosen games and start
-            playing right away!
+            {{ __('Comeback often to explore After catalog and experience the indie gaming world.') }}
           </p>
         </div>
       </div>
@@ -102,7 +92,7 @@
       </div>
     </section>
     <section>
-      <h2>Available Games</h2>
+      <h2>{{ __('Available Games') }}</h2>
       <div class="game-row">
         <div class="game-card">
           <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
@@ -179,30 +169,27 @@
     </section>
     <section>
       <div class="community-container">
-        <h2>Join Our Community</h2>
-        <p>Be a part of the After Community Today, enjoying our games and making your way on the indie world.</p>
+        <h2>{{ __('Join Our Community') }}</h2>
+        <p>{{ __('Be a part of the After Community Today, enjoying our games and making your way on the indie world.') }}</p>
         <div class="community-row">
           
           <div class="community-list">
             <div class="community-list-item">
-              <h3>Popularize Your Games</h3>
+              <h3>{{ __('Popularize Your Games') }}</h3>
               <p>
-                Aliquam erat volutpat. Integer malesuada turpis id fringilla
-                suscipit. Maecenas ultrices.
+               {{ __('Contact After and start selling your game access keys. We only take 5% of the revenue.') }}
               </p>
             </div>
             <div class="community-list-item">
-              <h3>Best Prices</h3>
+              <h3>{{ __('Best Prices') }}</h3>
               <p>
-                Aliquam erat volutpat. Integer malesuada turpis id fringilla
-                suscipit. Maecenas ultrices.
+                {{ __('With affordable prices and various discounts, you’ll surely fill your cart with indie games.') }}
               </p>
             </div>
             <div class="community-list-item">
-              <h3>Support for the Indie Community</h3>
+              <h3>{{ __('Support for the Indie Community') }}</h3>
               <p>
-                Aliquam erat volutpat. Integer malesuada turpis id fringilla
-                suscipit. Maecenas ultrices.
+                  {{ __('While you buy games for yourself, you’re also supporting an entire community with your decision.') }}
               </p>
             </div>
           </div>
@@ -210,7 +197,7 @@
         </div>
 
       </div>
-      <button class="btn-cta btn-last">Start & See Games</button>
+      <button class="btn-cta btn-last">{{ __('Start & See Games') }}</button>
     </section>
       @include('components/footer')
   </body>

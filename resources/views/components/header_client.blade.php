@@ -17,6 +17,14 @@
                 >5000<img src="{{ asset('icons/coin-icon.svg') }}" alt=""
               /></a>
             </li>
+            <li>
+               <form method="GET" action="">
+                  <select onchange="window.location.href=this.value" class="language-select">
+                      <option value="{{ route('lang.switch', 'pt') }}" {{ session('locale', 'pt') === 'pt' ? 'selected' : '' }}>Português</option>
+                      <option value="{{ route('lang.switch', 'en') }}" {{ session('locale', 'en') === 'en' ? 'selected' : '' }}>English</option>
+                  </select>
+                </form>
+            </li>
             <ul class="icon-group">
               <li>
                 <a href="#"><img src="{{ asset('icons/cart-icon.svg') }}" alt="" /></a>
