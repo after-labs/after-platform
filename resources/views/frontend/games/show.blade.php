@@ -44,7 +44,7 @@
         </div>
 
         <div class="about-section">
-            <h2>About this game</h2>
+            <h2>{{ __('About this game') }}</h2>
 
             <div class="description-text">
                 <p>
@@ -55,17 +55,17 @@
                 </p>
             </div>
 
-            <button class="toggle-more">Toggle more</button>
+            <button class="toggle-more">{{ __('Toggle more') }}</button>
         </div>
     </div>
 
     <div class="sidebar-right">
 
         <div class="game-header">
-            <span class="badge-popular">Popular</span>
+            <span class="badge-popular">{{ __('Popular') }}</span>
             <h1>Hollow Knight</h1>
             <p class="game-subtitle">
-                Forge your own path in Hollow Knight! An epic action adventure through a vast ruined kingdom of insects and heroes. Explore twisting caverns, battle tainted creatures and befriend bizarre bugs, all in a classic, hand-drawn 2D style.
+                {{ __('Forge your own path in Hollow Knight! An epic action adventure through a vast ruined kingdom of insects and heroes. Explore twisting caverns, battle tainted creatures and befriend bizarre bugs, all in a classic, hand-drawn 2D style.') }}
             </p>
         </div>
 
@@ -75,36 +75,36 @@
         </div>
 
         <div class="offer-timer">
-            <span>Offer expires in:</span>
+            <span>{{ __('Offer expires in:') }}</span>
 
             <div class="timer-grid">
                 <div class="timer-unit">
                     <span class="time-val">02</span>
-                    <span class="time-label">Days</span>
+                    <span class="time-label">{{ __('Days') }}</span>
                 </div>
                 <div class="timer-unit">
                     <span class="time-val">12</span>
-                    <span class="time-label">Hours</span>
+                    <span class="time-label">{{ __('Hours') }}</span>
                 </div>
                 <div class="timer-unit">
                     <span class="time-val">45</span>
-                    <span class="time-label">Minutes</span>
+                    <span class="time-label">{{ __('Minutes') }}</span>
                 </div>
                 <div class="timer-unit">
                     <span class="time-val">05</span>
-                    <span class="time-label">Seconds</span>
+                    <span class="time-label">{{ __('Seconds') }}</span>
                 </div>
             </div>
         </div>
 
         <div class="game-meta">
-            <div><strong>Developer:</strong> Team Cherry</div>
-            <div><strong>Release:</strong> 2017</div>
-            <div><strong>Genre:</strong> Action, Adventure, Metroidvania</div>
+            <div><strong>{{ __('Developer:') }}</strong> Team Cherry</div>
+            <div><strong>{{ __('Release:') }}</strong> 2017</div>
+            <div><strong>{{ __('Genre:') }}</strong> Action, Adventure, Metroidvania</div>
         </div>
 
         <div class="platform-section">
-            <span class="platform-title">Game Launcher Platforms Available</span>
+            <span class="platform-title">{{ __('Game Launcher Platforms Available') }}</span>
 
             <div class="platform-options">
                 <div class="platform-card active">
@@ -120,18 +120,18 @@
 
         <div class="purchase-actions">
             <div class="action-row-top">
-                <button class="btn btn-wishlist">Wishlist</button>
-                <button class="btn btn-cart">Add to Cart</button>
+                <button class="btn btn-wishlist">{{ __('Wishlist') }}</button>
+                <button class="btn btn-cart">{{ __('Add to Cart') }}</button>
             </div>
 
-            <button class="btn btn-buy-now">Buy It Now</button>
+            <button class="btn btn-buy-now">{{ __('Buy It Now') }}</button>
         </div>
 
     </div>
 </div>
 
 <div class="you-may-like-wrapper">
-    <h2>You may like</h2>
+    <h2>{{ __('You may like') }}</h2>
 
     <div class="you-may-like-grid">
         @for ($i = 0; $i < 6; $i++)

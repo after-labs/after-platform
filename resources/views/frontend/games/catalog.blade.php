@@ -10,16 +10,16 @@
 <body>
     @include('components/header_client')
     <main>
-        <h2 class="page-title">All Games Catalogue</h2>
+        <h2 class="page-title">{{ __('All Games Catalogue') }}</h2>
 
         <div class="filter-pills">
             <span class="filter-pill">
                 <i class="fa fa-times" aria-hidden="true"></i>
-                Adventure
+                {{ __('Adventure') }}
             </span>
             <span class="filter-pill">
                 <i class="fa fa-times" aria-hidden="true"></i>
-                Survival
+                {{ __('Survival') }}
             </span>
         </div>
         <div class="catalog-layout">
@@ -178,25 +178,25 @@
             <aside>
 
                 <div class="filter-top">
-                    <h3>Filters</h3>
-                    <button class="reset">Reset</button>
+                    <h3>{{ __('Filters') }}</h3>
+                    <button class="reset">{{ __('Reset') }}</button>
                 </div>
 
                 <details class="filter-item">
-                    <summary>Price</summary>
+                    <summary>{{ __('Price') }}</summary>
                 </details>
 
                 <details class="filter-item">
-                    <summary>Category</summary>
+                    <summary>{{ __('Category') }}</summary>
                 </details>
 
                 <details class="filter-item" open>
-                    <summary>Game Genre</summary>
+                    <summary>{{ __('Game Genre') }}</summary>
 
                     <div class="genre-list">
-                        <label><input type="checkbox"> Adventure</label>
-                        <label><input type="checkbox"> Action</label>
-                        <label><input type="checkbox"> Survival</label>
+                        <label><input type="checkbox"> {{ __('Adventure') }}</label>
+                        <label><input type="checkbox"> {{ __('Action') }}</label>
+                        <label><input type="checkbox"> {{ __('Survival') }}</label>
                     </div>
                     </details>
             </aside>
