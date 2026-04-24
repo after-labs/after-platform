@@ -12,21 +12,20 @@
       <div class="top-banner">
         <p>
           <span> [userName] </span>
-          <span> Level 5</span>
-          <span> Next Level Reward: 300 coins  <img src="{{ asset('icons/coin-icon.svg') }}" alt="" /></span>
+          <span> {{ __('Level') }} 5</span>
+          <span> {{ __('Next Level Reward') }}: 300 {{ __('Coins') }}  <img src="{{ asset('icons/coin-icon.svg') }}" alt="" /></span>
         </p>
       </div>
       <div class="highlights">
         <div class="highlights-main">
           <div class="highlights-main-content">
             <h2>REPLACED 60% OFF</h2>
-            <p>Enjoy it until april 19</p>
+            <p>{{ __('Enjoy it until april 19') }}</p>
             <p>
-              Enjoy this 2.5D cinematic action platformer adventure set in an
-              alternate 1980s America, Now Available with 60% OFF
+              {{ __('Enjoy this 2.5D cinematic action platformer adventure set in an alternate 1980s America, Now Available with 60% OFF') }}
             </p>
             <div class="highlights-main-buttons">
-              <button>Buy Now</button>
+              <button>{{ __('Buy Now') }}</button>
               <button>
                 <img src="{{ asset('icons/bookmark-icon.svg') }}" alt="bookmark-icon" />
               </button>
@@ -37,26 +36,26 @@
         <div class="highlights-cards">
           <div class="highlights-card">
             <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
-            <p>Replaced 60% Off</p>
+            <p>{{ __('Replaced 60% Off') }}</p>
           </div>
           <div class="highlights-card">
           <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
-            <p>Offer Example</p>
+            <p>{{ __('Offer Example') }}</p>
           </div>
           <div class="highlights-card">
           <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
-            <p>New Game</p>
+            <p>{{ __('New Game') }}</p>
           </div>
           <div class="highlights-card">
           <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
-            <p>Announcement</p>
+            <p>{{ __('Announcement') }}</p>
           </div>
         </div>
       </div>
     </main>
     <section>
       <div class="section-header">
-        <h2>Popular</h2>
+        <h2>{{ __('Popular') }}</h2>
         <div class="section-arrows">
           <button class="arrow-btn">
             <img src="{{ asset('icons/arrow-left.svg') }}" alt="arrow-left-icon" />
@@ -111,7 +110,7 @@
         </div>
       </div>
       <div class="section-header">
-        <h2>Free Demos</h2>
+        <h2>{{ __('Free Demos') }}</h2>
         <div class="section-arrows">
           <button class="arrow-btn">
             <img src="{{ asset('icons/arrow-left.svg') }}" alt="arrow-left-icon" />
@@ -166,7 +165,7 @@
         </div>
       </div>
       <div class="section-header">
-        <h2>On Sale</h2>
+        <h2>{{ __('On Sale') }}</h2>
         <div class="section-arrows">
           <button class="arrow-btn">
             <img src="{{ asset('icons/arrow-left.svg') }}" alt="arrow-left-icon" />
@@ -220,7 +219,7 @@
           <span class="game-price">$24.00</span>
         </div>
       </div>
-      <button class="catalog-btn">See Full Catalog</button>
+      <button class="catalog-btn">{{ __('See Full Catalog') }}</button>
     </section>
    @include('components/footer')
   </body>
