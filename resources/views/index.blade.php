@@ -55,9 +55,9 @@
       <button class="btn-tutorial">{{ __('Doubts? See Our Tutorial') }}</button>
     </section>
     <section>
-      <h2>{{ ('Our Gamified Approach') }}</h2>
+      <h2>{{ __('Our Gamified Approach') }}</h2>
       <p>
-        {{ ('Enjoy and support the unique world of indie games with fair prices and special discounts') }}
+        {{ __('Enjoy and support the unique world of indie games with fair prices and special discounts') }}
       </p>
       <div class="sequence-container">
         <div class="sequence-unit">
