@@ -13,9 +13,23 @@
             <li><a href="#">Backstage</a></li>
           </ul>
         </nav>
-        <div class="auth-buttons">
-          <button class="btn btn-outline">Sign Up</button>
-          <button class="btn btn-primary">Login</button>
-        </div>
+        @if (Route::has('login'))
+                <nav class="auth-buttons">
+                    @auth
+                        <a
+                            href="{{ url('/dashboard') }}"
+                            class="inline-block px-5 py-1.5 border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] rounded-sm text-sm leading-normal"
+                        >
+                            Dashboard
+                        </a>
+                    @else
+                        <a class="btn btn-primary"  href="{{ route('login') }}">Login</a>
+
+                        @if (Route::has('register'))
+                        <a class="btn btn-outline" href="{{ route('register') }}">Sign Up</a>
+                        @endif
+                    @endauth
+                </nav>
+            @endif
       </div>
     </header>
