@@ -8,14 +8,14 @@
   </head>
   <body>
     <div class="container">
-      <h1>Reset Password</h1>
-      <p>Type your authorised email address to receive reset password link.</p>
+      <h1>{{ __('Reset Password') }}</h1>
+      <p>{{ __('Type your authorised email address to receive reset password link.') }}</p>
       <form method="post" action="">
         @csrf
-        <label for="email">Email</label>
+        <label for="email">{{ __('Email') }}</label>
         <input type="email" name="email" id="email" />
 
-        <button type="submit">Send Code</button>
+        <button type="submit">{{ __('Send Code') }}</button>
       </form>
     </div>
   </body>
