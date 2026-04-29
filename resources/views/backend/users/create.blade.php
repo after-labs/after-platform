@@ -19,76 +19,76 @@
         <img src="/icons/user2.svg" alt="">
     </div> 
 
-    <h2>CREATE NEW USER: <span>Details</span></h2>
+    <h2>{{ __('CREATE NEW USER:') }} <span>{{ __('Details') }}</span></h2>
 
     <form class="form-grid">
 
       <div>
-        <label>First Name</label>
-        <input type="text" placeholder="Enter first name">
+        <label>{{ __('First Name') }}</label>
+        <input type="text" placeholder="{{ __('Enter first name') }}">
       </div>
 
       <div>
-        <label>Last Name</label>
-        <input type="text" placeholder="Enter last name">
+        <label>{{ __('Last Name') }}</label>
+        <input type="text" placeholder="{{ __('Enter last name') }}">
       </div>
 
       <div>
-        <label>Username</label>
-        <input type="text" placeholder="Enter username">
+        <label>{{ __('Username') }}</label>
+        <input type="text" placeholder="{{ __('Enter username') }}">
       </div>
 
       <div>
-        <label>Email</label>
-        <input type="email" placeholder="Enter email">
+        <label>{{ __('Email') }}</label>
+        <input type="email" placeholder="{{ __('Enter email') }}">
       </div>
 
       <div>
-        <label>Password</label>
-        <input type="password" placeholder="Enter password">
+        <label>{{ __('Password') }}</label>
+        <input type="password" placeholder="{{ __('Enter password') }}">
       </div>
 
       <div>
-        <label>Confirm password</label>
-        <input type="password" placeholder="Confirm password">
+        <label>{{ __('Confirm password') }}</label>
+        <input type="password" placeholder="{{ __('Confirm password') }}">
       </div>
 
       <div>
-        <label>Phone Number</label>
+        <label>{{ __('Phone Number') }}</label>
         <input type="text" placeholder="+55 (11) 90000-0000">
       </div>
 
       <div>
-        <label>Country</label>
+        <label>{{ __('Country') }}</label>
         <select>
-          <option disabled selected>Select country</option>
-          <option>Brazil</option>
+      <option disabled selected>{{ __('Select country') }}</option>
+      <option>{{ __('Brazil') }}</option>
         </select>
       </div>
 
       <div>
-        <label>User Type</label>
+        <label>{{ __('User Type') }}</label>
         <select>
-          <option disabled selected>Select type</option>
-          <option>Client</option>
-          <option>Admin</option>
+      <option disabled selected>{{ __('Select type') }}</option>
+      <option>{{ __('Client') }}</option>
+      <option>{{ __('Admin') }}</option>
         </select>
       </div>
 
       <div>
-        <label>Active Status</label>
+        <label>{{ __('Active Status') }}</label>
         <select>
-          <option disabled selected>Select status</option>
-          <option>Active</option>
-          <option>Inactive</option>
+      <option disabled selected>{{ __('Select status') }}</option>
+      <option>{{ __('Active') }}</option>
+      <option>{{ __('Inactive') }}</option>
         </select>
       </div>
 
     </form>
 
     <div class="actions">
-      <button class="cancel">Cancel</button>
-      <button class="save">Save & Create</button>
+      <button class="cancel">{{ __('Cancel') }}</button>
+      <button class="save">{{ __('Save & Create') }}</button>
     </div>
 
   </section>
