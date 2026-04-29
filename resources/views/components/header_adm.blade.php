@@ -20,9 +20,9 @@
             <!-- Navegação Central -->
             <nav class="nav-menu">
                 <ul>
-                    <li><a href="#">Users</a></li>
-                    <li><a href="#">Games</a></li>
-                    <li><a href="#">Orders</a></li>
+                    <li><a href="#">{{ __('Users') }}</a></li>
+                    <li><a href="#">{{ __('Games') }}</a></li>
+                    <li><a href="#">{{ __('Orders') }}</a></li>
                 </ul>
             </nav>
 

@@ -17,56 +17,56 @@
 
     <button class="close-btn">✕</button>
 
-    <h2>CREATE NEW GAME: <span>Details</span></h2>
+    <h2>{{ __('CREATE NEW GAME:') }} <span>{{ __('Details') }}</span></h2>
 
     <!-- GRID -->
     <form class="form-grid">
 
       <div>
-        <label>Name</label>
-        <input type="text" placeholder="Input placeholder">
+        <label>{{ __('Name') }}</label>
+        <input type="text" placeholder="{{ __('Input placeholder') }}">
       </div>
 
       <div>
-        <label>Category</label>
+        <label>{{ __('Category') }}</label>
         <select>
-          <option>Popular, Free Demo...</option>
+          <option>{{ __('Popular, Free Demo...') }}</option>
         </select>
       </div>
 
       <div>
-        <label>Developer</label>
-        <input type="text" placeholder="Input placeholder">
+        <label>{{ __('Developer') }}</label>
+        <input type="text" placeholder="{{ __('Input placeholder') }}">
       </div>
 
       <div>
-        <label>Base Price</label>
-        <input type="text" placeholder="Input placeholder">
+        <label>{{ __('Base Price') }}</label>
+        <input type="text" placeholder="{{ __('Input placeholder') }}">
       </div>
 
       <div>
-        <label>Genre(s)</label>
+        <label>{{ __('Genre(s)') }}</label>
         <select>
-          <option>Input placeholder</option>
+          <option>{{ __('Input placeholder') }}</option>
         </select>
       </div>
 
       <div>
-        <label>Release Year</label>
-        <input type="text" placeholder="Input placeholder">
+        <label>{{ __('Release Year') }}</label>
+        <input type="text" placeholder="{{ __('Input placeholder') }}">
       </div>
 
       <div>
-        <label>Active Status</label>
+        <label>{{ __('Active Status') }}</label>
         <select>
-          <option>Inactive</option>
+          <option>{{ __('Inactive') }}</option>
         </select>
       </div>
 
       <div>
-        <label>Age Range</label>
+        <label>{{ __('Age Range') }}</label>
         <select>
-          <option>Input placeholder</option>
+          <option>{{ __('Input placeholder') }}</option>
         </select>
       </div>
 
@@ -74,32 +74,32 @@
 
     <!-- DESCRIPTION -->
     <div class="textarea-group">
-      <label>Description</label>
-      <textarea placeholder="Input placeholder"></textarea>
+      <label>{{ __('Description') }}</label>
+      <textarea placeholder="{{ __('Input placeholder') }}"></textarea>
     </div>
 
     <div class="textarea-group">
-      <label>About This Game</label>
-      <textarea placeholder="Input placeholder"></textarea>
+       <label>{{ __('About This Game') }}</label>
+     <textarea placeholder="{{ __('Input placeholder') }}"></textarea>
     </div>
 
     <!-- IMAGES -->
     <div class="images-header">
-      <span>Images 0/12</span>
-      <button class="add-btn">Add Image</button>
+      <span>{{ __('Images') }} 0/12</span>
+      <button class="add-btn">{{ __('Add Image') }}</button>
     </div>
 
     <div class="image-upload">
-      <div class="upload-card">
-        image
+      div class="upload-card">
+        {{ __('Image') }}
         <span class="edit-icon">✎</span>
       </div>
     </div>
 
     <!-- ACTIONS -->
     <div class="actions">
-      <button class="cancel">Cancel</button>
-      <button class="save">Create Game</button>
+      <button class="cancel">{{ __('Cancel') }}</button>
+      <button class="save">{{ __('Create Game') }}</button>
     </div>
 
   </div>

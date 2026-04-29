@@ -17,64 +17,64 @@
 
     <button class="close-btn">✕</button>
 
-    <h2>&lt;GAMENAME&gt;: <span>Details</span></h2>
+    <h2>{{ __('<GAMENAME>:') }} <span>{{ __('Details') }}</span></h2>
 
     <!-- GRID 3 COLUNAS -->
     <form class="form-grid">
 
-      <input placeholder="Name">
-      <input placeholder="Offer Price">
-      <input placeholder="Developer">
+      <input placeholder="{{ __('Name') }}">
+      <input placeholder="{{ __('Offer Price') }}">
+      <input placeholder="{{ __('Developer') }}">
 
-      <input placeholder="Base Price">
-      <input placeholder="Related Offer">
-      <input placeholder="Release Year">
+      <input placeholder="{{ __('Base Price') }}">
+      <input placeholder="{{ __('Related Offer') }}">
+      <input placeholder="{{ __('Release Year') }}">
 
-      <select><option>Genre(s)</option></select>
-      <input placeholder="Offer Date-time Expiration">
-      <input placeholder="Input placeholder">
+      <select><option>{{ __('Genre(s)') }}</option></select>
+      <input placeholder="{{ __('Offer Date-time Expiration') }}">
+      <input placeholder="{{ __('Input placeholder') }}">
 
-      <select><option>Category</option></select>
-      <input placeholder="Related Offer Game Launchers">
-      <select><option>Available Game Launchers</option></select>
+      <select><option>{{ __('Category') }}</option></select>
+      <input placeholder="{{ __('Related Offer Game Launchers') }}">
+      <select><option>{{ __('Available Game Launchers') }}</option></select>
 
-      <select><option>Active Status</option></select>
-      <input placeholder="Input placeholder">
-      <input placeholder="Game ID">
+      <select><option>{{ __('Active Status') }}</option></select>
+      <input placeholder="{{ __('Input placeholder') }}">
+      <input placeholder="{{ __('Game ID') }}">
 
     </form>
 
     <!-- TEXTAREAS -->
     <div class="textarea-group">
-      <label>Description</label>
-      <textarea placeholder="Input placeholder"></textarea>
+      <label>{{ __('Description') }}</label>
+      <textarea placeholder="{{ __('Input placeholder') }}"></textarea>
     </div>
 
     <div class="textarea-group">
-      <label>About This Game</label>
-      <textarea placeholder="Input placeholder"></textarea>
+      <label>{{ __('About This Game') }}</label>
+      <textarea placeholder="{{ __('Input placeholder') }}"></textarea>
     </div>
 
     <!-- IMAGES -->
     <div class="images-header">
-      <span>Images 2/12</span>
-      <button class="add-btn">Add Image</button>
+      <span>{{ __('Images') }} 2/12</span>
+      <button class="add-btn">{{ __('Add Image') }}</button>
     </div>
 
     <div class="images-grid">
 
       <div class="image-card video">
-        video
+       {{ __('Video') }}
         <span class="edit">✎</span>
       </div>
 
-      <div class="image-card">
-        image
+       <div class="image-card">
+    {{ __('Image') }}
         <span class="close">✕</span>
       </div>
 
-      <div class="image-card">
-        image
+       <div class="image-card">
+    {{ __('Image') }}
         <span class="close">✕</span>
       </div>
 
@@ -82,8 +82,8 @@
 
     <!-- ACTIONS -->
     <div class="actions">
-      <button class="delete">Delete</button>
-      <button class="save">Save Game</button>
+      <button class="delete">{{ __('Delete') }}</button>
+  <button class="save">{{ __('Save Game') }}</button>
     </div>
 
   </div>

@@ -10,8 +10,8 @@
     <div class="modal-overlay">
     <article class="order-details-modal">
         <header class="modal-top">
-            <h1 class="modal-title">Order Details</h1>
-            <button class="btn-close" aria-label="Close modal">
+            <h1 class="modal-title">{{ __('Order Details') }}</h1>
+            <button class="btn-close" aria-label="{{ __('Close modal') }}">
                 <svg viewBox="0 0 24 24" width="24" height="24">
                     <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 </svg>
