@@ -2,7 +2,7 @@
          @vite(['resources/css/components/header.css'])
       <div class="container">
         <div class="logo">
-          <img src="{{ asset('icons/after-logomarca-branco.svg') }}" alt="after-logo" />
+            <img src="{{ asset('icons/after-logomarca-branco.svg') }}" alt="after-logo" onclick="window.location.href='{{ route('dashboard') }}';"/>
         </div>
         <div class="search-container">
           <img src="{{ asset('icons/search-icon.svg') }}" alt="" class="search-icon" />
@@ -10,7 +10,7 @@
         </div>
         <nav>
           <ul>
-            <li><a href="#">Store</a></li>
+            <li><a href="{{ route('games.catalog') }}">Store</a></li>
             <li><a href="#">My Orders</a></li>
             <li>
               <a href="#" class="points-trigger" onclick="togglePoints()"
