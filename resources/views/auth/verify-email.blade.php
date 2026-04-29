@@ -9,6 +9,9 @@
 </head>
 <body>
     <div class="container">
+        
+        <h1>Verify Email</h1>
+        
         <p>Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.</p>
 
         @if (session('status') == 'verification-link-sent')
@@ -16,9 +19,6 @@
                 A new verification link has been sent to the email address you provided during registration.
             </div>
         @endif
-
-        <h1>Verify Email</h1>
-
         <div class="footer-actions">
             <form method="POST" action="{{ route('verification.send') }}" style="display: inline;">
                 @csrf
