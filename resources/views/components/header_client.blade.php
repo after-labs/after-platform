@@ -27,7 +27,7 @@
                 /></a>
               </li>
               <li>
-                <a href="#"><img src="{{ asset('icons/user-icon.svg') }}" alt="" /></a>
+                <a href="{{ route('account') }}"><img src="{{ asset('icons/user-icon.svg') }}" alt="" /></a>
               </li>
             </ul>
           </ul>

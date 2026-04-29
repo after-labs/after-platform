@@ -12,6 +12,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('frontend/home');
     })->name('dashboard');
 
+    Route::get('/account', function () {
+        return view('dashboard');
+    })->name('account');
+
+
     Route::get('/games', function () {
         return view('frontend/games/catalog');
     })->name('games.catalog');
