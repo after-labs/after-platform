@@ -3,7 +3,6 @@ set -e
 
 php artisan config:cache
 php artisan route:cache
-php artisan key:generate --force --no-interaction
 php artisan migrate --force
 
 exec "$@"
