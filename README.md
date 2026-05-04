@@ -1,4 +1,4 @@
-# AFTER-GAMES MARKETPLACE
+# After - Indie Gaming Marketplace
 
 > Projeto de um marketplace de jogos indies com funcionalidades de cadastro, login, favoritos e carrinho de compras para usuários. Administradores podem gerenciar o catálogo de jogos.
 
@@ -9,7 +9,7 @@
 ---
 
 
-# 📝 Padrão de Commits
+## 📝 Padrão de Commits
 
 | Tipo | Descrição | Exemplo |
 | :--- | :--- | :--- |
@@ -23,6 +23,7 @@
 | `build` | Altera arquivos de build e dependências. | `build: atualiza versão do React` |
 | `ci` | Altera arquivos de integração contínua (CI). | `ci: corrige script de deploy` |
 | `chore` | Tarefas de rotina e manutenção. | `chore: adiciona a biblioteca prettier` |
+
 
 ## Tecnologias Utilizadas
 
@@ -39,3 +40,7 @@
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
 </p>
+
+## Demo Temporária
+
+- [After Platform Demo](https://after-platform-production.up.railway.app)
