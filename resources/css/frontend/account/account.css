@@ -1,0 +1,255 @@
+.account {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.sidebar {
+    max-width: 270px;
+    width: 100%;
+    background: var(--black-bg);
+    padding: 1rem;
+    border-right: var(--border-purple);
+}
+
+.sidebar .logo {
+    margin-bottom: 1.8rem;
+}
+
+.sidebar nav a {
+    display: block;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #222;
+}
+
+.sidebar .active {
+    color: var(--pink-highlight);
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+}
+
+.card {
+    background: var(--black-bg);
+    border: var(--border-purple);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.card .main-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.card p {
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    overflow-wrap: break-word;
+}
+
+.card p strong {
+    margin-right: 3rem;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.profile > .info {
+    width: 100%;
+}
+
+.profile > .info > h3 {
+    text-align: left;
+}
+
+.profile > .info > p {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile > .info > Strong {
+    font-size: 0.9rem;
+    color: var(--pink-highlight);
+}
+
+.avatar {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.avatar img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.profile-buttons {
+    display: flex;
+    width: 100%;
+    margin-top: auto;
+    justify-content: space-between;
+    position: relative;
+    bottom: 0;
+}
+
+.settings > h2 {
+    margin-bottom: 1rem;
+    width: fit-content;
+}
+
+.settings > .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+form > h3 {
+    width: fit-content;
+    margin-top: 1.8rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+input,
+select {
+    padding: 12px;
+    border-radius: var(--radius-xs);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--white);
+    width: 100%;
+
+    transition: all 0.2s ease;
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid var(--pink-highlight);
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
+}
+
+.phone {
+    display: flex;
+    gap: 8px;
+}
+
+.phone input:first-child {
+    width: 70px;
+}
+
+.btn {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.primary {
+    background: var(--purple-primary);
+}
+
+.outline {
+    border: 1px solid var(--white);
+    background: transparent;
+}
+
+.danger {
+    background: #ff3b3b;
+}
+
+.password {
+    display: flex;
+    justify-content: flex-start;
+    transition: all 0.2s ease;
+    gap: 0.5rem;
+}
+
+.password input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: var(--white);
+
+    position: relative;
+    border-radius: var(--radius-xs);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--white);
+}
+
+.password .toggle {
+    border-radius: var(--radius-xs);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.8rem;
+}
+
+.password .fa-eye {
+    color: var(--white);
+    cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .profile-buttons {
+        justify-content: center;
+        gap: 1.3rem;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .content {
+        padding: 0.7rem;
+    }
+
+    .card {
+        padding: 1rem;
+    }
+
+    .password .toggle {
+        padding: 0.6rem;
+    }
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
