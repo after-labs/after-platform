@@ -13,15 +13,27 @@
             <li><a href="#">{{ __('Backstage') }}</a></li>
           </ul>
         </nav>
-        <div class="auth-buttons">
-          <form method="GET" action="">
-            <select onchange="window.location.href=this.value" class="language-select">
-                <option value="{{ route('lang.switch', 'pt') }}" {{ session('locale', 'pt') === 'pt' ? 'selected' : '' }}>Português</option>
-                <option value="{{ route('lang.switch', 'en') }}" {{ session('locale', 'en') === 'en' ? 'selected' : '' }}>English</option>
-            </select>
-          </form>
-          <button class="btn btn-outline">{{ __('Sign Up') }}</button>
-          <button class="btn btn-primary">{{ __('Login') }}</button>
-        </div>
+        @if (Route::has('login'))
+                <nav class="auth-buttons">
+                    <form method="GET" action="">
+                      <select onchange="window.location.href=this.value" class="language-select">
+                          <option value="{{ route('lang.switch', 'pt') }}" {{ session('locale', 'pt') === 'pt' ? 'selected' : '' }}>Português</option>
+                          <option value="{{ route('lang.switch', 'en') }}" {{ session('locale', 'en') === 'en' ? 'selected' : '' }}>English</option>
+                      </select>
+                    </form>
+                    @auth
+                        <a
+                            href="{{ url('/dashboard') }}"
+                            class="btn-outline"
+                        >
+                            Dashboard
+                        </a>
+                    @else
+                        <a class="btn btn-primary"  href="{{ route('login') }}">{{ __('Login') }}</a>
+
+                        <a class="btn btn-outline" href="{{ route('register') }}">{{ __('Sign Up') }}</a>
+                    @endauth
+                </nav>
+            @endif
       </div>
     </header>

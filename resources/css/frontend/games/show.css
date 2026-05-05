@@ -1,6 +1,6 @@
 .store-container {
     display: grid;
-    grid-template-columns: 1fr 450px;
+    grid-template-columns: 1fr 430px;
     gap: 48px;
     max-width: 1280px;
     margin: 8rem auto 3rem;

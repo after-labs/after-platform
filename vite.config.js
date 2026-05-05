@@ -1,6 +1,5 @@
 import { defineConfig } from "vite";
 import laravel from "laravel-vite-plugin";
-import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
     plugins: [
@@ -13,11 +12,7 @@ export default defineConfig({
                 "resources/css/frontend/games/catalog.css",
                 "resources/css/frontend/games/show.css",
                 "resources/css/frontend/account/account.css",
-                "resources/css/auth/login.css",
-                "resources/css/auth/signup.css",
-                "resources/css/auth/reset_password.css",
-                "resources/css/auth/verify_code.css",
-                "resources/css/auth/new_password.css",
+                "resources/css/auth/auth.css",
                 "resources/css/backend/games/index.css",
                 "resources/css/backend/games/create.css",
                 "resources/css/backend/games/edit.css",
@@ -30,11 +25,5 @@ export default defineConfig({
             ],
             refresh: true,
         }),
-        tailwindcss(),
     ],
-    server: {
-        watch: {
-            ignored: ["**/storage/framework/views/**"],
-        },
-    },
 });
