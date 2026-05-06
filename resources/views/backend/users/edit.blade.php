@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="/css/user_record_adm.css">
 </head>
 <body>
-
-     <iframe src="header_adm.html" style="border:none; width:100%; height:100px;"></iframe>
+  @include('components/header_adm')
 
     <div class="wrapper">
 

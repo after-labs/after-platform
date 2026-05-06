@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="/css/users_control_adm.css">
 </head>
 <body>
-
-     <iframe src="header_adm.html" style="border:none; width:100%; height:100px;"></iframe>
+  @include('components/header_adm')
    
 <main>
   <h1>{{ __('Users') }}</h1>
