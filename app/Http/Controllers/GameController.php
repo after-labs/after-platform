@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class GameController extends Controller
 {
-    public function index(){
+    /* public function index(){
         // td: uso de condicional de admin logado para redirecionar a outra view
         return view('frontend.games.catalog', ['games' => GameVersion::all()]);
     }
@@ -14,7 +14,7 @@ class GameController extends Controller
     public function types(Request $category){
         // td: the request object is the data itself or a object with a field for the data inside? 
         $categoryRow = Category::where['name' => $category];
-        $games = Game::where['category_id' => $categoryRow->id]
+        $games = GameVersion::where['category_id' => $categoryRow->id]
         return view('frontend.games.catalog_type', ['category' => $category, 'games'=> $games]);
     }
 
@@ -49,5 +49,5 @@ class GameController extends Controller
     public function show(Game $game){
         // td: admin conditional usage - see with Quintas if its the best approach or if a new function should be created to split logic
         return view('game.show', ['game'=>$game]);
-    }
+    } */
 }

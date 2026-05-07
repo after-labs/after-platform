@@ -11,9 +11,9 @@ class Game extends Model
         'description',
         'summary',
         'age',
-        'release',
+        'release_date',
         'developer',
-        'category',
+        'category_id',
         'featured',
         'system_requirements'
     ];
