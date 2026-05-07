@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blank page</title>
-    <link rel="stylesheet" href="/css/global.css">
-    <link rel="stylesheet" href="/css/adm_blank_page.css">
+    @vite(['resources/css/app.css', 'resources/css/backend/games/create.css'])
 </head>
 <body>
   @include('components/header_adm')

@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User record</title>
-    <link rel="stylesheet" href="/css/global.css">
-    <link rel="stylesheet" href="/css/user_record_adm.css">
+    <@vite(['resources/css/app.css', 'resources/css/backend/users/edit.css'])
 </head>
 <body>
   @include('components/header_adm')

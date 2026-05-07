@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Users Control</title>
-    <link rel="stylesheet" href="/css/global.css">
-    <link rel="stylesheet" href="/css/users_control_adm.css">
+    @vite(['resources/css/app.css', 'resources/css/backend/users/index.css'])
 </head>
 <body>
   @include('components/header_adm')
