@@ -18,6 +18,19 @@ class User extends Authenticatable implements MustVerifyEmail
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
+    protected $fillable = [
+    'name',
+    'email',
+    'email_verified_at',
+    'password',
+    'phone',
+    'country',
+    'role',
+    'status',
+    'avatar',
+    'last_login_at'
+];
+
     /**
      * Get the attributes that should be cast.
      *
@@ -29,5 +42,32 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // td: why Quintas didn't gave the User model the hasMany methods to make the connections with other models?
+
+    public function CartItems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
+
+    public function Orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function Gamification()
+    {
+        return $this->hasOne(Gamification::class);
+    }
+
+    public function Notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
+
+    public function Wishlist()
+    {
+        return $this->hasMany(Wishlist::class);
     }
 }
