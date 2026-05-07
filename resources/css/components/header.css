@@ -251,6 +251,10 @@ header .btn-outline:hover {
     justify-content: space-between;
 }
 
+.progress-labels:last-of-type {
+    margin-bottom: 1.6rem;
+}
+
 .progress-labels > span:last-of-type {
     background: linear-gradient(90deg, #f7ffb9, #e8d5ff, #feeaac, #fff1ca);
     font-family: var(--font-family);

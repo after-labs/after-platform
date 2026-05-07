@@ -2,7 +2,7 @@
          @vite(['resources/css/components/header.css'])
       <div class="container">
         <div class="logo">
-            <img src="{{ asset('icons/after-logomarca-branco.svg') }}" alt="after-logo" onclick="window.location.href='{{ route('dashboard') }}';"/>
+            <img src="{{ asset('icons/after-logomarca-branco.svg') }}" alt="after-logo" onclick="window.location.href='{{ route('account') }}';"/>
         </div>
         <div class="search-container">
           <img src="{{ asset('icons/search-icon.svg') }}" alt="" class="search-icon" />
@@ -10,8 +10,8 @@
         </div>
         <nav>
           <ul>
-            <li><a href="{{ route('games.catalog') }}">{{ __('Store') }}</a></li>
-            <li><a href="#">{{ __('My Orders') }}</a></li>
+            <li><a href="/games">{{ __('Store') }}</a></li>
+            <li><a href="/orders">{{ __('My Orders') }}</a></li>
             <li>
               <a href="#" class="points-trigger" onclick="togglePoints()"
                 >5000<img src="{{ asset('icons/coin-icon.svg') }}" alt=""
@@ -71,6 +71,10 @@
           </div>
           <div class="progress-container">
             <div class="progress-fill" style="width: 70%">70%</div>
+          </div>
+           <div class="progress-labels">
+            <span>{{ __('Your Total Points') }}</span>
+            <span><strong>5000</strong> {{ __('Points') }}</span>
           </div>
         </div>
         <div class="reward-unit">

@@ -9,7 +9,7 @@
 <body>
      @include('components/header_client')
     <main>
-        <h2 class="page-title">{{ __('Popular') }}</h2>
+        <h2 class="page-title">$category</h2>
         <div class="catalog-layout-center">
         <section class="games-grid">
             <div class="game-card">

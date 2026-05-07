@@ -8,7 +8,7 @@
   </head>
   <body>
     @include('components/header_client')
-    <main class="home-page" data-catalog-link="{{ route('games.catalog') }}" data-game-link="{{ route('games.show', 'replaced') }}">
+    <main class="home-page" data-catalog-link="/games" data-game-link="/games/show/replaced">
       <div class="top-banner">
         <p>
           <span> [userName] </span>
@@ -34,19 +34,19 @@
           <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" class="bg-image" />
         </div>
         <div class="highlights-cards">
-          <div class="highlights-card" role="button" data-highlight-index="0" data-highlight-title="REPLACED 60% OFF" data-highlight-subtitle="Enjoy it until april 19" data-highlight-description="Enjoy this 2.5D cinematic action platformer adventure set in an alternate 1980s America, now available with 60% OFF" data-highlight-image="{{ asset('imgs/replaced-banner.png') }}" data-highlight-link="{{ route('games.show', 'replaced') }}">
+          <div class="highlights-card" role="button" data-highlight-index="0" data-highlight-title="REPLACED 60% OFF" data-highlight-subtitle="Enjoy it until april 19" data-highlight-description="Enjoy this 2.5D cinematic action platformer adventure set in an alternate 1980s America, now available with 60% OFF" data-highlight-image="{{ asset('imgs/replaced-banner.png') }}" data-highlight-link="/games/show/replaced">
             <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
             <p>{{ __('Replaced 60% Off') }}</p>
           </div>
-          <div class="highlights-card" role="button" data-highlight-index="1" data-highlight-title="SPRING SALE EVENT" data-highlight-subtitle="Limited time only" data-highlight-description="Enjoy bonus coins and fresh indie titles with our spring discounts, available for a short window." data-highlight-image="{{ asset('imgs/replaced-banner.png') }}" data-highlight-link="{{ route('games.show', 'replaced') }}">
+          <div class="highlights-card" role="button" data-highlight-index="1" data-highlight-title="SPRING SALE EVENT" data-highlight-subtitle="Limited time only" data-highlight-description="Enjoy bonus coins and fresh indie titles with our spring discounts, available for a short window." data-highlight-image="{{ asset('imgs/replaced-banner.png') }}" data-highlight-link="/games/show/replaced">
             <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
             <p>{{ __('Offer Example') }}</p>
           </div>
-          <div class="highlights-card" role="button" data-highlight-index="2" data-highlight-title="NEW GAME LAUNCH" data-highlight-subtitle="Discover our latest indie release" data-highlight-description="Explore a new adventure with a fresh storyline, unique art direction, and launch discounts." data-highlight-image="{{ asset('imgs/replaced-banner.png') }}" data-highlight-link="{{ route('games.show', 'replaced') }}">
+          <div class="highlights-card" role="button" data-highlight-index="2" data-highlight-title="NEW GAME LAUNCH" data-highlight-subtitle="Discover our latest indie release" data-highlight-description="Explore a new adventure with a fresh storyline, unique art direction, and launch discounts." data-highlight-image="{{ asset('imgs/replaced-banner.png') }}" data-highlight-link="/games/show/replaced">
             <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
             <p>{{ __('New Game') }}</p>
           </div>
-          <div class="highlights-card" role="button" data-highlight-index="3" data-highlight-title="ANNOUNCEMENT" data-highlight-subtitle="New features incoming" data-highlight-description="Our marketplace is growing with new tools, rewards, and curated indie drops for players like you." data-highlight-image="{{ asset('imgs/replaced-banner.png') }}" data-highlight-link="{{ route('games.show', 'replaced') }}">
+          <div class="highlights-card" role="button" data-highlight-index="3" data-highlight-title="ANNOUNCEMENT" data-highlight-subtitle="New features incoming" data-highlight-description="Our marketplace is growing with new tools, rewards, and curated indie drops for players like you." data-highlight-image="{{ asset('imgs/replaced-banner.png') }}" data-highlight-link="/games/show/replaced">
             <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
             <p>{{ __('Announcement') }}</p>
           </div>
