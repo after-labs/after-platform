@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('game_versions', function (Blueprint $table) {
             $table->id();
-            $table->integer('offer_id');
+            $table->integer('offer_id')->nullable();
             $table->integer('game_id');
             $table->string('edition_name');
             $table->string('platform_id');

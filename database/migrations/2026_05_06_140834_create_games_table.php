@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('description');
             $table->text('summary');
             $table->integer('age');
-            $table->year('release');
+            $table->year('release_date');
             $table->string('developer');
-            $table->string('category');
+            $table->integer('category_id');
             $table->boolean('featured');
             $table->string('system_requirements');
         });
