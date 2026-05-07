@@ -17,11 +17,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->text('summary');
-            $table->string('genre');
             $table->integer('age');
             $table->year('release');
             $table->string('developer');
             $table->string('category');
+            $table->boolean('featured');
+            $table->string('system_requirements');
         });
     }
 

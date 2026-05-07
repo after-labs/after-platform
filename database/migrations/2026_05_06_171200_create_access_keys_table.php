@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('game_version_id');
             $table->string('key');
             $table->string('status'); // reserved, sold, active, inactive 
+            $table->datetime('sold_at');
+            $table->datetime('expires_at');
         });
     }
 

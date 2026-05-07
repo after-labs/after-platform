@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_items', function (Blueprint $table) {
+        Schema::create('wishlist_items', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('game_version_id');
-            $table->integer('units');
-            $table->integer('order_id');
-            $table->decimal('price');
+            $table->integer('user_id');
+            $table->integer('game_id');
         });
     }
 
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_items');
+        Schema::dropIfExists('wishlist_items');
     }
 };

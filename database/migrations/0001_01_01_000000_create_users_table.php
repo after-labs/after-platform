@@ -19,8 +19,10 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone');
             $table->string('country');
-            $table->string('profile');
+            $table->string('role');
             $table->string('status');
+            $table->string('avatar');
+            $table->timestamp('last_login_at');
             $table->rememberToken();
             $table->timestamps();
         });

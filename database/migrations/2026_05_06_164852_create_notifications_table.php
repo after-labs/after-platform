@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->string('title');
             $table->string('description');
+            $table->datetime('read_at');
         });
     }
 
