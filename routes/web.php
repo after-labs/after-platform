@@ -12,9 +12,7 @@ use App\Http\Controllers\UserController;
 
 // Public/guest Routes
 
-Route::get('/', function () {
-    return view('frontend.home');
-})->name('home');
+Route::get('/', [GameController::class, 'home'])->name('home');
 
 Route::get('/games', [GameController::class, 'index'])->name('games.index');
 

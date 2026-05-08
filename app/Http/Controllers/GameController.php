@@ -2,52 +2,133 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Game;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
 {
-    /* public function index(){
-        // td: uso de condicional de admin logado para redirecionar a outra view
-        return view('frontend.games.catalog', ['games' => GameVersion::all()]);
-    }
-
-    public function types(Request $category){
-        // td: the request object is the data itself or a object with a field for the data inside? 
-        $categoryRow = Category::where['name' => $category];
-        $games = GameVersion::where['category_id' => $categoryRow->id]
-        return view('frontend.games.catalog_type', ['category' => $category, 'games'=> $games]);
-    }
-
-    public function create(){
-        // admin exclusive 
-        return view('backend.game.create');
-    }
-
-    public function store(Request $request){
-        $game = Game::create($request->all());
-        GameMedia::create([
-            'game_id' => $game->id,
-            'url' => $request['img_01'],
-            'order' => 0
-        ]);
-        GameMedia::create([
-            'game_id' => $game->id,
-            'url' => $request['img_02'],
-            'order' => 1
-        ]);
-        GameMedia::create([
-            'game_id' => $game->id,
-            'url' => $request['img_03'],
-            'order' => 2
+    public function home()
+    {
+        $baseQuery = Game::with([
+            'media',
+            'versions.offer',
+            'category',
         ]);
 
-        $product->Tags()->sync($request['tags_id']);
+        $popularGames = (clone $baseQuery)
+            ->where('featured', true)
+            ->latest()
+            ->limit(6)
+            ->get();
 
-        return redirect('/game');
+        if ($popularGames->isEmpty()) {
+            $popularGames = (clone $baseQuery)
+                ->latest()
+                ->limit(6)
+                ->get();
+        }
+
+        $freeGames = (clone $baseQuery)
+            ->whereHas('versions', function ($query) {
+                $query->where('active', true)
+                    ->where('final_price', 0);
+            })
+            ->limit(6)
+            ->get();
+
+        if ($freeGames->isEmpty()) {
+            $freeGames = (clone $baseQuery)
+                ->latest()
+                ->limit(6)
+                ->get();
+        }
+
+        $onSaleGames = (clone $baseQuery)
+            ->whereHas('versions', function ($query) {
+                $query->whereColumn('final_price', '<', 'base_price');
+            })
+            ->limit(6)
+            ->get();
+
+        if ($onSaleGames->isEmpty()) {
+            $onSaleGames = (clone $baseQuery)
+                ->latest()
+                ->limit(6)
+                ->get();
+        }
+
+        $highlightGame = $onSaleGames->first()
+            ?? $popularGames->first()
+            ?? $freeGames->first();
+
+        return view('frontend.home', compact(
+            'popularGames',
+            'freeGames',
+            'onSaleGames',
+            'highlightGame'
+        ));
     }
 
-    public function show(Game $game){
-        // td: admin conditional usage - see with Quintas if its the best approach or if a new function should be created to split logic
-        return view('game.show', ['game'=>$game]);
-    } */
+    public function index(Request $request)
+    {
+        $search = $request->search;
+
+        $games = Game::with([
+            'media',
+            'versions.offer',
+            'category'
+        ])
+        ->when($search, function ($query) use ($search) {
+            $query->where('name', 'like', "%{$search}%");
+        })
+        ->paginate(12)
+        ->withQueryString();
+
+        return view('frontend.games.catalog', compact(
+            'games',
+            'search'
+        ));
+    }
+
+    public function category(Category $category)
+    {
+        $games = Game::with([
+            'media',
+            'versions.offer',
+            'category'
+        ])
+        ->where('category_id', $category->id)
+        ->paginate(12);
+
+        return view('frontend.games.catalog_type', compact(
+            'games',
+            'category'
+        ));
+    }
+
+    public function show(Game $game)
+    {
+        $game->load([
+            'media',
+            'versions.platform',
+            'versions.offer',
+            'genres',
+            'category'
+        ]);
+
+        $relatedGames = Game::with([
+            'media',
+            'versions.offer'
+        ])
+        ->where('category_id', $game->category_id)
+        ->where('id', '!=', $game->id)
+        ->limit(6)
+        ->get();
+
+        return view('frontend.games.show', compact(
+            'game',
+            'relatedGames'
+        ));
+    }
 }
