@@ -1,64 +1,174 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\GameController;
-use App\Http\Controllers\GameVersionController;
-use App\Http\Controllers\CartItemController;
-use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\GameController;
+use App\Http\Controllers\CartItemController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UserController;
+
+
+
+// Public/guest Routes
+
 Route::get('/', function () {
-    return view('index');
+    return view('frontend.home');
 });
 
-Route::get('lang/{locale}', function (string $locale) {
-    if (in_array($locale, ['en', 'pt'])) {
+Route::get('/games', [GameController::class, 'index']);
+
+Route::get('/games/show/{game}', [
+    GameController::class,
+    'show'
+]);
+
+Route::get('/games/category/{category}', [
+    GameController::class,
+    'category'
+]);
+
+Route::get('lang/{locale}', function ($locale) {
+
+    if(in_array($locale, ['en', 'pt'])){
         session(['locale' => $locale]);
     }
-    return redirect(url()->previous('/'));
-})->name('lang.switch');
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/', function () {
-        return view('frontend/home');
-    });
+    return redirect()->back();
 
-    Route::get('/account', function () {
-        return view('account');
-    })->name('dashboard');
-    
-    Route::get('/games', [GameVersionController::class, 'index']);
-    Route::get('/games/show/{game}',[GameVersionController::class, 'show']);
-    Route::get('/games/{category}', [GameController::class, 'categorize']);
-    /*
-    Route::get('/cart', [CartItemController::class, 'index']);
-    Route::get('/checkout/{cartItems}',[OrderController::class, 'checkout']);
-    Route::get('/', [OrderController::class, 'types']);
-
-    Route::post('/cart/store/{product}', [CartItemController::class, 'store']);
-    Route::get('/cart', [CartItemController::class, 'index']);
-    Route::get('/cart/delete/{product}', [CartItemController::class, 'delete']);
-    Route::get('/order/checkout', [OrderController::class, 'checkout']);
-    Route::get('/order', [OrderController::class, 'index']);
-    */ 
-
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 
-// admin routes zone
-/* Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/product/create', [ProductController::class, 'create']);
-    Route::post('/product/store', [ProductController::class, 'store']);
-    Route::get('/category/create', [CategoryController::class, 'create']);
-    Route::post('/category/store', [CategoryController::class, 'store']);
-    Route::get('/tag/create', [TagController::class, 'create']);
-    Route::post('/tag/store', [TagController::class, 'store']);
-    }); */
+
+// Client
+
+Route::middleware(['auth'])->group(function(){
+
+    Route::get('/account', function () {
+        return view('frontend.account.account');
+    });
+
+    // Cart
+
+    Route::get('/cart', [
+        CartItemController::class,
+        'index'
+    ]);
+
+    Route::post('/cart/store/{gameVersion}', [
+        CartItemController::class,
+        'store'
+    ]);
+
+    Route::get('/cart/delete/{cartItem}', [
+        CartItemController::class,
+        'delete'
+    ]);
+
+    // Orders
+
+    Route::get('/orders', [
+        OrderController::class,
+        'index'
+    ]);
+
+    Route::get('/orders/checkout', [
+        OrderController::class,
+        'checkout'
+    ]);
+
+    // Profile
+
+    Route::get('/profile', [
+        ProfileController::class,
+        'edit'
+    ]);
+
+    Route::patch('/profile', [
+        ProfileController::class,
+        'update'
+    ]);
+
+    Route::delete('/profile', [
+        ProfileController::class,
+        'destroy'
+    ]);
+
+});
+
+// Admin
+
+Route::middleware(['auth', 'admin'])->group(function(){
+
+    Route::get('/admin', function () {
+        return view('backend.dashboard');
+    });
+
+    // Users
+
+    Route::get('/users', [
+        UserController::class,
+        'index'
+    ]);
+
+    Route::get('/users/create', [
+        UserController::class,
+        'create'
+    ]);
+
+    Route::post('/users/store', [
+        UserController::class,
+        'store'
+    ]);
+
+    Route::get('/users/edit/{user}', [
+        UserController::class,
+        'edit'
+    ]);
+
+    Route::post('/users/update/{user}', [
+        UserController::class,
+        'update'
+    ]);
+
+    Route::get('/users/delete/{user}', [
+        UserController::class,
+        'delete'
+    ]);
+
+    // Games
+
+    Route::get('/games', [
+        GameController::class,
+        'adminIndex'
+    ]);
+
+    Route::get('/games/create', [
+        GameController::class,
+        'create'
+    ]);
+
+    Route::post('/games/store', [
+        GameController::class,
+        'store'
+    ]);
+
+    Route::get('/games/edit/{game}', [
+        GameController::class,
+        'edit'
+    ]);
+
+    Route::post('/games/update/{game}', [
+        GameController::class,
+        'update'
+    ]);
+
+    Route::get('/games/delete/{game}', [
+        GameController::class,
+        'delete'
+    ]);
+
+});
+
 
 require __DIR__.'/auth.php';
