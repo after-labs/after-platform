@@ -14,6 +14,10 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', [GameController::class, 'home'])->name('home');
 
+Route::redirect('/dashboard', '/')
+    ->middleware(['auth'])
+    ->name('dashboard');
+
 Route::get('/games', [GameController::class, 'index'])->name('games.index');
 
 Route::get('/games/show/{game}', [
