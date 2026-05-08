@@ -68,10 +68,13 @@ main {
     display: flex;
     gap: 7px;
     align-items: center;
+    text-decoration: none;
 }
 
-.fa-times {
-    cursor: pointer;
+.filter-pill:hover,
+.filter-pill.active {
+    border-color: var(--pink-highlight);
+    color: var(--pink-highlight);
 }
 
 /* GRID DOS JOGOS  */
@@ -234,6 +237,25 @@ aside {
     align-items: center;
     font-size: 0.72rem;
     color: var(--ghost-white-80);
+}
+
+.genre-list a {
+    color: var(--ghost-white-80);
+    font-size: 0.82rem;
+    text-decoration: none;
+}
+
+.genre-list a:hover {
+    color: var(--pink-highlight);
+}
+
+.empty-state {
+    border: 1px solid var(--ghost-white-60);
+    border-radius: var(--radius-xs);
+    color: var(--ghost-white-80);
+    grid-column: 1 / -1;
+    padding: 2rem;
+    text-align: center;
 }
 
 .genre-list input {

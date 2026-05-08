@@ -72,7 +72,7 @@ class GameController extends Controller
 
     public function index(Request $request)
     {
-        $search = $request->search;
+        $search = $request->query('search');
 
         $games = Game::with([
             'media',
@@ -85,9 +85,12 @@ class GameController extends Controller
         ->paginate(12)
         ->withQueryString();
 
+        $categories = Category::orderBy('name')->get();
+
         return view('frontend.games.catalog', compact(
             'games',
-            'search'
+            'search',
+            'categories'
         ));
     }
 
@@ -99,11 +102,15 @@ class GameController extends Controller
             'category'
         ])
         ->where('category_id', $category->id)
-        ->paginate(12);
+        ->paginate(12)
+        ->withQueryString();
+
+        $categories = Category::orderBy('name')->get();
 
         return view('frontend.games.catalog_type', compact(
             'games',
-            'category'
+            'category',
+            'categories'
         ));
     }
 
