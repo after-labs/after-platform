@@ -1,22 +1,35 @@
     <header>
-         @vite(['resources/css/components/header.css'])
+      @vite(['resources/css/components/header.css'])
       <div class="container">
         <div class="logo">
-            <img src="{{ asset('icons/after-logomarca-branco.svg') }}" alt="after-logo" onclick="window.location.href='{{ route('account') }}';"/>
+            <a href="{{ route('home') }}">
+              <img src="{{ asset('icons/after-logomarca-branco.svg') }}" alt="after-logo" />
+            </a>
         </div>
-        <div class="search-container">
-          <img src="{{ asset('icons/search-icon.svg') }}" alt="" class="search-icon" />
-          <input type="text" placeholder="{{ __('Search...') }}" class="search-input" />
-        </div>
+
+        <form action="{{ route('games.index') }}" method="GET" class="search-container">
+            <img src="{{ asset('icons/search-icon.svg') }}" alt="" class="search-icon" />
+            <input
+                type="text"
+                name="search"
+                value="{{ request('search') }}"
+                placeholder="{{ __('Search...') }}"
+            >
+        </form>
         <nav>
           <ul>
-            <li><a href="/games">{{ __('Store') }}</a></li>
-            <li><a href="/orders">{{ __('My Orders') }}</a></li>
-            <li>
-              <a href="#" class="points-trigger" onclick="togglePoints()"
-                >5000<img src="{{ asset('icons/coin-icon.svg') }}" alt=""
-              /></a>
-            </li>
+            <li><a href="{{ route('games.index') }}">{{ __('Store') }}</a></li>
+
+            @auth
+              <li><a href="{{ route('orders.index') }}">{{ __('My Orders') }}</a></li>
+              <li>
+                <a href="#" class="points-trigger" onclick="togglePoints()">
+                  {{ auth()->user()->gamification?->coins ?? 0 }}
+                  <img src="{{ asset('icons/coin-icon.svg') }}" alt="" />
+                </a>
+              </li>
+            @endauth
+
             <li>
                <form method="GET" action="">
                   <select onchange="window.location.href=this.value" class="language-select">
@@ -26,23 +39,29 @@
                 </form>
             </li>
             <ul class="icon-group">
-              <li>
-                <a href="#"><img src="{{ asset('icons/cart-icon.svg') }}" alt="" /></a>
-              </li>
-              <li>
-                <a href="#" class="notif-trigger" onclick="toggleNotif()"
-                  ><img src="{{ asset('icons/bell-icon.svg') }}" alt=""
-                /></a>
-              </li>
-              <li>
-                <a href="{{ route('account') }}"><img src="{{ asset('icons/user-icon.svg') }}" alt="" /></a>
-              </li>
+              @auth
+                <li>
+                  <a href="{{ route('cart.index') }}"><img src="{{ asset('icons/cart-icon.svg') }}" alt="{{ __('Cart') }}" /></a>
+                </li>
+                <li>
+                  <a href="#" class="notif-trigger" onclick="toggleNotif()">
+                    <img src="{{ asset('icons/bell-icon.svg') }}" alt="{{ __('Notifications') }}" />
+                  </a>
+                </li>
+                <li>
+                  <a href="{{ route('profile.edit') }}"><img src="{{ asset('icons/user-icon.svg') }}" alt="{{ __('Account') }}" /></a>
+                </li>
+              @else
+                <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                <li><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
+              @endauth
             </ul>
           </ul>
         </nav>
       </div>
     </header>
 
+    @auth
     <!-- POINTS POPUP -->
 
     <div class="points-container hidden">
@@ -57,24 +76,24 @@
         <div class="level-row">
           <div class="level-unit">
             <span>{{ __('Your Level') }}</span>
-            <span>{{ __('Level') }} 12</span>
+            <span>{{ __('Level') }} {{ auth()->user()->gamification?->level ?? 1 }}</span>
           </div>
           <div class="level-unit">
             <span>{{ __('Next Level') }}</span>
-            <span>{{ __('Level') }} 13</span>
+            <span>{{ __('Level') }} {{ (auth()->user()->gamification?->level ?? 1) + 1 }}</span>
           </div>
         </div>
         <div class="points-progress">
           <div class="progress-labels">
             <span>{{ __('Level Progress') }}</span>
-            <span><strong>400</strong> {{ __('Points To Go') }}</span>
+            <span><strong>{{ auth()->user()->gamification?->points ?? 0 }}</strong> {{ __('Points') }}</span>
           </div>
           <div class="progress-container">
             <div class="progress-fill" style="width: 70%">70%</div>
           </div>
            <div class="progress-labels">
             <span>{{ __('Your Total Points') }}</span>
-            <span><strong>5000</strong> {{ __('Points') }}</span>
+            <span><strong>{{ auth()->user()->gamification?->points ?? 0 }}</strong> {{ __('Points') }}</span>
           </div>
         </div>
         <div class="reward-unit">
@@ -147,3 +166,4 @@
 
       renderNotifications()
     </script>
+    @endauth
