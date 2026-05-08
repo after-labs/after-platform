@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\CartItem;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function checkout(){
-        //pego os produtos
-        $items = CartItem::where(
-            ['user_id' => Auth::user()->id]
-        )->get();
+    public function checkout()
+    {
+        $items = CartItem::where([
+            'user_id' => Auth::user()->id
+        ])->get();
 
-        //Calcula o total
         $total = 0;
+
         foreach($items as $i){
-            $total += $i->units * $i->Product->price;
+            $total += $i->units * $i->GameVersion->final_price;
         }
 
-        //crio o pedido
         $order = Order::create([
             'user_id' => Auth::user()->id,
             'total' => $total
@@ -26,23 +28,26 @@ class OrderController extends Controller
 
         foreach($items as $i){
             OrderItem::create([
-                'product_id' => $i->product_id,
+                'game_version_id' => $i->game_version_id,
                 'units' => $i->units,
-                'price' => $i->Product->price,
+                'price' => $i->GameVersion->final_price,
                 'order_id' => $order->id
             ]);
+
             $i->delete();
         }
 
         return redirect('/order');
     }
 
-    public function index(){
-        //Pegar todos os pedidos
-        $orders = Order::where(
-            ['user_id' => Auth::user()->id]
-        )->get();
+    public function index() {
+        $orders = Order::where([
+            'user_id' => Auth::user()->id
+        ])->get();
 
-        return view('order.index', ['orders'=>$orders]);
+        return view('frontend.orders.index', [
+            'orders' => $orders
+        ]);
     }
 }
+
