@@ -8,223 +8,144 @@
   </head>
   <body>
     @include('components/header_client')
-    <main class="home-page" data-catalog-link="/games" data-game-link="/games/show/replaced">
+
+    @php
+      $highlightVersion = $highlightGame?->versions?->where('active', true)->sortBy('final_price')->first();
+      $highlightDiscount = 0;
+
+      if ($highlightVersion && $highlightVersion->base_price > 0 && $highlightVersion->base_price > $highlightVersion->final_price) {
+          $highlightDiscount = round((($highlightVersion->base_price - $highlightVersion->final_price) / $highlightVersion->base_price) * 100);
+      }
+
+      $highlightMedia = $highlightGame?->banner() ?? $highlightGame?->poster();
+      $highlightCards = $onSaleGames->take(4);
+    @endphp
+
+    <main
+      class="home-page"
+      data-catalog-link="{{ route('games.index') }}"
+      data-game-link="{{ $highlightGame ? route('games.show', $highlightGame) : route('games.index') }}"
+    >
       <div class="top-banner">
         <p>
-          <span> [userName] </span>
-          <span> {{ __('Level') }} 5</span>
-          <span> {{ __('Next Level Reward') }}: 300 {{ __('Coins') }}  <img src="{{ asset('icons/coin-icon.svg') }}" alt="" /></span>
+          @auth
+            <span>{{ auth()->user()->name }}</span>
+            <span>{{ __('Level') }} {{ auth()->user()->gamification?->level ?? 1 }}</span>
+            <span>{{ auth()->user()->gamification?->coins ?? 0 }} {{ __('Coins') }} <img src="{{ asset('icons/coin-icon.svg') }}" alt="" /></span>
+          @else
+            <span>{{ __('Explore indie games before joining After') }}</span>
+            <span><a href="{{ route('register') }}">{{ __('Create account') }}</a></span>
+          @endauth
         </p>
       </div>
       <div class="highlights">
         <div class="highlights-main">
           <div class="highlights-main-content">
-            <h2>REPLACED 60% OFF</h2>
-            <p>{{ __('Enjoy it until april 19') }}</p>
+            <h2>
+              @if($highlightGame)
+                {{ $highlightGame->name }} {{ $highlightDiscount > 0 ? $highlightDiscount . '% OFF' : '' }}
+              @else
+                {{ __('Discover Indie Games') }}
+              @endif
+            </h2>
+            <p>{{ $highlightGame?->category?->name ?? __('After marketplace') }}</p>
             <p>
-              {{ __('Enjoy this 2.5D cinematic action platformer adventure set in an alternate 1980s America, Now Available with 60% OFF') }}
+              {{ $highlightGame?->summary ?? __('Browse the catalog and find your next indie adventure.') }}
             </p>
             <div class="highlights-main-buttons">
-              <button>{{ __('Buy Now') }}</button>
-              <button>
+              <a href="{{ $highlightGame ? route('games.show', $highlightGame) : route('games.index') }}">{{ __('Buy Now') }}</a>
+              <a href="{{ auth()->check() ? route('profile.edit') : route('login') }}">
                 <img src="{{ asset('icons/bookmark-icon.svg') }}" alt="bookmark-icon" />
-              </button>
+              </a>
             </div>
           </div>
-          <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" class="bg-image" />
+          <img src="{{ asset($highlightMedia?->path ?? 'imgs/replaced-banner.png') }}" alt="" class="bg-image" />
         </div>
         <div class="highlights-cards">
-          <div class="highlights-card" role="button" data-highlight-index="0" data-highlight-title="REPLACED 60% OFF" data-highlight-subtitle="Enjoy it until april 19" data-highlight-description="Enjoy this 2.5D cinematic action platformer adventure set in an alternate 1980s America, now available with 60% OFF" data-highlight-image="{{ asset('imgs/replaced-banner.png') }}" data-highlight-link="/games/show/replaced">
-            <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
-            <p>{{ __('Replaced 60% Off') }}</p>
-          </div>
-          <div class="highlights-card" role="button" data-highlight-index="1" data-highlight-title="SPRING SALE EVENT" data-highlight-subtitle="Limited time only" data-highlight-description="Enjoy bonus coins and fresh indie titles with our spring discounts, available for a short window." data-highlight-image="{{ asset('imgs/replaced-banner.png') }}" data-highlight-link="/games/show/replaced">
-            <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
-            <p>{{ __('Offer Example') }}</p>
-          </div>
-          <div class="highlights-card" role="button" data-highlight-index="2" data-highlight-title="NEW GAME LAUNCH" data-highlight-subtitle="Discover our latest indie release" data-highlight-description="Explore a new adventure with a fresh storyline, unique art direction, and launch discounts." data-highlight-image="{{ asset('imgs/replaced-banner.png') }}" data-highlight-link="/games/show/replaced">
-            <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
-            <p>{{ __('New Game') }}</p>
-          </div>
-          <div class="highlights-card" role="button" data-highlight-index="3" data-highlight-title="ANNOUNCEMENT" data-highlight-subtitle="New features incoming" data-highlight-description="Our marketplace is growing with new tools, rewards, and curated indie drops for players like you." data-highlight-image="{{ asset('imgs/replaced-banner.png') }}" data-highlight-link="/games/show/replaced">
-            <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
-            <p>{{ __('Announcement') }}</p>
-          </div>
+          @forelse($highlightCards as $game)
+            @php
+              $media = $game->banner() ?? $game->poster();
+            @endphp
+
+            <div
+              class="highlights-card"
+              role="button"
+              data-highlight-index="{{ $loop->index }}"
+              data-highlight-title="{{ $game->name }}"
+              data-highlight-subtitle="{{ $game->category?->name ?? __('Indie') }}"
+              data-highlight-description="{{ $game->summary }}"
+              data-highlight-image="{{ asset($media?->path ?? 'imgs/replaced-banner.png') }}"
+              data-highlight-link="{{ route('games.show', $game) }}"
+            >
+              <img src="{{ asset($game->poster()?->path ?? 'imgs/replaced-poster.png') }}" alt="" />
+              <p>{{ $game->name }}</p>
+            </div>
+          @empty
+            <div class="highlights-card" role="button" data-highlight-index="0" data-highlight-title="{{ __('Discover Indie Games') }}" data-highlight-subtitle="{{ __('After marketplace') }}" data-highlight-description="{{ __('Browse the catalog and find your next indie adventure.') }}" data-highlight-image="{{ asset('imgs/replaced-banner.png') }}" data-highlight-link="{{ route('games.index') }}">
+              <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
+              <p>{{ __('After Store') }}</p>
+            </div>
+          @endforelse
         </div>
       </div>
     </main>
     <section>
       <div class="section-header">
-        <h2>{{ __('Popular') }}</h2>
-        <div class="section-arrows">
-          <button class="arrow-btn">
-            <img src="{{ asset('icons/arrow-left.svg') }}" alt="arrow-left-icon" />
-          </button>
-          <button class="arrow-btn">
-            <img src="{{ asset('icons/arrow-right.svg') }}" alt="arrow-right-icon" />
-          </button>
-        </div>
+          <h2>{{ __('Popular') }}</h2>
+          <div class="section-arrows">
+            <button class="arrow-btn">
+              <img src="{{ asset('icons/arrow-left.svg') }}" alt="arrow-left-icon" />
+            </button>
+            <button class="arrow-btn">
+              <img src="{{ asset('icons/arrow-right.svg') }}" alt="arrow-right-icon" />
+            </button>
+          </div>
       </div>
       <div class="game-row">
-        <div class="game-card">
-          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="Replaced" />
-          <p class="game-title">Replaced</p>
-          <span class="game-discount">60%</span>
-          <span class="game-old-price">$40.00</span>
-          <span class="game-price">$24.00</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/hk-poster.jpg') }}" alt="Hollow Knight" />
-          <p class="game-title">Hollow Knight</p>
-          <span class="game-discount">50%</span>
-          <span class="game-old-price">$19.99</span>
-          <span class="game-price">$12.99</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/valheim-poster.jpg') }}" alt="Valheim" />
-          <p class="game-title">Valheim</p>
-          <span class="game-discount">35%</span>
-          <span class="game-old-price">$29.99</span>
-          <span class="game-price">$19.99</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/bighops-poster.jpg') }}" alt="Big Hops" />
-          <p class="game-title">Big Hops</p>
-          <span class="game-discount">50%</span>
-          <span class="game-old-price">$14.99</span>
-          <span class="game-price">$9.99</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/dropshot-poster.jpg') }}" alt="Drop Shot" />
-          <p class="game-title">Drop Shot</p>
-          <span class="game-discount">45%</span>
-          <span class="game-old-price">$22.99</span>
-          <span class="game-price">$14.99</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="Replaced" />
-          <p class="game-title">Replaced</p>
-          <span class="game-discount">60%</span>
-          <span class="game-old-price">$40.00</span>
-          <span class="game-price">$24.00</span>
-        </div>
+          @foreach($popularGames as $game)
+              <x-game-card :game="$game" />
+          @endforeach
       </div>
     </section>
     <section>
       <div class="section-header">
-        <h2>{{ __('Free Demos') }}</h2>
-        <div class="section-arrows">
-          <button class="arrow-btn">
-            <img src="{{ asset('icons/arrow-left.svg') }}" alt="arrow-left-icon" />
-          </button>
-          <button class="arrow-btn">
-            <img src="{{ asset('icons/arrow-right.svg') }}" alt="arrow-right-icon" />
-          </button>
-        </div>
+          <h2>{{ __('Free Demos') }}</h2>
+          <div class="section-arrows">
+            <button class="arrow-btn">
+              <img src="{{ asset('icons/arrow-left.svg') }}" alt="arrow-left-icon" />
+            </button>
+            <button class="arrow-btn">
+              <img src="{{ asset('icons/arrow-right.svg') }}" alt="arrow-right-icon" />
+            </button>
+          </div>
       </div>
       <div class="game-row">
-        <div class="game-card">
-          <img src="{{ asset('imgs/hk-poster.jpg') }}" alt="Hollow Knight" />
-          <p class="game-title">Hollow Knight</p>
-          <span class="game-discount">50%</span>
-          <span class="game-old-price">$19.99</span>
-          <span class="game-price">$12.99</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/bighops-poster.jpg') }}" alt="Big Hops" />
-          <p class="game-title">Big Hops</p>
-          <span class="game-discount">50%</span>
-          <span class="game-old-price">$14.99</span>
-          <span class="game-price">$9.99</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/dropshot-poster.jpg') }}" alt="Drop Shot" />
-          <p class="game-title">Drop Shot</p>
-          <span class="game-discount">45%</span>
-          <span class="game-old-price">$22.99</span>
-          <span class="game-price">$14.99</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/valheim-poster.jpg') }}" alt="Valheim" />
-          <p class="game-title">Valheim</p>
-          <span class="game-discount">35%</span>
-          <span class="game-old-price">$29.99</span>
-          <span class="game-price">$19.99</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="Replaced" />
-          <p class="game-title">Replaced</p>
-          <span class="game-discount">60%</span>
-          <span class="game-old-price">$40.00</span>
-          <span class="game-price">$24.00</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/hk-poster.jpg') }}" alt="Hollow Knight" />
-          <p class="game-title">Hollow Knight</p>
-          <span class="game-discount">50%</span>
-          <span class="game-old-price">$19.99</span>
-          <span class="game-price">$12.99</span>
-        </div>
+          @foreach($freeGames as $game)
+              <x-game-card :game="$game" />
+          @endforeach
       </div>
     </section>
+
     <section>
       <div class="section-header">
-        <h2>{{ __('On Sale') }}</h2>
-        <div class="section-arrows">
-          <button class="arrow-btn">
-            <img src="{{ asset('icons/arrow-left.svg') }}" alt="arrow-left-icon" />
-          </button>
-          <button class="arrow-btn">
-            <img src="{{ asset('icons/arrow-right.svg') }}" alt="arrow-right-icon" />
-          </button>
-        </div>
+          <h2>{{ __('On Sale') }}</h2>
+          <div class="section-arrows">
+            <button class="arrow-btn">
+              <img src="{{ asset('icons/arrow-left.svg') }}" alt="arrow-left-icon" />
+            </button>
+            <button class="arrow-btn">
+              <img src="{{ asset('icons/arrow-right.svg') }}" alt="arrow-right-icon" />
+            </button>
+          </div>
       </div>
       <div class="game-row">
-        <div class="game-card">
-          <img src="{{ asset('imgs/dropshot-poster.jpg') }}" alt="Drop Shot" />
-          <p class="game-title">Drop Shot</p>
-          <span class="game-discount">45%</span>
-          <span class="game-old-price">$22.99</span>
-          <span class="game-price">$14.99</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/valheim-poster.jpg') }}" alt="Valheim" />
-          <p class="game-title">Valheim</p>
-          <span class="game-discount">35%</span>
-          <span class="game-old-price">$29.99</span>
-          <span class="game-price">$19.99</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/bighops-poster.jpg') }}" alt="Big Hops" />
-          <p class="game-title">Big Hops</p>
-          <span class="game-discount">50%</span>
-          <span class="game-old-price">$14.99</span>
-          <span class="game-price">$9.99</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="Replaced" />
-          <p class="game-title">Replaced</p>
-          <span class="game-discount">60%</span>
-          <span class="game-old-price">$40.00</span>
-          <span class="game-price">$24.00</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/hk-poster.jpg') }}" alt="Hollow Knight" />
-          <p class="game-title">Hollow Knight</p>
-          <span class="game-discount">50%</span>
-          <span class="game-old-price">$19.99</span>
-          <span class="game-price">$12.99</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/valheim-poster.jpg') }}" alt="Valheim" />
-          <p class="game-title">Valheim</p>
-          <span class="game-discount">35%</span>
-          <span class="game-old-price">$29.99</span>
-          <span class="game-price">$19.99</span>
-        </div>
+          @foreach($onSaleGames as $game)
+              <x-game-card :game="$game" />
+          @endforeach
       </div>
-      <button class="catalog-btn">{{ __('See Full Catalog') }}</button>
+      <a href="{{ route('games.index') }}" class="catalog-btn">{{ __('See Full Catalog') }}</a>
     </section>
-   @include('components/footer')
+
+    @include('components/footer')
   </body>
 </html>

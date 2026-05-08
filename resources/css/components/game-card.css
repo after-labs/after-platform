@@ -1,4 +1,5 @@
 .game-card-link {
+    display: block;
     text-decoration: none;
     color: inherit;
 }
@@ -8,8 +9,8 @@
     display: flex;
     flex-direction: column;
 
-    width: 210px;
-    min-width: 210px;
+    width: 100%;
+    min-width: 0;
 
     background: linear-gradient(
         180deg,
@@ -185,11 +186,6 @@
 }
 
 @media (max-width: 768px) {
-    .game-card {
-        width: 180px;
-        min-width: 180px;
-    }
-
     .game-card-image-wrapper {
         height: 250px;
     }
@@ -204,11 +200,6 @@
 }
 
 @media (max-width: 530px) {
-    .game-card {
-        width: 160px;
-        min-width: 160px;
-    }
-
     .game-card-image-wrapper {
         height: 220px;
     }
