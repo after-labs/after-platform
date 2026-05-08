@@ -138,4 +138,63 @@ class GameController extends Controller
             'relatedGames'
         ));
     }
+
+    public function adminIndex()
+    {
+        $games = Game::with(['media', 'versions.offer', 'category'])
+            ->latest()
+            ->get();
+
+        return view('backend.games.index', compact('games'));
+    }
+
+    public function create()
+    {
+        $categories = Category::orderBy('name')->get();
+
+        return view('backend.games.create', compact('categories'));
+    }
+
+    public function store(Request $request)
+    {
+        Game::create($this->gameData($request));
+
+        return redirect()->route('admin.games.index');
+    }
+
+    public function edit(Game $game)
+    {
+        $categories = Category::orderBy('name')->get();
+
+        return view('backend.games.edit', compact('game', 'categories'));
+    }
+
+    public function update(Request $request, Game $game)
+    {
+        $game->update($this->gameData($request));
+
+        return redirect()->route('admin.games.index');
+    }
+
+    public function delete(Game $game)
+    {
+        $game->delete();
+
+        return redirect()->route('admin.games.index');
+    }
+
+    private function gameData(Request $request): array
+    {
+        return $request->only([
+            'name',
+            'description',
+            'summary',
+            'age',
+            'release_date',
+            'developer',
+            'category_id',
+            'featured',
+            'system_requirements',
+        ]);
+    }
 }
