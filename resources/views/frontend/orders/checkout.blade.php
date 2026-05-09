@@ -13,7 +13,7 @@
         <section class="orders-hero">
             <span>{{ __('Checkout') }}</span>
             <h1>{{ __('Confirm your order') }}</h1>
-            <p>{{ __('Payment is simulated for this classroom marketplace version.') }}</p>
+            <p>{{ __('Select your payment method and review your order.') }}</p>
         </section>
 
         <div class="checkout-layout">

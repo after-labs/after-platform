@@ -177,7 +177,7 @@
                         </label>
 
                         <label>
-                            <span>{{ __('Confirm Password') }}</span>
+                            <span>{{ __('Confirm New Password') }}</span>
                             <input name="password_confirmation" type="password" autocomplete="new-password">
                             <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" />
                         </label>

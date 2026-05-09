@@ -98,7 +98,7 @@
         </div>
         <div class="reward-unit">
           <span>{{ __('Next Level Reward') }}</span>
-          <span>250 {{ __('Coins') }} <img src="{{ asset('icons/coin-icon.svg') }}" alt="" /></span>
+          <span>250<img src="{{ asset('icons/coin-icon.svg') }}" alt="" /></span>
         </div>
       </div>
     </div>

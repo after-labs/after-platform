@@ -13,7 +13,7 @@
 .account-tab {
     color: var(--ghost-white-80);
     text-decoration: none;
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    border: 1px solid var(--purple-secondary);
     border-radius: 999px;
     padding: 0.7rem 1rem;
     background: rgba(255, 255, 255, 0.04);
@@ -32,11 +32,15 @@
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 1.5rem;
     align-items: center;
-    border: 1px solid rgba(163, 89, 255, 0.45);
+    border: 1px solid var(--purple-secondary);
     border-radius: var(--radius-md);
     padding: 1.5rem;
     background:
-        linear-gradient(135deg, rgba(124, 58, 237, 0.22), rgba(255, 0, 183, 0.08)),
+        linear-gradient(
+            135deg,
+            rgba(124, 58, 237, 0.22),
+            rgba(29, 0, 21, 0.08)
+        ),
         rgba(7, 0, 14, 0.92);
     box-shadow: 0 0 24px rgba(124, 58, 237, 0.18);
 }
@@ -78,7 +82,7 @@
 
 .account-identity h1 {
     font-family: var(--russo-one);
-    font-size: clamp(1.65rem, 4vw, 2.6rem);
+    font-size: clamp(2rem, 1.5vw, 2.7rem);
     line-height: 1.05;
     margin: 0 0 0.5rem;
     overflow-wrap: anywhere;
@@ -97,7 +101,7 @@
 
 .account-stats article {
     min-width: 0;
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.24);
     border-radius: var(--radius-sm);
     padding: 0.9rem;
     background: rgba(0, 0, 0, 0.28);
@@ -107,6 +111,13 @@
     display: block;
     color: var(--ghost-white-80);
     font-size: 0.82rem;
+
+    background: linear-gradient(90deg, #f7ffb9, #e8d5ff, #feeaac, #fff1ca);
+    font-family: var(--font-family);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 14px #c2aeffaa;
 }
 
 .account-stats strong {
@@ -115,6 +126,13 @@
     font-size: 1.55rem;
     line-height: 1;
     margin-top: 0.45rem;
+
+    background: linear-gradient(90deg, #f7ffb9, #e8d5ff, #feeaac, #fff1ca);
+    font-family: var(--font-family);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 14px #c2aeffaa;
 }
 
 .account-grid {
@@ -129,10 +147,14 @@
 }
 
 .account-panel {
-    border: 1px solid rgba(163, 89, 255, 0.32);
+    border: 1px solid var(--purple-secondary);
     border-radius: var(--radius-md);
     padding: 1.25rem;
-    background: linear-gradient(180deg, rgba(22, 3, 38, 0.96), rgba(7, 0, 14, 0.98));
+    background: linear-gradient(
+        180deg,
+        rgba(22, 3, 38, 0.96),
+        rgba(7, 0, 14, 0.98)
+    );
 }
 
 .panel-heading {
@@ -191,12 +213,12 @@
     transition: var(--transition);
 }
 
-.account-form input[type='file'] {
+.account-form input[type="file"] {
     cursor: pointer;
     padding: 0.55rem;
 }
 
-.account-form input[type='file']::file-selector-button {
+.account-form input[type="file"]::file-selector-button {
     border: 0;
     border-radius: var(--radius-xs);
     background: var(--white);
@@ -209,7 +231,7 @@
     transition: var(--transition);
 }
 
-.account-form input[type='file']::file-selector-button:hover {
+.account-form input[type="file"]::file-selector-button:hover {
     background: var(--pink-highlight);
     color: var(--white);
 }
@@ -371,5 +393,6 @@
 
     .account-button {
         width: 100%;
+        max-width: 200px;
     }
 }

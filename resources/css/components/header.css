@@ -171,7 +171,7 @@ header .btn-outline:hover {
     border: var(--border-white);
     box-shadow: var(--box-shadow-purple);
 
-    max-width: 400px;
+    max-width: 450px;
 }
 
 .btn-close-points {

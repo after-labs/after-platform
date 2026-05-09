@@ -6,9 +6,13 @@
 .cart-hero,
 .cart-panel,
 .cart-summary {
-    border: 1px solid rgba(163, 89, 255, 0.34);
+    border: 1px solid var(--purple-primary);
     border-radius: var(--radius-md);
-    background: linear-gradient(180deg, rgba(22, 3, 38, 0.96), rgba(7, 0, 14, 0.98));
+    background: linear-gradient(
+        180deg,
+        rgba(22, 3, 38, 0.96),
+        rgba(7, 0, 14, 0.98)
+    );
 }
 
 .cart-hero {
@@ -24,7 +28,7 @@
 
 .cart-hero h1 {
     font-family: var(--russo-one);
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(2rem, 3vw, 2.7rem);
     margin: 0.35rem 0;
 }
 
