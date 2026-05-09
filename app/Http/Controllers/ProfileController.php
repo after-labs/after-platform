@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -15,6 +16,16 @@ class ProfileController extends Controller
      * Display the user's profile form.
      */
     public function edit(Request $request): View
+    {
+        $user = $request->user()->load('gamification');
+
+        return view('frontend.account.account', [
+            'user' => $user,
+            'gamification' => $user->gamification,
+        ]);
+    }
+
+    public function breezeEdit(Request $request): View
     {
         return view('profile.edit', [
             'user' => $request->user(),
@@ -26,15 +37,26 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $data = $request->safe()->except('avatar');
+        $user = $request->user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        if ($request->hasFile('avatar')) {
+            if ($user->avatar) {
+                Storage::disk('public')->delete($user->avatar);
+            }
+
+            $data['avatar'] = $request->file('avatar')->store('avatars', 'public');
         }
 
-        $request->user()->save();
+        $user->fill($data);
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
+        }
+
+        $user->save();
+
+        return Redirect::route('account')->with('status', 'profile-updated');
     }
 
     /**
