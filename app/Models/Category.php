@@ -8,7 +8,7 @@ class Category extends Model
 {
     public $fillable = ['name'];
 
-    public function Games(){
+    public function games(){
         return $this->hasMany(Game::class);
     }
 }

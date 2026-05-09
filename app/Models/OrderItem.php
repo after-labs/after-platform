@@ -13,11 +13,11 @@ class OrderItem extends Model {
     'price'
     ];
 
-    public function Order(){
+    public function order(){
         return $this->belongsTo(Order::class);
     }
 
-    public function GameVersion(){
+    public function gameVersion(){
         return $this->belongsTo(GameVersion::class);
     }
 }

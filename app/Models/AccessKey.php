@@ -15,11 +15,11 @@ class AccessKey extends Model {
     'expires_at'
     ];
 
-    public function Game(){
+    public function game(){
         return $this->belongsTo(Game::class);
     }
 
-    public function GameVersion(){
+    public function gameVersion(){
         return $this->belongsTo(GameVersion::class);
     }
 }

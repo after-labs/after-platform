@@ -11,15 +11,15 @@ class Order extends Model {
     'total'
     ];
 
-    public function User(){
+    public function user(){
         return $this->belongsTo(User::class);
     }
 
-    public function Items(){
+    public function items(){
         return $this->hasMany(OrderItem::class);
     }
-
-    public function PaymentTransactions(){
+    /* soon: payment logic with dedicated model
+    public function paymentTransactions(){
         return $this->hasMany(PaymentTransaction::class);
-    }
+    } */
 }

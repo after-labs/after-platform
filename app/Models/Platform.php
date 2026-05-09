@@ -11,7 +11,7 @@ class Platform extends Model
     'icon'
     ];
 
-    public function GameVersions(){
+    public function gameVersions(){
         return $this->hasMany(GameVersion::class);
     }
 }

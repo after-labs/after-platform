@@ -46,27 +46,27 @@ class User extends Authenticatable implements MustVerifyEmail
 
     // td: why Quintas didn't gave the User model the hasMany methods to make the connections with other models?
 
-    public function CartItems()
+    public function cartItems()
     {
         return $this->hasMany(CartItem::class);
     }
 
-    public function Orders()
+    public function orders()
     {
         return $this->hasMany(Order::class);
     }
 
-    public function Gamification()
+    public function gamification()
     {
         return $this->hasOne(Gamification::class);
     }
 
-    public function Notifications()
+    public function notifications()
     {
         return $this->hasMany(Notification::class);
     }
 
-    public function Wishlist()
+    public function wishlist()
     {
         return $this->hasMany(Wishlist::class);
     }

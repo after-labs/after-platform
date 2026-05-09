@@ -18,27 +18,47 @@ class Game extends Model
         'system_requirements'
     ];
 
-    public function Media(){
-        return $this->hasMany(GameMedia::class);
-    }
-
-    public function Versions(){
+    public function versions(){
         return $this->hasMany(GameVersion::class);
     }
 
-    public function Category(){
+    public function category(){
         return $this->belongsTo(Category::class);
     }
 
-    public function Genres(){
+    public function genres(){
         return $this->belongsToMany(Genre::class, 'game_genres');
     }
 
-    public function AccessKeys(){
+    public function accessKeys(){
         return $this->hasMany(AccessKey::class);
     }
 
-    public function Wishlists(){
+    public function wishlists(){
         return $this->hasMany(Wishlist::class);
+    }
+
+    public function media(){
+        return $this->hasMany(GameMedia::class);
+    }
+
+    public function poster()
+    {
+        return $this->media->where('type', 'poster')->first();
+    }
+
+    public function banner()
+    {
+        return $this->media->where('type', 'banner')->first();
+    }
+
+    public function gameplays()
+    {
+        return $this->media->where('type', 'gameplay');
+    }
+
+    public function video()
+    {
+        return $this->media->where('type', 'video')->first();
     }
 }

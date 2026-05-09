@@ -17,27 +17,27 @@ class GameVersion extends Model
     'active'
     ];
 
-    public function Game(){
+    public function game(){
         return $this->belongsTo(Game::class);
     }
 
-    public function Platform(){
+    public function platform(){
         return $this->belongsTo(Platform::class);
     }
 
-    public function Offer(){
+    public function offer(){
         return $this->belongsTo(Offer::class);
     }
 
-    public function CartItems(){
+    public function cartItems(){
         return $this->hasMany(CartItem::class);
     }
 
-    public function OrderItems(){
+    public function orderItems(){
         return $this->hasMany(OrderItem::class);
     }
 
-    public function AccessKeys(){
+    public function accessKeys(){
         return $this->hasMany(AccessKey::class);
     }
 }

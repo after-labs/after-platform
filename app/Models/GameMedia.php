@@ -12,7 +12,7 @@ class GameMedia extends Model
     'path'
     ];
 
-    public function Game(){
+    public function game(){
         return $this->belongsTo(Game::class);
     }
 }

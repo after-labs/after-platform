@@ -12,11 +12,11 @@ class CartItem extends Model
     'units'
     ];
 
-    public function User(){
+    public function user(){
         return $this->belongsTo(User::class);
     }
 
-    public function GameVersion(){
+    public function gameVersion(){
         return $this->belongsTo(GameVersion::class);
     }
 }

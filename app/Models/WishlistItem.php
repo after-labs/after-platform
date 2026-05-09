@@ -10,11 +10,11 @@ class WishlistItem extends Model {
     'game_id'
     ];
 
-    public function User(){
+    public function user(){
         return $this->belongsTo(User::class);
     }
 
-    public function Game(){
+    public function game(){
         return $this->belongsTo(Game::class);
     }
 }

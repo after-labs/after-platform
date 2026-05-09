@@ -13,7 +13,7 @@ class Offer extends Model
     'expiration'
     ];
 
-    public function GameVersions(){
+    public function gameVersions(){
         return $this->hasMany(GameVersion::class);
     }
 }
