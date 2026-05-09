@@ -54,7 +54,7 @@
             </p>
             <div class="highlights-main-buttons">
               <a href="{{ $highlightGame ? route('games.show', $highlightGame) : route('games.index') }}">{{ __('Buy Now') }}</a>
-              <a href="{{ auth()->check() ? route('profile.edit') : route('login') }}">
+              <a href="{{ auth()->check() ? route('account') : route('login') }}">
                 <img src="{{ asset('icons/bookmark-icon.svg') }}" alt="bookmark-icon" />
               </a>
             </div>

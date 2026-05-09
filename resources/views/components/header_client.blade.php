@@ -49,7 +49,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="{{ route('profile.edit') }}"><img src="{{ asset('icons/user-icon.svg') }}" alt="{{ __('Account') }}" /></a>
+                  <a href="{{ route('account') }}"><img src="{{ asset('icons/user-icon.svg') }}" alt="{{ __('Account') }}" /></a>
                 </li>
               @else
                 <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
