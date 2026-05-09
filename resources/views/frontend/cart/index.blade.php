@@ -3,109 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart</title>
+    <title>{{ __('Cart') }}</title>
+    @vite(['resources/css/app.css', 'resources/css/frontend/cart/cart.css'])
 </head>
 <body>
-    <main class="cart-page">
-        <h1 class="cart-page_title">{{ __('Cart') }}</h1>
+    @include('components/header_client')
 
-        <nav class="stepper">
-            <div class="cart-stepper">
-                <div class="stepper-active">
-                    <span class="stepper-number">1</span>
-                    <span class="stepper-text">{{ __('Shopping cart') }}</span>
-                </div>
-                <div class="stepper-item">
-                    <span class="stepper-number">2</span>
-                    <span class="stepper-text">{{ __('Checkout details') }}</span>
-                </div>
-                <div class="stepper-item">
-                    <span class="stepper-number">3</span>
-                    <span class="stepper-text">{{ __('Order complete') }}</span>
-                </div>
-            </div>
-        </nav>
-        <div class="cart-container">
-            <section class="cart-items">
-                <h2 class="cart-items-heading">{{ __('Games on the Cart') }}</h2>
-                
+    <main class="cart-page">
+        <section class="cart-hero">
+            <span>{{ __('Shopping Cart') }}</span>
+            <h1>{{ __('Your cart') }}</h1>
+            <p>{{ __('Review your selected game editions before checkout.') }}</p>
+        </section>
+
+        @if(session('status') === 'empty-cart')
+            <p class="cart-alert">{{ __('Your cart is empty. Add a game before checkout.') }}</p>
+        @endif
+
+        <div class="cart-layout">
+            <section class="cart-panel">
+                <h2>{{ __('Games on the Cart') }}</h2>
+
                 <div class="cart-items-list">
-                    <article class="cart-item">
-                        <div class="cart-item-image-placeholder">
-                            <img src="/img/hollow_knight.png" alt="Hollow Knight">
-                        </div>
-                        <div class="cart-item-details">
-                             <h3 class="cart-item-name">Hollow Knight (STEAM)</h3>
-                            <div class="cart-item-prices">
-                                <span class="cart-item-price-original">$99.99</span>
-                                <span class="cart-item-price-discount">$99.99</span>
+                    @forelse($items as $item)
+                        @php
+                            $version = $item->gameVersion;
+                            $game = $version->game;
+                            $poster = $game->poster();
+                            $subtotal = $item->units * $version->final_price;
+                        @endphp
+
+                        <article class="cart-item">
+                            <a href="{{ route('games.show', $game) }}" class="cart-cover">
+                                <img src="{{ asset($poster?->path ?? 'imgs/replaced-poster.png') }}" alt="{{ $game->name }}">
+                            </a>
+
+                            <div class="cart-item-details">
+                                <h3>{{ $game->name }}</h3>
+                                <p>{{ $version->edition_name }} · {{ $version->platform?->name ?? __('Platform') }}</p>
+                                <span>{{ __('Quantity') }}: {{ $item->units }}</span>
                             </div>
+
+                            <div class="cart-item-price">
+                                <span>${{ number_format($version->final_price, 2) }}</span>
+                                <strong>${{ number_format($subtotal, 2) }}</strong>
+                            </div>
+
+                            <form action="{{ route('cart.delete', $item) }}" method="POST">
+                                @csrf
+                                <button type="submit">{{ __('Remove') }}</button>
+                            </form>
+                        </article>
+                    @empty
+                        <div class="empty-state">
+                            <h3>{{ __('Your cart is empty') }}</h3>
+                            <p>{{ __('Browse the store and add an indie game to continue.') }}</p>
+                            <a href="{{ route('games.index') }}">{{ __('Browse store') }}</a>
                         </div>
-                        <div class="cart-item-actions">
-                            <button class="cart-item-remove-btn">{{ __('Remove') }}</button>
-                            <span class="cart-item-total">$25.98</span>
-                        </div>
-                    </article>
-                    </div>
+                    @endforelse
+                </div>
             </section>
- 
-            <aside class="order-summary">
-                <h2 class="order-summary-title">{{ __('Order Summary') }}</h2>
-                
-                <div class="order-summary-row">
-                    <span>{{ __('Items total') }}</span>
-                    <span>$128.78</span>
+
+            <aside class="cart-summary">
+                <h2>{{ __('Order Summary') }}</h2>
+
+                <div class="summary-row">
+                    <span>{{ __('Items') }}</span>
+                    <strong>{{ $items->sum('units') }}</strong>
                 </div>
-                <div class="order-summary-row">
-                    <span>{{ __('Items quantity') }}</span>
-                    <span>$128.78</span>
+
+                <div class="summary-row total">
+                    <span>{{ __('Total') }}</span>
+                    <strong>${{ number_format($total, 2) }}</strong>
                 </div>
-               
-                <hr class="order-summary-divider">
- 
-                <div class="order-summary-total-row">
-                    <span>{{ __('Subtotal') }}</span>
-                    <span>$134.56</span>
-                </div>
- 
-                <button class="checkout-button">
-                    <span class="checkout-button-icon">💳</span>
-                    <span class="checkout-button-text">{{ __('Checkout') }}</span>
-                    <span class="checkout-button-amount">$134.56</span>
-                </button>
+
+                @if($items->isNotEmpty())
+                    <a href="{{ route('orders.checkout') }}" class="checkout-button">
+                        {{ __('Checkout') }}
+                    </a>
+                @else
+                    <a href="{{ route('games.index') }}" class="checkout-button secondary">
+                        {{ __('Go to Store') }}
+                    </a>
+                @endif
             </aside>
         </div>
- 
-        <section class="you-may-like">
-        <h2>{{ __('You may like') }}</h2>
-        <div class="game-card">
-            <img src="#game-IMG" alt="" class="game-img">
-            <div class="game-info">
-                <h4 class="game-title">Replaced</h4>
-                <span class="discount">-40%</span>
-                <span class="old-price">R$40.00</span>
-                <span class="new-price">R$24.00</span>
-            </div>
-        </div>
-        <div class="game-card">
-            <img src="#game-IMG" alt="" class="game-img">
-            <div class="game-info">
-                <h4 class="game-title">Replaced</h4>
-                <span class="discount">-40%</span>
-                <span class="old-price">R$40.00</span>
-                <span class="new-price">R$24.00</span>
-            </div>
-        </div>
-        <div class="game-card">
-            <img src="#game-IMG" alt="" class="game-img">
-            <div class="game-info">
-                <h4 class="game-title">Replaced</h4>
-                <span class="discount">-40%</span>
-                <span class="old-price">R$40.00</span>
-                <span class="new-price">R$24.00</span>
-            </div>
-        </div>
-    </section>
     </main>
+
+    @include('components/footer')
 </body>
 </html>

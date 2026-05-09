@@ -3,130 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
+    <title>{{ __('Checkout') }}</title>
+    @vite(['resources/css/app.css', 'resources/css/frontend/orders/orders.css'])
 </head>
 <body>
-<main class="checkout-container">
-    <nav class="checkout-stepper">
-        <div class="stepper completed">
-            <span class="stepper-number">1</span>
-            <span class="stepper-label">{{ __('Shopping cart') }}</span>
-        </div>
-        <div class="stepper-active">
-            <span class="stepper-number">2</span>
-            <span class="stepper-label">{{ __('Checkout details') }}</span>
-        </div>
-        <div class="stepper">
-            <span class="stepper-number">3</span>
-            <span class="stepper-label">{{ __('Order complete') }}</span>
-        </div>
-    </nav>
-    <div class="checkout-content">
-        <section class="payment-methods">
-            <h2 class="section-title">{{ __('Payment method') }}</h2>
-            
-            <form id="payment-form">
-                <div class="radio-group">
-                    <label class="radio-option">
-                        <input type="radio" name="payment" value="credit-card" checked>
-                        <span>{{ __('Pay by Credit Card') }}</span>
-                        <i class="icon-card"></i>
-                    </label>
-                    <label class="radio-option">
-                        <input type="radio" name="payment" value="pix">
-                        <span>{{ __('PIX') }}</span>
-                    </label>
+    @include('components/header_client')
+
+    <main class="orders-page">
+        <section class="orders-hero">
+            <span>{{ __('Checkout') }}</span>
+            <h1>{{ __('Confirm your order') }}</h1>
+            <p>{{ __('Payment is simulated for this classroom marketplace version.') }}</p>
+        </section>
+
+        <div class="checkout-layout">
+            <section class="orders-panel">
+                <h2>{{ __('Order items') }}</h2>
+
+                <div class="checkout-items">
+                    @foreach($items as $item)
+                        @php
+                            $version = $item->gameVersion;
+                            $game = $version->game;
+                            $poster = $game->poster();
+                        @endphp
+
+                        <article class="checkout-item">
+                            <img src="{{ asset($poster?->path ?? 'imgs/replaced-poster.png') }}" alt="{{ $game->name }}">
+                            <div>
+                                <h3>{{ $game->name }}</h3>
+                                <p>{{ $version->edition_name }} · {{ $version->platform?->name ?? __('Platform') }}</p>
+                                <span>{{ $item->units }} × ${{ number_format($version->final_price, 2) }}</span>
+                            </div>
+                        </article>
+                    @endforeach
                 </div>
-                <div class="card-details">
-                    <div class="input-field">
-                        <label for="card-number">{{ __('CARD NUMBER') }}</label>
-                        <input type="text" id="card-number" placeholder="1234 1234 1234">
-                    </div>
-                    <div class="input-row">
-                        <div class="input-field">
-                            <label for="expiry">{{ __('EXPIRATION DATE') }}</label>
-                            <input type="text" id="expiry" placeholder="MM/YY">
-                        </div>
-                        <div class="input-field">
-                            <label for="cvc">{{ __('CVC') }}</label>
-                            <input type="text" id="cvc" placeholder="CVC code">
-                        </div>
-                    </div>
+            </section>
+
+            <aside class="order-summary-panel">
+                <h2>{{ __('Summary') }}</h2>
+
+                <div class="summary-row">
+                    <span>{{ __('Items') }}</span>
+                    <strong>{{ $items->sum('units') }}</strong>
                 </div>
 
-                <button type="submit" class="btn-place-order">{{ __('Place Order') }}</button>
-            </form>
-            <button type="submit" form="payment-form" class="btn-place-order">
-                Place Order
-            </button>
-        </section>
-        <aside class="order-summary">
-            <h2 class="section-title">{{ __('Order summary') }}</h2>
-            
-            <ul class="cart-items">
-                <li class="cart-item">
-                    <div class="item-thumb">
-                        <img src="/hollow_knight.png" alt="Hollow Knight">
-                    </div>
-                    <div class="item-info">
-                        <span class="item-name">Big Hops</span>
-                        <span class="item-price">$19.00</span>
-                    </div>
-                    <button class="remove-item">&times;</button>
-                </li>
-                <li class="cart-item">
-                    <div class="item-thumb">
-                        <img src="/hollow_knight.png" alt="Hollow Knight">
-                    </div>
-                    <div class="item-info">
-                        <span class="item-name">Hollow Knight</span>
-                        <span class="item-price">$24.00</span>
-                    </div>
-                    <button class="remove-item">&times;</button>
-                </li>
-                <li class="cart-item">
-                    <div class="item-thumb">
-                        <img src="/hollow_knight.png" alt="Hollow Knight">
-                    </div>
-                    <div class="item-info">
-                        <span class="item-name">Aerial_Knight's Drop Shot</span>
-                        <span class="item-price">$19.00</span>
-                    </div>
-                    <button class="remove-item">&times;</button>
-                </li>
-            </ul>
-            <div class="promo-section">
-                <div class="promo-input">
-                    <input type="text" placeholder="{{ __('Apply Coins!') }}">
-                    <button class="btn-apply">{{ __('Apply') }}</button>
-                </div>
-                <div class="promo-input">
-                    <input type="text" placeholder="{{ __('Enter coupon code') }}">
-                    <button class="btn-apply">{{ __('Apply') }}</button>
-                </div>
-            </div>
-            <div class="applied-coupons">
-                <div class="coupon-tag">
-                    <span>AFTER25</span>
-                    <span class="discount-value">-$25.00 [{{ __('Remove') }}]</span>
-                </div>
-            </div>
-            <footer class="summary-totals">
-                <div class="total-row">
-                    <span>{{ __('Coins Discount') }}</span>
-                    <span>$7.00</span>
-                </div>
-                <div class="total-row">
-                    <span>{{ __('Subtotal') }}</span>
-                    <span>$62.00</span>
-                </div>
-                <div class="total-row-grand-total">
+                <div class="summary-row total">
                     <span>{{ __('Total') }}</span>
-                    <span>$30.00</span>
+                    <strong>${{ number_format($total, 2) }}</strong>
                 </div>
-            </footer>
-        </aside>
-    </div>
-</main>
+
+                <form action="{{ route('orders.store') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="place-order-button">
+                        {{ __('Place Order') }}
+                    </button>
+                </form>
+            </aside>
+        </div>
+    </main>
+
+    @include('components/footer')
 </body>
 </html>

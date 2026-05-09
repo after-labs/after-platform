@@ -101,7 +101,10 @@
                     @guest
                         <a class="btn btn-wishlist" href="{{ route('login') }}">{{ __('Wishlist') }}</a>
                     @else
-                        <button class="btn btn-wishlist" type="button" disabled>{{ __('Wishlist') }}</button>
+                        <form action="{{ route('wishlist.store', $game) }}" method="POST">
+                            @csrf
+                            <button class="btn btn-wishlist" type="submit">{{ __('Wishlist') }}</button>
+                        </form>
                     @endguest
 
                     @if($selectedVersion)

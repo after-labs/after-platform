@@ -3,74 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Finished</title>
+    <title>{{ __('Order Finished') }}</title>
+    @vite(['resources/css/app.css', 'resources/css/frontend/orders/orders.css'])
 </head>
 <body>
-    <main class="confirmation-page">
-        <h1 class="confirmation-page_title">{{ __('Order Created!') }}</h1>
+    @include('components/header_client')
 
-        <nav class="stepper">
-            <div class="stepper-completed">
-                <span class="stepper-number">1</span>
-                <span class="stepper-label">{{ __('Shopping cart') }}</span>
-            </div>
-            <div class="stepper-completed">
-                <span class="stepper-number">2</span>
-                <span class="stepper-label">{{ __('Checkout details') }}</span>
-            </div>
-            <div class="stepper-active">
-                <span class="stepper-number">3</span>
-                <span class="stepper-label">{{ __('Order complete') }}</span>
-            </div>
-        </nav>
+    <main class="orders-page">
+        <section class="orders-hero">
+            <span>{{ __('Order Created') }}</span>
+            <h1>{{ __('Your order has been received') }}</h1>
+            <p>{{ __('Thanks for supporting indie games on After.') }}</p>
+        </section>
 
-        <section class="order-card">
-            <header class="order-card-header">
-                <p class="order-card-thanks">{{ __('Thank you! 🎉') }}</p>
-                <h2 class="order-card-headline">{{ __('Your order has been received') }}</h2>
-                <p class="order-card-instruction">
-                    {{ __('In a few minutes, check the email sent for') }}
-                <span class="order-card-email">&lt;emailName&gt;</span>
-                     {{ __('for your access keys') }}
-                </p>
-            </header>
-
-            <div class="order-card-items-preview">
-                <div class="order-card-item-thumb">
-                    <img src="/hollow_knight.png" alt="Hollow Knight">
+        <section class="orders-panel completed-order">
+            <div class="completed-summary">
+                <div>
+                    <span>{{ __('Order ID') }}</span>
+                    <strong>#{{ str_pad($order->id, 6, '0', STR_PAD_LEFT) }}</strong>
                 </div>
-                <div class="order-card-item-thumb">
-                    <img src="/hollow_knight.png" alt="Hollow Knight">
+                <div>
+                    <span>{{ __('Date') }}</span>
+                    <strong>{{ $order->created_at->format('M d, Y') }}</strong>
                 </div>
-                <div class="order-card-item-thumb">
-                    <img src="/hollow_knight.png" alt="Hollow Knight">
+                <div>
+                    <span>{{ __('Total') }}</span>
+                    <strong>${{ number_format($order->total, 2) }}</strong>
                 </div>
             </div>
 
-            <div class="order-info">
-                <div class="order-info-row">
-                    <span class="order-info-label">{{ __('Order ID:') }}</span>
-                    <span class="order-info-value">OR-0000-0001</span>
-                </div>
-                <div class="order-info-row">
-                    <span class="order-info-label">{{ __('Date:') }}</span>
-                    <span class="order-info-value">{{ __('October') }} 19, 2023</span>
-                </div>
-                <div class="order-info-row">
-                    <span class="order-info-label">{{ __('Total Price:') }}</span>
-                    <span class="order-info-value">$400.00</span>
-                </div>
-                <div class="order-info-row">
-                    <span class="order-info-label">{{ __('Payment method:') }}</span>
-                    <span class="order-info-value">{{ __('Credit Card') }}</span>
-                </div>
+            <div class="checkout-items">
+                @foreach($order->items as $item)
+                    @php
+                        $version = $item->gameVersion;
+                        $game = $version->game;
+                        $poster = $game->poster();
+                    @endphp
+
+                    <article class="checkout-item">
+                        <img src="{{ asset($poster?->path ?? 'imgs/replaced-poster.png') }}" alt="{{ $game->name }}">
+                        <div>
+                            <h3>{{ $game->name }}</h3>
+                            <p>{{ $version->edition_name }} · {{ $version->platform?->name ?? __('Platform') }}</p>
+                            <span>{{ $item->units }} × ${{ number_format($item->price, 2) }}</span>
+                        </div>
+                    </article>
+                @endforeach
             </div>
 
-            <footer class="order-card-actions">
-                <a href="#" class="btn btn-outline">{{ __('Back to Shop') }}</a>
-                <a href="#" class="btn btn-primary">{{ __('My Orders') }}</a>
-            </footer>
+            <div class="completed-actions">
+                <a href="{{ route('games.index') }}">{{ __('Back to Shop') }}</a>
+                <a href="{{ route('orders.index') }}">{{ __('My Orders') }}</a>
+            </div>
         </section>
     </main>
+
+    @include('components/footer')
 </body>
 </html>
