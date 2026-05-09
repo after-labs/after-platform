@@ -48,8 +48,7 @@
     min-width: 0;
 }
 
-.account-avatar,
-.avatar-upload img {
+.account-avatar {
     width: 96px;
     height: 96px;
     border-radius: 50%;
@@ -59,8 +58,7 @@
     box-shadow: 0 0 18px rgba(255, 0, 183, 0.25);
 }
 
-.account-avatar img,
-.avatar-upload img {
+.account-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -152,16 +150,21 @@
     gap: 1rem;
 }
 
-.avatar-upload {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
+.avatar-upload-field {
+    display: grid;
+    gap: 0.45rem;
+    max-width: 420px;
 }
 
-.avatar-upload label {
+.avatar-upload-field label {
     display: grid;
     gap: 0.5rem;
+    color: var(--ghost-white-80);
+}
+
+.avatar-upload-field small {
+    color: var(--ghost-white-60);
+    font-size: 0.78rem;
 }
 
 .form-grid {
@@ -189,7 +192,26 @@
 }
 
 .account-form input[type='file'] {
-    padding: 0.65rem;
+    cursor: pointer;
+    padding: 0.55rem;
+}
+
+.account-form input[type='file']::file-selector-button {
+    border: 0;
+    border-radius: var(--radius-xs);
+    background: var(--white);
+    color: var(--dark-purple-bg);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+    margin-right: 0.75rem;
+    padding: 0.55rem 0.8rem;
+    transition: var(--transition);
+}
+
+.account-form input[type='file']::file-selector-button:hover {
+    background: var(--pink-highlight);
+    color: var(--white);
 }
 
 .account-form input:focus {
@@ -325,8 +347,7 @@
         padding: 1rem;
     }
 
-    .account-identity,
-    .avatar-upload {
+    .account-identity {
         align-items: flex-start;
     }
 

@@ -65,11 +65,11 @@
                     @csrf
                     @method('patch')
 
-                    <div class="avatar-upload">
-                        <img src="{{ $avatarUrl }}" alt="{{ $user->name }}">
+                    <div class="avatar-upload-field">
                         <label for="avatar">
                             <span>{{ __('Avatar') }}</span>
                             <input id="avatar" name="avatar" type="file" accept="image/*">
+                            <small>{{ __('Upload a square image for the best result.') }}</small>
                         </label>
                         <x-input-error :messages="$errors->get('avatar')" />
                     </div>
