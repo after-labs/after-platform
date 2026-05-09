@@ -46,7 +46,10 @@ Route::get('lang/{locale}', function ($locale) {
 
 Route::middleware(['auth'])->group(function(){
 
-    Route::redirect('/account', '/profile')->name('account');
+    Route::get('/account', [
+        ProfileController::class,
+        'edit'
+    ])->name('account');
 
     // Cart
 
