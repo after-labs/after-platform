@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->string('description');
-            $table->text('summary');
+            $table->text('description');
+            $table->string('summary');
             $table->integer('age');
             $table->year('release_date');
             $table->string('developer');
