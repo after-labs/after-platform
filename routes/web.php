@@ -7,6 +7,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WishlistItemController;
 
 
 
@@ -63,7 +64,7 @@ Route::middleware(['auth'])->group(function(){
         'store'
     ])->name('cart.store');
 
-    Route::get('/cart/delete/{cartItem}', [
+    Route::post('/cart/delete/{cartItem}', [
         CartItemController::class,
         'delete'
     ])->name('cart.delete');
@@ -79,6 +80,33 @@ Route::middleware(['auth'])->group(function(){
         OrderController::class,
         'checkout'
     ])->name('orders.checkout');
+
+    Route::post('/orders/checkout', [
+        OrderController::class,
+        'store'
+    ])->name('orders.store');
+
+    Route::get('/orders/completed/{order}', [
+        OrderController::class,
+        'completed'
+    ])->name('orders.completed');
+
+    // Wishlist
+
+    Route::get('/wishlist', [
+        WishlistItemController::class,
+        'index'
+    ])->name('wishlist.index');
+
+    Route::post('/wishlist/store/{game}', [
+        WishlistItemController::class,
+        'store'
+    ])->name('wishlist.store');
+
+    Route::post('/wishlist/delete/{wishlistItem}', [
+        WishlistItemController::class,
+        'delete'
+    ])->name('wishlist.delete');
 
     // Profile
 
