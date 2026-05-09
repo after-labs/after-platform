@@ -7,7 +7,7 @@
     <title>{{ config('app.name', 'Laravel') }} - Login</title>
     @vite(['resources/css/app.css','resources/css/auth.css'])
 </head>
-<body>
+<body class="auth-bg">
     <div class="container">
         @if (session('status'))
             <div class="alert alert-success">
@@ -50,6 +50,7 @@
                 @endif
                 <button type="submit">{{ __('Log In') }}</button>
             </div>
+            
             <div class="extra-actions">
                 <span>{{ __('Don\'t have an account?') }} <a href="{{ route('register') }}">{{ __('Sign Up') }}</a></span>
                 <a href="">{{ __('Contact Support') }}</a>

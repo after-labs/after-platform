@@ -4,7 +4,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: url("../../../public/imgs/purple-spikes.png") no-repeat center;
     background-size: cover;
     font-family: var(--quantico);
     color: var(--white);
@@ -16,10 +15,10 @@ body {
     padding: 30px;
     margin: 32px;
     border-radius: 16px;
-    border: var(--border-pink);
+    border: var(--border-white);
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(40px);
-    box-shadow: 0 0 200px rgb(146, 2, 137);
+    box-shadow: 0 0 100px rgb(64, 2, 146);
 }
 
 h1 {
@@ -28,6 +27,13 @@ h1 {
     font-family: var(--russo-one);
     color: var(--white);
     margin-bottom: 1rem;
+}
+
+p {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--gray-text);
+    margin-bottom: 1.5rem;
 }
 
 .alert {
@@ -106,17 +112,21 @@ input[type="password"]:focus {
     font-size: 0.9rem;
 }
 
+a:hover {
+    text-decoration: underline;
+}
+
 .footer-actions a:hover {
     text-decoration: underline;
 }
 
 .footer-actions button {
-    padding: 12px 24px;
+    padding: 9px 24px;
     border: none;
     border-radius: 999px;
     background: var(--purple-primary);
     color: var(--white);
-    font-weight: bold;
+    font-family: var(--quantico);
     cursor: pointer;
     transition: 0.2s;
 }
@@ -124,6 +134,81 @@ input[type="password"]:focus {
 .footer-actions button:hover {
     box-shadow: 0 0 10px var(--purple-primary);
     transform: scale(1.02);
+}
+
+.extra-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.extra-actions a {
+    color: var(--pink-highlight);
+    font-size: 0.9rem;
+}
+
+.auth-bg {
+    min-height: 100vh;
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(180, 70, 255, 0.16),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at top right,
+            rgba(120, 0, 255, 0.14),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at bottom center,
+            rgba(190, 0, 255, 0.1),
+            transparent 38%
+        ),
+        linear-gradient(
+            180deg,
+            #020003 0%,
+            #050008 18%,
+            #090014 42%,
+            #040006 72%,
+            #000000 100%
+        );
+
+    background-color: #000;
+    position: relative;
+    overflow: hidden;
+    color: #f5ecff;
+}
+
+.auth-bg::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background:
+        linear-gradient(rgba(180, 70, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(180, 70, 255, 0.045) 1px, transparent 1px);
+
+    background-size: 60px 60px;
+
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.auth-bg::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background: radial-gradient(
+        circle at center,
+        transparent 45%,
+        rgba(0, 0, 0, 0.82) 100%
+    );
+
+    pointer-events: none;
 }
 
 @media (max-width: 480px) {
@@ -143,5 +228,12 @@ input[type="password"]:focus {
 
     .footer-actions button {
         width: 90%;
+    }
+
+    .extra-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 1rem;
     }
 }
