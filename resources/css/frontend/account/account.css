@@ -317,17 +317,27 @@
     margin-top: 1.25rem;
 }
 
-.quick-links a {
+.quick-links form {
+    margin: 0;
+}
+
+.quick-links a,
+.quick-links button {
+    width: 100%;
     color: var(--white);
     text-decoration: none;
+    text-align: left;
     border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: var(--radius-xs);
     padding: 0.8rem;
     background: rgba(255, 255, 255, 0.045);
+    cursor: pointer;
+    font-family: inherit;
     transition: var(--transition);
 }
 
-.quick-links a:hover {
+.quick-links a:hover,
+.quick-links button:hover {
     border-color: var(--pink-highlight);
     color: var(--pink-highlight);
 }

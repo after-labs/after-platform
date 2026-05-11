@@ -21,7 +21,7 @@
     <main class="account-page">
         <nav class="account-tabs" aria-label="{{ __('Account navigation') }}">
             <a href="{{ route('account') }}" class="account-tab active">{{ __('Account') }}</a>
-            <a href="/wishlist" class="account-tab">{{ __('Wishlist') }}</a>
+            <a href="{{ route('wishlist.index') }}" class="account-tab">{{ __('Wishlist') }}</a>
             <a href="{{ route('orders.index') }}" class="account-tab">{{ __('Orders') }}</a>
         </nav>
 
@@ -145,9 +145,13 @@
                 </dl>
 
                 <div class="quick-links">
-                    <a href="/wishlist">{{ __('Open wishlist') }}</a>
+                    <a href="{{ route('wishlist.index') }}">{{ __('Open wishlist') }}</a>
                     <a href="{{ route('orders.index') }}">{{ __('View orders') }}</a>
                     <a href="{{ route('games.index') }}">{{ __('Browse store') }}</a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit">{{ __('Logout') }}</button>
+                    </form>
                 </div>
             </aside>
         </section>

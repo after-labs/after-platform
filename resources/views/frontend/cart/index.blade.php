@@ -41,7 +41,19 @@
                             <div class="cart-item-details">
                                 <h3>{{ $game->name }}</h3>
                                 <p>{{ $version->edition_name }} · {{ $version->platform?->name ?? __('Platform') }}</p>
-                                <span>{{ __('Quantity') }}: {{ $item->units }}</span>
+                                <div class="cart-quantity-control" aria-label="{{ __('Quantity') }}">
+                                    <form action="{{ route('cart.decrease', $item) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" aria-label="{{ __('Decrease quantity') }}">-</button>
+                                    </form>
+
+                                    <span>{{ $item->units }}</span>
+
+                                    <form action="{{ route('cart.increase', $item) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" aria-label="{{ __('Increase quantity') }}">+</button>
+                                    </form>
+                                </div>
                             </div>
 
                             <div class="cart-item-price">
@@ -49,7 +61,7 @@
                                 <strong>${{ number_format($subtotal, 2) }}</strong>
                             </div>
 
-                            <form action="{{ route('cart.delete', $item) }}" method="POST">
+                            <form action="{{ route('cart.delete', $item) }}" method="POST" class="cart-remove-form">
                                 @csrf
                                 <button type="submit">{{ __('Remove') }}</button>
                             </form>

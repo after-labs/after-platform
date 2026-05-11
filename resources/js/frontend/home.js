@@ -20,11 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const highlightImage = document.querySelector(
         ".highlights-main img.bg-image",
     );
-    const buyButton = document.querySelector(
-        ".highlights-main-buttons button:first-of-type",
-    );
+    const buyButton = document.querySelector(".highlight-buy-button");
+    const wishlistForm = document.querySelector(".highlight-wishlist-form");
     const catalogButton = document.querySelector(".catalog-btn");
-    const gameCards = Array.from(document.querySelectorAll(".game-card"));
 
     const highlightItems = highlightCards.map((card) => ({
         title: card.dataset.highlightTitle || "Featured",
@@ -32,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         description: card.dataset.highlightDescription || "",
         image: card.dataset.highlightImage || "",
         link: card.dataset.highlightLink || gameDetailLink,
+        wishlistLink: card.dataset.highlightWishlistLink || "",
     }));
 
     let currentHighlight = 0;
@@ -53,9 +52,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (buyButton) {
-            buyButton.onclick = () => {
-                window.location.href = item.link;
-            };
+            buyButton.href = item.link;
+        }
+
+        if (wishlistForm && item.wishlistLink) {
+            wishlistForm.action = item.wishlistLink;
         }
 
         highlightCards.forEach((card, cardIndex) => {
@@ -83,15 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (catalogButton && catalogLink) {
         catalogButton.addEventListener("click", () => {
             window.location.href = catalogLink;
-        });
-    }
-
-    if (gameCards.length > 0 && gameDetailLink) {
-        gameCards.forEach((card) => {
-            card.style.cursor = "pointer";
-            card.addEventListener("click", () => {
-                window.location.href = gameDetailLink;
-            });
         });
     }
 

@@ -94,10 +94,11 @@ main {
 .highlights-main-buttons {
     display: flex;
     margin-top: 1rem;
-    gap: 1rem;
+    gap: 0.5rem;
 }
 
-.highlights-main-buttons > a {
+.highlights-main-buttons > a,
+.highlights-main-buttons button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -115,7 +116,12 @@ main {
     box-shadow: var(--box-shadow-purple);
 }
 
-.highlights-main-buttons > a:last-of-type {
+.highlights-main-buttons > form {
+    display: flex;
+}
+
+.highlights-main-buttons > button,
+.highlights-main-buttons > form button {
     padding: 0.5rem 0.5rem;
     border-radius: var(--radius-sm);
     border: none;
@@ -123,11 +129,13 @@ main {
     transition: all 0.3s ease;
 }
 
-.highlights-main-buttons > a:last-of-type:hover {
+.highlights-main-buttons > button:hover,
+.highlights-main-buttons > form button:hover {
     background-color: #d7b5ff60;
 }
 
-.highlights-main-buttons > a:last-of-type > img {
+.highlights-main-buttons > button > img,
+.highlights-main-buttons > form button > img {
     width: 2.2rem;
     height: 2.2rem;
 }

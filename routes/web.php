@@ -69,6 +69,16 @@ Route::middleware(['auth'])->group(function(){
         'delete'
     ])->name('cart.delete');
 
+    Route::post('/cart/increase/{cartItem}', [
+        CartItemController::class,
+        'increase'
+    ])->name('cart.increase');
+
+    Route::post('/cart/decrease/{cartItem}', [
+        CartItemController::class,
+        'decrease'
+    ])->name('cart.decrease');
+
     // Orders
 
     Route::get('/orders', [

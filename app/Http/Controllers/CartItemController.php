@@ -61,4 +61,30 @@ class CartItemController extends Controller
 
         return redirect()->route('cart.index');
     }
+
+    public function increase(CartItem $cartItem)
+    {
+        abort_unless($cartItem->user_id === Auth::id(), 403);
+
+        $cartItem->update([
+            'units' => $cartItem->units + 1,
+        ]);
+
+        return redirect()->route('cart.index');
+    }
+
+    public function decrease(CartItem $cartItem)
+    {
+        abort_unless($cartItem->user_id === Auth::id(), 403);
+
+        if($cartItem->units <= 1){
+            $cartItem->delete();
+        }else{
+            $cartItem->update([
+                'units' => $cartItem->units - 1,
+            ]);
+        }
+
+        return redirect()->route('cart.index');
+    }
 }

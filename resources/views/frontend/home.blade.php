@@ -53,10 +53,26 @@
               {{ $highlightGame?->summary ?? __('Browse the catalog and find your next indie adventure.') }}
             </p>
             <div class="highlights-main-buttons">
-              <a href="{{ $highlightGame ? route('games.show', $highlightGame) : route('games.index') }}">{{ __('Buy Now') }}</a>
-              <a href="{{ auth()->check() ? route('account') : route('login') }}">
-                <img src="{{ asset('icons/bookmark-icon.svg') }}" alt="bookmark-icon" />
-              </a>
+              <a class="highlight-buy-button" href="{{ $highlightGame ? route('games.show', $highlightGame) : route('games.index') }}">{{ __('Buy Now') }}</a>
+
+              @if($highlightGame)
+                @guest
+                    <a class="highlight-wishlist-link" href="{{ route('login') }}">
+                      <img src="{{ asset('icons/bookmark-icon.svg') }}" alt="bookmark-icon" />
+                    </a>
+                @else
+                    <form class="highlight-wishlist-form" action="{{ route('wishlist.store', $highlightGame) }}" method="POST">
+                      @csrf
+                      <button type="submit" aria-label="{{ __('Save to wishlist') }}">
+                        <img src="{{ asset('icons/bookmark-icon.svg') }}" alt="bookmark-icon" />
+                      </button>
+                    </form>
+                @endguest
+              @else
+                  <a class="highlight-wishlist-link" href="{{ route('games.index') }}">
+                    <img src="{{ asset('icons/bookmark-icon.svg') }}" alt="bookmark-icon" />
+                  </a>
+              @endif
             </div>
           </div>
           <img src="{{ asset($highlightMedia?->path ?? 'imgs/replaced-banner.png') }}" alt="" class="bg-image" />
@@ -76,6 +92,7 @@
               data-highlight-description="{{ $game->summary }}"
               data-highlight-image="{{ asset($media?->path ?? 'imgs/replaced-banner.png') }}"
               data-highlight-link="{{ route('games.show', $game) }}"
+              data-highlight-wishlist-link="{{ route('wishlist.store', $game) }}"
             >
               <img src="{{ asset($game->poster()?->path ?? 'imgs/replaced-poster.png') }}" alt="" />
               <p>{{ $game->name }}</p>
