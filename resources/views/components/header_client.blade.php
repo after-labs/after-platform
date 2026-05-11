@@ -23,10 +23,15 @@
             @auth
               <li><a href="{{ route('orders.index') }}">{{ __('My Orders') }}</a></li>
               <li>
-                <a href="#" class="points-trigger" onclick="togglePoints()">
+                <button type="button" class="points-trigger nav-action-button" onclick="togglePoints()">
                   {{ auth()->user()->gamification?->coins ?? 0 }}
                   <img src="{{ asset('icons/coin-icon.svg') }}" alt="" />
-                </a>
+                </button>
+              </li>
+
+            @else
+              <li>
+                <a href="{{ route('about') }}">{{ __('About') }}</a>
               </li>
             @endauth
 
@@ -44,9 +49,9 @@
                   <a href="{{ route('cart.index') }}"><img src="{{ asset('icons/cart-icon.svg') }}" alt="{{ __('Cart') }}" /></a>
                 </li>
                 <li>
-                  <a href="#" class="notif-trigger" onclick="toggleNotif()">
+                  <button type="button" class="notif-trigger nav-action-button" onclick="toggleNotif()">
                     <img src="{{ asset('icons/bell-icon.svg') }}" alt="{{ __('Notifications') }}" />
-                  </a>
+                  </button>
                 </li>
                 <li>
                   <a href="{{ route('account') }}"><img src="{{ asset('icons/user-icon.svg') }}" alt="{{ __('Account') }}" /></a>

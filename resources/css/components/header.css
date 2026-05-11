@@ -42,6 +42,7 @@ nav ul:not(.icon-group) {
     display: flex;
     gap: 20px;
     align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
@@ -51,18 +52,24 @@ nav li {
     gap: 4px;
 }
 
-nav a {
+nav a,
+.nav-action-button {
     color: var(--dark-color);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
     font-weight: 500;
     padding: 5px;
     gap: 7px;
+    cursor: pointer;
 
     display: flex;
     align-items: center;
 }
 
 nav a:hover,
-nav a.active {
+nav a.active,
+.nav-action-button:hover {
     color: var(--pink-highlight);
 }
 
@@ -430,7 +437,7 @@ header .btn-outline:hover {
     display: none;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1320px) {
     header .container {
         flex-wrap: wrap;
     }
