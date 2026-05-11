@@ -53,7 +53,7 @@
             
             <div class="extra-actions">
                 <span>{{ __('Don\'t have an account?') }} <a href="{{ route('register') }}">{{ __('Sign Up') }}</a></span>
-                <a href="">{{ __('Contact Support') }}</a>
+                <a href="{{ route('about') }}">{{ __('Contact Support') }}</a>
             </div>
         </form>
     </div>

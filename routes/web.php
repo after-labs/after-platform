@@ -19,6 +19,8 @@ Route::redirect('/dashboard', '/')
     ->middleware(['auth'])
     ->name('dashboard');
 
+Route::get('/about', [GameController::class, 'about'])->name('about');
+
 Route::get('/games', [GameController::class, 'index'])->name('games.index');
 
 Route::get('/games/show/{game}', [
