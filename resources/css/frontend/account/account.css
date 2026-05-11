@@ -323,6 +323,7 @@
 
 .quick-links a,
 .quick-links button {
+    box-sizing: border-box;
     width: 100%;
     color: var(--white);
     text-decoration: none;

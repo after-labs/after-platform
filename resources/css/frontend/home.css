@@ -120,6 +120,7 @@ main {
     display: flex;
 }
 
+.highlights-main-buttons > .highlight-wishlist-link,
 .highlights-main-buttons > button,
 .highlights-main-buttons > form button {
     padding: 0.5rem 0.5rem;
@@ -129,11 +130,13 @@ main {
     transition: all 0.3s ease;
 }
 
+.highlights-main-buttons > .highlight-wishlist-link:hover,
 .highlights-main-buttons > button:hover,
 .highlights-main-buttons > form button:hover {
     background-color: #d7b5ff60;
 }
 
+.highlights-main-buttons > .highlight-wishlist-link > img,
 .highlights-main-buttons > button > img,
 .highlights-main-buttons > form button > img {
     width: 2.2rem;

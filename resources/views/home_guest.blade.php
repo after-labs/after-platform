@@ -21,10 +21,10 @@
               {{ __('Enjoy this 2.5D cinematic action platformer adventure set in an alternate 1980s America, Now Available with 60% OFF') }}
             </p>
             <div class="highlights-main-buttons">
-              <button>{{ __('Buy Now') }}</button>
-              <button>
+              <a class="highlight-buy-button" href="{{ route('games.index') }}">{{ __('Buy Now') }}</a>
+              <a class="highlight-wishlist-link" href="{{ route('login') }}" aria-label="{{ __('Login to save to wishlist') }}">
                 <img src="{{ asset('icons/bookmark-icon.svg') }}" alt="bookmark-icon" />
-              </button>
+              </a>
             </div>
           </div>
           <img src="{{ asset('imgs/replaced-banner.png') }}" alt="" class="bg-image" />
@@ -215,7 +215,7 @@
           <span class="game-price">$24.00</span>
         </div>
       </div>
-      <button class="catalog-btn">{{ __('See Full Catalog') }}</button>
+      <a href="{{ route('games.index') }}" class="catalog-btn">{{ __('See Full Catalog') }}</a>
     </section>
    @include('components/footer')
   </body>

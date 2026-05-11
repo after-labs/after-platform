@@ -111,6 +111,7 @@
 .cart-quantity-control button {
     width: 2rem;
     height: 2rem;
+    padding: 0;
     border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: var(--radius-xs);
     color: var(--white);
