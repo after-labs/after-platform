@@ -48,10 +48,10 @@
 
             <div class="description-text">
                 <p>
-                    Beneath the soil of a forgotten world lies Hallownest — a vast underground kingdom of crumbling temples...
+                    {{ __('Beneath the soil of a forgotten world lies Hallownest — a vast underground kingdom of crumbling temples...') }}
                 </p>
                 <p>
-                    Hollow Knight is a classic action-adventure platformer rendered entirely by hand...
+                    {{ __('Hollow Knight is a classic action-adventure platformer rendered entirely by hand...') }}
                 </p>
             </div>
 

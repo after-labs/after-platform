@@ -14,10 +14,10 @@
 
             <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-            <h1>Reset Password</h1>
+            <h1>{{ __('Reset Password') }}</h1>
 
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email">{{ __('Email') }}</label>
                 <input id="email" type="email" name="email" value="{{ old('email', $request->email) }}" required autofocus autocomplete="username">
                 @error('email')
                     <div class="error">{{ $message }}</div>
@@ -25,7 +25,7 @@
             </div>
 
             <div class="form-group">
-                <label for="password">Password</label>
+                 <label for="password">{{ __('Password') }}</label>
                 <input id="password" type="password" name="password" required autocomplete="new-password">
                 @error('password')
                     <div class="error">{{ $message }}</div>
@@ -33,7 +33,7 @@
             </div>
 
             <div class="form-group">
-                <label for="password_confirmation">Confirm Password</label>
+                <label for="password_confirmation">{{ __('Confirm Password') }}</label>
                 <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password">
                 @error('password_confirmation')
                     <div class="error">{{ $message }}</div>
@@ -41,7 +41,7 @@
             </div>
 
             <div class="footer-actions">
-                <button type="submit">Reset Password</button>
+                <button type="submit">{{ __('Reset Password') }}</button>
             </div>
         </form>
     </div>

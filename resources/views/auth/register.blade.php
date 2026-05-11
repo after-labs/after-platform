@@ -12,10 +12,10 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
-            <h1>Register</h1>
+            <h1>{{ __('Register') }}</h1>
 
             <div class="form-group">
-                <label for="name">Name</label>
+                <<label for="name">{{ __('Name') }}</label>
                 <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name">
                 @error('name')
                     <div class="error">{{ $message }}</div>
@@ -23,7 +23,7 @@
             </div>
 
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email">{{ __('Email') }}</label>
                 <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="username">
                 @error('email')
                     <div class="error">{{ $message }}</div>
@@ -31,7 +31,7 @@
             </div>
 
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">{{ __('Password') }}</label>
                 <input id="password" type="password" name="password" required autocomplete="new-password">
                 @error('password')
                     <div class="error">{{ $message }}</div>
@@ -39,7 +39,7 @@
             </div>
 
             <div class="form-group">
-                <label for="password_confirmation">Confirm Password</label>
+                 <label for="password_confirmation">{{ __('Confirm Password') }}</label>
                 <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password">
                 @error('password_confirmation')
                     <div class="error">{{ $message }}</div>
@@ -47,8 +47,8 @@
             </div>
 
             <div class="footer-actions">
-                <a href="{{ route('login') }}">Already registered?</a>
-                <button type="submit">Register</button>
+                <a href="{{ route('login') }}">{{ __('Already registered?') }}</a>
+                <button type="submit">{{ __('Register') }}</button>
             </div>
         </form>
     </div>
