@@ -25,6 +25,7 @@ export default defineConfig({
                 "resources/css/components/header.css",
                 "resources/css/components/header_adm.css",
                 "resources/css/components/footer.css",
+                "resources/css/components/game-card.css",
             ],
             refresh: true,
         }),
