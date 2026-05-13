@@ -3,161 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalog</title>
- @vite(['resources/css/app.css', 'resources/css/frontend/games/catalog.css'])
+    <title>{{ $category->name }}</title>
+    @vite(['resources/css/app.css', 'resources/css/frontend/games/catalog.css'])
 </head>
 <body>
-     @include('components/header_client')
-    <main>
-        <h2 class="page-title">{{ __('Popular') }}</h2>
-        <div class="catalog-layout-center">
-        <section class="games-grid">
-            <div class="game-card">
-                <div class="game-cover">
-                    <img src="/img/replaced-banner.png">
-                </div>
-                <div class="game-info">
-                    <h4 class="game-title">Replaced</h4>
-                    <div class="price-row">
-                        <span class="discount">-40%</span>
-                        <span class="old-price">R$40.00</span>
-                        <span class="new-price">R$24.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="game-card">
-                <div class="game-cover">
-                    <img src="/img/replaced-banner.png">
-                </div>
-                <div class="game-info">
-                    <h4 class="game-title">Replaced</h4>
-                    <div class="price-row">
-                        <span class="discount">-40%</span>
-                        <span class="old-price">R$40.00</span>
-                        <span class="new-price">R$24.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="game-card">
-                <div class="game-cover">
-                    <img src="/img/replaced-banner.png">
-                </div>
-                <div class="game-info">
-                    <h4 class="game-title">Replaced</h4>
-                    <div class="price-row">
-                        <span class="discount">-40%</span>
-                        <span class="old-price">R$40.00</span>
-                        <span class="new-price">R$24.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="game-card">
-                <div class="game-cover">
-                    <img src="/img/replaced-banner.png">
-                </div>
-                <div class="game-info">
-                    <h4 class="game-title">Replaced</h4>
-                    <div class="price-row">
-                        <span class="discount">-40%</span>
-                        <span class="old-price">R$40.00</span>
-                        <span class="new-price">R$24.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="game-card">
-                <div class="game-cover">
-                    <img src="/img/replaced-banner.png">
-                </div>
-                <div class="game-info">
-                    <h4 class="game-title">Replaced</h4>
-                    <div class="price-row">
-                        <span class="discount">-40%</span>
-                        <span class="old-price">R$40.00</span>
-                        <span class="new-price">R$24.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="game-card">
-                <div class="game-cover">
-                    <img src="/img/replaced-banner.png">
-                </div>
-                <div class="game-info">
-                    <h4 class="game-title">Replaced</h4>
-                    <div class="price-row">
-                        <span class="discount">-40%</span>
-                        <span class="old-price">R$40.00</span>
-                        <span class="new-price">R$24.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="game-card">
-                <div class="game-cover">
-                    <img src="/img/replaced-banner.png">
-                </div>
-                <div class="game-info">
-                    <h4 class="game-title">Replaced</h4>
-                    <div class="price-row">
-                        <span class="discount">-40%</span>
-                        <span class="old-price">R$40.00</span>
-                        <span class="new-price">R$24.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="game-card">
-                <div class="game-cover">
-                    <img src="/img/replaced-banner.png">
-                </div>
-                <div class="game-info">
-                    <h4 class="game-title">Replaced</h4>
-                    <div class="price-row">
-                        <span class="discount">-40%</span>
-                        <span class="old-price">R$40.00</span>
-                        <span class="new-price">R$24.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="game-card">
-                <div class="game-cover">
-                    <img src="/img/replaced-banner.png">
-                </div>
-                <div class="game-info">
-                    <h4 class="game-title">Replaced</h4>
-                    <div class="price-row">
-                        <span class="discount">-40%</span>
-                        <span class="old-price">R$40.00</span>
-                        <span class="new-price">R$24.00</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <div class="pagination">
-            <button class="nav-btn">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.1703 11.8772C10.1682 12.2258 10.2351 12.5715 10.3673 12.8942C10.4994 13.2169 10.6942 13.5102 10.9403 13.7572L20.4803 23.2972C20.8171 23.6017 21.2581 23.7651 21.712 23.7537C22.1659 23.7423 22.598 23.5569 22.9191 23.2359C23.2401 22.9148 23.4255 22.4827 23.4369 22.0288C23.4483 21.5749 23.2849 21.1339 22.9803 20.7972L14.2403 12.0572C14.1961 12.0076 14.1716 11.9436 14.1716 11.8772C14.1716 11.8107 14.1961 11.7467 14.2403 11.6972L22.9803 2.95715C23.2849 2.62038 23.4483 2.17945 23.4369 1.72555C23.4255 1.27164 23.2401 0.839481 22.9191 0.518422C22.598 0.197363 22.1659 0.0119627 21.712 0.000558933C21.2581 -0.0108448 20.8171 0.15262 20.4803 0.457152L10.9403 9.99715C10.6942 10.2441 10.4994 10.5374 10.3673 10.8601C10.2351 11.1828 10.1682 11.5285 10.1703 11.8772Z" fill="#EEE0FF"/>
-                    <path d="M0.000192642 11.8772C-0.00840777 12.5784 0.261288 13.2544 0.750193 13.7572L10.2902 23.2972C10.627 23.6017 11.0679 23.7651 11.5218 23.7537C11.9757 23.7423 12.4079 23.5569 12.7289 23.2359C13.05 22.9148 13.2354 22.4827 13.2468 22.0288C13.2582 21.5749 13.0947 21.1339 12.7902 20.7972L4.05019 12.0572C4.026 12.0338 4.00675 12.0059 3.99361 11.9749C3.98046 11.944 3.97369 11.9108 3.97369 11.8772C3.97369 11.8435 3.98046 11.8103 3.99361 11.7794C4.00675 11.7484 4.026 11.7205 4.05019 11.6972L12.8202 2.95715C13.1247 2.62038 13.2882 2.17945 13.2768 1.72555C13.2654 1.27164 13.08 0.839481 12.7589 0.518422C12.4379 0.197363 12.0057 0.0119627 11.5518 0.000558933C11.0979 -0.0108448 10.657 0.15262 10.3202 0.457152L0.750193 9.99715C0.261288 10.4999 -0.00840777 11.1759 0.000192642 11.8772Z" fill="#EEE0FF"/>
-                </svg>
+    @include('components/header_client')
 
-            </button>
-            <button class="page">1</button>
-            <button class="page">2</button>
-            <button class="page">3</button>
-            <button class="page">...</button>
-            <button class="page">29</button>
-            <button class="nav-btn">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_545_3146)">
-                        <path d="M13.5801 12C13.5823 12.3486 13.5154 12.6943 13.3832 13.017C13.2511 13.3397 13.0563 13.633 12.8101 13.88L3.27014 23.42C2.93336 23.7245 2.49244 23.888 2.03853 23.8765C1.58463 23.8651 1.15247 23.6797 0.83141 23.3587C0.510351 23.0376 0.324951 22.6055 0.313547 22.1516C0.302143 21.6977 0.465608 21.2567 0.77014 20.92L9.51014 12.18C9.55442 12.1305 9.57889 12.0664 9.57889 12C9.57889 11.9335 9.55442 11.8695 9.51014 11.82L0.77014 3.07995C0.465608 2.74318 0.302143 2.30225 0.313547 1.84835C0.324951 1.39445 0.510351 0.962283 0.83141 0.641224C1.15247 0.320165 1.58463 0.134765 2.03853 0.123362C2.49244 0.111958 2.93336 0.275423 3.27014 0.579954L12.8101 10.12C13.0563 10.3669 13.2511 10.6602 13.3832 10.9829C13.5154 11.3056 13.5823 11.6513 13.5801 12Z" fill="#EEE0FF"/>
-                        <path d="M23.7503 12C23.7589 12.7012 23.4892 13.3772 23.0003 13.88L13.4603 23.42C13.1235 23.7245 12.6826 23.888 12.2287 23.8765C11.7748 23.8651 11.3426 23.6797 11.0216 23.3587C10.7005 23.0376 10.5151 22.6055 10.5037 22.1516C10.4923 21.6977 10.6558 21.2567 10.9603 20.92L19.7003 12.18C19.7245 12.1566 19.7437 12.1287 19.7569 12.0977C19.77 12.0668 19.7768 12.0336 19.7768 12C19.7768 11.9663 19.77 11.9331 19.7569 11.9022C19.7437 11.8712 19.7245 11.8433 19.7003 11.82L10.9303 3.07995C10.6258 2.74318 10.4623 2.30225 10.4737 1.84835C10.4851 1.39445 10.6705 0.962283 10.9916 0.641224C11.3126 0.320165 11.7448 0.134765 12.1987 0.123362C12.6526 0.111958 13.0935 0.275423 13.4303 0.579954L23.0003 10.12C23.4892 10.6227 23.7589 11.2987 23.7503 12Z" fill="#EEE0FF"/>
-                    </g>
-                    <defs>
-                        <clipPath id="clip0_545_3146">
-                        <rect width="24" height="24" fill="white"/>
-                        </clipPath>
-                    </defs>
-                </svg>
-            </button>
+    <main>
+        <h2 class="page-title">{{ $category->name }}</h2>
+
+        <div class="filter-pills">
+            <a href="{{ route('games.index') }}" class="filter-pill">
+                {{ __('All Games') }}
+            </a>
+
+            @foreach($categories as $categoryItem)
+                <a
+                    href="{{ route('games.category', $categoryItem) }}"
+                    class="filter-pill {{ $categoryItem->is($category) ? 'active' : '' }}"
+                >
+                    {{ $categoryItem->name }}
+                </a>
+            @endforeach
+        </div>
+
+        <div class="catalog-layout-center">
+            <section class="games">
+                <div class="games-grid">
+                    @forelse($games as $game)
+                        <x-game-card :game="$game" />
+                    @empty
+                        <p class="empty-state">
+                            {{ __('No games found in this category.') }}
+                        </p>
+                    @endforelse
+                </div>
+
+                <div class="pagination">
+                    {{ $games->links() }}
+                </div>
+            </section>
         </div>
     </main>
+
     @include('components/footer')
 </body>
 </html>

@@ -12,21 +12,21 @@
      <iframe src="header_adm.html" style="border:none; width:100%; height:100px;"></iframe>
    
 <main>
-  <h1>Users</h1>
+  <h1>{{ __('Users') }}</h1>
 
   <section class="card">
 
     <div class="search-row">
-      <input type="text" placeholder="Search by username, email or ID">
-      <span class="total">Total Users: 340</span>
+      <input type="text" placeholder="{{ __('Search by username, email or ID') }}">
+      <span class="total">{{ __('Total Users: :count', ['count' => 340]) }}</span>
     </div>
 
     <div class="filters">
-      <button class="btn active">All Users</button>
-      <button class="btn">Active Users</button>
-      <button class="btn">Inactive Users</button>
-      <button class="btn">Admin Users</button>
-      <button class="btn create">Create User</button>
+      <button class="btn active">{{ __('All Users') }}</button>
+      <button class="btn">{{ __('Active Users') }}</button>
+      <button class="btn">{{ __('Inactive Users') }}</button>
+      <button class="btn">{{ __('Admin Users') }}</button>
+      <button class="btn create">{{ __('Create User') }}</button>
     </div>
     </section> <br>
 
@@ -35,11 +35,11 @@
     <table>
       <thead>
         <tr>
-          <th>ID</th>
-          <th>USERNAME</th>
-          <th>EMAIL</th>
-          <th>USER TYPE</th>
-          <th>ACTIVE STATUS</th>
+          <th>{{ __('ID') }}</th>
+          <th>{{ __('USERNAME') }}</th>
+          <th>{{ __('EMAIL') }}</th>
+          <th>{{ __('USER TYPE') }}</th>
+          <th>{{ __('ACTIVE STATUS') }}</th>
         </tr>
       </thead>
 
@@ -49,24 +49,24 @@
           <td>U-0001-0001</td>
           <td>quitten_h10</td>
           <td>thiago@email.com</td>
-          <td class="select">Client ▾</td>
-          <td class="select">Active ▾</td>
+          <td class="select">{{ __('Client') }} ▾</td>
+          <td class="select">{{ __('Active') }} ▾</td>
         </tr>
 
         <tr>
           <td>U-0001-0001</td>
           <td>quitten_h10</td>
           <td>thiago@email.com</td>
-          <td class="select">Client ▾</td>
-          <td class="select">Active ▾</td>
+          <td class="select">{{ __('Client') }} ▾</td>
+          <td class="select">{{ __('Active') }} ▾</td>
         </tr>
 
         <tr>
           <td>U-0001-0001</td>
           <td>quitten_h10</td>
           <td>thiago@email.com</td>
-          <td class="select">Client ▾</td>
-          <td class="select">Active ▾</td>
+          <td class="select">{{ __('Client') }} ▾</td>
+          <td class="select">{{ __('Active') }} ▾</td>
         </tr>
       </tbody>
     </table>

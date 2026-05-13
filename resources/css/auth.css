@@ -1,0 +1,239 @@
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    font-family: var(--quantico);
+    color: var(--white);
+}
+
+.container {
+    max-width: 570px;
+    width: 100%;
+    padding: 30px;
+    margin: 32px;
+    border-radius: 16px;
+    border: var(--border-white);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(40px);
+    box-shadow: 0 0 100px rgb(64, 2, 146);
+}
+
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    font-family: var(--russo-one);
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+
+p {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--gray-text);
+    margin-bottom: 1.5rem;
+}
+
+.alert {
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.alert-success {
+    background: rgba(92, 255, 138, 0.1);
+    color: var(--success);
+    border: 1px solid var(--success);
+}
+
+.form-group {
+    margin: 12px 0;
+}
+
+label {
+    display: block;
+    font-size: 0.8rem;
+    color: #cbb6ff;
+    margin-bottom: 4px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border: 1px solid var(--pink-highlight);
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--gray-text);
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-right: 8px;
+    width: 16px;
+}
+
+.error {
+    color: var(--alert);
+    font-size: 0.8rem;
+    margin-top: 4px;
+}
+
+.footer-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.footer-actions a {
+    color: var(--pink-highlight);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.footer-actions a:hover {
+    text-decoration: underline;
+}
+
+.footer-actions button {
+    padding: 9px 24px;
+    border: none;
+    border-radius: 999px;
+    background: var(--purple-primary);
+    color: var(--white);
+    font-family: var(--quantico);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.footer-actions button:hover {
+    box-shadow: 0 0 10px var(--purple-primary);
+    transform: scale(1.02);
+}
+
+.extra-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.extra-actions a {
+    color: var(--pink-highlight);
+    font-size: 0.9rem;
+}
+
+.auth-bg {
+    min-height: 100vh;
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(180, 70, 255, 0.16),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at top right,
+            rgba(120, 0, 255, 0.14),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at bottom center,
+            rgba(190, 0, 255, 0.1),
+            transparent 38%
+        ),
+        linear-gradient(
+            180deg,
+            #020003 0%,
+            #050008 18%,
+            #090014 42%,
+            #040006 72%,
+            #000000 100%
+        );
+
+    background-color: #000;
+    position: relative;
+    overflow: hidden;
+    color: #f5ecff;
+}
+
+.auth-bg::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background:
+        linear-gradient(rgba(180, 70, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(180, 70, 255, 0.045) 1px, transparent 1px);
+
+    background-size: 60px 60px;
+
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.auth-bg::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background: radial-gradient(
+        circle at center,
+        transparent 45%,
+        rgba(0, 0, 0, 0.82) 100%
+    );
+
+    pointer-events: none;
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
+        margin: 20px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .footer-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .footer-actions button {
+        width: 90%;
+    }
+
+    .extra-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 1rem;
+    }
+}

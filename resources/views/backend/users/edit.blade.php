@@ -21,32 +21,32 @@
         <img src="/icons/user2.svg" alt="">
     </div>
 
-    <h2>Quintou_th10: <span>Details</span></h2>
+    <h2>Quintou_th10: <span>{{ __('Details') }}</span></h2>
 
     <form class="form-grid">
 
       <div>
-        <label>First Name</label>
+        <label>{{ __('First Name') }}</label>
         <input type="text" value="Thyago">
       </div>
 
       <div>
-        <label>Last Name</label>
+        <label>{{ __('Last Name') }}</label>
         <input type="text" value="Quintas">
       </div>
 
       <div>
-        <label>Username</label>
+        <label>{{ __('Username') }}</label>
         <input type="text" value="quintou_th10">
       </div>
 
       <div>
-        <label>Email</label>
+        <label>{{ __('Email') }}</label>
         <input type="email" value="thyago.quintas@email.com">
       </div>
 
       <div class="phone-group">
-        <label>Phone Number</label>
+        <label>{{ __('Phone Number') }}</label>
         <div class="phone-input">
           <input class="code" type="text" value="+55">
           <input type="text" value="(11) 90000-0000">
@@ -54,35 +54,35 @@
       </div>
 
       <div>
-        <label>Country</label>
+        <label>{{ __('Country') }}</label>
         <select>
-          <option>Brazil</option>
+      <option>{{ __('Brazil') }}</option>
         </select>
       </div>
 
       <div>
-        <label>User Type</label>
+        <label>{{ __('User Type') }}</label>
         <select>
-          <option>Client</option>
+      <option>{{ __('Client') }}</option>
         </select>
       </div>
 
       <div>
-        <label>Active Status</label>
+        <label>{{ __('Active Status') }}</label>
         <select>
-          <option>Active</option>
+      <option>{{ __('Active') }}</option>
         </select>
       </div>
 
       <div class="full">
-        <label>User ID</label>
+        <label>{{ __('User ID') }}</label>
         <input type="text" value="U-0001-0001">
       </div>
     </form>
 
     <div class="actions">
-      <button class="delete">Delete User</button>
-      <button class="save">Save changes</button>
+      <button class="delete">{{ __('Delete User') }}</button>
+      <button class="save">{{ __('Save changes') }}</button>
     </div>
 
 

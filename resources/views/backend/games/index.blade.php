@@ -13,26 +13,27 @@
     
     <main class="container">
 
-  <h1>Games</h1>
+  <h1>{{ __('Games') }}</h1>
 
   <div class="card">
 
     <!-- SEARCH -->
     <div class="search-row">
-      <input type="text" placeholder="Search by name, ID or creator">
-      <span>Total Games: 121</span>
+      <<input type="text" placeholder="{{ __('Search by name, ID or creator') }}">
+      <span>{{ __('Total Games: :count', ['count' => 121]) }}</span>
     </div>
 
     <!-- BOTÕES -->
     <div class="filters-bar">
-      <button class="btn active">Gallery View</button>
-      <button class="btn">Table View</button>
-      <button class="btn">Order By ▾</button>
+      <button class="btn active">{{ __('Gallery View') }}</button>
+      <button class="btn">{{ __('Table View') }}</button>
+      <button class="btn">{{ __('Order By') }} ▾</button>
 
       <!-- ABRIR FILTER -->
-      <a href="#filters" class="btn">Filters ▾</a>
+      <a href="#filters" class="btn">{{ __('Filters') }} ▾</a>
 
-      <button class="btn create">Create Game</button>
+
+      <button class="btn create">{{ __('Create Game') }}</button>
     </div>
 
     <!-- GALERIA -->
@@ -40,77 +41,35 @@
 
       <!-- repetir -->
       <div class="game-card">
-        <button class="edit">EDIT</button>
+        <button class="edit">{{ __('Edit') }}</button>
         <img src="/img/replaced-banner.png">
         <h3>REPLACED</h3>
         <p>$24.00</p>
       </div>
 
       <div class="game-card">
-        <button class="edit">EDIT</button>
+        <button class="edit">{{ __('Edit') }}</button>
         <img src="/img/replaced-banner.png">
         <h3>REPLACED</h3>
         <p>$24.00</p>
       </div>
 
       <div class="game-card">
-        <button class="edit">EDIT</button>
+        <button class="edit">{{ __('Edit') }}</button>
         <img src="/img/replaced-banner.png">
         <h3>REPLACED</h3>
         <p>$24.00</p>
       </div>
 
       <div class="game-card">
-        <button class="edit">EDIT</button>
+        <button class="edit">{{ __('Edit') }}</button>
         <img src="/img/replaced-banner.png">
         <h3>REPLACED</h3>
         <p>$24.00</p>
       </div>
 
       <div class="game-card">
-        <button class="edit">EDIT</button>
-        <img src="/img/replaced-banner.png">
-        <h3>REPLACED</h3>
-        <p>$24.00</p>
-      </div>
-
-    </div>
-
-
-    <!-- GALERIA -->
-    <div class="gallery">
-
-      <!-- repetir -->
-      <div class="game-card">
-        <button class="edit">EDIT</button>
-        <img src="/img/replaced-banner.png">
-        <h3>REPLACED</h3>
-        <p>$24.00</p>
-      </div>
-
-      <div class="game-card">
-        <button class="edit">EDIT</button>
-        <img src="/img/replaced-banner.png">
-        <h3>REPLACED</h3>
-        <p>$24.00</p>
-      </div>
-
-      <div class="game-card">
-        <button class="edit">EDIT</button>
-        <img src="/img/replaced-banner.png">
-        <h3>REPLACED</h3>
-        <p>$24.00</p>
-      </div>
-
-      <div class="game-card">
-        <button class="edit">EDIT</button>
-        <img src="/img/replaced-banner.png">
-        <h3>REPLACED</h3>
-        <p>$24.00</p>
-      </div>
-
-      <div class="game-card">
-        <button class="edit">EDIT</button>
+        <button class="edit">{{ __('Edit') }}</button>
         <img src="/img/replaced-banner.png">
         <h3>REPLACED</h3>
         <p>$24.00</p>
@@ -124,35 +83,77 @@
 
       <!-- repetir -->
       <div class="game-card">
-        <button class="edit">EDIT</button>
+        <button class="edit">{{ __('Edit') }}</button>
         <img src="/img/replaced-banner.png">
         <h3>REPLACED</h3>
         <p>$24.00</p>
       </div>
 
       <div class="game-card">
-        <button class="edit">EDIT</button>
+        <button class="edit">{{ __('Edit') }}</button>
         <img src="/img/replaced-banner.png">
         <h3>REPLACED</h3>
         <p>$24.00</p>
       </div>
 
       <div class="game-card">
-        <button class="edit">EDIT</button>
+        <button class="edit">{{ __('Edit') }}</button>
         <img src="/img/replaced-banner.png">
         <h3>REPLACED</h3>
         <p>$24.00</p>
       </div>
 
       <div class="game-card">
-        <button class="edit">EDIT</button>
+        <button class="edit">{{ __('Edit') }}</button>
         <img src="/img/replaced-banner.png">
         <h3>REPLACED</h3>
         <p>$24.00</p>
       </div>
 
       <div class="game-card">
-        <button class="edit">EDIT</button>
+        <button class="edit">{{ __('Edit') }}</button>
+        <img src="/img/replaced-banner.png">
+        <h3>REPLACED</h3>
+        <p>$24.00</p>
+      </div>
+
+    </div>
+
+
+    <!-- GALERIA -->
+    <div class="gallery">
+
+      <!-- repetir -->
+      <div class="game-card">
+        <button class="edit">{{ __('Edit') }}</button>
+        <img src="/img/replaced-banner.png">
+        <h3>REPLACED</h3>
+        <p>$24.00</p>
+      </div>
+
+      <div class="game-card">
+        <button class="edit">{{ __('Edit') }}</button>
+        <img src="/img/replaced-banner.png">
+        <h3>REPLACED</h3>
+        <p>$24.00</p>
+      </div>
+
+      <div class="game-card">
+        <button class="edit">{{ __('Edit') }}</button>
+        <img src="/img/replaced-banner.png">
+        <h3>REPLACED</h3>
+        <p>$24.00</p>
+      </div>
+
+      <div class="game-card">
+        <button class="edit">{{ __('Edit') }}</button>
+        <img src="/img/replaced-banner.png">
+        <h3>REPLACED</h3>
+        <p>$24.00</p>
+      </div>
+
+      <div class="game-card">
+        <button class="edit">{{ __('Edit') }}</button>
         <img src="/img/replaced-banner.png">
         <h3>REPLACED</h3>
         <p>$24.00</p>
@@ -179,32 +180,32 @@
   <div class="filters-box">
 
     <div class="filters-header">
-      <h3>Filters</h3>
-      <a href="#" class="reset">Reset</a>
+      <h3>{{ __('Filters') }}</h3>
+      <a href="#" class="reset">{{ __('Reset') }}</a>
     </div>
 
-    <div class="filter-item">Price ▾</div>
-    <div class="filter-item">Category ▾</div>
-    <div class="filter-item">Features ▾</div>
-    <div class="filter-item">Release ▾</div>
-    <div class="filter-item">Game Launcher ▾</div>
+    <div class="filter-item">{{ __('Price') }} ▾</div>
+    <div class="filter-item">{{ __('Category') }} ▾</div>
+    <div class="filter-item">{{ __('Features') }} ▾</div>
+    <div class="filter-item">{{ __('Release') }} ▾</div>
+    <div class="filter-item">{{ __('Game Launcher') }} ▾</div>
 
     <div class="filter-item open">
       <div class="genre-title">
-        Game Genre <span class="badge"></span> ▲
+        {{ __('Game Genre') }} <span class="badge"></span> ▲
       </div>
 
       <div class="checkbox-list">
-        <label><input type="checkbox"> Adventure</label>
-        <label><input type="checkbox"> Action</label>
-        <label><input type="checkbox"> Metroidvania</label>
-        <label><input type="checkbox"> Strategy</label>
-        <label><input type="checkbox"> Platform</label>
-        <label><input type="checkbox"> Shooter</label>
-        <label><input type="checkbox"> First-person</label>
-        <label><input type="checkbox"> MMO</label>
-        <label><input type="checkbox"> Horror</label>
-        <label><input type="checkbox"> Survival</label>
+        <label><input type="checkbox"> {{ __('Adventure') }}</label>
+        <label><input type="checkbox"> {{ __('Action') }}</label>
+        <label><input type="checkbox"> {{ __('Metroidvania') }}</label>
+        <label><input type="checkbox"> {{ __('Strategy') }}</label>
+        <label><input type="checkbox"> {{ __('Platform') }}</label>
+        <label><input type="checkbox"> {{ __('Shooter') }}</label>
+        <label><input type="checkbox"> {{ __('First-person') }}</label>
+        <label><input type="checkbox"> {{ __('MMO') }}</label>
+        <label><input type="checkbox"> {{ __('Horror') }}</label>
+        <label><input type="checkbox"> {{ __('Survival') }}</label>
       </div>
     </div>
 
