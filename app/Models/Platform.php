@@ -6,5 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Platform extends Model
 {
-    //
+    protected $fillable = [
+    'name',
+    'icon'
+    ];
+
+    public function gameVersions(){
+        return $this->hasMany(GameVersion::class);
+    }
 }

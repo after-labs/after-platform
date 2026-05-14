@@ -50,7 +50,8 @@
     --ghost-black-60: #10101060;
 
     --gray-text: #c0b3ce;
-    --alert: #ff0000;
+    --alert: rgba(217, 54, 82, 0.5);
+    --alert-border: rgba(217, 54, 82, 0.5);
     --success: #5cff8a;
 
     --russo-one: "Russo One", sans-serif;
@@ -64,6 +65,7 @@
     --transition: all 0.3s ease;
     --box-shadow-purple: 0 0 16px var(--purple-primary);
     --box-shadow-white: 0 0 16px var(---white);
+    --box-shadow-alert: 0 0 16px var(--alert);
     --border-purple: 2px solid var(--purple-primary);
     --border-ghost-purple: 3px solid var(--ghost-purple);
     --border-white: 2px solid var(--white);
@@ -97,7 +99,7 @@ h2,
 h3,
 h4 {
     color: var(--white);
-    text-align: center;
+    /* text-align: center; */
 }
 
 h1 {
@@ -107,7 +109,7 @@ h1 {
     margin-bottom: 1.25rem; /* 20px */
 }
 h2 {
-    font-size: 1.875rem; /* 30px */
+    font-size: 1.675rem; /* 30px */
     font-weight: 700;
     font-family: var(--russo-one);
     margin: 8px 0 1.5rem 0;

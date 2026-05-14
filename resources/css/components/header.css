@@ -19,6 +19,7 @@ header .container {
     gap: 0.8rem;
     width: 100%;
     max-width: 1440px;
+    align-items: center;
 }
 
 .logo {
@@ -40,6 +41,9 @@ nav {
 nav ul:not(.icon-group) {
     display: flex;
     gap: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 nav li {
@@ -48,18 +52,24 @@ nav li {
     gap: 4px;
 }
 
-nav a {
+nav a,
+.nav-action-button {
     color: var(--dark-color);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
     font-weight: 500;
     padding: 5px;
     gap: 7px;
+    cursor: pointer;
 
     display: flex;
     align-items: center;
 }
 
 nav a:hover,
-nav a.active {
+nav a.active,
+.nav-action-button:hover {
     color: var(--pink-highlight);
 }
 
@@ -165,10 +175,10 @@ header .btn-outline:hover {
     padding: 2rem;
     background-color: var(--black-bg);
     border-radius: var(--radius-sm);
-    border: var(--border-purple);
+    border: var(--border-white);
     box-shadow: var(--box-shadow-purple);
 
-    max-width: 400px;
+    max-width: 450px;
 }
 
 .btn-close-points {
@@ -251,6 +261,10 @@ header .btn-outline:hover {
     justify-content: space-between;
 }
 
+.progress-labels:last-of-type {
+    margin-bottom: 1.6rem;
+}
+
 .progress-labels > span:last-of-type {
     background: linear-gradient(90deg, #f7ffb9, #e8d5ff, #feeaac, #fff1ca);
     font-family: var(--font-family);
@@ -307,11 +321,11 @@ header .btn-outline:hover {
     position-try-fallbacks: flip-block, flip-inline;
 
     margin: 2rem 0 0 1rem;
-    width: 300px;
+    width: 330px;
     max-height: 400px;
     background: var(--black-bg);
     border-radius: 12px;
-    border: var(--border-purple);
+    border: var(--border-white);
     box-shadow: var(--box-shadow-purple);
 
     display: flex;
@@ -320,6 +334,7 @@ header .btn-outline:hover {
 
 .notif-header {
     padding: 10px;
+    width: 100%;
     border-bottom: 1px solid var(--ghost-white-60);
     display: flex;
     justify-content: space-between;
@@ -331,6 +346,7 @@ header .btn-outline:hover {
     font-size: 1.4rem;
     font-weight: 600;
     color: var(--white);
+    margin-left: 8px;
 
     background: linear-gradient(90deg, #ffc0f0, #ffa2f9, #ffd6f8, #ffb3d9);
     font-family: var(--font-family);
@@ -353,6 +369,7 @@ header .btn-outline:hover {
 
 .notif-list {
     overflow-y: auto;
+    width: 100%;
 }
 
 .notif-item {
@@ -418,4 +435,44 @@ header .btn-outline:hover {
 
 .hidden {
     display: none;
+}
+
+@media (max-width: 1320px) {
+    header .container {
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        width: 160px;
+    }
+
+    .search-container {
+        order: 3;
+        max-width: none;
+    }
+
+    nav {
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 640px) {
+    header .container {
+        justify-content: center;
+    }
+
+    nav {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    nav ul:not(.icon-group) {
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .language-select {
+        padding: 8px 28px 8px 10px;
+        font-size: 0.85rem;
+    }
 }

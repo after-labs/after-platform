@@ -12,27 +12,27 @@
               {{ __('Sharing the incredible potential of indie creations. Find your next game today!') }}
             </p>
             <div class="social-icons">
-              <a href="#"><i class="fab fa-github"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-linkedin"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="{{ route('about') }}"><i class="fab fa-github"></i></a>
+              <a href="{{ route('about') }}"><i class="fab fa-twitter"></i></a>
+              <a href="{{ route('about') }}"><i class="fab fa-linkedin"></i></a>
+              <a href="{{ route('about') }}"><i class="fab fa-instagram"></i></a>
             </div>
           </div>
           <div class="footer-column">
             <h4>{{ __('About Us') }}</h4>
             <ul>
-              <li><a href="#">{{ __('Our Mission') }}</a></li>
-              <li><a href="#">{{ __('Blog & News') }}</a></li>
-              <li><a href="#">{{ __('How the platform works') }}</a></li>
-              <li><a href="#">{{ __('Project Backstage') }}</a></li>
+              <li><a href="{{ route('about') }}">{{ __('Our Mission') }}</a></li>
+              <li><a href="{{ route('about') }}">{{ __('Blog & News') }}</a></li>
+              <li><a href="{{ route('about') }}">{{ __('How the platform works') }}</a></li>
+              <li><a href="{{ route('about') }}">{{ __('Project Backstage') }}</a></li>
             </ul>
           </div>
           <div class="footer-column">
             <h4>{{ __('Stores') }}</h4>
             <ul>
-              <li><a href="#">{{ __('Full Catalog') }}</a></li>
-              <li><a href="#">{{ __('Start Selling Your Games') }}</a></li>
-              <li><a href="#">{{ __('Top Creators') }}</a></li>
+              <li><a href="{{ route('games.index') }}">{{ __('Full Catalog') }}</a></li>
+              <li><a href="{{ route('about') }}">{{ __('Start Selling Your Games') }}</a></li>
+              <li><a href="{{ route('games.index') }}">{{ __('Top Creators') }}</a></li>
             </ul>
           </div>
           <div class="footer-column">
@@ -49,9 +49,9 @@
         <div class="footer-bottom">
           <p>© 2026 After Indie Gaming. {{ __('All rights reserved.') }}</p>
           <div class="footer-links">
-            <a href="#">{{ __('Privacy Policy') }}</a>
-            <a href="#">{{ __('Terms of Service') }}</a>
-            <a href="#">{{ __('Accessibility') }}</a>
+            <a href="{{ route('about') }}">{{ __('Privacy Policy') }}</a>
+            <a href="{{ route('about') }}">{{ __('Terms of Service') }}</a>
+            <a href="{{ route('about') }}">{{ __('Accessibility') }}</a>
           </div>
         </div>
       </div>

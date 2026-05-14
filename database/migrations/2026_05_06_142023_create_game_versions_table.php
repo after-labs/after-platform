@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('game_versions', function (Blueprint $table) {
             $table->id();
-            $table->integer('offer_id');
+            $table->integer('offer_id')->nullable();
             $table->integer('game_id');
+            $table->string('edition_name');
             $table->string('platform_id');
             $table->decimal('base_price');
+            $table->decimal('final_price');
+            $table->integer('stock');
+            $table->boolean('active');
             $table->timestamps();
         });
     }

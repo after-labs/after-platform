@@ -7,7 +7,7 @@
     <title>{{ config('app.name', 'Laravel') }} - Register</title>
     @vite(['resources/css/app.css','resources/css/auth.css'])
 </head>
-<body>
+<body class="auth-bg">
     <div class="container">
         <form method="POST" action="{{ route('register') }}">
             @csrf

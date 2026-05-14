@@ -7,7 +7,7 @@
     <title>{{ config('app.name', 'Laravel') }} - Confirm Password</title>
     @vite(['resources/css/app.css','resources/css/auth.css'])
 </head>
-<body>
+<body class="auth-bg">
     <div class="container">
         <p>{{ __('This is a secure area of the application. Please confirm your password before continuing.') }}</p>
 

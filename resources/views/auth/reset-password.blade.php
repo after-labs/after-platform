@@ -7,7 +7,7 @@
     <title>{{ config('app.name', 'Laravel') }} - Reset Password</title>
     @vite(['resources/css/app.css','resources/css/auth.css'])
 </head>
-<body>
+<body class="auth-bg">
     <div class="container">
         <form method="POST" action="{{ route('password.store') }}">
             @csrf

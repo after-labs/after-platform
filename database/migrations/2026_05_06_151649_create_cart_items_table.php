@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->integer('user_id');
-            $table->integer('game_id');
+            $table->integer('game_version_id');
             $table->integer('units');
         });
     }

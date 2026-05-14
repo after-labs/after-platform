@@ -7,7 +7,7 @@
     <title>{{ config('app.name', 'Laravel') }} - Verify Email</title>
     @vite(['resources/css/app.css','resources/css/auth.css'])
 </head>
-<body>
+<body class="auth-bg">
     <div class="container">
         
         <h1>{{ __('Verify Email') }}</h1>

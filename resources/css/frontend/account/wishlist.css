@@ -1,0 +1,83 @@
+.wishlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+.wishlist-item {
+    display: grid;
+    gap: 0.75rem;
+    min-width: 0;
+}
+
+.wishlist-item .game-card-link {
+    width: 100%;
+}
+
+.wishlist-item form {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.wishlist-item button {
+    width: 70%;
+    max-width: 220px;
+    border: 1px solid var(--alert-border);
+    border-radius: var(--radius-xs);
+    color: var(--white);
+    background: var(--alert);
+    cursor: pointer;
+    padding: 0.8rem 1rem;
+    transition: var(--transition);
+}
+
+.wishlist-item button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow-alert);
+}
+
+.wishlist-grid .empty-state {
+    grid-column: 1 / -1;
+    border: 1px solid var(--alert-border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    background: linear-gradient(
+        180deg,
+        rgba(22, 3, 38, 0.96),
+        rgba(7, 0, 14, 0.98)
+    );
+}
+
+.wishlist-grid .empty-state h2 {
+    color: var(--white);
+    font-family: var(--russo-one);
+    margin-bottom: 0.5rem;
+}
+
+.wishlist-grid .empty-state p {
+    color: var(--ghost-white-80);
+}
+
+.wishlist-grid .empty-state a {
+    display: inline-block;
+    border-radius: var(--radius-xs);
+    color: var(--dark-purple-bg);
+    background: var(--white);
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.wishlist-grid .empty-state a:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow-purple);
+}
+
+@media (max-width: 680px) {
+    .wishlist-grid {
+        grid-template-columns: 1fr;
+    }
+}

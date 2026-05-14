@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome to After</title>
-     @vite(['resources/css/app.css', 'resources/css/index.css'])
+     @vite(['resources/css/app.css', 'resources/css/about.css'])
   </head>
   <body>
-   @include('components/header_guest')
+   @include('components/header_client')
     <section class="main-bg">
       <main>
         <div>
@@ -15,7 +15,7 @@
           <p>
             {{ __('From indie game developers and studios to players interested in support the community while having fun, explore a collaborative marketplace with dozens of games and opportunities for creators who want their games to get on the hands of people') }}
           </p>
-          <button class="btn-cta">{{ __('Start & See Games') }}</button>
+          <a href="{{ route('games.index') }}" class="btn-cta">{{ __('Start & See Games') }}</a>
         </div>
         <img src="{{ asset('imgs/hollow-knight.png') }}" alt="" />
       </main>
@@ -64,7 +64,7 @@
           <div class="sequence-square">
             <img src="{{ asset('icons/level-up-icon.svg') }}" alt="" />
           </div>
-          <p>{{ __('1. Earn Points and Level Up') }}</p>
+          <p>{{ __('1. Earn Points & Level Up') }}</p>
           <p>
             {{ __('As you buy new games (even free ones!), you level up and earn coins.') }}
           </p>
@@ -93,79 +93,16 @@
     </section>
     <section>
       <h2>{{ __('Available Games') }}</h2>
-      <div class="game-row">
-        <div class="game-card">
-          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
-          <p class="game-title">Replaced</p>
-          <span class="game-discount">60%</span>
-          <span class="game-old-price">$40.00</span>
-          <span class="game-price">$24.00</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
-          <p class="game-title">Replaced</p>
-          <span class="game-discount">60%</span>
-          <span class="game-old-price">$40.00</span>
-          <span class="game-price">$24.00</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
-          <p class="game-title">Replaced</p>
-          <span class="game-discount">60%</span>
-          <span class="game-old-price">$40.00</span>
-          <span class="game-price">$24.00</span>
-        </div>
-        <div class="game-card">
-         <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
-          <p class="game-title"></p>
-          <span class="game-discount">60%</span>
-          <span class="game-old-price">$40.00</span>
-          <span class="game-price">$24.00</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
-          <p class="game-title">Replaced</p>
-          <span class="game-discount">60%</span>
-          <span class="game-old-price">$40.00</span>
-          <span class="game-price">$24.00</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
-          <p class="game-title">Replaced</p>
-          <span class="game-discount">60%</span>
-          <span class="game-old-price">$40.00</span>
-          <span class="game-price">$24.00</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
-          <p class="game-title">Replaced</p>
-          <span class="game-discount">60%</span>
-          <span class="game-old-price">$40.00</span>
-          <span class="game-price">$24.00</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
-          <p class="game-title">Replaced</p>
-          <span class="game-discount">60%</span>
-          <span class="game-old-price">$40.00</span>
-          <span class="game-price">$24.00</span>
-        </div>
-        <div class="game-card">
-         <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
-          <p class="game-title">Replaced</p>
-          <span class="game-discount">60%</span>
-          <span class="game-old-price">$40.00</span>
-          <span class="game-price">$24.00</span>
-        </div>
-        <div class="game-card">
-          <img src="{{ asset('imgs/replaced-poster.png') }}" alt="" />
-          <p class="game-title">Replaced</p>
-          <span class="game-discount">60%</span>
-          <span class="game-old-price">$40.00</span>
-          <span class="game-price">$24.00</span>
-        </div>
+      <div class="game-row about-game-row">
+        @forelse($games as $game)
+          <x-game-card :game="$game" />
+        @empty
+          <div class="empty-games">
+            <p>{{ __('No games available yet. Check the catalog again soon.') }}</p>
+          </div>
+        @endforelse
       </div>
-      <button class="btn-catalog">See Catalog</button>
+      <a href="{{ route('games.index') }}" class="btn-catalog">{{ __('See Catalog') }}</a>
     </section>
     <section>
       <div class="community-container">
@@ -197,7 +134,7 @@
         </div>
 
       </div>
-      <button class="btn-cta btn-last">{{ __('Start & See Games') }}</button>
+      <a href="{{ route('games.index') }}" class="btn-cta btn-last">{{ __('Start & See Games') }}</a>
     </section>
       @include('components/footer')
   </body>

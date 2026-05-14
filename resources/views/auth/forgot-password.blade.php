@@ -7,7 +7,7 @@
     <title>{{ config('app.name', 'Laravel') }} - Forgot Password</title>
     @vite(['resources/css/app.css','resources/css/auth.css'])
 </head>
-<body>
+<body class="auth-bg">
     <div class="container">
         @if (session('status'))
             <div class="alert alert-success">
