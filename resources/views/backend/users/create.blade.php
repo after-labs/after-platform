@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create User</title>
-    <link rel="stylesheet" href="/css/global.css">
-    <link rel="stylesheet" href="/css/create_user_adm.css">
+    @vite(['resources/css/app.css', 'resources/css/backend/users/create.css'])
 </head>
 <body>
-
-    <iframe src="header_adm.html" style="border:none; width:100%; height:100px;"></iframe>
+  @include('components/header_adm')
 
    <main class="container">
 
