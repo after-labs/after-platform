@@ -47,7 +47,7 @@ Route::get('lang/{locale}', function ($locale) {
 
 // Client
 
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth', 'client'])->group(function(){
 
     Route::get('/account', [
         ProfileController::class,

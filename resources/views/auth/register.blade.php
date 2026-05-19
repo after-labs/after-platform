@@ -15,7 +15,7 @@
             <h1>{{ __('Register') }}</h1>
 
             <div class="form-group">
-                <<label for="name">{{ __('Name') }}</label>
+                <label for="name">{{ __('Name') }}</label>
                 <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name">
                 @error('name')
                     <div class="error">{{ $message }}</div>
@@ -39,7 +39,7 @@
             </div>
 
             <div class="form-group">
-                 <label for="password_confirmation">{{ __('Confirm Password') }}</label>
+                <label for="password_confirmation">{{ __('Confirm Password') }}</label>
                 <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password">
                 @error('password_confirmation')
                     <div class="error">{{ $message }}</div>

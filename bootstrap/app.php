@@ -21,8 +21,11 @@ return Application::configure(basePath: dirname(__DIR__))
         );
         $middleware->appendToGroup('web', \App\Http\Middleware\SetLocale::class);
         $middleware->alias([
+            'client' => \App\Http\Middleware\ClientMiddleware::class,
+        ]);
+        $middleware->alias([
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
-    ]);
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
