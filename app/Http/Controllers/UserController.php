@@ -9,8 +9,12 @@ class UserController extends Controller
 {
     public function index()
     {
+        $users = User::all();
+
         return view('backend.users.index', [
-            'users' => User::all()
+            //'users' => User::all(),
+            'users' => $users,
+            'totalUsers' => $users->count()
         ]);
     }
 

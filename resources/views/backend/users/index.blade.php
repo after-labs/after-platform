@@ -16,7 +16,7 @@
 
     <div class="search-row">
       <input type="text" placeholder="{{ __('Search by username, email or ID') }}">
-      <span class="total">{{ __('Total Users: :count', ['count' => 340]) }}</span>
+      <span class="total">{{ __('Total Users: :count', ['count' => $totalUsers]) }}</span>
     </div>
 
     <div class="filters">
@@ -43,29 +43,17 @@
 
       <tbody>
        
-        <tr>
-          <td>U-0001-0001</td>
-          <td>quitten_h10</td>
-          <td>thiago@email.com</td>
-          <td class="select">{{ __('Client') }} ▾</td>
-          <td class="select">{{ __('Active') }} ▾</td>
-        </tr>
-
-        <tr>
-          <td>U-0001-0001</td>
-          <td>quitten_h10</td>
-          <td>thiago@email.com</td>
-          <td class="select">{{ __('Client') }} ▾</td>
-          <td class="select">{{ __('Active') }} ▾</td>
-        </tr>
-
-        <tr>
-          <td>U-0001-0001</td>
-          <td>quitten_h10</td>
-          <td>thiago@email.com</td>
-          <td class="select">{{ __('Client') }} ▾</td>
-          <td class="select">{{ __('Active') }} ▾</td>
-        </tr>
+        @foreach ($users as $user)
+        <a href="{{ route('admin.users.edit', ['user' => '$user']) }}">
+          <tr>
+            <td>{{ $user->id }}</td>
+            <td>{{ $user->name }}</td>
+            <td>{{ $user->email }}</td>
+            <td class="select">{{ __($user->role)}} ▾</td>
+            <td class="select">{{ __($user->status) }} ▾</td>
+          </tr>
+        </a>
+        @endforeach
       </tbody>
     </table>
 
