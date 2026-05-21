@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Header adm</title>
-    <link rel="stylesheet" href="/css/header_adm.css">
-    <link rel="stylesheet" href="/css/global.css">
+    @vite(["resources/css/components/header_adm.css"])
 
 </head>
 <body>
@@ -14,7 +13,7 @@
         <div class="container">
             <!-- Logo -->
             <div class="logo">
-                 <img src="/icons/after_logomarca_branco.svg" alt="After Logo"> 
+                 <img src="{{ asset('icons/after-logomarca-branco.svg') }}" alt="After Logo"> 
             </div>
 
             <!-- Navegação Central -->
@@ -28,8 +27,8 @@
 
             <!-- Ícones da Direita -->
             <div class="user-actions">
-                <button class="icon-btn"><img src="/icons/notifications.svg" alt="Notifications"></button>
-                <button class="icon-btn"><img src="/icons/user.svg" alt="User"></button>
+                <button class="icon-btn"><img src="{{  asset('icons/bell-icon.svg') }}" alt="Notifications"></button>
+                <button class="icon-btn"><img src="{{ asset('icons/user-icon.svg') }}" alt="User"></button>
             </div>
         </div>
     </header>
