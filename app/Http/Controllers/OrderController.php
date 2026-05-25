@@ -7,6 +7,7 @@ use App\Models\OrderItem;
 use App\Models\CartItem;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -15,7 +16,8 @@ class OrderController extends Controller
         $items = $this->cartItems();
 
         if ($items->isEmpty()) {
-            return redirect()->route('cart.index')
+            return redirect()
+                ->route('cart.index')
                 ->with('status', 'empty-cart');
         }
 
@@ -30,17 +32,20 @@ class OrderController extends Controller
         $items = $this->cartItems();
 
         if ($items->isEmpty()) {
-            return redirect()->route('cart.index')
+            return redirect()
+                ->route('cart.index')
                 ->with('status', 'empty-cart');
         }
 
         $order = DB::transaction(function () use ($items) {
+
             $order = Order::create([
                 'user_id' => Auth::id(),
                 'total' => $this->cartTotal($items),
             ]);
 
             foreach ($items as $item) {
+
                 OrderItem::create([
                     'game_version_id' => $item->game_version_id,
                     'units' => $item->units,
@@ -80,8 +85,47 @@ class OrderController extends Controller
             ->get();
 
         return view('frontend.orders.index', [
-            'orders' => $orders
+            'orders' => $orders,
         ]);
+    }
+
+    public function adminIndex(Request $request)
+    {
+        $query = Order::with([
+            'user',
+            'items.gameVersion.game',
+            'items.gameVersion.platform',
+        ]);
+
+        if ($request->filled('search')) {
+
+            $s = $request->search;
+
+            $query->where(function ($q) use ($s) {
+
+                $q->where('id', $s)
+
+                  ->orWhereHas('user', function ($u) use ($s) {
+
+                      $u->where('name', 'like', "%{$s}%")
+                        ->orWhere('email', 'like', "%{$s}%");
+
+                  });
+            });
+        }
+
+        // TOTAL DE PEDIDOS
+        $totalOrders = $query->count();
+
+        $orders = $query
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('backend.orders.index', compact(
+            'orders',
+            'totalOrders'
+        ));
     }
 
     private function cartItems()
@@ -98,7 +142,10 @@ class OrderController extends Controller
     private function cartTotal($items): float
     {
         return $items->sum(function ($item) {
-            return $item->units * $item->gameVersion->final_price;
+
+            return $item->units
+                * $item->gameVersion->final_price;
+
         });
     }
 }

@@ -177,6 +177,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         'delete'
     ])->name('users.delete');
 
+    Route::patch('/users/{user}/field', [
+        UserController::class,
+        'updateField'
+    ])->name('users.field');
+
     // Games
 
     Route::get('/games', [
@@ -208,6 +213,22 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         GameController::class,
         'delete'
     ])->name('games.delete');
+
+    Route::get('/games/{game}/version/destroy/{version}', [
+        GameController::class,
+        'destroyVersion'
+    ])->name('games.version.destroy');
+
+    Route::delete('/games/{game}/media/{media}', [
+        GameController::class,
+        'deleteMedia'
+    ])->name('games.media.destroy');
+
+    // Orders
+    Route::get('/orders', [
+        OrderController::class,
+        'adminIndex'
+    ])->name('orders.index');
 
 });
 

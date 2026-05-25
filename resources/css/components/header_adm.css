@@ -1,93 +1,229 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-}
+/* ═══════════════════════════════════════════════════════════
+   header_adm.css  —  idêntico ao header.css do client
+   Só muda: sem points popup, search vai para admin.games
+═══════════════════════════════════════════════════════════ */
 
-body {
-    margin-top: 0;
-}
-
-/* Header principal */
-.main-header {
-    width: 100%;
-    height: auto;
+header {
+    background-color: var(--black-bg);
+    box-shadow: 0 2px 5px rgba(0,0,0,.1);
+    top: 0;
+    position: fixed;
+    z-index: 1000;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    padding: 30px 50px; /* Controla a altura do header */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    position: relative;
-    z-index: 100;
+    width: 100%;
+    border-bottom: solid 1px var(--white);
 }
 
-.container {
+header .container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    padding: 15px 20px;
+    gap: 0.8rem;
     width: 100%;
+    max-width: 1440px;
+    align-items: center;
 }
 
-/* Logo */
+/* ── Logo ────────────────────────────────────────────── */
 .logo {
     display: flex;
-    align-items: center;
-    color: #fff;
-    font-weight: 900;
-    font-size: 24px;
-    letter-spacing: 1px;
-    font-style: italic;
+    justify-content: center;
+    width: 210px;
 }
+.logo img { width: 100%; }
 
-.logo-icon {
-    margin-right: 8px;
-    letter-spacing: -2px;
-}
-
-/* Menu de Navegação */
-.nav-menu ul {
-    list-style: none;
+/* ── Nav (cópia exata do client) ─────────────────────── */
+nav {
     display: flex;
-    gap: 30px;
-     color: #ff00ff; /* Rosa neon da imagem */
-    text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+    justify-content: center;
+    align-items: center;
 }
 
-.nav-menu a {
-    text-decoration: none;
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 14px;
-    text-transform: uppercase;
-    transition: 0.3s;
-     color: #ffffff; /* Rosa neon da imagem */
-    text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
-    
-}
-
-.nav-menu a:hover{
-    color: #ff00ff;
-}
-
-/* Lado direito (Ícones) */
-.user-actions {
+nav ul:not(.icon-group) {
     display: flex;
     gap: 20px;
-    
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0; margin: 0;
 }
 
-.icon-btn{
-    background: none;
-    border: none;
-    color: #ffffff;
-    font-size: 12px;
+nav li {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    list-style: none;
+}
+
+nav a,
+.nav-action-button {
+    color: var(--dark-color);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    font-weight: 500;
+    padding: 5px;
+    gap: 7px;
     cursor: pointer;
-    transition: 0.3s;
-    
-    
+    text-decoration: none;
+    display: flex;
+    align-items: center;
 }
 
-.icon-btn:hover {
-    opacity: 1;
-    transform: scale(1.1);
+nav a:hover,
+nav a.active,
+.nav-action-button:hover {
+    color: var(--pink-highlight);
+}
+
+nav img {
+    height: 30px;
+    color: var(--white);
+}
+
+/* ── Icon group (direita) ────────────────────────────── */
+.icon-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* ── Search bar (cópia exata do client) ──────────────── */
+.search-container {
+    display: flex;
+    align-items: center;
+    border: var(--border-ghost-purple);
+    border-radius: var(--radius-md);
+    padding: 5px 15px;
+    width: 100%;
+    max-width: 480px;
+    background-color: var(--dark-purple-bg);
+}
+
+.search-container input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 5px;
+    color: var(--white);
+    background-color: transparent;
+}
+
+.search-container img {
+    width: 18px;
+    height: 18px;
+    order: 2;
+    margin-left: 10px;
+}
+
+/* ── Language select (cópia exata do client) ─────────── */
+.language-select {
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.95rem;
+    border: var(--border-white);
+    background-color: transparent;
+    color: var(--white);
+    font-family: var(--quantico);
+    appearance: none;
+    padding-right: 36px;
+}
+.language-select:hover {
+    background-color: var(--white);
+    color: var(--black-bg);
+}
+.language-select:focus {
+    outline: none;
+    border: var(--border-purple);
+    box-shadow: var(--box-shadow-purple);
+}
+.language-select option {
+    background-color: var(--black-bg);
+    color: var(--white);
+    padding: 8px;
+}
+
+/* ── Notification popup (cópia exata do client) ──────── */
+.notif-trigger { anchor-name: --notif-icon; }
+
+.notif-box {
+    z-index: 1001;
+    position: fixed;
+    position-anchor: --notif-icon;
+    top: anchor(bottom);
+    right: anchor(right);
+    position-try-fallbacks: flip-block, flip-inline;
+    margin: 2rem 0 0 1rem;
+    width: 330px;
+    max-height: 400px;
+    background: var(--black-bg);
+    border-radius: 12px;
+    border: var(--border-white);
+    box-shadow: var(--box-shadow-purple);
+    display: flex;
+    flex-direction: column;
+}
+
+.notif-header {
+    padding: 10px;
+    width: 100%;
+    border-bottom: 1px solid var(--ghost-white-60);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.notif-header span {
+    font-size: 1.4rem;
+    font-weight: 600;
+    background: linear-gradient(90deg, #ffc0f0, #ffa2f9, #ffd6f8, #ffb3d9);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 14px #fc62ffaa;
+}
+
+.notif-header button {
+    all: unset;
+    background: none;
+    width: 1.6rem;
+    cursor: pointer;
+}
+.notif-header button img { width: 100%; }
+
+.notif-list { overflow-y: auto; width: 100%; }
+
+.notif-item {
+    padding: 12px;
+    border-bottom: 1px solid #1e1e1e;
+}
+.notif-item:last-child { border-bottom: none; }
+.notif-title { font-size: 14px; color: var(--pink-highlight); }
+.notif-desc  { font-size: 12px; color: var(--gray-text); }
+.notif-time  { font-size: 11px; color: var(--ghost-white-80); margin-top: 4px; }
+
+.hidden { display: none; }
+
+/* ── Push page content below fixed header ────────────── */
+body { padding-top: 72px; }
+
+/* ── Responsive (cópia exata do client) ──────────────── */
+@media (max-width: 1320px) {
+    header .container { flex-wrap: wrap; }
+    .logo { width: 160px; }
+    .search-container { order: 3; max-width: none; }
+    nav { margin-left: auto; }
+}
+
+@media (max-width: 640px) {
+    header .container { justify-content: center; }
+    nav { width: 100%; margin-left: 0; }
+    nav ul:not(.icon-group) { justify-content: center; gap: 10px; }
+    .language-select { padding: 8px 28px 8px 10px; font-size: 0.85rem; }
 }

@@ -3,124 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orders control</title>
+    <title>{{ __('Orders') }}</title>
     @vite(['resources/css/app.css', 'resources/css/backend/orders/index.css'])
 </head>
 <body>
+@include('components/header_adm')
 
-     <iframe src="header_adm.html" style="border:none; width:100%; height:100px;"></iframe>
-    
-    <main class="container">
+<main class="orders-main">
 
-  <h1>{{ __('Orders') }}</h1>
+    <h1>{{ __('Orders') }}</h1>
 
-  <div class="card">
+    {{-- ── Search + total ── --}}
+    <section class="card">
+        <form method="GET" action="{{ route('admin.orders.index') }}" class="search-row">
+            <input
+                type="text"
+                name="search"
+                value="{{ request('search') }}"
+                placeholder="{{ __('Search by customer name, email or order ID…') }}"
+                autocomplete="off"
+                id="orders-search"
+            >
+            <span class="total">{{ __('Total Orders:') }} <strong>{{ $totalOrders }}</strong></span>
+        </form>
 
-    <!-- SEARCH -->
-    <div class="search-row">
-      <input type="text" placeholder="{{ __('Search by Order ID, User ID and games names') }}">
-      <span>{{ __('Total Orders: :count', ['count' => 140]) }}</span>
-    </div>
+        <div class="filters">
+            @php $f = request('filter', 'all'); @endphp
+            <a href="{{ request()->fullUrlWithQuery(['filter' => 'all',   'page' => 1]) }}" class="btn {{ $f === 'all'   ? 'active' : '' }}">{{ __('All') }}</a>
+            <a href="{{ request()->fullUrlWithQuery(['filter' => 'today', 'page' => 1]) }}" class="btn {{ $f === 'today' ? 'active' : '' }}">{{ __('Today') }}</a>
+            <a href="{{ request()->fullUrlWithQuery(['filter' => 'week',  'page' => 1]) }}" class="btn {{ $f === 'week'  ? 'active' : '' }}">{{ __('This Week') }}</a>
+            <a href="{{ request()->fullUrlWithQuery(['filter' => 'month', 'page' => 1]) }}" class="btn {{ $f === 'month' ? 'active' : '' }}">{{ __('This Month') }}</a>
+        </div>
+    </section>
 
-    <!-- BOTÕES -->
-    <div class="filters">
-      <button class="btn active">{{ __('All Orders') }}</button>
-      <button class="btn">{{ __('Order By') }} ▾</button>
-      <button class="btn">{{ __('Filters') }} ▾</button>
-    </div>
+    <br>
 
-    <!-- TABELA -->
-    <table>
-      <thead>
-        <tr>
-          <th>{{ __('ID') }}</th>
-        <th>{{ __('Game Units') }}</th>
-        <th>{{ __('Total Price') }}</th>
-        <th>{{ __('Date') }}</th>
-        <th>{{ __('Status') }}</th>
-        </tr>
-      </thead>
+    {{-- ── Table ── --}}
+    <section class="card">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>{{ __('CUSTOMER') }}</th>
+                    <th>{{ __('EMAIL') }}</th>
+                    <th>{{ __('ITEMS') }}</th>
+                    <th>{{ __('TOTAL') }}</th>
+                    <th>{{ __('DATE') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($orders as $order)
+                    <tr>
+                        <td class="td-id">{{ $order->id }}</td>
 
-      <tbody>
+                        <td class="td-name">{{ $order->user?->name ?? '—' }}</td>
 
-        <!-- CLICK abre painel -->
-        <tr onclick="location.href='#order1'">
-          <td>OR-0000-0001</td>
-          <td>3</td>
-          <td>R$400.00</td>
-          <td>2026/03/13</td>
-          <td>{{ __('Completed') }}</td>
-        </tr>
+                        <td class="td-email">{{ $order->user?->email ?? '—' }}</td>
 
-        <tr onclick="location.href='#order1'">
-          <td>OR-0000-0002</td>
-          <td>3</td>
-          <td>R$400.00</td>
-          <td>2026/03/13</td>
-           <td>{{ __('On Progress') }}</td>
-        </tr>
+                        <td class="td-items">
+                            @foreach($order->items as $item)
+                                <div class="order-item-row">
+                                    <span class="order-item-name">
+                                        {{ $item->gameVersion?->game?->name ?? '—' }}
+                                    </span>
+                                    <span class="order-item-meta">
+                                        {{ $item->gameVersion?->edition_name }}
+                                        · {{ $item->gameVersion?->platform?->name }}
+                                        · ×{{ $item->units }}
+                                    </span>
+                                </div>
+                            @endforeach
+                        </td>
 
-      </tbody>
-    </table>
+                        <td class="td-total">${{ number_format($order->total, 2) }}</td>
 
-    <div class="pagination">
-      « 1 2 3 4 ... 29 »
-    </div>
+                        <td class="td-date">
+                            <span>{{ $order->created_at->format('d/m/Y') }}</span>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="6" class="empty-state">{{ __('No orders found.') }}</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
 
-  </div>
+        {{-- Pagination --}}
+        <div class="pagination">
+            @if($orders->onFirstPage())
+                <span class="page-arrow disabled">«</span>
+            @else
+                <a class="page-arrow" href="{{ $orders->previousPageUrl() }}">«</a>
+            @endif
+
+            @foreach($orders->getUrlRange(1, $orders->lastPage()) as $page => $url)
+                @if($page === $orders->currentPage())
+                    <span class="page active">{{ $page }}</span>
+                @elseif($page === 1 || $page === $orders->lastPage() || abs($page - $orders->currentPage()) <= 2)
+                    <a class="page" href="{{ $url }}">{{ $page }}</a>
+                @elseif(abs($page - $orders->currentPage()) === 3)
+                    <span class="page-ellipsis">…</span>
+                @endif
+            @endforeach
+
+            @if($orders->hasMorePages())
+                <a class="page-arrow" href="{{ $orders->nextPageUrl() }}">»</a>
+            @else
+                <span class="page-arrow disabled">»</span>
+            @endif
+        </div>
+    </section>
 
 </main>
 
-
-<!-- PAINEL DETAILS -->
-
-<div id="order1" class="details-panel">
-
-  <a href="#" class="overlay-close"></a>
-
-  <div class="details-box">
-
-    <button class="close-btn" onclick="location.href='#'">✕</button>
-
-    <<h2>{{ __('Order Details') }}</h2>
-
-    <div class="details">
-      <p><strong>{{ __('Order ID:') }}</strong> OR-0000-0001</p>
-      <p><strong>{{ __('Date:') }}</strong> October 13, 2025</p>
-      <p><strong>{{ __('Game units:') }}</strong> 6</p>
-      <p><strong>{{ __('Total Price:') }}</strong> $60.00</p>
-      <p><strong>{{ __('Payment method:') }}</strong> {{ __('Credit Card') }}</p>
-      <p><strong>{{ __('Coupons Used:') }}</strong> AFTER25</p>
-      <p><strong>{{ __('Coins Used:') }}</strong> 50 {{ __('coins') }}</p>
-      <p><strong>{{ __('Status:') }}</strong> {{ __('Completed') }} ▾</p>
-      <p><strong>{{ __('User ID:') }}</strong> U-0000-0001</p>
-    </div>
-
-    <!-- GAMES -->
-    <div class="games">
-      <div class="game">
-        <img src="/img/replaced-banner.png">
-        <span>REPLACED</span>
-        <small>$24.00</small>
-      </div>
-
-      <div class="game">
-        <img src="/img/replaced-banner.png">
-        <span>REPLACED</span>
-        <small>$24.00</small>
-      </div>
-
-      <div class="game">
-        <img src="/img/replaced-banner.png">
-        <span>REPLACED</span>
-        <small>$24.00</small>
-      </div>
-    </div>
-
-  </div>
-
-</div>
-</main>
+<script>
+    // live search debounce
+    const si = document.getElementById('orders-search')
+    let t
+    si?.addEventListener('input', () => {
+        clearTimeout(t)
+        t = setTimeout(() => si.closest('form').submit(), 400)
+    })
+</script>
 
 </body>
 </html>
