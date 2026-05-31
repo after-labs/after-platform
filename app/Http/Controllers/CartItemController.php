@@ -33,6 +33,8 @@ class CartItemController extends Controller
     {
         abort_unless($gameVersion->active, 404);
 
+        $gameVersion->load('game');
+
         $item = CartItem::where([
             'game_version_id' => $gameVersion->id,
             'user_id' => Auth::id(),
@@ -49,6 +51,11 @@ class CartItemController extends Controller
                 'units' => 1,
             ]);
         }
+
+        $request->user()->notifications()->create([
+            'title' => 'Jogo adicionado ao carrinho',
+            'description' => $gameVersion->game->name.' foi adicionado ao carrinho.',
+        ]);
 
         return redirect()->route('cart.index');
     }

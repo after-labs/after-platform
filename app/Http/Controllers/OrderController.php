@@ -54,6 +54,11 @@ class OrderController extends Controller
             return $order;
         });
 
+        Auth::user()->notifications()->create([
+            'title' => 'Pedido criado',
+            'description' => 'Seu pedido #'.str_pad($order->id, 6, '0', STR_PAD_LEFT).' foi criado.',
+        ]);
+
         return redirect()->route('orders.completed', $order);
     }
 
