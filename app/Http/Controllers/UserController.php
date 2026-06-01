@@ -31,8 +31,8 @@ class UserController extends Controller
             default    => null,
         };
 
-        $totalUsers = User::count();
-        $users      = $query->latest()->paginate(5)->withQueryString();
+        $users      = $query->latest()->paginate(10)->withQueryString();
+        $totalUsers = User::count(); // always the grand total, not filtered
 
         return view('backend.users.index', compact('users', 'totalUsers'));
     }
@@ -50,6 +50,8 @@ class UserController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role'     => ['required', Rule::in(['client', 'admin'])],
             'status'   => ['required', Rule::in(['active', 'inactive'])],
+            'phone'    => ['nullable', 'string', 'max:30'],
+            'country'  => ['nullable', 'string', 'max:10'],
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -66,10 +68,12 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $validated = $request->validate([
-            'name'   => ['required', 'string', 'max:255'],
-            'email'  => ['required', 'email', Rule::unique('users')->ignore($user->id)],
-            'role'   => ['required', Rule::in(['client', 'admin'])],
-            'status' => ['required', Rule::in(['active', 'inactive'])],
+            'name'    => ['required', 'string', 'max:255'],
+            'email'   => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+            'role'    => ['required', Rule::in(['client', 'admin'])],
+            'status'  => ['required', Rule::in(['active', 'inactive'])],
+            'phone'   => ['nullable', 'string', 'max:30'],
+            'country' => ['nullable', 'string', 'max:10'],
         ]);
 
         // Only update password if provided

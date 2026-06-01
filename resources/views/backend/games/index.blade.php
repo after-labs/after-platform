@@ -3,215 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game control</title>
+    <title>{{ __('Game Control') }}</title>
     @vite(['resources/css/app.css', 'resources/css/backend/games/index.css'])
 </head>
 <body>
-  @include('components/header_adm')
-    
-    <main class="container">
+@include('components/header_adm')
 
-  <h1>{{ __('Games') }}</h1>
+<main class="container">
 
-  <div class="card">
+    <h1>{{ __('Games') }}</h1>
 
-    <!-- SEARCH -->
-    <div class="search-row">
-      <<input type="text" placeholder="{{ __('Search by name, ID or creator') }}">
-      <span>{{ __('Total Games: :count', ['count' => 121]) }}</span>
-    </div>
+    @if(session('success'))
+        <div class="alert-success">{{ session('success') }}</div>
+    @endif
 
-    <!-- BOTÕES -->
-    <div class="filters-bar">
-      <button class="btn active">{{ __('Gallery View') }}</button>
-      <button class="btn">{{ __('Table View') }}</button>
-      <button class="btn">{{ __('Order By') }} ▾</button>
+    <div class="card">
 
-      <!-- ABRIR FILTER -->
-      <a href="#filters" class="btn">{{ __('Filters') }} ▾</a>
+        {{-- SEARCH --}}
+        <form class="search-row" method="GET" action="{{ route('admin.games.index') }}">
+            <input type="text" name="search" value="{{ $search ?? '' }}"
+                   placeholder="{{ __('Search by name, ID or developer') }}">
+            <span>{{ __('Total: :count game(s)', ['count' => $games->total()]) }}</span>
+        </form>
 
+        {{-- FILTER BAR --}}
+        <div class="filters-bar">
+            <a href="{{ route('admin.games.index') }}"
+               class="btn {{ !request('search') ? 'active' : '' }}">
+                {{ __('All Games') }}
+            </a>
+            <a href="{{ route('admin.games.create') }}" class="btn create">
+                + {{ __('Create Game') }}
+            </a>
+        </div>
 
-      <button class="btn create">{{ __('Create Game') }}</button>
-    </div>
+        {{-- GALLERY --}}
+        <div class="gallery">
+            @forelse($games as $game)
+                @php
+                    $poster  = $game->media->where('type', 'poster')->first()
+                             ?? $game->media->where('type', 'banner')->first();
+                    $version = $game->versions->where('active', true)->sortBy('final_price')->first()
+                             ?? $game->versions->sortBy('final_price')->first();
 
-    <!-- GALERIA -->
-    <div class="gallery">
+                    $discount = 0;
+                    if ($version && $version->base_price > 0 && $version->base_price > $version->final_price) {
+                        $discount = round((($version->base_price - $version->final_price) / $version->base_price) * 100);
+                    }
+                @endphp
 
-      <!-- repetir -->
-      <div class="game-card">
-        <button class="edit">{{ __('Edit') }}</button>
-        <img src="/img/replaced-banner.png">
-        <h3>REPLACED</h3>
-        <p>$24.00</p>
-      </div>
+                <div class="game-card">
 
-      <div class="game-card">
-        <button class="edit">{{ __('Edit') }}</button>
-        <img src="/img/replaced-banner.png">
-        <h3>REPLACED</h3>
-        <p>$24.00</p>
-      </div>
+                    {{-- Edit --}}
+                    <a href="{{ route('admin.games.edit', $game) }}" class="edit-btn">{{ __('Edit') }}</a>
 
-      <div class="game-card">
-        <button class="edit">{{ __('Edit') }}</button>
-        <img src="/img/replaced-banner.png">
-        <h3>REPLACED</h3>
-        <p>$24.00</p>
-      </div>
+                    {{-- Delete: abre modal de confirmação --}}
+                    <button type="button"
+                            class="delete-btn"
+                            data-game-name="{{ $game->name }}"
+                            data-delete-url="{{ route('admin.games.delete', $game) }}">{{ __('Delete') }}</button>
 
-      <div class="game-card">
-        <button class="edit">{{ __('Edit') }}</button>
-        <img src="/img/replaced-banner.png">
-        <h3>REPLACED</h3>
-        <p>$24.00</p>
-      </div>
+                    {{-- Image --}}
+                    <div class="game-card-image-wrapper">
+                        @if($discount > 0)
+                            <div class="discount-badge">-{{ $discount }}%</div>
+                        @endif
 
-      <div class="game-card">
-        <button class="edit">{{ __('Edit') }}</button>
-        <img src="/img/replaced-banner.png">
-        <h3>REPLACED</h3>
-        <p>$24.00</p>
-      </div>
+                        @if($poster)
+                            <img src="{{ $poster->path }}" alt="{{ $game->name }}">
+                        @else
+                            <div class="no-image">{{ __('No image') }}</div>
+                        @endif
 
-    </div>
+                        <div class="game-card-overlay"></div>
+                    </div>
 
+                    {{-- Content --}}
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">{{ $game->name }}</h3>
 
-    <!-- GALERIA -->
-    <div class="gallery">
+                        <div class="game-card-prices">
+                            @if($version)
+                                @if($version->final_price == 0)
+                                    {{-- Gratuito: só o "Free", sem preço riscado --}}
+                                    <span class="price-free">{{ __('Free') }}</span>
+                                @else
+                                    {{-- Pago: mostra original riscado só se houver desconto real --}}
+                                    @if($discount > 0)
+                                        <span class="price-old">${{ number_format($version->base_price, 2) }}</span>
+                                    @endif
+                                    <span class="price-current">${{ number_format($version->final_price, 2) }}</span>
+                                @endif
+                            @else
+                                <span class="price-none">{{ __('No version') }}</span>
+                            @endif
+                        </div>
 
-      <!-- repetir -->
-      <div class="game-card">
-        <button class="edit">{{ __('Edit') }}</button>
-        <img src="/img/replaced-banner.png">
-        <h3>REPLACED</h3>
-        <p>$24.00</p>
-      </div>
+                        <div class="game-card-footer">
+                            <span class="game-card-category">
+                                {{ $game->category?->name ?? __('Indie') }}
+                            </span>
+                        </div>
+                    </div>
 
-      <div class="game-card">
-        <button class="edit">{{ __('Edit') }}</button>
-        <img src="/img/replaced-banner.png">
-        <h3>REPLACED</h3>
-        <p>$24.00</p>
-      </div>
+                </div>
+            @empty
+                <p class="empty">{{ __('No games found.') }}</p>
+            @endforelse
+        </div>
 
-      <div class="game-card">
-        <button class="edit">{{ __('Edit') }}</button>
-        <img src="/img/replaced-banner.png">
-        <h3>REPLACED</h3>
-        <p>$24.00</p>
-      </div>
-
-      <div class="game-card">
-        <button class="edit">{{ __('Edit') }}</button>
-        <img src="/img/replaced-banner.png">
-        <h3>REPLACED</h3>
-        <p>$24.00</p>
-      </div>
-
-      <div class="game-card">
-        <button class="edit">{{ __('Edit') }}</button>
-        <img src="/img/replaced-banner.png">
-        <h3>REPLACED</h3>
-        <p>$24.00</p>
-      </div>
-
-    </div>
-
-
-    <!-- GALERIA -->
-    <div class="gallery">
-
-      <!-- repetir -->
-      <div class="game-card">
-        <button class="edit">{{ __('Edit') }}</button>
-        <img src="/img/replaced-banner.png">
-        <h3>REPLACED</h3>
-        <p>$24.00</p>
-      </div>
-
-      <div class="game-card">
-        <button class="edit">{{ __('Edit') }}</button>
-        <img src="/img/replaced-banner.png">
-        <h3>REPLACED</h3>
-        <p>$24.00</p>
-      </div>
-
-      <div class="game-card">
-        <button class="edit">{{ __('Edit') }}</button>
-        <img src="/img/replaced-banner.png">
-        <h3>REPLACED</h3>
-        <p>$24.00</p>
-      </div>
-
-      <div class="game-card">
-        <button class="edit">{{ __('Edit') }}</button>
-        <img src="/img/replaced-banner.png">
-        <h3>REPLACED</h3>
-        <p>$24.00</p>
-      </div>
-
-      <div class="game-card">
-        <button class="edit">{{ __('Edit') }}</button>
-        <img src="/img/replaced-banner.png">
-        <h3>REPLACED</h3>
-        <p>$24.00</p>
-      </div>
+        {{-- Pagination --}}
+        <div class="pagination">
+            {{ $games->withQueryString()->links() }}
+        </div>
 
     </div>
-
-
-    <!-- PAGINAÇÃO -->
-    <div class="pagination">
-      « 1 2 3 4 ... 29 »
-    </div>
-
-  </div>
-
 </main>
 
-<!-- FILTERS (MESMA PÁGINA) -->
-<div id="filters" class="filters-panel">
-
-  <!-- clicar fora fecha -->
-  <a href="#" class="overlay-close"></a>
-
-  <div class="filters-box">
-
-    <div class="filters-header">
-      <h3>{{ __('Filters') }}</h3>
-      <a href="#" class="reset">{{ __('Reset') }}</a>
+{{-- ══════════════════════════════
+     MODAL DE CONFIRMAÇÃO DE DELETE
+     ══════════════════════════════ --}}
+<div id="delete-modal" class="modal-backdrop" aria-hidden="true">
+    <div class="modal-box" role="dialog">
+        <div class="modal-icon">⚠</div>
+        <h4 id="modal-title">{{ __('Delete game?') }}</h4>
+        <p>{{ __('This action cannot be undone.') }}</p>
+        <div class="modal-actions">
+            <button type="button" class="modal-cancel" id="modal-cancel">{{ __('Cancel') }}</button>
+            <form id="delete-form" method="GET" action="">
+                @csrf
+                <button type="submit" class="modal-confirm">{{ __('Yes, delete') }}</button>
+            </form>
+        </div>
     </div>
-
-    <div class="filter-item">{{ __('Price') }} ▾</div>
-    <div class="filter-item">{{ __('Category') }} ▾</div>
-    <div class="filter-item">{{ __('Features') }} ▾</div>
-    <div class="filter-item">{{ __('Release') }} ▾</div>
-    <div class="filter-item">{{ __('Game Launcher') }} ▾</div>
-
-    <div class="filter-item open">
-      <div class="genre-title">
-        {{ __('Game Genre') }} <span class="badge"></span> ▲
-      </div>
-
-      <div class="checkbox-list">
-        <label><input type="checkbox"> {{ __('Adventure') }}</label>
-        <label><input type="checkbox"> {{ __('Action') }}</label>
-        <label><input type="checkbox"> {{ __('Metroidvania') }}</label>
-        <label><input type="checkbox"> {{ __('Strategy') }}</label>
-        <label><input type="checkbox"> {{ __('Platform') }}</label>
-        <label><input type="checkbox"> {{ __('Shooter') }}</label>
-        <label><input type="checkbox"> {{ __('First-person') }}</label>
-        <label><input type="checkbox"> {{ __('MMO') }}</label>
-        <label><input type="checkbox"> {{ __('Horror') }}</label>
-        <label><input type="checkbox"> {{ __('Survival') }}</label>
-      </div>
-    </div>
-
-  </div>
-
 </div>
-</main>
 
+<script>
+const modal      = document.getElementById('delete-modal')
+const deleteForm = document.getElementById('delete-form')
+const modalTitle = document.getElementById('modal-title')
+const cancelBtn  = document.getElementById('modal-cancel')
+
+document.querySelectorAll('.delete-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        modalTitle.textContent = `{{ __("Delete") }} "${btn.dataset.gameName}"?`
+        deleteForm.action = btn.dataset.deleteUrl
+        modal.removeAttribute('aria-hidden')
+        modal.classList.add('visible')
+    })
+})
+
+function closeModal() {
+    modal.setAttribute('aria-hidden', 'true')
+    modal.classList.remove('visible')
+}
+
+cancelBtn.addEventListener('click', closeModal)
+modal.addEventListener('click', e => { if (e.target === modal) closeModal() })
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal() })
+</script>
 
 </body>
 </html>
