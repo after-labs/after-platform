@@ -1,18 +1,20 @@
+@php
+    $adminUser = auth()->user();
+    $notifications = $adminUser?->notifications()->latest()->limit(6)->get() ?? collect();
+    $unreadNotifications = $adminUser?->notifications()->whereNull('read_at')->count() ?? 0;
+@endphp
+
 <header>
     @vite(['resources/css/components/header_adm.css'])
 
     <div class="container">
 
-        {{-- Logo --}}
         <div class="logo">
             <a href="{{ route('admin.dashboard') }}">
                 <img src="{{ asset('icons/after-logomarca-branco.svg') }}" alt="After Logo">
             </a>
         </div>
 
-        
-
-        {{-- Nav central --}}
         <nav>
             <ul>
                 <li>
@@ -34,7 +36,7 @@
                     </a>
                 </li>
 
-                <li>
+                <li class="language-item">
                     <form method="GET" action="">
                         <select onchange="window.location.href=this.value" class="language-select">
                             <option value="{{ route('lang.switch', 'pt') }}" {{ session('locale', 'pt') === 'pt' ? 'selected' : '' }}>Português</option>
@@ -48,10 +50,13 @@
                 <li>
                     <button type="button" class="notif-trigger nav-action-button" onclick="toggleNotif()">
                         <img src="{{ asset('icons/bell-icon.svg') }}" alt="{{ __('Notifications') }}">
+                        @if($unreadNotifications > 0)
+                            <span class="notif-count">{{ $unreadNotifications }}</span>
+                        @endif
                     </button>
                 </li>
                 <li>
-                    <a href="{{ route('profile.edit') }}" class="nav-action-button">
+                    <a href="{{ route('admin.account') }}" class="nav-action-button admin-icon-link">
                         <img src="{{ asset('icons/user-icon.svg') }}" alt="{{ __('Profile') }}">
                     </a>
                 </li>
@@ -61,7 +66,6 @@
     </div>
 </header>
 
-{{-- Notification popup (idêntico ao client) --}}
 <div id="notif-box" class="notif-box hidden">
     <div class="notif-header">
         <span>{{ __('Notifications') }}</span>
@@ -69,30 +73,24 @@
             <img src="{{ asset('icons/close-icon.svg') }}" alt="close">
         </button>
     </div>
-    <div id="notif-list" class="notif-list"></div>
+    <div id="notif-list" class="notif-list">
+        @forelse($notifications as $notification)
+            <div class="notif-item">
+                <div class="notif-title">{{ __($notification->title) }}</div>
+                <div class="notif-desc">{{ __($notification->description) }}</div>
+                <div class="notif-time">{{ $notification->created_at->diffForHumans() }}</div>
+            </div>
+        @empty
+            <div class="notif-item">
+                <div class="notif-title">{{ __('No notifications yet') }}</div>
+                <div class="notif-desc">{{ __('Your updates will appear here.') }}</div>
+            </div>
+        @endforelse
+    </div>
 </div>
 
 <script>
     function toggleNotif() {
         document.getElementById('notif-box').classList.toggle('hidden')
     }
-
-    const adminNotifications = [
-        { title: '{{ __('New Order') }}',  desc: '{{ __('A new purchase was completed') }}',  time: 'now' },
-        { title: '{{ __('New User') }}',   desc: '{{ __('A new account was registered') }}',  time: '5m ago' },
-        { title: '{{ __('Low Stock') }}',  desc: '{{ __('One version is running low') }}',    time: '1h ago' },
-        { title: '{{ __('System') }}',     desc: '{{ __('Platform running normally') }}',     time: '3h ago' },
-    ]
-
-    ;(function renderNotifications() {
-        const list = document.getElementById('notif-list')
-        adminNotifications.forEach(n => {
-            list.innerHTML += `
-                <div class="notif-item">
-                    <div class="notif-title">${n.title}</div>
-                    <div class="notif-desc">${n.desc}</div>
-                    <div class="notif-time">${n.time}</div>
-                </div>`
-        })
-    })()
 </script>

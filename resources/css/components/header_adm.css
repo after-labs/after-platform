@@ -1,14 +1,10 @@
-/* ═══════════════════════════════════════════════════════════
-   header_adm.css  —  idêntico ao header.css do client
-   Só muda: sem points popup, search vai para admin.games
-═══════════════════════════════════════════════════════════ */
-
 header {
     background-color: var(--black-bg);
-    box-shadow: 0 2px 5px rgba(0,0,0,.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     top: 0;
     position: fixed;
     z-index: 1000;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,29 +22,33 @@ header .container {
     align-items: center;
 }
 
-/* ── Logo ────────────────────────────────────────────── */
 .logo {
     display: flex;
     justify-content: center;
     width: 210px;
 }
-.logo img { width: 100%; }
 
-/* ── Nav (cópia exata do client) ─────────────────────── */
+.logo img {
+    width: 100%;
+}
+
 nav {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 18px;
+    margin-left: auto;
 }
 
 nav ul:not(.icon-group) {
     display: flex;
-    gap: 20px;
+    gap: 24px;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
     list-style: none;
-    padding: 0; margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 nav li {
@@ -65,6 +65,8 @@ nav a,
     border: 0;
     border-radius: 0;
     font-weight: 500;
+    font-size: 1rem;
+    font-family: var(--quantico);
     padding: 5px;
     gap: 7px;
     cursor: pointer;
@@ -84,44 +86,33 @@ nav img {
     color: var(--white);
 }
 
-/* ── Icon group (direita) ────────────────────────────── */
+nav img:hover {
+    color: var(--pink-highlight);
+}
+
 .icon-group {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
+    padding: 0;
+    margin: 0;
 }
 
-/* ── Search bar (cópia exata do client) ──────────────── */
-.search-container {
+.language-item {
     display: flex;
     align-items: center;
-    border: var(--border-ghost-purple);
-    border-radius: var(--radius-md);
-    padding: 5px 15px;
-    width: 100%;
-    max-width: 480px;
-    background-color: var(--dark-purple-bg);
 }
 
-.search-container input {
-    border: none;
-    outline: none;
-    flex: 1;
-    padding: 5px;
-    color: var(--white);
-    background-color: transparent;
+.admin-icon-link,
+.notif-trigger {
+    width: 42px;
+    height: 42px;
+    padding: 6px;
+    justify-content: center;
 }
 
-.search-container img {
-    width: 18px;
-    height: 18px;
-    order: 2;
-    margin-left: 10px;
-}
-
-/* ── Language select (cópia exata do client) ─────────── */
 .language-select {
-    padding: 10px 16px;
+    padding: 10px 38px 10px 16px;
     border-radius: var(--radius-sm);
     font-weight: 600;
     cursor: pointer;
@@ -132,7 +123,7 @@ nav img {
     color: var(--white);
     font-family: var(--quantico);
     appearance: none;
-    padding-right: 36px;
+    min-width: 136px;
 }
 .language-select:hover {
     background-color: var(--white);
@@ -149,8 +140,27 @@ nav img {
     padding: 8px;
 }
 
-/* ── Notification popup (cópia exata do client) ──────── */
-.notif-trigger { anchor-name: --notif-icon; }
+.notif-trigger {
+    anchor-name: --notif-icon;
+    position: relative;
+}
+
+.notif-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: var(--pink-highlight);
+    color: var(--black-bg);
+    font-family: var(--quantico);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 18px;
+    text-align: center;
+}
 
 .notif-box {
     z-index: 1001;
@@ -180,6 +190,7 @@ nav img {
 }
 
 .notif-header span {
+    font-family: var(--russo-one);
     font-size: 1.4rem;
     font-weight: 600;
     background: linear-gradient(90deg, #ffc0f0, #ffa2f9, #ffd6f8, #ffb3d9);
@@ -195,35 +206,88 @@ nav img {
     width: 1.6rem;
     cursor: pointer;
 }
-.notif-header button img { width: 100%; }
+.notif-header button img {
+    width: 100%;
+}
 
-.notif-list { overflow-y: auto; width: 100%; }
+.notif-list {
+    overflow-y: auto;
+    width: 100%;
+}
 
 .notif-item {
     padding: 12px;
     border-bottom: 1px solid #1e1e1e;
+    font-family: var(--quantico);
 }
-.notif-item:last-child { border-bottom: none; }
-.notif-title { font-size: 14px; color: var(--pink-highlight); }
-.notif-desc  { font-size: 12px; color: var(--gray-text); }
-.notif-time  { font-size: 11px; color: var(--ghost-white-80); margin-top: 4px; }
+.notif-item:last-child {
+    border-bottom: none;
+}
+.notif-title {
+    font-size: 0.95rem;
+    color: var(--pink-highlight);
+}
+.notif-desc {
+    font-size: 0.88rem;
+    color: var(--gray-text);
+}
+.notif-time {
+    font-size: 0.82rem;
+    color: var(--ghost-white-80);
+    margin-top: 4px;
+}
 
-.hidden { display: none; }
+.hidden {
+    display: none;
+}
 
-/* ── Push page content below fixed header ────────────── */
-body { padding-top: 72px; }
+body {
+    padding-top: 72px;
+}
 
-/* ── Responsive (cópia exata do client) ──────────────── */
 @media (max-width: 1320px) {
-    header .container { flex-wrap: wrap; }
-    .logo { width: 160px; }
-    .search-container { order: 3; max-width: none; }
-    nav { margin-left: auto; }
+    header .container {
+        flex-wrap: wrap;
+    }
+    .logo {
+        width: 160px;
+    }
+    nav {
+        gap: 14px;
+    }
+    nav ul:not(.icon-group) {
+        gap: 16px;
+    }
 }
 
-@media (max-width: 640px) {
-    header .container { justify-content: center; }
-    nav { width: 100%; margin-left: 0; }
-    nav ul:not(.icon-group) { justify-content: center; gap: 10px; }
-    .language-select { padding: 8px 28px 8px 10px; font-size: 0.85rem; }
+@media (max-width: 760px) {
+    header .container {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    nav {
+        width: 100%;
+        margin-left: 0;
+    }
+    nav,
+    nav ul:not(.icon-group) {
+        justify-content: center;
+    }
+    nav ul:not(.icon-group) {
+        gap: 12px;
+    }
+    .icon-group {
+        gap: 10px;
+    }
+    .language-select {
+        padding: 8px 32px 8px 12px;
+        font-size: 0.9rem;
+        min-width: 122px;
+    }
+    .admin-icon-link,
+    .notif-trigger {
+        width: 38px;
+        height: 38px;
+    }
 }
