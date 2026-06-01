@@ -87,11 +87,12 @@ class OrderController extends Controller
             return $order;
         });
 
-        if ($order->total <= 0) {
+        // Go complete the order without stripe integration if the total value is 0. 
+        /* if ($order->total <= 0) {
             $this->completeOrder($order);
 
             return redirect()->route('orders.success', $order);
-        }
+        } */
 
         if (! config('services.stripe.secret')) {
             return redirect()->route('orders.error', $order)
