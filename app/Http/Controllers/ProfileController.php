@@ -25,6 +25,13 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function adminEdit(Request $request): View
+    {
+        return view('backend.account.account', [
+            'user' => $request->user(),
+        ]);
+    }
+
     public function breezeEdit(Request $request): View
     {
         return view('profile.edit', [
@@ -56,7 +63,7 @@ class ProfileController extends Controller
 
         $user->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route($user->role === 'admin' ? 'admin.account' : 'profile.edit')->with('status', 'profile-updated');
     }
 
     /**
