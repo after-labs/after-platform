@@ -11,14 +11,14 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    /* ─────────────── FRONTEND ─────────────── */
+
     public function checkout()
     {
         $items = $this->cartItems();
 
         if ($items->isEmpty()) {
-            return redirect()
-                ->route('cart.index')
-                ->with('status', 'empty-cart');
+            return redirect()->route('cart.index')->with('status', 'empty-cart');
         }
 
         return view('frontend.orders.checkout', [
@@ -32,27 +32,23 @@ class OrderController extends Controller
         $items = $this->cartItems();
 
         if ($items->isEmpty()) {
-            return redirect()
-                ->route('cart.index')
-                ->with('status', 'empty-cart');
+            return redirect()->route('cart.index')->with('status', 'empty-cart');
         }
 
         $order = DB::transaction(function () use ($items) {
-
             $order = Order::create([
                 'user_id' => Auth::id(),
-                'total' => $this->cartTotal($items),
+                'total'   => $this->cartTotal($items),
+                'status'  => 'in_progress',
             ]);
 
             foreach ($items as $item) {
-
                 OrderItem::create([
                     'game_version_id' => $item->game_version_id,
-                    'units' => $item->units,
-                    'price' => $item->gameVersion->final_price,
-                    'order_id' => $order->id,
+                    'units'           => $item->units,
+                    'price'           => $item->gameVersion->final_price,
+                    'order_id'        => $order->id,
                 ]);
-
                 $item->delete();
             }
 
@@ -84,10 +80,10 @@ class OrderController extends Controller
             ->latest()
             ->get();
 
-        return view('frontend.orders.index', [
-            'orders' => $orders,
-        ]);
+        return view('frontend.orders.index', compact('orders'));
     }
+
+    /* ─────────────── ADMIN ─────────────── */
 
     public function adminIndex(Request $request)
     {
@@ -97,36 +93,48 @@ class OrderController extends Controller
             'items.gameVersion.platform',
         ]);
 
+        // Busca por ID, nome ou e-mail
         if ($request->filled('search')) {
-
             $s = $request->search;
-
             $query->where(function ($q) use ($s) {
-
                 $q->where('id', $s)
-
-                  ->orWhereHas('user', function ($u) use ($s) {
-
-                      $u->where('name', 'like', "%{$s}%")
-                        ->orWhere('email', 'like', "%{$s}%");
-
-                  });
+                  ->orWhereHas('user', fn($u) =>
+                      $u->where('name',  'like', "%{$s}%")
+                        ->orWhere('email', 'like', "%{$s}%")
+                  );
             });
         }
 
-        // TOTAL DE PEDIDOS
-        $totalOrders = $query->count();
+        // Filtros de status
+        match ($request->input('filter', 'all')) {
+            'in_progress' => $query->where('status', 'in_progress'),
+            'completed'   => $query->where('status', 'completed'),
+            'refused'     => $query->where('status', 'refused'),
+            'today'       => $query->whereDate('created_at', today()),
+            'week'        => $query->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()]),
+            'month'       => $query->whereYear('created_at', now()->year)->whereMonth('created_at', now()->month),
+            default       => null,
+        };
 
-        $orders = $query
-            ->latest()
-            ->paginate(10)
-            ->withQueryString();
+        $totalOrders = Order::count();
+        $orders      = $query->latest()->paginate(10)->withQueryString();
 
-        return view('backend.orders.index', compact(
-            'orders',
-            'totalOrders'
-        ));
+        return view('backend.orders.index', compact('orders', 'totalOrders'));
     }
+
+    // Atualiza status de um pedido via AJAX (inline)
+    public function updateStatus(Request $request, Order $order)
+    {
+        $request->validate([
+            'status' => ['required', 'in:in_progress,completed,refused'],
+        ]);
+
+        $order->update(['status' => $request->status]);
+
+        return response()->json(['ok' => true, 'status' => $order->status]);
+    }
+
+    /* ─────────────── HELPERS ─────────────── */
 
     private function cartItems()
     {
@@ -141,11 +149,6 @@ class OrderController extends Controller
 
     private function cartTotal($items): float
     {
-        return $items->sum(function ($item) {
-
-            return $item->units
-                * $item->gameVersion->final_price;
-
-        });
+        return $items->sum(fn($item) => $item->units * $item->gameVersion->final_price);
     }
 }
