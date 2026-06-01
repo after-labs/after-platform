@@ -22,7 +22,7 @@
                     <div>
                         <span class="order-id">#{{ str_pad($order->id, 6, '0', STR_PAD_LEFT) }}</span>
                         <h2>{{ __('Order from') }} {{ $order->created_at->format('M d, Y') }}</h2>
-                        <p>{{ $order->items->sum('units') }} {{ __('game units') }}</p>
+                        <p>{{ $order->items->sum('units') }} {{ __('game units') }} · {{ __($order->status) }}</p>
                     </div>
 
                     <div class="order-card-meta">
