@@ -96,8 +96,9 @@ nav img:hover {
     border: var(--border-ghost-purple);
     border-radius: var(--radius-md);
     padding: 5px 15px;
+    margin-left: 20px;
     width: 100%;
-    max-width: 480px;
+    max-width: 380px;
     background-color: var(--dark-purple-bg);
 }
 
@@ -108,6 +109,11 @@ nav img:hover {
     padding: 5px;
     color: var(--white);
     background-color: transparent;
+}
+
+.search-container input:focus {
+    outline: none;
+    border: none;
 }
 
 .search-container img {
@@ -465,17 +471,23 @@ header .btn-outline:hover {
         width: 160px;
     }
 
-    .search-container {
-        order: 3;
-        max-width: none;
-    }
-
     nav {
         margin-left: auto;
     }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 1180px) {
+    .search-container {
+        max-width: 100%;
+        order: 3;
+    }
+
+    nav ul:not(.icon-group) {
+        gap: 15px;
+    }
+}
+
+@media (max-width: 750px) {
     header .container {
         justify-content: center;
     }
