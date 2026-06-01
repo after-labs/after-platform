@@ -10,16 +10,7 @@
             </a>
         </div>
 
-        {{-- Search (pesquisa de jogos, igual ao client) --}}
-        <form action="{{ route('admin.games.index') }}" method="GET" class="search-container">
-            <img src="{{ asset('icons/search-icon.svg') }}" alt="" class="search-icon">
-            <input
-                type="text"
-                name="search"
-                value="{{ request('search') }}"
-                placeholder="{{ __('Search games…') }}"
-            >
-        </form>
+        
 
         {{-- Nav central --}}
         <nav>
@@ -43,7 +34,6 @@
                     </a>
                 </li>
 
-                {{-- Language switcher (igual ao client) --}}
                 <li>
                     <form method="GET" action="">
                         <select onchange="window.location.href=this.value" class="language-select">
@@ -54,7 +44,6 @@
                 </li>
             </ul>
 
-            {{-- Right icons (igual ao client) --}}
             <ul class="icon-group">
                 <li>
                     <button type="button" class="notif-trigger nav-action-button" onclick="toggleNotif()">

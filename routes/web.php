@@ -145,6 +145,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     Route::redirect('/', '/admin/games')->name('dashboard');
 
+    Route::patch('/orders/{order}/status', [
+    OrderController::class,
+    'updateStatus'
+])->name('orders.status');
+
     // Users
 
     Route::get('/users', [
@@ -229,6 +234,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         OrderController::class,
         'adminIndex'
     ])->name('orders.index');
+
+    Route::patch('/orders/{order}/status', [
+        OrderController::class,
+        'updateStatus'
+    ])->name('orders.status');
 
 });
 
