@@ -8,6 +8,16 @@ class Order extends Model {
     
     protected $fillable = [
     'user_id',
+    'status',
+    'subtotal',
+    'coupon_code',
+    'coupon_discount',
+    'coins_used',
+    'coin_discount',
+    'stripe_checkout_session_id',
+    'stripe_payment_intent_id',
+    'paid_at',
+    'fulfilled_at',
     'total'
     ];
 
@@ -18,8 +28,8 @@ class Order extends Model {
     public function items(){
         return $this->hasMany(OrderItem::class);
     }
-    /* soon: payment logic with dedicated model
-    public function paymentTransactions(){
-        return $this->hasMany(PaymentTransaction::class);
-    } */
+
+    public function accessKeys(){
+        return $this->hasMany(AccessKey::class);
+    }
 }
