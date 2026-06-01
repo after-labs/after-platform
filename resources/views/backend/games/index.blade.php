@@ -53,17 +53,6 @@
                 @endphp
 
                 <div class="game-card">
-
-                    {{-- Edit --}}
-                    <a href="{{ route('admin.games.edit', $game) }}" class="edit-btn">{{ __('Edit') }}</a>
-
-                    {{-- Delete: abre modal de confirmação --}}
-                    <button type="button"
-                            class="delete-btn"
-                            data-game-name="{{ $game->name }}"
-                            data-delete-url="{{ route('admin.games.delete', $game) }}">{{ __('Delete') }}</button>
-
-                    {{-- Image --}}
                     <div class="game-card-image-wrapper">
                         @if($discount > 0)
                             <div class="discount-badge">-{{ $discount }}%</div>
@@ -103,6 +92,14 @@
                             <span class="game-card-category">
                                 {{ $game->category?->name ?? __('Indie') }}
                             </span>
+                        </div>
+
+                        <div class="game-card-actions">
+                            <a href="{{ route('admin.games.edit', $game) }}" class="edit-btn">{{ __('Edit') }}</a>
+                            <button type="button"
+                                    class="delete-btn"
+                                    data-game-name="{{ $game->name }}"
+                                    data-delete-url="{{ route('admin.games.delete', $game) }}">{{ __('Delete') }}</button>
                         </div>
                     </div>
 

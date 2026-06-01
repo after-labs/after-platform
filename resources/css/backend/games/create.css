@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--quantico);
 }
 
 body { background: #02000a; color: #fff; }
@@ -58,7 +58,7 @@ h2 span { color: #b88cff; }
   border-radius: 8px;
   padding: 12px 16px;
   margin-bottom: 20px;
-  font-size: 13px;
+  font-size: 14px;
 }
 .alert-error ul { margin: 8px 0 0 16px; }
 
@@ -68,7 +68,7 @@ h2 span { color: #b88cff; }
   border-radius: 8px;
   padding: 10px 16px;
   margin-bottom: 20px;
-  font-size: 13px;
+  font-size: 14px;
   color: #3cff78;
 }
 
@@ -89,7 +89,7 @@ h2 span { color: #b88cff; }
 .field-group.span-3 { grid-column: 1 / -1; }
 
 label {
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 600;
   color: #b88cff;
   text-transform: uppercase;
@@ -105,7 +105,7 @@ input, select, textarea {
   border: 1px solid #7a3cff;
   background: #0d001f;
   color: #fff;
-  font-size: 13px;
+  font-size: 14px;
   margin-top: 4px;
   transition: border-color .2s, box-shadow .2s;
 }
@@ -121,7 +121,7 @@ input.is-invalid, select.is-invalid, textarea.is-invalid {
 }
 
 .field-error {
-  font-size: 11px;
+  font-size: 14px;
   color: #ff6b6b;
   margin-top: 2px;
 }
@@ -143,7 +143,7 @@ input[disabled] {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px;
+  font-size: 14px;
   color: #ccc;
   cursor: pointer;
   text-transform: none;
@@ -173,7 +173,7 @@ textarea {
 .section-title {
   margin-top: 28px;
   margin-bottom: 14px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: #b88cff;
   text-transform: uppercase;
@@ -216,7 +216,7 @@ textarea {
   color: #fff;
   border-radius: 50%;
   width: 22px; height: 22px;
-  font-size: 11px;
+  font-size: 14px;
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
 }
@@ -241,7 +241,7 @@ textarea {
 }
 
 .video-link {
-  font-size: 11px;
+  font-size: 14px;
   color: #b88cff;
   text-decoration: none;
   flex: 1;
@@ -258,7 +258,7 @@ textarea {
   align-items: center;
   margin-top: 20px;
   margin-bottom: 10px;
-  font-size: 13px;
+  font-size: 14px;
   color: #b88cff;
   font-weight: 600;
 }
@@ -294,7 +294,7 @@ textarea {
   color: #fff;
   border-radius: 50%;
   width: 18px; height: 18px;
-  font-size: 10px;
+  font-size: 14px;
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
 }
@@ -322,7 +322,7 @@ textarea {
   border-radius: 6px;
   padding: 8px 10px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 14px;
   transition: background .2s;
 }
 .remove-gameplay:hover { background: rgba(255,68,68,.15); }
@@ -350,7 +350,7 @@ textarea {
   border-radius: 6px;
   padding: 5px 12px;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 14px;
   transition: background .2s;
 }
 .remove-version:hover { background: rgba(255,68,68,.15); }
@@ -363,7 +363,7 @@ textarea {
   background: transparent;
   color: #b88cff;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 14px;
   transition: background .2s;
   margin-top: 4px;
 }
@@ -384,7 +384,7 @@ textarea {
   padding: 10px 22px;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 14px;
   text-decoration: none;
   transition: background .2s;
 }
