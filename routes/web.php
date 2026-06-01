@@ -13,7 +13,15 @@ use App\Http\Controllers\WishlistItemController;
 
 // Public/guest Routes
 
-Route::get('/', [GameController::class, 'home'])->name('home');
+Route::get('/', function () {
+    if (auth()->check() && auth()->user()->role === 'admin') {
+        return redirect()->route('admin.games.index');
+    }
+
+    return app(GameController::class)->home();
+})->name('home');
+
+Route::get('/home', [GameController::class, 'home'])->name('home.guest');
 
 Route::redirect('/dashboard', '/')
     ->middleware(['auth'])
@@ -144,6 +152,16 @@ Route::middleware(['auth', 'client'])->group(function(){
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function(){
 
     Route::redirect('/', '/admin/games')->name('dashboard');
+
+    Route::get('/account', [
+        ProfileController::class,
+        'adminEdit'
+    ])->name('account');
+
+    Route::patch('/profile', [
+        ProfileController::class,
+        'update'
+    ])->name('profile.update');
 
     Route::patch('/orders/{order}/status', [
     OrderController::class,
