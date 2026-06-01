@@ -1,5 +1,11 @@
     @auth
       @php
+        $gamification = auth()->user()->gamification;
+        $level = $gamification?->level ?? 1;
+        $points = $gamification?->points ?? 0;
+        $coins = $gamification?->coins ?? 0;
+        $pointsToNextLevel = $level * 100;
+        $levelProgress = $pointsToNextLevel > 0 ? min(100, round(($points / $pointsToNextLevel) * 100)) : 0;
         $notifications = auth()->user()->notifications()->latest()->limit(6)->get();
         $unreadNotifications = auth()->user()->notifications()->whereNull('read_at')->count();
       @endphp
@@ -31,7 +37,7 @@
               <li><a href="{{ route('orders.index') }}">{{ __('My Orders') }}</a></li>
               <li>
                 <button type="button" class="points-trigger nav-action-button" onclick="togglePoints()">
-                  {{ auth()->user()->gamification?->coins ?? 0 }}
+                  {{ $coins }}
                   <img src="{{ asset('icons/coin-icon.svg') }}" alt="" />
                 </button>
               </li>
@@ -89,24 +95,24 @@
         <div class="level-row">
           <div class="level-unit">
             <span>{{ __('Your Level') }}</span>
-            <span>{{ __('Level') }} {{ auth()->user()->gamification?->level ?? 1 }}</span>
+            <span>{{ __('Level') }} {{ $level }}</span>
           </div>
           <div class="level-unit">
             <span>{{ __('Next Level') }}</span>
-            <span>{{ __('Level') }} {{ (auth()->user()->gamification?->level ?? 1) + 1 }}</span>
+            <span>{{ __('Level') }} {{ $level + 1 }}</span>
           </div>
         </div>
         <div class="points-progress">
           <div class="progress-labels">
             <span>{{ __('Level Progress') }}</span>
-            <span><strong>{{ auth()->user()->gamification?->points ?? 0 }}</strong> {{ __('Points') }}</span>
+            <span><strong>{{ $points }}</strong> / {{ $pointsToNextLevel }} {{ __('Points') }}</span>
           </div>
           <div class="progress-container">
-            <div class="progress-fill" style="width: 70%">70%</div>
+            <div class="progress-fill" style="width: {{ $levelProgress }}%">{{ $levelProgress }}%</div>
           </div>
            <div class="progress-labels">
             <span>{{ __('Your Total Points') }}</span>
-            <span><strong>{{ auth()->user()->gamification?->points ?? 0 }}</strong> {{ __('Points') }}</span>
+            <span><strong>{{ $points }}</strong> {{ __('Points') }}</span>
           </div>
         </div>
         <div class="reward-unit">
