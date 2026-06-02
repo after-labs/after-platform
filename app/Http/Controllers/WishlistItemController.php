@@ -29,6 +29,11 @@ class WishlistItemController extends Controller
             'game_id' => $game->id,
         ]);
 
+        Auth::user()->notifications()->create([
+            'title' => 'Jogo salvo na wishlist',
+            'description' => $game->name.' foi salvo na sua wishlist.',
+        ]);
+
         return redirect()->route('wishlist.index');
     }
 

@@ -3,94 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User record</title>
-    <link rel="stylesheet" href="/css/global.css">
-    <link rel="stylesheet" href="/css/user_record_adm.css">
+    <title>{{ $user->name }} — {{ __('Edit User') }}</title>
+    @vite(['resources/css/app.css', 'resources/css/backend/users/edit.css'])
 </head>
 <body>
+@include('components/header_adm')
 
-     <iframe src="header_adm.html" style="border:none; width:100%; height:100px;"></iframe>
+<div class="wrapper">
+<div class="user-card">
 
-    <div class="wrapper">
-
-  <div class="user-card">
-
-    <button class="close-btn">✕</button>
-
-   <div class="avatar">
-        <img src="/icons/user2.svg" alt="">
+    <div class="avatar">
+        <img src="{{ asset('icons/user-icon.svg') }}" alt="User">
     </div>
 
-    <h2>Quintou_th10: <span>{{ __('Details') }}</span></h2>
+    <h2>{{ $user->name }}: <span>{{ __('Details') }}</span></h2>
 
-    <form class="form-grid">
-
-      <div>
-        <label>{{ __('First Name') }}</label>
-        <input type="text" value="Thyago">
-      </div>
-
-      <div>
-        <label>{{ __('Last Name') }}</label>
-        <input type="text" value="Quintas">
-      </div>
-
-      <div>
-        <label>{{ __('Username') }}</label>
-        <input type="text" value="quintou_th10">
-      </div>
-
-      <div>
-        <label>{{ __('Email') }}</label>
-        <input type="email" value="thyago.quintas@email.com">
-      </div>
-
-      <div class="phone-group">
-        <label>{{ __('Phone Number') }}</label>
-        <div class="phone-input">
-          <input class="code" type="text" value="+55">
-          <input type="text" value="(11) 90000-0000">
+    @if($errors->any())
+        <div class="alert-error">
+            <strong>{{ __('Please fix the errors below:') }}</strong>
+            <ul>@foreach($errors->all() as $e)<li>{{ $e }}</li>@endforeach</ul>
         </div>
-      </div>
+    @endif
 
-      <div>
-        <label>{{ __('Country') }}</label>
-        <select>
-      <option>{{ __('Brazil') }}</option>
-        </select>
-      </div>
+    @if(session('success'))
+        <div class="alert-success">{{ session('success') }}</div>
+    @endif
 
-      <div>
-        <label>{{ __('User Type') }}</label>
-        <select>
-      <option>{{ __('Client') }}</option>
-        </select>
-      </div>
+    <form class="form-grid" action="{{ route('admin.users.update', $user) }}" method="POST" id="edit-form">
+    @csrf
 
-      <div>
-        <label>{{ __('Active Status') }}</label>
-        <select>
-      <option>{{ __('Active') }}</option>
-        </select>
-      </div>
+        {{-- Name --}}
+        <div class="field-group">
+            <label for="name">{{ __('Name') }} <span class="req">*</span></label>
+            <input id="name" name="name" type="text"
+                value="{{ old('name', $user->name) }}"
+                class="{{ $errors->has('name') ? 'is-invalid' : '' }}">
+            @error('name')<span class="field-error">{{ $message }}</span>@enderror
+        </div>
 
-      <div class="full">
-        <label>{{ __('User ID') }}</label>
-        <input type="text" value="U-0001-0001">
-      </div>
+        {{-- Email --}}
+        <div class="field-group">
+            <label for="email">{{ __('Email') }} <span class="req">*</span></label>
+            <input id="email" name="email" type="email"
+                value="{{ old('email', $user->email) }}"
+                class="{{ $errors->has('email') ? 'is-invalid' : '' }}">
+            @error('email')<span class="field-error">{{ $message }}</span>@enderror
+        </div>
+
+        {{-- New password (optional) --}}
+        <div class="field-group">
+            <label for="password">
+                {{ __('New Password') }}
+                <span class="field-hint">{{ __('leave blank to keep current') }}</span>
+            </label>
+            <input id="password" name="password" type="password"
+                placeholder="{{ __('Min. 8 characters') }}"
+                class="{{ $errors->has('password') ? 'is-invalid' : '' }}">
+            @error('password')<span class="field-error">{{ $message }}</span>@enderror
+        </div>
+
+        {{-- Confirm new password --}}
+        <div class="field-group">
+            <label for="password_confirmation">{{ __('Confirm New Password') }}</label>
+            <input id="password_confirmation" name="password_confirmation" type="password"
+                placeholder="{{ __('Repeat new password') }}">
+        </div>
+
+        {{-- Phone --}}
+        <div class="field-group">
+            <label for="phone">{{ __('Phone Number') }}</label>
+            <input id="phone" name="phone" type="text"
+                value="{{ old('phone', $user->phone) }}"
+                placeholder="+55 (11) 90000-0000">
+        </div>
+
+        {{-- Country --}}
+        <div class="field-group">
+            <label for="country">{{ __('Country') }}</label>
+            <select id="country" name="country">
+                <option value="">{{ __('Select country') }}</option>
+                @foreach([
+                    'BR' => 'Brazil', 'US' => 'United States', 'PT' => 'Portugal',
+                    'AR' => 'Argentina', 'MX' => 'Mexico', 'CO' => 'Colombia',
+                    'GB' => 'United Kingdom', 'DE' => 'Germany', 'FR' => 'France',
+                    'JP' => 'Japan', 'CA' => 'Canada', 'AU' => 'Australia',
+                ] as $code => $name)
+                    <option value="{{ $code }}"
+                        {{ old('country', $user->country) === $code ? 'selected' : '' }}>
+                        {{ $name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        {{-- User type --}}
+        <div class="field-group">
+            <label for="role">{{ __('User Type') }} <span class="req">*</span></label>
+            <select id="role" name="role"
+                class="{{ $errors->has('role') ? 'is-invalid' : '' }}">
+                <option value="client" {{ old('role', $user->role) === 'client' ? 'selected' : '' }}>{{ __('Client') }}</option>
+                <option value="admin"  {{ old('role', $user->role) === 'admin'  ? 'selected' : '' }}>{{ __('Admin') }}</option>
+            </select>
+            @error('role')<span class="field-error">{{ $message }}</span>@enderror
+        </div>
+
+        {{-- Status --}}
+        <div class="field-group">
+            <label for="status">{{ __('Active Status') }} <span class="req">*</span></label>
+            <select id="status" name="status"
+                class="{{ $errors->has('status') ? 'is-invalid' : '' }}">
+                <option value="active"   {{ old('status', $user->status) === 'active'   ? 'selected' : '' }}>{{ __('Active') }}</option>
+                <option value="inactive" {{ old('status', $user->status) === 'inactive' ? 'selected' : '' }}>{{ __('Inactive') }}</option>
+            </select>
+            @error('status')<span class="field-error">{{ $message }}</span>@enderror
+        </div>
+
+        {{-- User ID (read-only) --}}
+        <div class="field-group full">
+            <label>{{ __('User ID') }}</label>
+            <input type="text" value="{{ $user->id }}" readonly class="readonly">
+        </div>
+
+        {{-- Member since (read-only) --}}
+        <div class="field-group full">
+            <label>{{ __('Member Since') }}</label>
+            <input type="text" value="{{ $user->created_at->format('d/m/Y H:i') }}" readonly class="readonly">
+        </div>
+
     </form>
 
     <div class="actions">
-      <button class="delete">{{ __('Delete User') }}</button>
-      <button class="save">{{ __('Save changes') }}</button>
+        <a class="delete"
+           href="{{ route('admin.users.delete', $user) }}"
+           onclick="return confirm('{{ __('Delete this user? This cannot be undone.') }}')">
+            {{ __('Delete User') }}
+        </a>
+        <button class="save" type="submit" form="edit-form">
+            {{ __('Save Changes') }}
+        </button>
     </div>
 
-
-  </div>
-   
 </div>
-
 </div>
-
 </body>
 </html>

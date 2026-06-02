@@ -13,7 +13,15 @@ use App\Http\Controllers\WishlistItemController;
 
 // Public/guest Routes
 
-Route::get('/', [GameController::class, 'home'])->name('home');
+Route::get('/', function () {
+    if (auth()->check() && auth()->user()->role === 'admin') {
+        return redirect()->route('admin.games.index');
+    }
+
+    return app(GameController::class)->home();
+})->name('home');
+
+Route::get('/home', [GameController::class, 'home'])->name('home.guest');
 
 Route::redirect('/dashboard', '/')
     ->middleware(['auth'])
@@ -47,7 +55,7 @@ Route::get('lang/{locale}', function ($locale) {
 
 // Client
 
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth', 'client'])->group(function(){
 
     Route::get('/account', [
         ProfileController::class,
@@ -145,6 +153,21 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     Route::redirect('/', '/admin/games')->name('dashboard');
 
+    Route::get('/account', [
+        ProfileController::class,
+        'adminEdit'
+    ])->name('account');
+
+    Route::patch('/profile', [
+        ProfileController::class,
+        'update'
+    ])->name('profile.update');
+
+    Route::patch('/orders/{order}/status', [
+    OrderController::class,
+    'updateStatus'
+])->name('orders.status');
+
     // Users
 
     Route::get('/users', [
@@ -177,6 +200,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         'delete'
     ])->name('users.delete');
 
+    Route::patch('/users/{user}/field', [
+        UserController::class,
+        'updateField'
+    ])->name('users.field');
+
     // Games
 
     Route::get('/games', [
@@ -208,6 +236,27 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         GameController::class,
         'delete'
     ])->name('games.delete');
+
+    Route::get('/games/{game}/version/destroy/{version}', [
+        GameController::class,
+        'destroyVersion'
+    ])->name('games.version.destroy');
+
+    Route::delete('/games/{game}/media/{media}', [
+        GameController::class,
+        'deleteMedia'
+    ])->name('games.media.destroy');
+
+    // Orders
+    Route::get('/orders', [
+        OrderController::class,
+        'adminIndex'
+    ])->name('orders.index');
+
+    Route::patch('/orders/{order}/status', [
+        OrderController::class,
+        'updateStatus'
+    ])->name('orders.status');
 
 });
 

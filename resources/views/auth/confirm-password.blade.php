@@ -9,15 +9,17 @@
 </head>
 <body class="auth-bg">
     <div class="container">
-        <p>This is a secure area of the application. Please confirm your password before continuing.</p>
+        <p>{{ __('This is a secure area of the application. Please confirm your password before continuing.') }}</p>
+
 
         <form method="POST" action="{{ route('password.confirm') }}">
             @csrf
 
-            <h1>Confirm Password</h1>
+            <h1>{{ __('Confirm Password') }}</h1>
+
 
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">{{ __('Password') }}</label>
                 <input id="password" type="password" name="password" required autocomplete="current-password">
                 @error('password')
                     <div class="error">{{ $message }}</div>
@@ -25,7 +27,7 @@
             </div>
 
             <div class="footer-actions">
-                <button type="submit">Confirm</button>
+                 <button type="submit">{{ __('Confirm') }}</button>
             </div>
         </form>
     </div>

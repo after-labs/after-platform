@@ -1,3 +1,10 @@
+    @auth
+      @php
+        $notifications = auth()->user()->notifications()->latest()->limit(6)->get();
+        $unreadNotifications = auth()->user()->notifications()->whereNull('read_at')->count();
+      @endphp
+    @endauth
+
     <header>
       @vite(['resources/css/components/header.css'])
       <div class="container">
@@ -51,6 +58,9 @@
                 <li>
                   <button type="button" class="notif-trigger nav-action-button" onclick="toggleNotif()">
                     <img src="{{ asset('icons/bell-icon.svg') }}" alt="{{ __('Notifications') }}" />
+                    @if($unreadNotifications > 0)
+                      <span class="notif-count">{{ $unreadNotifications }}</span>
+                    @endif
                   </button>
                 </li>
                 <li>
@@ -67,8 +77,6 @@
     </header>
 
     @auth
-    <!-- POINTS POPUP -->
-
     <div class="points-container hidden">
       <button onclick="togglePoints()" class="btn-close-points">
         <img src="{{ asset('icons/close-icon.svg') }}" alt="close-button" />
@@ -108,8 +116,6 @@
       </div>
     </div>
 
-    <!-- NOTIFICATION POPUP -->
-
     <div id="notif-box" class="notif-box hidden">
       <div class="notif-header">
         <span>{{ __('Notifications') }}</span>
@@ -117,58 +123,31 @@
           <img src="{{ asset('icons/close-icon.svg') }}" alt="close-button" />
         </button>
       </div>
-      <div id="notif-list" class="notif-list"></div>
+      <div id="notif-list" class="notif-list">
+        @forelse($notifications as $notification)
+          <div class="notif-item">
+            <div class="notif-title">{{ __($notification->title) }}</div>
+            <div class="notif-desc">{{ __($notification->description) }}</div>
+            <div class="notif-time">{{ $notification->created_at->diffForHumans() }}</div>
+          </div>
+        @empty
+          <div class="notif-item">
+            <div class="notif-title">{{ __('No notifications yet') }}</div>
+            <div class="notif-desc">{{ __('Your updates will appear here.') }}</div>
+          </div>
+        @endforelse
+      </div>
     </div>
 
     <script>
-      // POINTS POPUP Logic
-
       function togglePoints() {
         const box = document.querySelector('.points-container')
         box.classList.toggle('hidden')
-      }
-
-      // NOTIFICATION POPUP Logic
-      const notifications = [
-        {
-          title: '{{ __('New Game Released') }}',
-          desc: '{{ __('A new indie game just dropped') }}',
-          time: 'now'
-        },
-        {
-          title: '{{ __('Sale Live') }}',
-          desc: '{{ __('Up to 50% discount available') }}',
-          time: '2m ago'
-        },
-        {
-          title: '{{ __('Update') }}',
-          desc: '{{ __('System performance improved') }}',
-          time: '10m ago'
-        },
-        { title: '{{ __('Patch Notes') }}', desc: '{{ __('Bug fixes deployed') }}', time: '1h ago' },
-        { title: '{{ __('Reminder') }}', desc: '{{ __('Wishlist items on sale') }}', time: '3h ago' },
-        { title: '{{ __('Event') }}', desc: '{{ __('Indie showcase starting soon') }}', time: '1d ago' }
-      ]
-
-      function renderNotifications() {
-        const list = document.getElementById('notif-list')
-        list.innerHTML = ''
-        notifications.slice(0, 6).forEach((n) => {
-          list.innerHTML += `
-        <div class="notif-item">
-          <div class="notif-title">${n.title}</div>
-          <div class="notif-desc">${n.desc}</div>
-          <div class="notif-time">${n.time}</div>
-        </div>
-      `
-        })
       }
 
       function toggleNotif() {
         const box = document.getElementById('notif-box')
         box.classList.toggle('hidden')
       }
-
-      renderNotifications()
     </script>
     @endauth
