@@ -106,6 +106,16 @@ Route::middleware(['auth', 'client'])->group(function(){
         'store'
     ])->name('orders.store');
 
+    Route::get('/orders/success/{order}', [
+        OrderController::class,
+        'success'
+    ])->name('orders.success');
+
+    Route::get('/orders/error/{order}', [
+        OrderController::class,
+        'error'
+    ])->name('orders.error');
+
     Route::get('/orders/completed/{order}', [
         OrderController::class,
         'completed'
@@ -146,6 +156,11 @@ Route::middleware(['auth', 'client'])->group(function(){
     ])->name('profile.destroy');
 
 });
+
+Route::post('/stripe/webhook', [
+    OrderController::class,
+    'webhook'
+])->name('stripe.webhook');
 
 // Admin
 

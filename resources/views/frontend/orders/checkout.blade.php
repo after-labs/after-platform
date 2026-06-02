@@ -13,7 +13,7 @@
         <section class="orders-hero">
             <span>{{ __('Checkout') }}</span>
             <h1>{{ __('Confirm your order') }}</h1>
-            <p>{{ __('Select your payment method and review your order.') }}</p>
+            <p>{{ __('Review your order, apply discounts and continue to payment.') }}</p>
         </section>
 
         <div class="checkout-layout">
@@ -49,14 +49,27 @@
                 </div>
 
                 <div class="summary-row total">
-                    <span>{{ __('Total') }}</span>
-                    <strong>${{ number_format($total, 2) }}</strong>
+                    <span>{{ __('Subtotal') }}</span>
+                    <strong>${{ number_format($subtotal, 2) }}</strong>
                 </div>
 
                 <form action="{{ route('orders.store') }}" method="POST">
                     @csrf
+                    <label class="checkout-field">
+                        <span>{{ __('Coupon') }}</span>
+                        <input type="text" name="coupon_code" value="{{ old('coupon_code') }}" placeholder="{{ __('Enter coupon code') }}">
+                        <x-input-error :messages="$errors->get('coupon_code')" />
+                    </label>
+
+                    <label class="checkout-field">
+                        <span>{{ __('Use coins') }}</span>
+                        <input type="number" name="coins_used" value="{{ old('coins_used', 0) }}" min="0" max="{{ $availableCoins }}">
+                        <small>{{ __('Available coins:') }} {{ $availableCoins }} · {{ __('100 coins = $1') }}</small>
+                        <x-input-error :messages="$errors->get('coins_used')" />
+                    </label>
+
                     <button type="submit" class="place-order-button">
-                        {{ __('Place Order') }}
+                        {{ __('Pay with Stripe') }}
                     </button>
                 </form>
             </aside>

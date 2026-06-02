@@ -159,3 +159,58 @@ ul {
     scrollbar-color: var(--ghost-purple) var(--black-bg);
     overscroll-behavior-y: none;
 }
+
+/* Tailwind styles changed */
+input:focus,
+textarea:focus,
+select:focus,
+button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: inherit !important;
+
+    --tw-ring-offset-width: 0px !important;
+    --tw-ring-width: 0px !important;
+    --tw-ring-offset-shadow: 0 0 #0000 !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+button:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 1px var(--primary-color) !important;
+}
+
+input,
+textarea,
+select {
+    --tw-ring-offset-width: 0px;
+    --tw-ring-width: 0px;
+}
+
+@media (max-width: 1180px) {
+    body {
+        margin-top: 60px;
+    }
+}
+
+@media (max-width: 750px) {
+    body {
+        margin-top: 100px;
+    }
+}
+
+@media (max-width: 540px) {
+    body {
+        margin-top: 130px;
+    }
+}

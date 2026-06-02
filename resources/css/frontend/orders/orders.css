@@ -102,6 +102,39 @@
     font-size: 1.25rem;
 }
 
+.checkout-field {
+    display: grid;
+    gap: 0.45rem;
+    margin-top: 1rem;
+}
+
+.checkout-field input {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius-xs);
+    padding: 0.75rem;
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.checkout-field small {
+    color: var(--ghost-white-80);
+}
+
+.summary-box,
+.access-keys-box {
+    margin-top: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.035);
+}
+
+.access-keys-box p {
+    color: var(--ghost-white-80);
+    overflow-wrap: anywhere;
+}
+
 .place-order-button,
 .order-card-meta a,
 .completed-actions a,

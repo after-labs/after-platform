@@ -9,6 +9,7 @@ class AccessKey extends Model {
     protected $fillable = [
     'game_id',
     'game_version_id',
+    'order_id',
     'key',
     'status',
     'sold_at',
@@ -21,5 +22,9 @@ class AccessKey extends Model {
 
     public function gameVersion(){
         return $this->belongsTo(GameVersion::class);
+    }
+
+    public function order(){
+        return $this->belongsTo(Order::class);
     }
 }

@@ -42,6 +42,12 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        $user->gamification()->create([
+            'level' => 1,
+            'points' => 0,
+            'coins' => 0,
+        ]);
+
         event(new Registered($user));
 
         Auth::login($user);
