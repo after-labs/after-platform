@@ -314,17 +314,22 @@ section > h2 + p {
         min-width: 0;
     }
 
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background:
-        radial-gradient(
-            circle at 20% 20%,
-            var(--ghost-pink-60),
-            transparent 40%
-        ),
-        radial-gradient(circle at 80% 60%, var(--ghost-purple), transparent 50%);
-    opacity: 0.2;
-    z-index: -1;
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+            radial-gradient(
+                circle at 20% 20%,
+                var(--ghost-pink-60),
+                transparent 40%
+            ),
+            radial-gradient(
+                circle at 80% 60%,
+                var(--ghost-purple),
+                transparent 50%
+            );
+        opacity: 0.2;
+        z-index: -1;
+    }
 }
