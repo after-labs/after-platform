@@ -13,6 +13,8 @@ WORKDIR /app
 # Copy entire Laravel project (excluding .dockerignore files)
 COPY . .
 
+RUN mkdir -p database && touch database/database.sqlite
+
 # Install PHP deps (vendor will be created inside container)
 RUN composer install --no-dev --optimize-autoloader
 
