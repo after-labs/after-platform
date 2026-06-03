@@ -2,8 +2,8 @@
       @php
         $gamification = auth()->user()->gamification;
         $level = $gamification?->level ?? 1;
-        $points = $gamification?->points ?? 0;
-        $coins = $gamification?->coins ?? 0;
+        $points = (int) ($gamification?->points ?? 0);
+        $coins = (int) ($gamification?->coins ?? 0);
         $pointsToNextLevel = $level * 100;
         $levelProgress = $pointsToNextLevel > 0 ? min(100, round(($points / $pointsToNextLevel) * 100)) : 0;
         $notifications = auth()->user()->notifications()->latest()->limit(6)->get();
@@ -117,7 +117,7 @@
         </div>
         <div class="reward-unit">
           <span>{{ __('Next Level Reward') }}</span>
-          <span>250<img src="{{ asset('icons/coin-icon.svg') }}" alt="" /></span>
+          <span>100<img src="{{ asset('icons/coin-icon.svg') }}" alt="" /></span>
         </div>
       </div>
     </div>
