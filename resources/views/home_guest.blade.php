@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <title>{{ __('Home') }}</title>
     @vite(['resources/css/app.css', 'resources/css/frontend/home.css'])
   </head>
   <body>
@@ -15,7 +15,7 @@
       <div class="highlights">
         <div class="highlights-main">
           <div class="highlights-main-content">
-            <h2>REPLACED 60% OFF</h2>
+            <h2>{{ __('REPLACED 60% OFF') }}</h2>
             <p>{{ __('Enjoy it until april 19') }}</p>
             <p>
               {{ __('Enjoy this 2.5D cinematic action platformer adventure set in an alternate 1980s America, Now Available with 60% OFF') }}
@@ -23,7 +23,7 @@
             <div class="highlights-main-buttons">
               <a class="highlight-buy-button" href="{{ route('games.index') }}">{{ __('Buy Now') }}</a>
               <a class="highlight-wishlist-link" href="{{ route('login') }}" aria-label="{{ __('Login to save to wishlist') }}">
-                <img src="{{ asset('icons/bookmark-icon.svg') }}" alt="bookmark-icon" />
+                <img src="{{ asset('icons/bookmark-icon.svg') }}" alt="{{ __('Bookmark') }}" />
               </a>
             </div>
           </div>
@@ -54,10 +54,10 @@
         <h2>{{ __('Popular') }}</h2>
         <div class="section-arrows">
           <button class="arrow-btn">
-            <img src="{{ asset('icons/arrow-left.svg') }}" alt="arrow-left-icon" />
+            <img src="{{ asset('icons/arrow-left.svg') }}" alt="{{ __('Previous') }}" />
           </button>
           <button class="arrow-btn">
-            <img src="{{ asset('icons/arrow-right.svg') }}" alt="arrow-right-icon" />
+            <img src="{{ asset('icons/arrow-right.svg') }}" alt="{{ __('Next') }}" />
           </button>
         </div>
       </div>
@@ -109,10 +109,10 @@
         <h2>{{ __('Free Demos') }}</h2>
         <div class="section-arrows">
           <button class="arrow-btn">
-            <img src="{{ asset('icons/arrow-left.svg') }}" alt="arrow-left-icon" />
+            <img src="{{ asset('icons/arrow-left.svg') }}" alt="{{ __('Previous') }}" />
           </button>
           <button class="arrow-btn">
-            <img src="{{ asset('icons/arrow-right.svg') }}" alt="arrow-right-icon" />
+            <img src="{{ asset('icons/arrow-right.svg') }}" alt="{{ __('Next') }}" />
           </button>
         </div>
       </div>
@@ -164,10 +164,10 @@
         <h2>{{ __('On Sale') }}</h2>
         <div class="section-arrows">
           <button class="arrow-btn">
-            <img src="{{ asset('icons/arrow-left.svg') }}" alt="arrow-left-icon" />
+            <img src="{{ asset('icons/arrow-left.svg') }}" alt="{{ __('Previous') }}" />
           </button>
           <button class="arrow-btn">
-            <img src="{{ asset('icons/arrow-right.svg') }}" alt="arrow-right-icon" />
+            <img src="{{ asset('icons/arrow-right.svg') }}" alt="{{ __('Next') }}" />
           </button>
         </div>
       </div>

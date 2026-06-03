@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,7 @@
 <div class="user-card">
 
     <div class="avatar">
-        <img src="{{ asset('icons/user-icon.svg') }}" alt="User">
+        <img src="{{ asset('icons/user-icon.svg') }}" alt="{{ __('User') }}">
     </div>
 
     <h2>{{ $user->name }}: <span>{{ __('Details') }}</span></h2>
@@ -90,7 +90,7 @@
                 ] as $code => $name)
                     <option value="{{ $code }}"
                         {{ old('country', $user->country) === $code ? 'selected' : '' }}>
-                        {{ $name }}
+                        {{ __($name) }}
                     </option>
                 @endforeach
             </select>

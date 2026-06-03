@@ -68,7 +68,7 @@
                 </span>
 
                 <span class="game-card-hover-text">
-                    View Game
+                    {{ __('View Game') }}
                 </span>
             </div>
         </div>

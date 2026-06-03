@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game catalog</title>
+    <title>{{ __('Game catalog') }}</title>
    @vite(['resources/css/app.css', 'resources/css/frontend/games/catalog.css'])
    <script src="https://fontawesome.com" crossorigin="anonymous"></script>
 </head>

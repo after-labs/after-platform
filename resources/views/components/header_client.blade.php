@@ -16,7 +16,7 @@
       <div class="container">
         <div class="logo">
             <a href="{{ route('home') }}">
-              <img src="{{ asset('icons/after-logomarca-branco.svg') }}" alt="after-logo" />
+              <img src="{{ asset('icons/after-logomarca-branco.svg') }}" alt="{{ __('After logo') }}" />
             </a>
         </div>
 
@@ -85,7 +85,7 @@
     @auth
     <div class="points-container hidden">
       <button onclick="togglePoints()" class="btn-close-points">
-        <img src="{{ asset('icons/close-icon.svg') }}" alt="close-button" />
+        <img src="{{ asset('icons/close-icon.svg') }}" alt="{{ __('Close') }}" />
       </button>
       <h4 class="points-title">{{ __('Pontuation System') }}</h4>
       <p class="points-description">
@@ -126,7 +126,7 @@
       <div class="notif-header">
         <span>{{ __('Notifications') }}</span>
         <button onclick="toggleNotif()">
-          <img src="{{ asset('icons/close-icon.svg') }}" alt="close-button" />
+          <img src="{{ asset('icons/close-icon.svg') }}" alt="{{ __('Close') }}" />
         </button>
       </div>
       <div id="notif-list" class="notif-list">

@@ -19,6 +19,7 @@ export default defineConfig({
                 "resources/css/backend/games/index.css",
                 "resources/css/backend/games/create.css",
                 "resources/css/backend/games/edit.css",
+                "resources/css/backend/orders/index.css",
                 "resources/css/backend/users/index.css",
                 "resources/css/backend/users/create.css",
                 "resources/css/backend/users/edit.css",
