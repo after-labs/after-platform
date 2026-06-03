@@ -45,15 +45,41 @@ class GameController extends Controller
     public function index(Request $request)
     {
         $search = $request->query('search');
+        $categoryIds = array_filter((array) $request->query('category_id', []));
+        $genreIds = array_filter((array) $request->query('genre_id', []));
+        $platformIds = array_filter((array) $request->query('platform_id', []));
+        $priceFilter = $request->query('price');
 
-        $games = Game::with(['media', 'versions.offer', 'category'])
+        $games = Game::with(['media', 'versions.offer', 'versions.platform', 'category', 'genres'])
             ->when($search, fn($q) => $q->where('name', 'like', "%{$search}%"))
+            ->when($categoryIds, fn($q) => $q->whereIn('category_id', $categoryIds))
+            ->when($genreIds, fn($q) => $q->whereHas('genres', fn($g) => $g->whereIn('genres.id', $genreIds)))
+            ->when($platformIds, fn($q) => $q->whereHas('versions', fn($v) => $v->whereIn('platform_id', $platformIds)))
+            ->when($priceFilter === 'free',
+                fn($q) => $q->whereHas('versions', fn($v) => $v->where('active', true)->where('final_price', 0)))
+            ->when($priceFilter === 'sale',
+                fn($q) => $q->whereHas('versions', fn($v) => $v->where('active', true)->whereColumn('final_price', '<', 'base_price')))
+            ->when($priceFilter === 'paid',
+                fn($q) => $q->whereHas('versions', fn($v) => $v->where('active', true)->where('final_price', '>', 0)))
+            ->latest()
             ->paginate(12)
             ->withQueryString();
 
         $categories = Category::orderBy('name')->get();
+        $genres = Genre::orderBy('name')->get();
+        $platforms = Platform::orderBy('name')->get();
 
-        return view('frontend.games.catalog', compact('games', 'search', 'categories'));
+        return view('frontend.games.catalog', compact(
+            'games',
+            'search',
+            'categories',
+            'genres',
+            'platforms',
+            'categoryIds',
+            'genreIds',
+            'platformIds',
+            'priceFilter'
+        ));
     }
 
     public function about()
