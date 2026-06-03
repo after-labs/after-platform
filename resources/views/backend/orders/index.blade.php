@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -316,7 +316,7 @@
                         <span class="modal-item-meta">${item.edition}${item.platform ? ' · ' + item.platform : ''}</span>
                         <span class="modal-item-qty">
                             <span class="qty-badge">x${item.units}</span>
-                            $${item.price} each
+                            $${item.price} {{ __('each') }}
                         </span>
                     </div>
                     <span class="modal-item-subtotal">$${item.subtotal}</span>

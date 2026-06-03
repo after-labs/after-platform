@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->integer('user_id');
-            $table->integer('level');
-            $table->integer('points');
-            $table->integer('coins');
+            $table->integer('level')->default(1);
+            $table->integer('points')->default(0);
+            $table->integer('coins')->default(0);
         });
     }
 

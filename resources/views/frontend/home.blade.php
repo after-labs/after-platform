@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <title>{{ __('Home') }}</title>
   @vite(['resources/css/app.css', 'resources/css/frontend/home.css', 'resources/js/app.js'])
   </head>
   <body>
@@ -58,19 +58,19 @@
               @if($highlightGame)
                 @guest
                     <a class="highlight-wishlist-link" href="{{ route('login') }}">
-                      <img src="{{ asset('icons/bookmark-icon.svg') }}" alt="bookmark-icon" />
+                      <img src="{{ asset('icons/bookmark-icon.svg') }}" alt="{{ __('Bookmark') }}" />
                     </a>
                 @else
                     <form class="highlight-wishlist-form" action="{{ route('wishlist.store', $highlightGame) }}" method="POST">
                       @csrf
                       <button type="submit" aria-label="{{ __('Save to wishlist') }}">
-                        <img src="{{ asset('icons/bookmark-icon.svg') }}" alt="bookmark-icon" />
+                        <img src="{{ asset('icons/bookmark-icon.svg') }}" alt="{{ __('Bookmark') }}" />
                       </button>
                     </form>
                 @endguest
               @else
                   <a class="highlight-wishlist-link" href="{{ route('games.index') }}">
-                    <img src="{{ asset('icons/bookmark-icon.svg') }}" alt="bookmark-icon" />
+                    <img src="{{ asset('icons/bookmark-icon.svg') }}" alt="{{ __('Bookmark') }}" />
                   </a>
               @endif
             </div>
@@ -111,10 +111,10 @@
           <h2>{{ __('Popular') }}</h2>
           <div class="section-arrows">
             <button class="arrow-btn">
-              <img src="{{ asset('icons/arrow-left.svg') }}" alt="arrow-left-icon" />
+              <img src="{{ asset('icons/arrow-left.svg') }}" alt="{{ __('Previous') }}" />
             </button>
             <button class="arrow-btn">
-              <img src="{{ asset('icons/arrow-right.svg') }}" alt="arrow-right-icon" />
+              <img src="{{ asset('icons/arrow-right.svg') }}" alt="{{ __('Next') }}" />
             </button>
           </div>
       </div>
@@ -129,10 +129,10 @@
           <h2>{{ __('Free Demos') }}</h2>
           <div class="section-arrows">
             <button class="arrow-btn">
-              <img src="{{ asset('icons/arrow-left.svg') }}" alt="arrow-left-icon" />
+              <img src="{{ asset('icons/arrow-left.svg') }}" alt="{{ __('Previous') }}" />
             </button>
             <button class="arrow-btn">
-              <img src="{{ asset('icons/arrow-right.svg') }}" alt="arrow-right-icon" />
+              <img src="{{ asset('icons/arrow-right.svg') }}" alt="{{ __('Next') }}" />
             </button>
           </div>
       </div>
@@ -148,10 +148,10 @@
           <h2>{{ __('On Sale') }}</h2>
           <div class="section-arrows">
             <button class="arrow-btn">
-              <img src="{{ asset('icons/arrow-left.svg') }}" alt="arrow-left-icon" />
+              <img src="{{ asset('icons/arrow-left.svg') }}" alt="{{ __('Previous') }}" />
             </button>
             <button class="arrow-btn">
-              <img src="{{ asset('icons/arrow-right.svg') }}" alt="arrow-right-icon" />
+              <img src="{{ asset('icons/arrow-right.svg') }}" alt="{{ __('Next') }}" />
             </button>
           </div>
       </div>

@@ -53,8 +53,8 @@ class CartItemController extends Controller
         }
 
         $request->user()->notifications()->create([
-            'title' => 'Jogo adicionado ao carrinho',
-            'description' => $gameVersion->game->name.' foi adicionado ao carrinho.',
+            'title' => 'Game added to cart',
+            'description' => $gameVersion->game->name.' was added to your cart.',
         ]);
 
         return redirect()->route('cart.index');

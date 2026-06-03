@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -154,7 +154,7 @@
             <label>{{ __('Poster URL') }}</label>
             @if($mediaPoster)
                 <div class="media-preview">
-                    <img src="{{ $mediaPoster->path }}" alt="poster">
+                    <img src="{{ $mediaPoster->path }}" alt="{{ __('Poster') }}">
                     <form method="POST" action="{{ route('admin.games.media.destroy', [$game, $mediaPoster]) }}">
                         @csrf @method('DELETE')
                         <button type="submit" class="remove-media" title="{{ __('Remove') }}">✕</button>
@@ -172,7 +172,7 @@
             <label>{{ __('Banner URL') }}</label>
             @if($mediaBanner)
                 <div class="media-preview">
-                    <img src="{{ $mediaBanner->path }}" alt="banner">
+                    <img src="{{ $mediaBanner->path }}" alt="{{ __('Banner') }}">
                     <form method="POST" action="{{ route('admin.games.media.destroy', [$game, $mediaBanner]) }}">
                         @csrf @method('DELETE')
                         <button type="submit" class="remove-media" title="{{ __('Remove') }}">✕</button>
@@ -219,7 +219,7 @@
         <div class="existing-gameplay">
             @foreach($mediaGameplay as $gp)
                 <div class="gameplay-existing-item">
-                    <img src="{{ $gp->path }}" alt="gameplay">
+                    <img src="{{ $gp->path }}" alt="{{ __('Gameplay') }}">
                     <form method="POST" action="{{ route('admin.games.media.destroy', [$game, $gp]) }}">
                         @csrf @method('DELETE')
                         <button type="submit" class="remove-media-sm">✕</button>

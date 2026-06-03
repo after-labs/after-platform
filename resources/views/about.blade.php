@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome to After</title>
+    <title>{{ __('Welcome to After') }}</title>
      @vite(['resources/css/app.css', 'resources/css/about.css'])
   </head>
   <body>
@@ -20,7 +20,7 @@
         <img src="{{ asset('imgs/hollow-knight.png') }}" alt="" />
       </main>
     </section>
-    <section>
+    <section class="steps-section">
       <h2>{{ __('How It Works?') }}</h2>
       <p>
         {{ __('Enjoy and support the unique world of indie games with fair prices and special discounts') }}
@@ -30,7 +30,7 @@
           <div class="sequence-square">
             <img src="{{ asset('icons/cursor-click-icon.svg') }}" alt="" />
           </div>
-          <p>{{ __('1. Select your Game') }}</p>
+          <h3>{{ __('1. Select your Game') }}</h3>
           <p>
             {{ __('Choose many titles from our catalog, considering the platform you want to play them!') }}
           </p>
@@ -39,14 +39,14 @@
           <div class="sequence-square">
             <img src="{{ asset('icons/cart-icon.svg') }}" alt="" />
           </div>
-          <p>{{ __('2. Purchase') }}</p>
+          <h3>{{ __('2. Purchase') }}</h3>
           <p>{{ __('Buy quickly and easily, enjoying frequent special discounts') }}</p>
         </div>
         <div class="sequence-unit">
           <div class="sequence-square">
             <img src="{{ asset('icons/access-key-icon.svg') }}" alt="" />
           </div>
-          <p>{{ __('3. Get Your Access Keys') }}</p>
+          <h3>{{ __('3. Get Your Access Keys') }}</h3>
           <p>
             {{ __('Receive your access keys on email for the chosen games and start playing right away!') }}
           </p>
@@ -54,7 +54,7 @@
       </div>
       <button class="btn-tutorial">{{ __('Doubts? See Our Tutorial') }}</button>
     </section>
-    <section>
+    <section class="steps-section">
       <h2>{{ __('Our Gamified Approach') }}</h2>
       <p>
         {{ __('Enjoy and support the unique world of indie games with fair prices and special discounts') }}
@@ -64,7 +64,7 @@
           <div class="sequence-square">
             <img src="{{ asset('icons/level-up-icon.svg') }}" alt="" />
           </div>
-          <p>{{ __('1. Earn Points & Level Up') }}</p>
+          <h3>{{ __('1. Earn Points & Level Up') }}</h3>
           <p>
             {{ __('As you buy new games (even free ones!), you level up and earn coins.') }}
           </p>
@@ -73,14 +73,14 @@
           <div class="sequence-square">
             <img src="{{ asset('icons/coin-icon.svg') }}" alt="" />
           </div>
-          <p>{{ __('2. Earn Discounts') }}</p>
+          <h3>{{ __('2. Earn Discounts') }}</h3>
           <p>{{ __('Spend your coins as DISCOUNTS and enjoy frequent special discounts.') }}</p>
         </div>
         <div class="sequence-unit">
           <div class="sequence-square">
             <img src="{{ asset('icons/repeat-icon.svg') }}" alt="" />
           </div>
-          <p>{{ __('3. Repeat') }}</p>
+          <h3>{{ __('3. Repeat') }}</h3>
           <p>
             {{ __('Comeback often to explore After catalog and experience the indie gaming world.') }}
           </p>

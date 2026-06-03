@@ -11,7 +11,7 @@
 
         <div class="logo">
             <a href="{{ route('admin.dashboard') }}">
-                <img src="{{ asset('icons/after-logomarca-branco.svg') }}" alt="After Logo">
+                <img src="{{ asset('icons/after-logomarca-branco.svg') }}" alt="{{ __('After logo') }}">
             </a>
         </div>
 
@@ -70,7 +70,7 @@
     <div class="notif-header">
         <span>{{ __('Notifications') }}</span>
         <button onclick="toggleNotif()">
-            <img src="{{ asset('icons/close-icon.svg') }}" alt="close">
+            <img src="{{ asset('icons/close-icon.svg') }}" alt="{{ __('Close') }}">
         </button>
     </div>
     <div id="notif-list" class="notif-list">

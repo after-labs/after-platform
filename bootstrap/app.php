@@ -20,6 +20,9 @@ return Application::configure(basePath: dirname(__DIR__))
                 | Request::HEADER_X_FORWARDED_PROTO
         );
         $middleware->appendToGroup('web', \App\Http\Middleware\SetLocale::class);
+        $middleware->validateCsrfTokens(except: [
+            'stripe/webhook',
+        ]);
         $middleware->alias([
             'client' => \App\Http\Middleware\ClientMiddleware::class,
             'admin' => \App\Http\Middleware\AdminMiddleware::class,

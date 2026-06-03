@@ -2,7 +2,7 @@
       @vite(['resources/css/components/header.css'])
       <div class="container">
         <div class="logo">
-          <img src="{{ asset('icons/after-logomarca-branco.svg') }}" alt="after-logo" />
+          <img src="{{ asset('icons/after-logomarca-branco.svg') }}" alt="{{ __('After logo') }}" />
         </div>
         <nav>
           <ul>

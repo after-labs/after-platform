@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,7 @@
 <section class="form-card">
 
     <div class="avatar">
-        <img src="{{ asset('icons/user-icon.svg') }}" alt="User">
+        <img src="{{ asset('icons/user-icon.svg') }}" alt="{{ __('User') }}">
     </div>
 
     <h2>{{ __('CREATE NEW USER:') }} <span>{{ __('Details') }}</span></h2>
@@ -83,7 +83,7 @@
                     'GB' => 'United Kingdom', 'DE' => 'Germany', 'FR' => 'France',
                     'JP' => 'Japan', 'CA' => 'Canada', 'AU' => 'Australia',
                 ] as $code => $name)
-                    <option value="{{ $code }}" {{ old('country') === $code ? 'selected' : '' }}>{{ $name }}</option>
+                    <option value="{{ $code }}" {{ old('country') === $code ? 'selected' : '' }}>{{ __($name) }}</option>
                 @endforeach
             </select>
         </div>

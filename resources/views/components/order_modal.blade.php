@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{{ __('Order Details') }}</title>
 </head>
 <body>
     <!-- Verify if we're gone use this -->
@@ -20,24 +20,24 @@
 
         <section class="order-info">
             <div class="info-group">
-                <span class="info-label">Order ID:</span>
+                <span class="info-label">{{ __('Order ID:') }}</span>
                 <span class="info-value">OR-0000-0001</span>
             </div>
             <div class="info-group">
-                <span class="info-label">Date:</span>
+                <span class="info-label">{{ __('Date:') }}</span>
                 <span class="info-value">October 19, 2023</span>
             </div>
             <div class="info-group">
-                <span class="info-label">Game units:</span>
+                <span class="info-label">{{ __('Game units:') }}</span>
                 <span class="info-value">3</span>
             </div>
             <div class="info-group">
-                <span class="info-label">Total Price:</span>
+                <span class="info-label">{{ __('Total Price:') }}</span>
                 <span class="info-value">$400.00</span>
             </div>
             <div class="info-group">
-                <span class="info-label">Payment method:</span>
-                <span class="info-value">Credit Card</span>
+                <span class="info-label">{{ __('Payment method:') }}</span>
+                <span class="info-value">{{ __('Credit Card') }}</span>
             </div>
         </section>
 

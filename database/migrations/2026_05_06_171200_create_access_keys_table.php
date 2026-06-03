@@ -16,10 +16,11 @@ return new class extends Migration
             $table->timestamps();
             $table->integer('game_id');
             $table->integer('game_version_id');
+            $table->integer('order_id')->nullable();
             $table->string('key');
             $table->string('status'); // reserved, sold, active, inactive 
-            $table->datetime('sold_at');
-            $table->datetime('expires_at');
+            $table->datetime('sold_at')->nullable();
+            $table->datetime('expires_at')->nullable();
         });
     }
 

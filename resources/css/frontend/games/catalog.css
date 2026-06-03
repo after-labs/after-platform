@@ -55,12 +55,12 @@ main {
 .filter-pills {
     display: flex;
     gap: 8px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     flex-wrap: wrap;
 }
 
 .filter-pill {
-    padding: 5px 12px;
+    padding: 6px 10px 6px 12px;
     border-radius: 30px;
     border: 1px solid var(--ghost-white-80);
     color: var(--white);
@@ -75,6 +75,19 @@ main {
 .filter-pill.active {
     border-color: var(--pink-highlight);
     color: var(--pink-highlight);
+}
+
+.filter-pill-x {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #ffffff18;
+    color: inherit;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.85rem;
+    line-height: 1;
 }
 
 /* GRID DOS JOGOS  */
@@ -182,6 +195,7 @@ aside {
     color: var(--pink-highlight);
     font-family: var(--quantico);
     font-size: 0.9rem;
+    text-decoration: none;
 }
 
 .filter-item {
@@ -225,28 +239,49 @@ aside {
     font-weight: 700;
 }
 
-.genre-list {
-    padding: 6px 0 10px;
+.filter-options {
+    padding: 8px 0 12px;
     display: grid;
-    gap: 8px;
+    grid-template-columns: 1fr;
+    gap: 10px;
 }
 
-.genre-list label {
+.filter-options label {
     display: flex;
-    gap: 8px;
+    width: 100%;
+    gap: 10px;
     align-items: center;
-    font-size: 0.72rem;
-    color: var(--ghost-white-80);
+    font-size: 0.95rem;
+    line-height: 1.25;
+    color: var(--white);
+    cursor: pointer;
+    padding: 4px 0;
 }
 
-.genre-list a {
-    color: var(--ghost-white-80);
-    font-size: 0.82rem;
-    text-decoration: none;
+.filter-options input {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+    accent-color: #ff4fd8;
+    cursor: pointer;
 }
 
-.genre-list a:hover {
-    color: var(--pink-highlight);
+.filter-options label:hover {
+    color: #ff4fd8;
+}
+
+.filter-submit {
+    width: 100%;
+    margin-top: 14px;
+    border: 1px solid var(--pink-highlight);
+    box-sizing: border-box;
+    border-radius: var(--radius-xs);
+    background: var(--pink-highlight);
+    color: var(--white);
+    font-family: var(--quantico);
+    font-size: 0.92rem;
+    padding: 0.7rem;
+    cursor: pointer;
 }
 
 .empty-state {
