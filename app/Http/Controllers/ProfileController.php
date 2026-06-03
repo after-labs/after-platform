@@ -64,8 +64,8 @@ class ProfileController extends Controller
         $user->save();
 
         $user->notifications()->create([
-            'title' => 'Perfil atualizado',
-            'description' => 'Suas informações de perfil foram atualizadas.',
+            'title' => 'Profile updated',
+            'description' => 'Your profile information was updated.',
         ]);
 
         return Redirect::route($user->role === 'admin' ? 'admin.account' : 'profile.edit')->with('status', 'profile-updated');

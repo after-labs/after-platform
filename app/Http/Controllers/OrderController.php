@@ -356,8 +356,8 @@ class OrderController extends Controller
                     ]);
 
                     $order->user->notifications()->create([
-                        'title' => 'Pedido pago',
-                        'description' => 'Seu pagamento foi confirmado, mas algumas chaves ainda precisam ser liberadas.',
+                        'title' => 'Order paid',
+                        'description' => 'Your payment was confirmed, but some keys still need to be released.',
                     ]);
 
                     return;
@@ -398,8 +398,8 @@ class OrderController extends Controller
             $this->rewardUser($order);
 
             $order->user->notifications()->create([
-                'title' => 'Pedido concluído',
-                'description' => 'Seu pedido #'.str_pad($order->id, 6, '0', STR_PAD_LEFT).' foi pago e suas chaves foram enviadas.',
+                'title' => 'Order completed',
+                'description' => 'Your order #'.str_pad($order->id, 6, '0', STR_PAD_LEFT).' was paid and your keys were sent.',
             ]);
         });
 
