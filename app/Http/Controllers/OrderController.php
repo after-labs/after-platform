@@ -104,7 +104,7 @@ class OrderController extends Controller
         try {
             $session = Session::create([
                 'mode' => 'payment',
-                'payment_method_types' => ['card'],
+                'payment_method_types' => ['card', 'pix'],
                 'line_items' => [[
                     'quantity' => 1,
                     'price_data' => [
