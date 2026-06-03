@@ -100,16 +100,18 @@ section {
     margin: 0 auto;
 }
 
-section p:not(main) {
-    font-size: 1.1rem;
+section > p {
+    font-size: 1rem;
 }
 
 section > h2 {
     margin-bottom: 0.75rem;
+    font-size: clamp(1.8rem, 3vw, 2.35rem);
+    line-height: 1.15;
 }
 
 section > h2 + p {
-    max-width: 720px;
+    max-width: 640px;
     margin: 0 auto;
     color: var(--ghost-white-80);
 }
@@ -117,41 +119,47 @@ section > h2 + p {
 /* Sequences (How it works / Gamified) */
 
 .sequence-container {
-    display: flex;
-    gap: 24px;
-    margin-top: 40px;
-    justify-content: center;
-    margin-bottom: 32px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin: 32px 0 28px;
 }
 
 .sequence-unit {
-    max-width: 360px;
-    padding: 20px;
-    border-radius: var(--radius-sm);
-    background: var(--black-bg);
-    border: var(--border-ghost-purple);
-    transition: 0.2s;
+    padding: 22px;
+    border-radius: var(--radius-xs);
+    background: rgba(16, 16, 16, 0.48);
+    border: 1px solid rgba(238, 224, 255, 0.16);
+    transition: var(--transition);
 }
 
 .sequence-unit:hover {
     transform: translateY(-4px);
-    border: 1px solid var(--purple-primary);
-    box-shadow: 0 0 16px var(--purple-primary);
+    border-color: rgba(255, 82, 252, 0.45);
+    background: rgba(27, 0, 55, 0.48);
 }
 
-.sequence-unit p:first-of-type {
+.sequence-unit h3 {
     color: var(--white);
-    font-size: 1.4rem;
-    margin-bottom: 0.6rem;
+    font-family: var(--russo-one);
+    font-size: 1.05rem;
+    line-height: 1.25;
+    margin: 0 0 0.55rem;
+}
+
+.sequence-unit p {
+    color: var(--ghost-white-80);
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
 
 .sequence-square {
-    width: 86px;
-    height: 86px;
+    width: 64px;
+    height: 64px;
     margin: 0 auto 16px;
     border-radius: var(--radius-xs);
-    border: var(--border-white);
-    background: none;
+    border: 1px solid rgba(255, 82, 252, 0.32);
+    background: rgba(255, 82, 252, 0.08);
 
     display: flex;
     align-items: center;
@@ -159,8 +167,8 @@ section > h2 + p {
 }
 
 .sequence-square img {
-    width: 70%;
-    height: 70%;
+    width: 58%;
+    height: 58%;
 }
 
 /* Prints */
@@ -271,14 +279,16 @@ section > h2 + p {
         object-fit: cover;
     }
 
-    .sequence-container,
     .community-row {
         flex-direction: column;
     }
 
-    .sequence-unit,
     .community-list {
         max-width: 100%;
+    }
+
+    .sequence-container {
+        grid-template-columns: 1fr;
     }
 
     .community-row img {
@@ -303,33 +313,5 @@ section > h2 + p {
 
     .community-container {
         padding: 2rem 1rem;
-    }
-}
-
-.game-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 0 18px var(--purple-primary);
-    border: 2px solid var(--purple-primary);
-    .about-game-row .game-card-link {
-        min-width: 0;
-    }
-
-    body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background:
-            radial-gradient(
-                circle at 20% 20%,
-                var(--ghost-pink-60),
-                transparent 40%
-            ),
-            radial-gradient(
-                circle at 80% 60%,
-                var(--ghost-purple),
-                transparent 50%
-            );
-        opacity: 0.2;
-        z-index: -1;
     }
 }
