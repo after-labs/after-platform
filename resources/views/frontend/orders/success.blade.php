@@ -12,7 +12,7 @@
     <main class="orders-page">
         <section class="orders-hero">
             <span>{{ __('Checkout Success') }}</span>
-            @if($order->status === 'paid')
+            @if($order->status === 'completed')
                 <h1>{{ __('Payment confirmed') }}</h1>
                 <p>{{ __('Your access keys were sent to your email and are available below.') }}</p>
             @elseif($order->status === 'missing_keys')

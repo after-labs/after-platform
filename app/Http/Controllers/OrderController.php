@@ -19,7 +19,7 @@ use UnexpectedValueException;
 
 class OrderController extends Controller
 {
-    /* ─────────────── FRONTEND ─────────────── */
+    /* Frontend Views */
 
     public function checkout()
     {
@@ -88,11 +88,11 @@ class OrderController extends Controller
         });
 
         // Go complete the order without stripe integration if the total value is 0. 
-        /* if ($order->total <= 0) {
+        if ($order->total <= 0) {
             $this->completeOrder($order);
 
             return redirect()->route('orders.success', $order);
-        } */
+        }
 
         if (! config('services.stripe.secret')) {
             return redirect()->route('orders.error', $order)
@@ -221,7 +221,7 @@ class OrderController extends Controller
         return view('frontend.orders.index', compact('orders'));
     }
 
-    /* ─────────────── ADMIN ─────────────── */
+    /* Backend Views */
 
     public function adminIndex(Request $request)
     {
@@ -272,7 +272,7 @@ class OrderController extends Controller
         return response()->json(['ok' => true, 'status' => $order->status]);
     }
 
-    /* ─────────────── HELPERS ─────────────── */
+    /* Helpers/additionals */
 
     private function cartItems()
     {
@@ -450,5 +450,9 @@ class OrderController extends Controller
             $message->to($order->user->email)
                 ->subject('Suas chaves de acesso da After');
         });
+
+        $order->update([
+            'status' => 'completed',
+        ]);
     }
 }
