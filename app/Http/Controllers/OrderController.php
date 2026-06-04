@@ -185,12 +185,12 @@ class OrderController extends Controller
             return response('Order not found', 404);
         }
 
-        if ($order->status !== 'paid') {
-            $order->update([
-                'stripe_checkout_session_id' => $session->id,
-                'stripe_payment_intent_id' => $session->payment_intent ?? null,
-            ]);
+        $order->update([
+            'stripe_checkout_session_id' => $session->id,
+            'stripe_payment_intent_id' => $session->payment_intent ?? null,
+        ]);
 
+        if (! $order->fulfilled_at && ! in_array($order->status, ['paid', 'completed', 'missing_keys'], true)) {
             $this->completeOrder($order);
         }
 
@@ -331,10 +331,16 @@ class OrderController extends Controller
 
     private function completeOrder(Order $order): void
     {
-        DB::transaction(function () use ($order) {
-            $order->refresh();
+        $shouldSendEmail = false;
 
-            if ($order->status === 'paid') {
+        DB::transaction(function () use ($order, &$shouldSendEmail) {
+            $order = Order::whereKey($order->id)->lockForUpdate()->first();
+
+            if (! $order || $order->fulfilled_at || in_array($order->status, ['paid', 'completed'], true)) {
+                return;
+            }
+
+            if ($order->status === 'missing_keys') {
                 return;
             }
 
@@ -357,7 +363,7 @@ class OrderController extends Controller
 
                     $order->user->notifications()->create([
                         'title' => 'Order paid',
-                        'description' => 'Your payment was confirmed, but some keys still need to be released.',
+                        'description' => 'Your order #'.str_pad($order->id, 6, '0', STR_PAD_LEFT).' was paid, but some keys still need to be released.',
                     ]);
 
                     return;
@@ -401,9 +407,13 @@ class OrderController extends Controller
                 'title' => 'Order completed',
                 'description' => 'Your order #'.str_pad($order->id, 6, '0', STR_PAD_LEFT).' was paid and your keys were sent.',
             ]);
+
+            $shouldSendEmail = true;
         });
 
-        $this->sendKeysEmail($order);
+        if ($shouldSendEmail) {
+            $this->sendKeysEmail($order->fresh());
+        }
     }
 
     private function rewardUser(Order $order): void
@@ -446,9 +456,9 @@ class OrderController extends Controller
             return $key->game->name.' - '.$key->gameVersion->platform->name.': '.$key->key;
         })->implode("\n");
 
-        Mail::raw("Obrigado pela compra na After.\n\nSuas chaves:\n".$lines, function ($message) use ($order) {
+        Mail::raw("Thank you for your purchase at After Platform.\n\nYour Keys:\n".$lines, function ($message) use ($order) {
             $message->to($order->user->email)
-                ->subject('Suas chaves de acesso da After');
+                ->subject('Your Games Access Keys from After Platform');
         });
 
         $order->update([
