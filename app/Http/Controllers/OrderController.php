@@ -446,9 +446,9 @@ class OrderController extends Controller
             return $key->game->name.' - '.$key->gameVersion->platform->name.': '.$key->key;
         })->implode("\n");
 
-        Mail::raw("Obrigado pela compra na After.\n\nSuas chaves:\n".$lines, function ($message) use ($order) {
+        Mail::raw("Thank you for your purchase at After Platform.\n\nYour Keys:\n".$lines, function ($message) use ($order) {
             $message->to($order->user->email)
-                ->subject('Suas chaves de acesso da After');
+                ->subject('Your Games Access Keys from After Platform');
         });
 
         $order->update([
