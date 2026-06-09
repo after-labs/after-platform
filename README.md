@@ -235,9 +235,3 @@ Novas funcionalidades planejadas incluem:
 * Biblioteca do usuário
 * Métricas avançadas para administradores
 * Pipeline CI/CD
-
----
-
-## Autor
-
-Desenvolvido por Rafael Reis como projeto de portfólio voltado para demonstração de competências em desenvolvimento web full-stack, arquitetura de aplicações Laravel e modelagem de produtos digitais.
