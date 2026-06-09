@@ -18,7 +18,7 @@ Mais do que uma simples loja virtual, o objetivo foi modelar fluxos comuns encon
 
 | Página do Jogo          | Cart                |
 | ----------------------- | ----------------------- |
-| <img width="1710" height="978" alt="after-game-detail" src="https://github.com/user-attachments/assets/95f96e5f-4436-4ac7-a97b-242fb953ff8b" /> | <img width="1710" height="978" alt="after-cart" src="https://github.com/user-attachments/assets/7a7b6ae6-d407-4904-8a7d-612a89639fc8" />
+| <img width="1602" height="978" alt="after-game-detail" src="https://github.com/user-attachments/assets/95f96e5f-4436-4ac7-a97b-242fb953ff8b" /> | <img width="1710" height="978" alt="after-cart" src="https://github.com/user-attachments/assets/7a7b6ae6-d407-4904-8a7d-612a89639fc8" />
 
 ---
 
