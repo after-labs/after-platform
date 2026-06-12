@@ -10,20 +10,28 @@
         $versions = $versions->whereIn('platform_id', $platformIds);
     }
 
+    $saleVersions = $versions
+        ->where('final_price', '>', 0)
+        ->filter(fn ($item) => $item->base_price > 0 && $item->final_price < $item->base_price);
+
     $filteredVersions = match ($priceFilter) {
         'free' => $versions->where('final_price', 0),
-        'sale' => $versions
-            ->where('final_price', '>', 0)
-            ->filter(fn ($item) => $item->base_price > 0 && $item->final_price < $item->base_price),
+        'sale' => $saleVersions,
         'paid' => $versions
             ->where('final_price', '>', 0)
             ->filter(fn ($item) => $item->base_price <= 0 || $item->final_price >= $item->base_price),
-        default => $versions,
+        default => $saleVersions->isNotEmpty() ? $saleVersions : $versions,
     };
 
-    $version = $filteredVersions
-        ->sortBy('final_price')
-        ->first() ?? $versions->sortBy('final_price')->first() ?? $game->versions->sortBy('final_price')->first();
+    if (($priceFilter === 'sale' || $priceFilter === null) && $saleVersions->isNotEmpty()) {
+        $version = $saleVersions
+            ->sortByDesc(fn ($item) => $item->base_price > 0 ? ($item->base_price - $item->final_price) / $item->base_price : 0)
+            ->first();
+    } else {
+        $version = $filteredVersions->sortBy('final_price')->first()
+            ?? $versions->sortBy('final_price')->first()
+            ?? $game->versions->sortBy('final_price')->first();
+    }
 
     $discount = 0;
 
