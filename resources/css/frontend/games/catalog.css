@@ -98,6 +98,10 @@ main {
     gap: 0.9rem;
 }
 
+.games-grid > .game-card-link:only-child {
+    max-width: 260px;
+}
+
 /* CARD */
 
 .game-card {

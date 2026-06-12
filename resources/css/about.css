@@ -207,6 +207,10 @@ section > h2 + p {
     min-width: 0;
 }
 
+.about-game-row > .game-card-link:only-child {
+    max-width: 260px;
+}
+
 .empty-games {
     grid-column: 1 / -1;
     border: var(--border-ghost-purple);
