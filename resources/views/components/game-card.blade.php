@@ -1,12 +1,29 @@
 
-@props(['game'])
+@props(['game', 'priceFilter' => null, 'platformIds' => []])
 
 @php
     $poster = $game->poster();
-    $version = $game->versions
-        ->where('active', true)
+    $versions = $game->versions->where('active', true);
+    $platformIds = array_filter((array) $platformIds);
+
+    if ($platformIds) {
+        $versions = $versions->whereIn('platform_id', $platformIds);
+    }
+
+    $filteredVersions = match ($priceFilter) {
+        'free' => $versions->where('final_price', 0),
+        'sale' => $versions
+            ->where('final_price', '>', 0)
+            ->filter(fn ($item) => $item->base_price > 0 && $item->final_price < $item->base_price),
+        'paid' => $versions
+            ->where('final_price', '>', 0)
+            ->filter(fn ($item) => $item->base_price <= 0 || $item->final_price >= $item->base_price),
+        default => $versions,
+    };
+
+    $version = $filteredVersions
         ->sortBy('final_price')
-        ->first() ?? $game->versions->sortBy('final_price')->first();
+        ->first() ?? $versions->sortBy('final_price')->first() ?? $game->versions->sortBy('final_price')->first();
 
     $discount = 0;
 
