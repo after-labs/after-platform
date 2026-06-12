@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AccessKey;
-use App\Models\CartItem;
 use App\Models\Coupon;
 use App\Models\Order;
-use App\Models\OrderItem;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Stripe\Checkout\Session;
@@ -19,17 +15,15 @@ use UnexpectedValueException;
 
 class OrderController extends Controller
 {
-    /* Frontend Views */
-
-    public function checkout()
+    public function checkout(Request $request)
     {
-        $items = $this->cartItems();
+        $items = $this->cartItems($request);
 
         if ($items->isEmpty()) {
             return redirect()->route('cart.index')->with('status', 'empty-cart');
         }
 
-        $gamification = Auth::user()->gamification;
+        $gamification = $request->user()->gamification;
 
         return view('frontend.orders.checkout', [
             'items' => $items,
@@ -45,13 +39,13 @@ class OrderController extends Controller
             'coins_used' => ['nullable', 'integer', 'min:0'],
         ]);
 
-        $items = $this->cartItems();
+        $items = $this->cartItems($request);
 
         if ($items->isEmpty()) {
             return redirect()->route('cart.index')->with('status', 'empty-cart');
         }
 
-        $user = Auth::user();
+        $user = $request->user();
         $gamification = $user->gamification ?: $user->gamification()->create([
             'level' => 1,
             'points' => 0,
@@ -64,8 +58,7 @@ class OrderController extends Controller
         }
 
         $order = DB::transaction(function () use ($items, $user, $totals) {
-            $order = Order::create([
-                'user_id' => $user->id,
+            $order = $user->orders()->create([
                 'status' => 'pending',
                 'subtotal' => $totals['subtotal'],
                 'coupon_code' => $totals['coupon']?->code,
@@ -76,18 +69,16 @@ class OrderController extends Controller
             ]);
 
             foreach ($items as $item) {
-                OrderItem::create([
+                $order->items()->create([
                     'game_version_id' => $item->game_version_id,
-                    'units'           => $item->units,
-                    'price'           => $item->gameVersion->final_price,
-                    'order_id'        => $order->id,
+                    'units' => $item->units,
+                    'price' => $item->gameVersion->final_price,
                 ]);
             }
 
             return $order;
         });
 
-        // Go complete the order without stripe integration if the total value is 0. 
         if ($order->total <= 0) {
             $this->completeOrder($order);
 
@@ -133,11 +124,13 @@ class OrderController extends Controller
         return redirect($session->url);
     }
 
-    public function success(Order $order)
+    public function success(Request $request, Order $order)
     {
-        abort_unless($order->user_id === Auth::id(), 403);
+        $order->loadMissing('user');
 
-        if ($order->status === 'pending' && ! request()->has('session_id')) {
+        abort_unless($order->user->is($request->user()), 403);
+
+        if ($order->status === 'pending' && ! $request->has('session_id')) {
             return redirect()->route('orders.error', $order);
         }
 
@@ -151,9 +144,11 @@ class OrderController extends Controller
         return view('frontend.orders.success', compact('order'));
     }
 
-    public function error(Order $order)
+    public function error(Request $request, Order $order)
     {
-        abort_unless($order->user_id === Auth::id(), 403);
+        $order->loadMissing('user');
+
+        abort_unless($order->user->is($request->user()), 403);
 
         return view('frontend.orders.error', compact('order'));
     }
@@ -197,9 +192,11 @@ class OrderController extends Controller
         return response('OK');
     }
 
-    public function completed(Order $order)
+    public function completed(Request $request, Order $order)
     {
-        abort_unless($order->user_id === Auth::id(), 403);
+        $order->loadMissing('user');
+
+        abort_unless($order->user->is($request->user()), 403);
 
         if ($order->status === 'pending') {
             return redirect()->route('orders.error', $order);
@@ -208,20 +205,19 @@ class OrderController extends Controller
         return redirect()->route('orders.success', $order);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::with([
-            'items.gameVersion.game',
-            'items.gameVersion.platform',
-        ])
-            ->where('user_id', Auth::id())
+        $orders = $request->user()
+            ->orders()
+            ->with([
+                'items.gameVersion.game',
+                'items.gameVersion.platform',
+            ])
             ->latest()
             ->get();
 
         return view('frontend.orders.index', compact('orders'));
     }
-
-    /* Backend Views */
 
     public function adminIndex(Request $request)
     {
@@ -231,36 +227,31 @@ class OrderController extends Controller
             'items.gameVersion.platform',
         ]);
 
-        // Busca por ID, nome ou e-mail
         if ($request->filled('search')) {
             $s = $request->search;
             $query->where(function ($q) use ($s) {
                 $q->where('id', $s)
-                  ->orWhereHas('user', fn($u) =>
-                      $u->where('name',  'like', "%{$s}%")
-                        ->orWhere('email', 'like', "%{$s}%")
-                  );
+                    ->orWhereHas('user', fn ($u) => $u->where('name', 'like', "%{$s}%")
+                        ->orWhere('email', 'like', "%{$s}%"));
             });
         }
 
-        // Filtros de status
         match ($request->input('filter', 'all')) {
             'in_progress' => $query->where('status', 'in_progress'),
-            'completed'   => $query->where('status', 'completed'),
-            'refused'     => $query->where('status', 'refused'),
-            'today'       => $query->whereDate('created_at', today()),
-            'week'        => $query->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()]),
-            'month'       => $query->whereYear('created_at', now()->year)->whereMonth('created_at', now()->month),
-            default       => null,
+            'completed' => $query->where('status', 'completed'),
+            'refused' => $query->where('status', 'refused'),
+            'today' => $query->whereDate('created_at', today()),
+            'week' => $query->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()]),
+            'month' => $query->whereYear('created_at', now()->year)->whereMonth('created_at', now()->month),
+            default => null,
         };
 
         $totalOrders = Order::count();
-        $orders      = $query->latest()->paginate(10)->withQueryString();
+        $orders = $query->latest()->paginate(10)->withQueryString();
 
         return view('backend.orders.index', compact('orders', 'totalOrders'));
     }
 
-    // Atualiza status de um pedido via AJAX (inline)
     public function updateStatus(Request $request, Order $order)
     {
         $request->validate([
@@ -272,22 +263,21 @@ class OrderController extends Controller
         return response()->json(['ok' => true, 'status' => $order->status]);
     }
 
-    /* Helpers/additionals */
-
-    private function cartItems()
+    private function cartItems(Request $request)
     {
-        return CartItem::with([
-            'gameVersion.game.media',
-            'gameVersion.platform',
-            'gameVersion.offer',
-        ])
-            ->where('user_id', Auth::id())
+        return $request->user()
+            ->cartItems()
+            ->with([
+                'gameVersion.game.media',
+                'gameVersion.platform',
+                'gameVersion.offer',
+            ])
             ->get();
     }
 
     private function cartTotal($items): float
     {
-        return $items->sum(fn($item) => $item->units * $item->gameVersion->final_price);
+        return $items->sum(fn ($item) => $item->units * $item->gameVersion->final_price);
     }
 
     private function totals($items, Request $request, int $availableCoins): array
@@ -351,7 +341,8 @@ class OrderController extends Controller
             ]);
 
             foreach ($order->items as $item) {
-                $availableKeys = AccessKey::where('game_version_id', $item->game_version_id)
+                $availableKeys = $item->gameVersion
+                    ->accessKeys()
                     ->where('status', 'available')
                     ->count();
 
@@ -371,7 +362,8 @@ class OrderController extends Controller
             }
 
             foreach ($order->items as $item) {
-                $keys = AccessKey::where('game_version_id', $item->game_version_id)
+                $keys = $item->gameVersion
+                    ->accessKeys()
                     ->where('status', 'available')
                     ->limit($item->units)
                     ->get();
@@ -393,7 +385,7 @@ class OrderController extends Controller
                 $order->user->gamification()->decrement('coins', $order->coins_used);
             }
 
-            CartItem::where('user_id', $order->user_id)->delete();
+            $order->user->cartItems()->delete();
 
             $order->update([
                 'status' => 'paid',
