@@ -5,23 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\CartItem;
 use App\Models\GameVersion;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class CartItemController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $items = CartItem::with([
-            'gameVersion.game.media',
-            'gameVersion.platform',
-            'gameVersion.offer',
-        ])
-            ->where('user_id', Auth::id())
+        $items = $request->user()
+            ->cartItems()
+            ->with([
+                'gameVersion.game.media',
+                'gameVersion.platform',
+                'gameVersion.offer',
+            ])
             ->get();
 
-        $total = $items->sum(function ($item) {
-            return $item->units * $item->gameVersion->final_price;
-        });
+        $total = $items->sum(fn (CartItem $item) => $item->units * $item->gameVersion->final_price);
 
         return view('frontend.cart.index', [
             'items' => $items,
@@ -35,22 +33,12 @@ class CartItemController extends Controller
 
         $gameVersion->load('game');
 
-        $item = CartItem::where([
+        $item = $request->user()->cartItems()->firstOrNew([
             'game_version_id' => $gameVersion->id,
-            'user_id' => Auth::id(),
-        ])->first();
+        ]);
 
-        if($item){
-            $item->update([
-                'units' => $item->units + 1
-            ]);
-        }else{
-            CartItem::create([
-                'game_version_id' => $gameVersion->id,
-                'user_id' => Auth::id(),
-                'units' => 1,
-            ]);
-        }
+        $item->units = $item->exists ? $item->units + 1 : 1;
+        $item->save();
 
         $request->user()->notifications()->create([
             'title' => 'Game added to cart',
@@ -60,18 +48,22 @@ class CartItemController extends Controller
         return redirect()->route('cart.index');
     }
 
-    public function delete(CartItem $cartItem)
+    public function delete(Request $request, CartItem $cartItem)
     {
-        abort_unless($cartItem->user_id === Auth::id(), 403);
+        $cartItem->loadMissing('user');
+
+        abort_unless($cartItem->user->is($request->user()), 403);
 
         $cartItem->delete();
 
         return redirect()->route('cart.index');
     }
 
-    public function increase(CartItem $cartItem)
+    public function increase(Request $request, CartItem $cartItem)
     {
-        abort_unless($cartItem->user_id === Auth::id(), 403);
+        $cartItem->loadMissing('user');
+
+        abort_unless($cartItem->user->is($request->user()), 403);
 
         $cartItem->update([
             'units' => $cartItem->units + 1,
@@ -80,13 +72,15 @@ class CartItemController extends Controller
         return redirect()->route('cart.index');
     }
 
-    public function decrease(CartItem $cartItem)
+    public function decrease(Request $request, CartItem $cartItem)
     {
-        abort_unless($cartItem->user_id === Auth::id(), 403);
+        $cartItem->loadMissing('user');
 
-        if($cartItem->units <= 1){
+        abort_unless($cartItem->user->is($request->user()), 403);
+
+        if ($cartItem->units <= 1) {
             $cartItem->delete();
-        }else{
+        } else {
             $cartItem->update([
                 'units' => $cartItem->units - 1,
             ]);

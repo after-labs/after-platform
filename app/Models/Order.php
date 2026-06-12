@@ -7,18 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $fillable = [
-    'user_id',
-    'status',
-    'subtotal',
-    'coupon_code',
-    'coupon_discount',
-    'coins_used',
-    'coin_discount',
-    'stripe_checkout_session_id',
-    'stripe_payment_intent_id',
-    'paid_at',
-    'fulfilled_at',
-    'total'
+        'user_id',
+        'status',
+        'subtotal',
+        'coupon_code',
+        'coupon_discount',
+        'coins_used',
+        'coin_discount',
+        'stripe_checkout_session_id',
+        'stripe_payment_intent_id',
+        'paid_at',
+        'fulfilled_at',
+        'total',
     ];
 
     protected $attributes = [
@@ -35,7 +35,8 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-    public function accessKeys(){
+    public function accessKeys()
+    {
         return $this->hasMany(AccessKey::class);
     }
 }

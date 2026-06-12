@@ -15,30 +15,36 @@ class Game extends Model
         'developer',
         'category_id',
         'featured',
-        'system_requirements'
+        'system_requirements',
     ];
 
-    public function versions(){
+    public function versions()
+    {
         return $this->hasMany(GameVersion::class);
     }
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
 
-    public function genres(){
+    public function genres()
+    {
         return $this->belongsToMany(Genre::class, 'game_genres');
     }
 
-    public function accessKeys(){
+    public function accessKeys()
+    {
         return $this->hasMany(AccessKey::class);
     }
 
-    public function wishlists(){
-        return $this->hasMany(Wishlist::class);
+    public function wishlistItems()
+    {
+        return $this->hasMany(WishlistItem::class);
     }
 
-    public function media(){
+    public function media()
+    {
         return $this->hasMany(GameMedia::class);
     }
 

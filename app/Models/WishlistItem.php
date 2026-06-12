@@ -4,17 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class WishlistItem extends Model {
+class WishlistItem extends Model
+{
     protected $fillable = [
-    'user_id',
-    'game_id'
+        'user_id',
+        'game_id',
     ];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function game(){
+    public function game()
+    {
         return $this->belongsTo(Game::class);
     }
 }

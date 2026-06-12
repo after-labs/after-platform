@@ -2,40 +2,32 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements MustVerifyEmail
 {
-    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
     protected $fillable = [
-    'name',
-    'email',
-    'email_verified_at',
-    'password',
-    'phone',
-    'country',
-    'role',
-    'status',
-    'avatar',
-    'last_login_at'
-];
+        'name',
+        'email',
+        'email_verified_at',
+        'password',
+        'phone',
+        'country',
+        'role',
+        'status',
+        'avatar',
+        'last_login_at',
+    ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -43,8 +35,6 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
-
-    // td: why Quintas didn't gave the User model the hasMany methods to make the connections with other models?
 
     public function cartItems()
     {
@@ -66,8 +56,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Notification::class);
     }
 
-    public function wishlist()
+    public function wishlistItems()
     {
-        return $this->hasMany(Wishlist::class);
+        return $this->hasMany(WishlistItem::class);
     }
 }
