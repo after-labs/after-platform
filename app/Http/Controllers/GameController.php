@@ -89,8 +89,7 @@ class GameController extends Controller
 
     public function about()
     {
-        $games = Game::with(['media', 'versions.offer', 'category'])
-            ->where('featured', true)->latest()->limit(8)->get();
+        $games = Game::with(['media', 'versions.offer', 'category'])->latest()->limit(8)->get();
 
         if ($games->isEmpty()) {
             $games = Game::with(['media', 'versions.offer', 'category'])->latest()->limit(8)->get();

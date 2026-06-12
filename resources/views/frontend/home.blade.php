@@ -126,7 +126,7 @@
     </section>
     <section>
       <div class="section-header">
-          <h2>{{ __('Free Demos') }}</h2>
+          <h2>{{ __('Demos') }}</h2>
           <div class="section-arrows">
             <button class="arrow-btn">
               <img src="{{ asset('icons/arrow-left.svg') }}" alt="{{ __('Previous') }}" />
