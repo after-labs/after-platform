@@ -12,32 +12,29 @@ use Illuminate\Http\Request;
 
 class GameController extends Controller
 {
-    /* ─────────────── FRONTEND ─────────────── */
+    /* FRONTEND */
 
     public function home()
     {
         $baseQuery = Game::with(['media', 'versions.offer', 'category']);
 
         $popularGames = (clone $baseQuery)->where('featured', true)->latest()->limit(6)->get();
-        if ($popularGames->isEmpty()) {
-            $popularGames = (clone $baseQuery)->latest()->limit(6)->get();
-        }
 
         $freeGames = (clone $baseQuery)
-            ->whereHas('versions', fn($q) => $q->where('active', true)->where('final_price', 0))
+            ->whereHas('versions', fn ($q) => $q->where('active', true)->where('final_price', 0))
             ->limit(6)->get();
         if ($freeGames->isEmpty()) {
             $freeGames = (clone $baseQuery)->latest()->limit(6)->get();
         }
 
         $onSaleGames = (clone $baseQuery)
-            ->whereHas('versions', fn($q) => $q->whereColumn('final_price', '<', 'base_price'))
+            ->whereHas('versions', fn ($q) => $q->whereColumn('final_price', '<', 'base_price'))
             ->limit(6)->get();
         if ($onSaleGames->isEmpty()) {
             $onSaleGames = (clone $baseQuery)->latest()->limit(6)->get();
         }
 
-        $highlightGame = $onSaleGames->first() ?? $popularGames->first() ?? $freeGames->first();
+        $highlightGame = $popularGames->first();
 
         return view('frontend.home', compact('popularGames', 'freeGames', 'onSaleGames', 'highlightGame'));
     }
@@ -49,18 +46,26 @@ class GameController extends Controller
         $genreIds = array_filter((array) $request->query('genre_id', []));
         $platformIds = array_filter((array) $request->query('platform_id', []));
         $priceFilter = $request->query('price');
+        $filterVersions = function ($query) use ($platformIds, $priceFilter) {
+            $query->where('active', true);
+
+            if ($platformIds) {
+                $query->whereIn('platform_id', $platformIds);
+            }
+
+            match ($priceFilter) {
+                'free' => $query->where('final_price', 0),
+                'sale' => $query->where('final_price', '>', 0)->whereColumn('final_price', '<', 'base_price'),
+                'paid' => $query->where('final_price', '>', 0)->whereColumn('final_price', '>=', 'base_price'),
+                default => null,
+            };
+        };
 
         $games = Game::with(['media', 'versions.offer', 'versions.platform', 'category', 'genres'])
-            ->when($search, fn($q) => $q->where('name', 'like', "%{$search}%"))
-            ->when($categoryIds, fn($q) => $q->whereIn('category_id', $categoryIds))
-            ->when($genreIds, fn($q) => $q->whereHas('genres', fn($g) => $g->whereIn('genres.id', $genreIds)))
-            ->when($platformIds, fn($q) => $q->whereHas('versions', fn($v) => $v->whereIn('platform_id', $platformIds)))
-            ->when($priceFilter === 'free',
-                fn($q) => $q->whereHas('versions', fn($v) => $v->where('active', true)->where('final_price', 0)))
-            ->when($priceFilter === 'sale',
-                fn($q) => $q->whereHas('versions', fn($v) => $v->where('active', true)->whereColumn('final_price', '<', 'base_price')))
-            ->when($priceFilter === 'paid',
-                fn($q) => $q->whereHas('versions', fn($v) => $v->where('active', true)->where('final_price', '>', 0)))
+            ->when($search, fn ($q) => $q->where('name', 'like', "%{$search}%"))
+            ->when($categoryIds, fn ($q) => $q->whereIn('category_id', $categoryIds))
+            ->when($genreIds, fn ($q) => $q->whereHas('genres', fn ($g) => $g->whereIn('genres.id', $genreIds)))
+            ->when($platformIds || $priceFilter, fn ($q) => $q->whereHas('versions', $filterVersions))
             ->latest()
             ->paginate(12)
             ->withQueryString();
@@ -84,8 +89,7 @@ class GameController extends Controller
 
     public function about()
     {
-        $games = Game::with(['media', 'versions.offer', 'category'])
-            ->where('featured', true)->latest()->limit(8)->get();
+        $games = Game::with(['media', 'versions.offer', 'category'])->latest()->limit(8)->get();
 
         if ($games->isEmpty()) {
             $games = Game::with(['media', 'versions.offer', 'category'])->latest()->limit(8)->get();
@@ -117,37 +121,37 @@ class GameController extends Controller
         return view('frontend.games.show', compact('game', 'relatedGames'));
     }
 
-    /* ─────────────── ADMIN: INDEX ─────────────── */
+    /*  ADMIN: INDEX */
 
     public function adminIndex(Request $request)
     {
-        $search      = $request->query('search');
-        $categoryId  = $request->query('category_id');
+        $search = $request->query('search');
+        $categoryId = $request->query('category_id');
         $releaseYear = $request->query('release_date');
-        $featured    = $request->query('featured');   // '1', '0' ou null
+        $featured = $request->query('featured');   // '1', '0' ou null
         $priceFilter = $request->query('price');      // 'free', 'sale', 'paid'
 
         $games = Game::with(['media', 'versions.offer', 'category'])
-            ->when($search, fn($q) => $q->where(function ($q) use ($search) {
+            ->when($search, fn ($q) => $q->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('developer', 'like', "%{$search}%")
-                  ->orWhere('id', $search);
+                    ->orWhere('developer', 'like', "%{$search}%")
+                    ->orWhere('id', $search);
             }))
-            ->when($categoryId,  fn($q) => $q->where('category_id', $categoryId))
-            ->when($releaseYear, fn($q) => $q->where('release_date', $releaseYear))
+            ->when($categoryId, fn ($q) => $q->where('category_id', $categoryId))
+            ->when($releaseYear, fn ($q) => $q->where('release_date', $releaseYear))
             ->when($featured !== null && $featured !== '',
-                fn($q) => $q->where('featured', (bool) $featured))
+                fn ($q) => $q->where('featured', (bool) $featured))
             ->when($priceFilter === 'free',
-                fn($q) => $q->whereHas('versions', fn($v) => $v->where('final_price', 0)))
+                fn ($q) => $q->whereHas('versions', fn ($v) => $v->where('final_price', 0)))
             ->when($priceFilter === 'sale',
-                fn($q) => $q->whereHas('versions', fn($v) => $v->whereColumn('final_price', '<', 'base_price')))
+                fn ($q) => $q->whereHas('versions', fn ($v) => $v->whereColumn('final_price', '<', 'base_price')))
             ->when($priceFilter === 'paid',
-                fn($q) => $q->whereHas('versions', fn($v) => $v->where('final_price', '>', 0)))
+                fn ($q) => $q->whereHas('versions', fn ($v) => $v->where('final_price', '>', 0)))
             ->latest()
             ->paginate(15)
             ->withQueryString();
 
-        $categories  = Category::orderBy('name')->get();
+        $categories = Category::orderBy('name')->get();
         $releaseYears = Game::selectRaw('DISTINCT release_date')
             ->orderByDesc('release_date')
             ->pluck('release_date');
@@ -158,13 +162,13 @@ class GameController extends Controller
         ));
     }
 
-    /* ─────────────── ADMIN: CREATE ─────────────── */
+    /* ADMIN: CREATE */
 
     public function create()
     {
         $categories = Category::orderBy('name')->get();
-        $genres     = Genre::orderBy('name')->get();
-        $platforms  = Platform::orderBy('name')->get();
+        $genres = Genre::orderBy('name')->get();
+        $platforms = Platform::orderBy('name')->get();
 
         return view('backend.games.create', compact('categories', 'genres', 'platforms'));
     }
@@ -172,42 +176,42 @@ class GameController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'                => 'required|string|max:255',
-            'developer'           => 'required|string|max:255',
-            'category_id'         => 'required|exists:categories,id',
-            'release_date'        => 'required|digits:4|integer|min:1970|max:2099',
-            'age'                 => 'required|integer|min:0',
-            'summary'             => 'required|string|max:500',
-            'description'         => 'required|string',
+            'name' => 'required|string|max:255',
+            'developer' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'release_date' => 'required|digits:4|integer|min:1970|max:2099',
+            'age' => 'required|integer|min:0',
+            'summary' => 'required|string|max:500',
+            'description' => 'required|string',
             'system_requirements' => 'nullable|string',
-            'featured'            => 'nullable|boolean',
+            'featured' => 'nullable|boolean',
 
             // Mídias (links)
-            'media_poster'        => 'nullable|string|max:2048',
-            'media_banner'        => 'nullable|string|max:2048',
-            'media_video'         => 'nullable|string|max:2048', // link YouTube
-            'media_gameplay.*'    => 'nullable|string|max:2048',
+            'media_poster' => 'nullable|string|max:2048',
+            'media_banner' => 'nullable|string|max:2048',
+            'media_video' => 'nullable|string|max:2048', // link YouTube
+            'media_gameplay.*' => 'nullable|string|max:2048',
 
             // Versões
-            'versions'                      => 'nullable|array',
-            'versions.*.edition_name'       => 'required_with:versions|string|max:255',
-            'versions.*.platform_id'        => 'required_with:versions|exists:platforms,id',
-            'versions.*.base_price'         => 'required_with:versions|numeric|min:0',
-            'versions.*.final_price'        => 'required_with:versions|numeric|min:0',
-            'versions.*.stock'              => 'required_with:versions|integer|min:0',
-            'versions.*.active'             => 'nullable|boolean',
+            'versions' => 'nullable|array',
+            'versions.*.edition_name' => 'required_with:versions|string|max:255',
+            'versions.*.platform_id' => 'required_with:versions|exists:platforms,id',
+            'versions.*.base_price' => 'required_with:versions|numeric|min:0',
+            'versions.*.final_price' => 'required_with:versions|numeric|min:0',
+            'versions.*.stock' => 'required_with:versions|integer|min:0',
+            'versions.*.active' => 'nullable|boolean',
         ]);
 
         $game = Game::create([
-            'name'                => $request->name,
-            'developer'           => $request->developer,
-            'category_id'         => $request->category_id,
-            'release_date'        => $request->release_date,
-            'age'                 => $request->age,
-            'summary'             => $request->summary,
-            'description'         => $request->description,
+            'name' => $request->name,
+            'developer' => $request->developer,
+            'category_id' => $request->category_id,
+            'release_date' => $request->release_date,
+            'age' => $request->age,
+            'summary' => $request->summary,
+            'description' => $request->description,
             'system_requirements' => $request->system_requirements,
-            'featured'            => $request->boolean('featured'),
+            'featured' => $request->boolean('featured'),
         ]);
 
         // Géneros
@@ -223,11 +227,11 @@ class GameController extends Controller
             foreach ($request->versions as $v) {
                 $game->versions()->create([
                     'edition_name' => $v['edition_name'],
-                    'platform_id'  => $v['platform_id'],
-                    'base_price'   => $v['base_price'],
-                    'final_price'  => $v['final_price'],
-                    'stock'        => $v['stock'],
-                    'active'       => isset($v['active']) ? (bool) $v['active'] : true,
+                    'platform_id' => $v['platform_id'],
+                    'base_price' => $v['base_price'],
+                    'final_price' => $v['final_price'],
+                    'stock' => $v['stock'],
+                    'active' => isset($v['active']) ? (bool) $v['active'] : true,
                 ]);
             }
         }
@@ -236,14 +240,14 @@ class GameController extends Controller
             ->with('success', __('Game created successfully.'));
     }
 
-    /* ─────────────── ADMIN: EDIT ─────────────── */
+    /*  ADMIN: EDIT */
 
     public function edit(Game $game)
     {
         $game->load(['media', 'versions.platform', 'genres', 'category']);
         $categories = Category::orderBy('name')->get();
-        $genres     = Genre::orderBy('name')->get();
-        $platforms  = Platform::orderBy('name')->get();
+        $genres = Genre::orderBy('name')->get();
+        $platforms = Platform::orderBy('name')->get();
 
         return view('backend.games.edit', compact('game', 'categories', 'genres', 'platforms'));
     }
@@ -251,41 +255,41 @@ class GameController extends Controller
     public function update(Request $request, Game $game)
     {
         $request->validate([
-            'name'                => 'required|string|max:255',
-            'developer'           => 'required|string|max:255',
-            'category_id'         => 'required|exists:categories,id',
-            'release_date'        => 'required|digits:4|integer|min:1970|max:2099',
-            'age'                 => 'required|integer|min:0',
-            'summary'             => 'required|string|max:500',
-            'description'         => 'required|string',
+            'name' => 'required|string|max:255',
+            'developer' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'release_date' => 'required|digits:4|integer|min:1970|max:2099',
+            'age' => 'required|integer|min:0',
+            'summary' => 'required|string|max:500',
+            'description' => 'required|string',
             'system_requirements' => 'nullable|string',
-            'featured'            => 'nullable|boolean',
+            'featured' => 'nullable|boolean',
 
-            'media_poster'        => 'nullable|string|max:2048',
-            'media_banner'        => 'nullable|string|max:2048',
-            'media_video'         => 'nullable|string|max:2048',
-            'media_gameplay.*'    => 'nullable|string|max:2048',
+            'media_poster' => 'nullable|string|max:2048',
+            'media_banner' => 'nullable|string|max:2048',
+            'media_video' => 'nullable|string|max:2048',
+            'media_gameplay.*' => 'nullable|string|max:2048',
 
-            'versions'                      => 'nullable|array',
-            'versions.*.id'                 => 'nullable|exists:game_versions,id',
-            'versions.*.edition_name'       => 'required_with:versions|string|max:255',
-            'versions.*.platform_id'        => 'required_with:versions|exists:platforms,id',
-            'versions.*.base_price'         => 'required_with:versions|numeric|min:0',
-            'versions.*.final_price'        => 'required_with:versions|numeric|min:0',
-            'versions.*.stock'              => 'required_with:versions|integer|min:0',
-            'versions.*.active'             => 'nullable|boolean',
+            'versions' => 'nullable|array',
+            'versions.*.id' => 'nullable|exists:game_versions,id',
+            'versions.*.edition_name' => 'required_with:versions|string|max:255',
+            'versions.*.platform_id' => 'required_with:versions|exists:platforms,id',
+            'versions.*.base_price' => 'required_with:versions|numeric|min:0',
+            'versions.*.final_price' => 'required_with:versions|numeric|min:0',
+            'versions.*.stock' => 'required_with:versions|integer|min:0',
+            'versions.*.active' => 'nullable|boolean',
         ]);
 
         $game->update([
-            'name'                => $request->name,
-            'developer'           => $request->developer,
-            'category_id'         => $request->category_id,
-            'release_date'        => $request->release_date,
-            'age'                 => $request->age,
-            'summary'             => $request->summary,
-            'description'         => $request->description,
+            'name' => $request->name,
+            'developer' => $request->developer,
+            'category_id' => $request->category_id,
+            'release_date' => $request->release_date,
+            'age' => $request->age,
+            'summary' => $request->summary,
+            'description' => $request->description,
             'system_requirements' => $request->system_requirements,
-            'featured'            => $request->boolean('featured'),
+            'featured' => $request->boolean('featured'),
         ]);
 
         // Géneros
@@ -297,27 +301,27 @@ class GameController extends Controller
         // Versões: upsert
         $keptIds = [];
         foreach ($request->versions ?? [] as $v) {
-            if (!empty($v['id'])) {
+            if (! empty($v['id'])) {
                 $version = GameVersion::find($v['id']);
                 if ($version && $version->game_id === $game->id) {
                     $version->update([
                         'edition_name' => $v['edition_name'],
-                        'platform_id'  => $v['platform_id'],
-                        'base_price'   => $v['base_price'],
-                        'final_price'  => $v['final_price'],
-                        'stock'        => $v['stock'],
-                        'active'       => isset($v['active']) ? (bool) $v['active'] : true,
+                        'platform_id' => $v['platform_id'],
+                        'base_price' => $v['base_price'],
+                        'final_price' => $v['final_price'],
+                        'stock' => $v['stock'],
+                        'active' => isset($v['active']) ? (bool) $v['active'] : true,
                     ]);
                     $keptIds[] = $version->id;
                 }
             } else {
                 $newVersion = $game->versions()->create([
                     'edition_name' => $v['edition_name'],
-                    'platform_id'  => $v['platform_id'],
-                    'base_price'   => $v['base_price'],
-                    'final_price'  => $v['final_price'],
-                    'stock'        => $v['stock'],
-                    'active'       => isset($v['active']) ? (bool) $v['active'] : true,
+                    'platform_id' => $v['platform_id'],
+                    'base_price' => $v['base_price'],
+                    'final_price' => $v['final_price'],
+                    'stock' => $v['stock'],
+                    'active' => isset($v['active']) ? (bool) $v['active'] : true,
                 ]);
                 $keptIds[] = $newVersion->id;
             }
@@ -329,7 +333,7 @@ class GameController extends Controller
             ->with('success', __('Game updated successfully.'));
     }
 
-    /* ─────────────── ADMIN: DELETE ─────────────── */
+    /*  ADMIN: DELETE */
 
     public function delete(Game $game)
     {
@@ -342,7 +346,7 @@ class GameController extends Controller
             ->with('success', __('Game deleted successfully.'));
     }
 
-    /* ─────────────── ADMIN: DELETE MÍDIA ─────────────── */
+    /*  ADMIN: DELETE MÍDIA */
 
     public function deleteMedia(Game $game, GameMedia $media)
     {
@@ -352,7 +356,7 @@ class GameController extends Controller
         return back()->with('success', __('Media removed.'));
     }
 
-    /* ─────────────── ADMIN: DELETE VERSÃO ─────────────── */
+    /*  ADMIN: DELETE VERSÃO */
 
     public function destroyVersion(Game $game, GameVersion $version)
     {
@@ -362,7 +366,7 @@ class GameController extends Controller
         return back()->with('success', __('Version removed.'));
     }
 
-    /* ─────────────── HELPER PRIVADO ─────────────── */
+    /*  HELPER PRIVADO */
 
     /**
      * Sincroniza as mídias do jogo a partir dos campos de link do request.
@@ -416,17 +420,17 @@ class GameController extends Controller
 
         // youtu.be/ID
         if (preg_match('#youtu\.be/([A-Za-z0-9_-]{11})#', $url, $m)) {
-            return 'https://www.youtube.com/embed/' . $m[1];
+            return 'https://www.youtube.com/embed/'.$m[1];
         }
 
         // youtube.com/watch?v=ID  (ou shorts, live, etc.)
         if (preg_match('#[?&]v=([A-Za-z0-9_-]{11})#', $url, $m)) {
-            return 'https://www.youtube.com/embed/' . $m[1];
+            return 'https://www.youtube.com/embed/'.$m[1];
         }
 
         // youtube.com/shorts/ID
         if (preg_match('#youtube\.com/shorts/([A-Za-z0-9_-]{11})#', $url, $m)) {
-            return 'https://www.youtube.com/embed/' . $m[1];
+            return 'https://www.youtube.com/embed/'.$m[1];
         }
 
         // Não reconheceu — devolve como está
@@ -443,7 +447,7 @@ class GameController extends Controller
     private function resolveImageUrl(string $url): string
     {
         // Só processa URLs do ImgBB (página de visualização)
-        if (!preg_match('#^https?://ibb\.co/([A-Za-z0-9]+)$#', $url, $m)) {
+        if (! preg_match('#^https?://ibb\.co/([A-Za-z0-9]+)$#', $url, $m)) {
             return $url; // já é link direto ou outro host — usa como está
         }
 
@@ -452,9 +456,9 @@ class GameController extends Controller
         try {
             // Tenta buscar o link direto via endpoint embed do ImgBB
             $apiUrl = "https://ibb.co/json?type=album&action=data&albumid={$albumId}";
-            $ctx    = stream_context_create(['http' => [
+            $ctx = stream_context_create(['http' => [
                 'timeout' => 5,
-                'header'  => "User-Agent: Mozilla/5.0\r\n",
+                'header' => "User-Agent: Mozilla/5.0\r\n",
             ]]);
             $json = @file_get_contents($apiUrl, false, $ctx);
 
@@ -463,19 +467,23 @@ class GameController extends Controller
                 $direct = $data['image']['image']['url']
                        ?? $data['image']['url']
                        ?? null;
-                if ($direct) return $direct;
+                if ($direct) {
+                    return $direct;
+                }
             }
-        } catch (\Throwable) {}
+        } catch (\Throwable) {
+        }
 
         // Fallback: tenta scraping leve da página para encontrar og:image
         try {
-            $ctx  = stream_context_create(['http' => ['timeout' => 5,
+            $ctx = stream_context_create(['http' => ['timeout' => 5,
                 'header' => "User-Agent: Mozilla/5.0\r\n"]]);
             $html = @file_get_contents("https://ibb.co/{$albumId}", false, $ctx);
             if ($html && preg_match('/<meta property="og:image"\s+content="([^"]+)"/i', $html, $og)) {
                 return $og[1];
             }
-        } catch (\Throwable) {}
+        } catch (\Throwable) {
+        }
 
         // Último recurso: devolve a URL original
         return $url;

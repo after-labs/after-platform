@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('game_version_id');
             $table->integer('order_id')->nullable();
             $table->string('key');
-            $table->string('status'); // reserved, sold, active, inactive 
+            $table->string('status');
             $table->datetime('sold_at')->nullable();
             $table->datetime('expires_at')->nullable();
         });

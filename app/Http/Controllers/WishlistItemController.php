@@ -4,32 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Models\Game;
 use App\Models\WishlistItem;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class WishlistItemController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $items = WishlistItem::with([
-            'Game.media',
-            'Game.versions.offer',
-            'Game.category',
-        ])
-            ->where('user_id', Auth::id())
+        $items = $request->user()
+            ->wishlistItems()
+            ->with([
+                'game.media',
+                'game.versions.offer',
+                'game.category',
+            ])
             ->latest()
             ->get();
 
         return view('frontend.account.wishlist', compact('items'));
     }
 
-    public function store(Game $game)
+    public function store(Request $request, Game $game)
     {
-        WishlistItem::firstOrCreate([
-            'user_id' => Auth::id(),
+        $request->user()->wishlistItems()->firstOrCreate([
             'game_id' => $game->id,
         ]);
 
-        Auth::user()->notifications()->create([
+        $request->user()->notifications()->create([
             'title' => 'Game saved to wishlist',
             'description' => $game->name.' was saved to your wishlist.',
         ]);
@@ -37,9 +37,11 @@ class WishlistItemController extends Controller
         return redirect()->route('wishlist.index');
     }
 
-    public function delete(WishlistItem $wishlistItem)
+    public function delete(Request $request, WishlistItem $wishlistItem)
     {
-        abort_unless($wishlistItem->user_id === Auth::id(), 403);
+        $wishlistItem->loadMissing('user');
+
+        abort_unless($wishlistItem->user->is($request->user()), 403);
 
         $wishlistItem->delete();
 

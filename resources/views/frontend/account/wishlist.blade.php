@@ -29,7 +29,7 @@
         <section class="wishlist-grid">
             @forelse($items as $item)
                 <article class="wishlist-item">
-                    <x-game-card :game="$item->Game" />
+                    <x-game-card :game="$item->game" />
 
                     <form action="{{ route('wishlist.delete', $item) }}" method="POST">
                         @csrf

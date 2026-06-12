@@ -87,7 +87,7 @@
             <section class="games">
                 <div class="games-grid">
                     @forelse($games as $game)
-                        <x-game-card :game="$game" />
+                        <x-game-card :game="$game" :price-filter="$priceFilter" :platform-ids="$platformIds" />
                     @empty
                         <p class="empty-state">
                             {{ __('No games found.') }}

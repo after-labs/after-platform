@@ -376,6 +376,10 @@
     width: 100%;
 }
 
+.you-may-like-grid > .game-card-link:only-child {
+    max-width: 260px;
+}
+
 .empty-state {
     color: var(--ghost-white-80);
     margin: 0;

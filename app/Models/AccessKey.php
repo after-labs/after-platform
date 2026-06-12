@@ -4,27 +4,30 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AccessKey extends Model {
-    
+class AccessKey extends Model
+{
     protected $fillable = [
-    'game_id',
-    'game_version_id',
-    'order_id',
-    'key',
-    'status',
-    'sold_at',
-    'expires_at'
+        'game_id',
+        'game_version_id',
+        'order_id',
+        'key',
+        'status',
+        'sold_at',
+        'expires_at',
     ];
 
-    public function game(){
+    public function game()
+    {
         return $this->belongsTo(Game::class);
     }
 
-    public function gameVersion(){
+    public function gameVersion()
+    {
         return $this->belongsTo(GameVersion::class);
     }
 
-    public function order(){
+    public function order()
+    {
         return $this->belongsTo(Order::class);
     }
 }

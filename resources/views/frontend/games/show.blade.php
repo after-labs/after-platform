@@ -15,6 +15,7 @@
         $gameplays = $game->gameplays();
         $versions = $game->versions->where('active', true);
         $selectedVersion = $versions->sortBy('final_price')->first();
+        $selectedVersionId = $selectedVersion?->id;
         $genres = $game->genres->pluck('name')->join(', ');
         $firstGameplay = $gameplays->first();
     @endphp
@@ -102,10 +103,9 @@
             @if($selectedVersion)
                 <div class="price-container">
                     <span class="current-price">${{ number_format($selectedVersion->final_price, 2) }}</span>
-
-                    @if($selectedVersion->base_price > $selectedVersion->final_price)
-                        <span class="original-price">${{ number_format($selectedVersion->base_price, 2) }}</span>
-                    @endif
+                    <span class="original-price" @if($selectedVersion->base_price <= $selectedVersion->final_price) style="display: none" @endif>
+                        ${{ number_format($selectedVersion->base_price, 2) }}
+                    </span>
                 </div>
             @else
                 <div class="price-container">
@@ -127,7 +127,7 @@
                 <div class="platform-options">
                     @forelse($versions as $version)
                         <button
-                            class="platform-card {{ $loop->first ? 'active' : '' }}"
+                            class="platform-card {{ $version->id === $selectedVersionId ? 'active' : '' }}"
                             type="button"
                             data-cart-action="{{ route('cart.store', $version) }}"
                             data-final-price="${{ number_format($version->final_price, 2) }}"
