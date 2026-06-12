@@ -2,9 +2,9 @@
 
 After Platform é uma plataforma web de distribuição digital voltada para jogos independentes.
 
-O projeto simula uma operação completa de comercialização de licenças digitais, permitindo que jogadores descubram títulos, realizem compras, resgatem chaves de acesso e acompanhem seu histórico de pedidos, enquanto administradores gerenciam catálogo, estoque, usuários e operações da plataforma.
+O projeto simula uma operação completa de comercialização de chaves de acesso para jogos digitais indie, permitindo que jogadores descubram títulos, realizem compras, resgatem chaves de acesso e acompanhem seu histórico de pedidos, enquanto administradores gerenciam catálogo, usuários e jogos da plataforma.
 
-Mais do que uma simples loja virtual, o objetivo foi modelar fluxos comuns encontrados em marketplaces digitais modernos, incluindo gerenciamento de catálogo, checkout integrado, processamento de pedidos, distribuição automática de licenças digitais, sistema de recompensas e painel administrativo.
+Mais do que uma simples loja virtual, o objetivo foi modelar fluxos comuns encontrados em marketplaces digitais modernos, incluindo gerenciamento de catálogo, checkout integrado, processamento de pedidos, distribuição automática de chaves, sistema de recompensas e painel administrativo.
 
 ---
 
@@ -34,8 +34,7 @@ Durante o desenvolvimento foram explorados conceitos como:
 * Fluxo completo de carrinho e checkout
 * Integração com gateway de pagamento
 * Processamento automatizado de pedidos
-* Distribuição de licenças digitais
-* Controle de estoque
+* Distribuição de chaves de acceso
 * Gamificação de usuários
 * Painel administrativo
 * Internacionalização (PT-BR / EN)
@@ -49,7 +48,6 @@ Durante o desenvolvimento foram explorados conceitos como:
 * Cadastro e autenticação de usuários
 * Recuperação de senha
 * Perfil do usuário
-* Upload de avatar
 * Catálogo completo de jogos
 * Busca textual
 * Filtros por categoria
@@ -82,7 +80,7 @@ As moedas acumuladas podem ser utilizadas como desconto em futuras compras, cria
 
 ---
 
-### Distribuição Digital de Licenças
+### Distribuição Digital de Chaves 
 
 Após a confirmação do pagamento:
 
@@ -92,21 +90,16 @@ Após a confirmação do pagamento:
 * O usuário recebe acesso imediato às chaves adquiridas
 * O sistema envia confirmação por e-mail
 
-Caso não existam licenças suficientes em estoque, o pedido é colocado em estado de espera para posterior liberação.
+Caso não existam chaves suficientes em estoque, o pedido é colocado em estado de espera para posterior liberação.
 
 ---
 
 ### Painel Administrativo
 
-| Dashboard Administrativo | Gestão de Jogos         |
-| ------------------------ | ----------------------- |
-| **[IMAGE_PLACEHOLDER]**  | **[IMAGE_PLACEHOLDER]** |
-
 O painel administrativo permite:
 
 * Gestão de usuários
 * Controle de permissões
-* Controle de status de contas
 * Cadastro de jogos
 * Edição de catálogo
 * Gerenciamento de mídias
@@ -217,7 +210,6 @@ public/
 * Integração com APIs externas
 * Processamento assíncrono via Webhook
 * Internacionalização
-* Upload e gerenciamento de arquivos
 * Boas práticas de organização Laravel
 * Modelagem de marketplace digital
 
