@@ -19,9 +19,6 @@ class GameController extends Controller
         $baseQuery = Game::with(['media', 'versions.offer', 'category']);
 
         $popularGames = (clone $baseQuery)->where('featured', true)->latest()->limit(6)->get();
-        if ($popularGames->isEmpty()) {
-            $popularGames = (clone $baseQuery)->latest()->limit(6)->get();
-        }
 
         $freeGames = (clone $baseQuery)
             ->whereHas('versions', fn ($q) => $q->where('active', true)->where('final_price', 0))
@@ -37,7 +34,7 @@ class GameController extends Controller
             $onSaleGames = (clone $baseQuery)->latest()->limit(6)->get();
         }
 
-        $highlightGame = $onSaleGames->first() ?? $popularGames->first() ?? $freeGames->first();
+        $highlightGame = $popularGames->first();
 
         return view('frontend.home', compact('popularGames', 'freeGames', 'onSaleGames', 'highlightGame'));
     }

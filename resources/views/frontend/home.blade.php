@@ -18,7 +18,7 @@
       }
 
       $highlightMedia = $highlightGame?->banner() ?? $highlightGame?->poster();
-      $highlightCards = $onSaleGames->take(4);
+      $highlightCards = $popularGames->take(4);
     @endphp
 
     <main
