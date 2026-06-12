@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class GameController extends Controller
 {
-    /* ─────────────── FRONTEND ─────────────── */
+    /* FRONTEND */
 
     public function home()
     {
@@ -117,7 +117,7 @@ class GameController extends Controller
         return view('frontend.games.show', compact('game', 'relatedGames'));
     }
 
-    /* ─────────────── ADMIN: INDEX ─────────────── */
+    /*  ADMIN: INDEX */
 
     public function adminIndex(Request $request)
     {
@@ -158,7 +158,7 @@ class GameController extends Controller
         ));
     }
 
-    /* ─────────────── ADMIN: CREATE ─────────────── */
+    /* ADMIN: CREATE */
 
     public function create()
     {
@@ -236,7 +236,7 @@ class GameController extends Controller
             ->with('success', __('Game created successfully.'));
     }
 
-    /* ─────────────── ADMIN: EDIT ─────────────── */
+    /*  ADMIN: EDIT  */
 
     public function edit(Game $game)
     {
@@ -329,7 +329,7 @@ class GameController extends Controller
             ->with('success', __('Game updated successfully.'));
     }
 
-    /* ─────────────── ADMIN: DELETE ─────────────── */
+    /*  ADMIN: DELETE  */
 
     public function delete(Game $game)
     {
@@ -342,7 +342,7 @@ class GameController extends Controller
             ->with('success', __('Game deleted successfully.'));
     }
 
-    /* ─────────────── ADMIN: DELETE MÍDIA ─────────────── */
+    /*  ADMIN: DELETE MÍDIA  */
 
     public function deleteMedia(Game $game, GameMedia $media)
     {
@@ -352,7 +352,7 @@ class GameController extends Controller
         return back()->with('success', __('Media removed.'));
     }
 
-    /* ─────────────── ADMIN: DELETE VERSÃO ─────────────── */
+    /*  ADMIN: DELETE VERSÃO  */
 
     public function destroyVersion(Game $game, GameVersion $version)
     {
@@ -362,7 +362,7 @@ class GameController extends Controller
         return back()->with('success', __('Version removed.'));
     }
 
-    /* ─────────────── HELPER PRIVADO ─────────────── */
+    /*  HELPER PRIVADO  */
 
     /**
      * Sincroniza as mídias do jogo a partir dos campos de link do request.
