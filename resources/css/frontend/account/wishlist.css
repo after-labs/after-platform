@@ -1,8 +1,7 @@
 .wishlist-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 260px));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1rem;
-    justify-content: start;
     margin-top: 1.25rem;
 }
 
@@ -14,6 +13,10 @@
 
 .wishlist-item .game-card-link {
     width: 100%;
+}
+
+.wishlist-grid > .wishlist-item:only-child {
+    max-width: 260px;
 }
 
 .wishlist-item form {

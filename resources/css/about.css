@@ -196,9 +196,8 @@ section > h2 + p {
 
 .game-row {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(210px, 260px));
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
     gap: 1.25rem;
-    justify-content: start;
     margin: 2.5rem 0 2rem 0;
     width: 100%;
     max-width: 1200px;
@@ -206,6 +205,10 @@ section > h2 + p {
 
 .about-game-row .game-card-link {
     min-width: 0;
+}
+
+.about-game-row > .game-card-link:only-child {
+    max-width: 260px;
 }
 
 .empty-games {

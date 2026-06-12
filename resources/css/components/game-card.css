@@ -1,6 +1,5 @@
 .game-card-link {
     display: block;
-    width: min(100%, 260px);
     text-decoration: none;
     color: inherit;
 }
