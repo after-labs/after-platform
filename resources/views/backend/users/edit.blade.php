@@ -32,7 +32,7 @@
     <form class="form-grid" action="{{ route('admin.users.update', $user) }}" method="POST" id="edit-form">
     @csrf
 
-        {{-- Name --}}
+        <!--Name-->
         <div class="field-group">
             <label for="name">{{ __('Name') }} <span class="req">*</span></label>
             <input id="name" name="name" type="text"
@@ -41,7 +41,7 @@
             @error('name')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        {{-- Email --}}
+        <!--Email-->
         <div class="field-group">
             <label for="email">{{ __('Email') }} <span class="req">*</span></label>
             <input id="email" name="email" type="email"
@@ -50,7 +50,7 @@
             @error('email')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        {{-- New password (optional) --}}
+        <!--New password-->
         <div class="field-group">
             <label for="password">
                 {{ __('New Password') }}
@@ -62,14 +62,14 @@
             @error('password')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        {{-- Confirm new password --}}
+        <!--Confirm new password-->
         <div class="field-group">
             <label for="password_confirmation">{{ __('Confirm New Password') }}</label>
             <input id="password_confirmation" name="password_confirmation" type="password"
                 placeholder="{{ __('Repeat new password') }}">
         </div>
 
-        {{-- Phone --}}
+        <!--Phone-->
         <div class="field-group">
             <label for="phone">{{ __('Phone Number') }}</label>
             <input id="phone" name="phone" type="text"
@@ -77,7 +77,7 @@
                 placeholder="+55 (11) 90000-0000">
         </div>
 
-        {{-- Country --}}
+        <!--Country-->
         <div class="field-group">
             <label for="country">{{ __('Country') }}</label>
             <select id="country" name="country">
@@ -86,8 +86,7 @@
                     'BR' => 'Brazil', 'US' => 'United States', 'PT' => 'Portugal',
                     'AR' => 'Argentina', 'MX' => 'Mexico', 'CO' => 'Colombia',
                     'GB' => 'United Kingdom', 'DE' => 'Germany', 'FR' => 'France',
-                    'JP' => 'Japan', 'CA' => 'Canada', 'AU' => 'Australia',
-                ] as $code => $name)
+                    'JP' => 'Japan', 'CA' => 'Canada', 'AU' => 'Australia',] as $code => $name)
                     <option value="{{ $code }}"
                         {{ old('country', $user->country) === $code ? 'selected' : '' }}>
                         {{ __($name) }}
@@ -96,7 +95,7 @@
             </select>
         </div>
 
-        {{-- User type --}}
+        <!--User type-->
         <div class="field-group">
             <label for="role">{{ __('User Type') }} <span class="req">*</span></label>
             <select id="role" name="role"
@@ -107,7 +106,7 @@
             @error('role')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        {{-- Status --}}
+        <!--Status-->
         <div class="field-group">
             <label for="status">{{ __('Active Status') }} <span class="req">*</span></label>
             <select id="status" name="status"
@@ -118,13 +117,13 @@
             @error('status')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        {{-- User ID (read-only) --}}
+        <!--User ID-->
         <div class="field-group full">
             <label>{{ __('User ID') }}</label>
             <input type="text" value="{{ $user->id }}" readonly class="readonly">
         </div>
 
-        {{-- Member since (read-only) --}}
+        <!--Member since-->
         <div class="field-group full">
             <label>{{ __('Member Since') }}</label>
             <input type="text" value="{{ $user->created_at->format('d/m/Y H:i') }}" readonly class="readonly">

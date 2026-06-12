@@ -26,7 +26,6 @@
     <form id="game-form" class="form-grid" action="{{ route('admin.games.store') }}" method="POST">
     @csrf
 
-        {{-- Name --}}
         <div class="field-group">
             <label for="name">{{ __('Name') }} <span class="req">*</span></label>
             <input id="name" name="name" type="text"
@@ -36,7 +35,6 @@
             @error('name')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        {{-- Category --}}
         <div class="field-group">
             <label for="category_id">{{ __('Category') }} <span class="req">*</span></label>
             <select id="category_id" name="category_id"
@@ -51,7 +49,6 @@
             @error('category_id')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        {{-- Developer --}}
         <div class="field-group">
             <label for="developer">{{ __('Developer') }} <span class="req">*</span></label>
             <input id="developer" name="developer" type="text"
@@ -61,7 +58,6 @@
             @error('developer')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        {{-- Release Year --}}
         <div class="field-group">
             <label for="release_date">{{ __('Release Year') }} <span class="req">*</span></label>
             <input id="release_date" name="release_date" type="number"
@@ -71,7 +67,6 @@
             @error('release_date')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        {{-- Age --}}
         <div class="field-group">
             <label for="age">{{ __('Age Rating') }} <span class="req">*</span></label>
             <select id="age" name="age" class="{{ $errors->has('age') ? 'is-invalid' : '' }}">
@@ -83,7 +78,7 @@
             @error('age')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        {{-- Featured --}}
+
         <div class="field-group">
             <label for="featured">{{ __('Featured') }}</label>
             <select id="featured" name="featured">
@@ -92,7 +87,6 @@
             </select>
         </div>
 
-        {{-- Genres (multi-select) --}}
         <div class="field-group span-3">
             <label>{{ __('Genre(s)') }}</label>
             <div class="checkbox-inline">
@@ -108,7 +102,7 @@
 
     </form>
 
-    {{-- Summary --}}
+    
     <div class="textarea-group">
         <label for="summary">{{ __('Summary') }} <span class="req">*</span></label>
         <textarea id="summary" name="summary" form="game-form"
@@ -131,7 +125,7 @@
                   placeholder="{{ __('Minimum and recommended specs') }}">{{ old('system_requirements') }}</textarea>
     </div>
 
-    {{-- ── MEDIA ── --}}
+    
     <div class="section-title">{{ __('Media (image links)') }}</div>
 
     <div class="media-grid">
@@ -162,7 +156,7 @@
 
     </div>
 
-    {{-- Gameplay images --}}
+    <!--Gameplay images-->
     <div class="images-header">
         <span>{{ __('Gameplay Screenshots') }}</span>
         <button type="button" class="add-btn" id="add-gameplay">+ {{ __('Add Image') }}</button>
@@ -185,7 +179,7 @@
         @endif
     </div>
 
-    {{-- ── VERSIONS ── --}}
+
     <div class="section-title">{{ __('Game Versions / Editions') }}</div>
 
     <div id="versions-list">
@@ -231,7 +225,7 @@
 
     <button type="button" class="add-btn" id="add-version">+ {{ __('Add Version') }}</button>
 
-    {{-- ── ACTIONS ── --}}
+
     <div class="actions">
         <a class="cancel" href="{{ route('admin.games.index') }}">{{ __('Cancel') }}</a>
         <button class="save" type="submit" form="game-form">{{ __('Create Game') }}</button>
@@ -241,7 +235,7 @@
 </div>
 
 <script>
-    /* ── Gameplay screenshots ── */
+   
     document.getElementById('add-gameplay').addEventListener('click', function () {
         const list = document.getElementById('gameplay-list')
         const div  = document.createElement('div')

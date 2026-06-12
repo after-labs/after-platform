@@ -12,14 +12,12 @@
 <main>
     <h1>{{ __('Users') }}</h1>
 
-    {{-- ── Flash ── --}}
+    <!--Flash-->
     @if(session('success'))
         <div class="alert-success">{{ session('success') }}</div>
     @endif
 
-    {{-- ══════════════════════════════════════════════════
-         Card 1: Search + filter tabs
-    ══════════════════════════════════════════════════ --}}
+        <!--Card 1: Search + filter tabs-->
     <section class="card">
 
         {{-- Search --}}
@@ -32,7 +30,7 @@
                 placeholder="{{ __('Search by username, email or ID…') }}"
                 autocomplete="off"
             >
-            {{-- keep active filter when searching --}}
+            <!--keep active filter when searching-->
             @if(request('filter'))
                 <input type="hidden" name="filter" value="{{ request('filter') }}">
             @endif
@@ -41,7 +39,7 @@
             </span>
         </form>
 
-        {{-- Filter tabs --}}
+        <!--Filter tabs-->
         <div class="filters">
             @php
                 $active = request('filter', 'all');
@@ -68,9 +66,7 @@
 
     <br>
 
-    {{-- ══════════════════════════════════════════════════
-         Card 2: Table
-    ══════════════════════════════════════════════════ --}}
+    <!--Card 2: Table-->
     <section class="card">
         <table>
             <thead>
@@ -90,7 +86,7 @@
                         <td>{{ $user->name }}</td>
                         <td class="td-email">{{ $user->email }}</td>
 
-                        {{-- Role dropdown ──────────────────── --}}
+                        <!--Role dropdown-->
                         <td>
                             <div class="inline-select-wrap">
                                 <select
@@ -106,15 +102,14 @@
                             </div>
                         </td>
 
-                        {{-- Status dropdown ────────────────── --}}
+                        <!--Status dropdown-->
                         <td>
                             <div class="inline-select-wrap">
                                 <select
                                     class="inline-select"
                                     data-user="{{ $user->id }}"
                                     data-field="status"
-                                    data-url="{{ route('admin.users.field', $user) }}"
-                                >
+                                    data-url="{{ route('admin.users.field', $user) }}">
                                     <option value="active"   {{ $user->status === 'active'   ? 'selected' : '' }}>{{ __('Active') }}</option>
                                     <option value="inactive" {{ $user->status === 'inactive' ? 'selected' : '' }}>{{ __('Inactive') }}</option>
                                 </select>
@@ -122,7 +117,7 @@
                             </div>
                         </td>
 
-                        {{-- Actions ────────────────────────── --}}
+                        <!--Actions-->
                         <td class="td-actions">
                             <a href="{{ route('admin.users.edit', $user) }}" class="btn-action btn-edit">
                                 {{ __('Edit') }}
@@ -141,16 +136,16 @@
             </tbody>
         </table>
 
-        {{-- ── Pagination ── --}}
+        <!--Pagination-->
         <div class="pagination">
-            {{-- Previous --}}
+            <!--Previous-->
             @if($users->onFirstPage())
                 <span class="page-arrow disabled">«</span>
             @else
                 <a class="page-arrow" href="{{ $users->previousPageUrl() }}">«</a>
             @endif
 
-            {{-- Page numbers --}}
+            <!--Page numbers-->
             @foreach($users->getUrlRange(1, $users->lastPage()) as $page => $url)
                 @if($page === $users->currentPage())
                     <span class="page active">{{ $page }}</span>
@@ -161,7 +156,7 @@
                 @endif
             @endforeach
 
-            {{-- Next --}}
+            <!--Next-->
             @if($users->hasMorePages())
                 <a class="page-arrow" href="{{ $users->nextPageUrl() }}">»</a>
             @else
@@ -176,7 +171,7 @@
 (function () {
     'use strict'
 
-    // ── Live search (debounced, 400 ms) ───────────────────────
+    //Live search
     const searchInput = document.getElementById('search-input')
     const searchForm  = document.getElementById('search-form')
     let   searchTimer = null
@@ -190,7 +185,7 @@
         if (e.key === 'Enter') { clearTimeout(searchTimer); searchForm.submit() }
     })
 
-    // ── Inline role / status update (AJAX) ───────────────────
+    //Inline role / status update (AJAX) 
     const CSRF = document.querySelector('meta[name="csrf-token"]')?.content
                  ?? '{{ csrf_token() }}'
 

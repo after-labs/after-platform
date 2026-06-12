@@ -17,7 +17,7 @@
         <div class="alert-success">{{ session('success') }}</div>
     @endif
 
-    {{-- ── Card 1: Search + filtros ── --}}
+    <!--Card 1: Search + filtros-->
     <section class="card">
 
         <form method="GET" action="{{ route('admin.orders.index') }}"
@@ -46,7 +46,7 @@
                 'in_progress' => __('In Progress'),
                 'completed'   => __('Completed'),
                 'refused'     => __('Refused'),
-            ] as $key => $label)
+                ] as $key => $label)
                 <a href="{{ request()->fullUrlWithQuery(['filter' => $key, 'page' => 1]) }}"
                    class="btn {{ $active === $key ? 'active' : '' }}">{{ $label }}</a>
             @endforeach
@@ -67,7 +67,7 @@
 
     <br>
 
-    {{-- ── Card 2: Tabela ── --}}
+    <!--Card 2: Tabela-->
     <section class="card">
         <table>
             <thead>
@@ -90,14 +90,13 @@
 
                         <td class="td-total">${{ number_format($order->total, 2) }}</td>
 
-                        {{-- Status inline --}}
+                        <!--Status inline-->
                         <td>
                             <div class="inline-select-wrap">
                                 <select
                                     class="inline-select status-select"
                                     data-url="{{ route('admin.orders.status', $order) }}"
-                                    data-status="{{ $order->status }}"
-                                >
+                                    data-status="{{ $order->status }}">
                                     <option value="in_progress" {{ $order->status === 'in_progress' ? 'selected' : '' }}>{{ __('In Progress') }}</option>
                                     <option value="completed"   {{ $order->status === 'completed'   ? 'selected' : '' }}>{{ __('Completed') }}</option>
                                     <option value="refused"     {{ $order->status === 'refused'     ? 'selected' : '' }}>{{ __('Refused') }}</option>
@@ -111,7 +110,7 @@
                             
                         </td>
 
-                        {{-- Botão que abre o popup --}}
+                        <!--open popup-->
                         <td>
                             <button
                                 type="button"
@@ -172,9 +171,7 @@
     </section>
 </main>
 
-{{-- ══════════════════════════════════════
-     ORDER DETAILS POPUP
-     ══════════════════════════════════════ --}}
+<!--ORDER DETAILS POPUP-->
 <div id="order-modal" class="modal-backdrop" aria-hidden="true">
     <div class="modal-box" role="dialog">
 
@@ -186,7 +183,7 @@
             <button type="button" class="modal-close" id="modal-close">✕</button>
         </div>
 
-        {{-- Info grid --}}
+        <!--Info grid-->
         <div class="modal-info-grid">
             <div class="info-cell">
                 <span class="info-label">{{ __('Customer') }}</span>
@@ -210,7 +207,7 @@
             </div>
         </div>
 
-        {{-- Items --}}
+        <!--Items-->
         <p class="items-label">{{ __('Items') }}</p>
         <div class="modal-items" id="m-items"></div>
 
@@ -234,7 +231,6 @@
         if (e.key === 'Enter') { clearTimeout(searchTimer); searchForm.submit() }
     })
 
-    /* ── Inline status update ── */
     const CSRF = document.querySelector('meta[name="csrf-token"]')?.content
 
     document.querySelectorAll('.status-select').forEach(select => {
@@ -275,7 +271,7 @@
         select.dataset.status = value
     }
 
-    /* ── Order Details Modal ── */
+
     const modal     = document.getElementById('order-modal')
     const closeBtn  = document.getElementById('modal-close')
 

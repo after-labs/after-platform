@@ -19,14 +19,14 @@
 
     <div class="card">
 
-        {{-- SEARCH --}}
+        <!--SEARCH-->
         <form class="search-row" method="GET" action="{{ route('admin.games.index') }}">
             <input type="text" name="search" value="{{ $search ?? '' }}"
                    placeholder="{{ __('Search by name, ID or developer') }}">
             <span>{{ __('Total: :count game(s)', ['count' => $games->total()]) }}</span>
         </form>
 
-        {{-- FILTER BAR --}}
+        <!--FILTER BAR-->
         <div class="filters-bar">
             <a href="{{ route('admin.games.index') }}"
                class="btn {{ !request('search') ? 'active' : '' }}">
@@ -37,7 +37,7 @@
             </a>
         </div>
 
-        {{-- GALLERY --}}
+        <!--GALLERY-->
         <div class="gallery">
             @forelse($games as $game)
                 @php
@@ -109,7 +109,7 @@
             @endforelse
         </div>
 
-        {{-- Pagination --}}
+        <!--Pagination-->
         <div class="pagination">
             {{ $games->withQueryString()->links() }}
         </div>
@@ -117,9 +117,7 @@
     </div>
 </main>
 
-{{-- ══════════════════════════════
-     MODAL DE CONFIRMAÇÃO DE DELETE
-     ══════════════════════════════ --}}
+<!--MODAL DE CONFIRMAÇÃO DE DELETE-->
 <div id="delete-modal" class="modal-backdrop" aria-hidden="true">
     <div class="modal-box" role="dialog">
         <div class="modal-icon">⚠</div>

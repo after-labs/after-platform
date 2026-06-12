@@ -28,7 +28,7 @@
     <form class="form-grid" action="{{ route('admin.users.store') }}" method="POST">
     @csrf
 
-        {{-- Name --}}
+        <!--Name-->
         <div class="field-group">
             <label for="name">{{ __('Name') }} <span class="req">*</span></label>
             <input id="name" name="name" type="text"
@@ -38,7 +38,7 @@
             @error('name')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        {{-- Email --}}
+        <!--Email-->
         <div class="field-group">
             <label for="email">{{ __('Email') }} <span class="req">*</span></label>
             <input id="email" name="email" type="email"
@@ -48,7 +48,7 @@
             @error('email')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        {{-- Password --}}
+        <!--Password-->
         <div class="field-group">
             <label for="password">{{ __('Password') }} <span class="req">*</span></label>
             <input id="password" name="password" type="password"
@@ -57,14 +57,14 @@
             @error('password')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        {{-- Confirm password --}}
+        <!--Confirm password-->
         <div class="field-group">
             <label for="password_confirmation">{{ __('Confirm Password') }} <span class="req">*</span></label>
             <input id="password_confirmation" name="password_confirmation" type="password"
                 placeholder="{{ __('Repeat password') }}">
         </div>
 
-        {{-- Phone --}}
+        <!--Phone-->
         <div class="field-group">
             <label for="phone">{{ __('Phone Number') }}</label>
             <input id="phone" name="phone" type="text"
@@ -72,7 +72,7 @@
                 placeholder="+55 (11) 90000-0000">
         </div>
 
-        {{-- Country --}}
+        <!--Country-->
         <div class="field-group">
             <label for="country">{{ __('Country') }}</label>
             <select id="country" name="country">
@@ -88,7 +88,7 @@
             </select>
         </div>
 
-        {{-- User type --}}
+        <!--User type-->
         <div class="field-group">
             <label for="role">{{ __('User Type') }} <span class="req">*</span></label>
             <select id="role" name="role"
@@ -100,7 +100,7 @@
             @error('role')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        {{-- Status --}}
+        <!--Status-->
         <div class="field-group">
             <label for="status">{{ __('Active Status') }} <span class="req">*</span></label>
             <select id="status" name="status"
@@ -121,7 +121,6 @@
         </button>
     </div>
 
-    {{-- Move submit inside form via JS since button is outside --}}
     <script>
         document.querySelector('.save').addEventListener('click', function () {
             document.querySelector('.form-grid').submit()

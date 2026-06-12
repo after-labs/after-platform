@@ -31,7 +31,7 @@
           action="{{ route('admin.games.update', $game) }}" method="POST">
     @csrf
 
-        {{-- Name --}}
+        <!--Name-->
         <div class="field-group">
             <label for="name">{{ __('Name') }} <span class="req">*</span></label>
             <input id="name" name="name" type="text"
@@ -40,7 +40,7 @@
             @error('name')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        {{-- Category --}}
+        <!--Category-->
         <div class="field-group">
             <label for="category_id">{{ __('Category') }} <span class="req">*</span></label>
             <select id="category_id" name="category_id"
@@ -55,7 +55,7 @@
             @error('category_id')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        {{-- Developer --}}
+        <!--Developer-->
         <div class="field-group">
             <label for="developer">{{ __('Developer') }} <span class="req">*</span></label>
             <input id="developer" name="developer" type="text"
@@ -64,7 +64,7 @@
             @error('developer')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        {{-- Release Year --}}
+        <!--Release Year-->
         <div class="field-group">
             <label for="release_date">{{ __('Release Year') }} <span class="req">*</span></label>
             <input id="release_date" name="release_date" type="number"
@@ -74,7 +74,7 @@
             @error('release_date')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        {{-- Age --}}
+        <!--Age-->
         <div class="field-group">
             <label for="age">{{ __('Age Rating') }} <span class="req">*</span></label>
             <select id="age" name="age" class="{{ $errors->has('age') ? 'is-invalid' : '' }}">
@@ -85,7 +85,7 @@
             @error('age')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        {{-- Featured --}}
+        <!--Featured-->
         <div class="field-group">
             <label for="featured">{{ __('Featured') }}</label>
             <select id="featured" name="featured">
@@ -94,13 +94,13 @@
             </select>
         </div>
 
-        {{-- Game ID (read-only) --}}
+        <!--Game ID-->
         <div class="field-group">
             <label>{{ __('Game ID') }}</label>
             <input type="text" value="{{ $game->id }}" disabled>
         </div>
 
-        {{-- Genres --}}
+        <!--Genres-->
         <div class="field-group span-3">
             <label>{{ __('Genre(s)') }}</label>
             <div class="checkbox-inline">
@@ -117,7 +117,7 @@
 
     </form>
 
-    {{-- Textareas --}}
+    <!--Textareas-->
     <div class="textarea-group">
         <label for="summary">{{ __('Summary') }} <span class="req">*</span></label>
         <textarea id="summary" name="summary" form="game-form"
@@ -137,7 +137,7 @@
         <textarea id="system_requirements" name="system_requirements" form="game-form">{{ old('system_requirements', $game->system_requirements) }}</textarea>
     </div>
 
-    {{-- ── MEDIA ── --}}
+    <!--MEDIA-->
     <div class="section-title">{{ __('Media (image links)') }}</div>
 
     @php
@@ -149,7 +149,7 @@
 
     <div class="media-grid">
 
-        {{-- Poster --}}
+        <!--Poster-->
         <div class="field-group media-field">
             <label>{{ __('Poster URL') }}</label>
             @if($mediaPoster)
@@ -167,7 +167,7 @@
             @error('media_poster')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        {{-- Banner --}}
+        <!--Banner-->
         <div class="field-group media-field">
             <label>{{ __('Banner URL') }}</label>
             @if($mediaBanner)
@@ -185,7 +185,7 @@
             @error('media_banner')<span class="field-error">{{ $message }}</span>@enderror
         </div>
 
-        {{-- Video YouTube --}}
+        <!--Video YouTube-->
         <div class="field-group media-field">
             <label>{{ __('YouTube Video URL') }}</label>
             @if($mediaVideo)
@@ -208,13 +208,13 @@
 
     </div>
 
-    {{-- Gameplay screenshots --}}
+    <!--Gameplay screenshots-->
     <div class="images-header">
         <span>{{ __('Gameplay Screenshots') }}</span>
         <button type="button" class="add-btn" id="add-gameplay">+ {{ __('Add Image') }}</button>
     </div>
 
-    {{-- Existing gameplay images --}}
+    <!--Existing gameplay images-->
     @if($mediaGameplay->count())
         <div class="existing-gameplay">
             @foreach($mediaGameplay as $gp)
@@ -246,7 +246,7 @@
         @endif
     </div>
 
-    {{-- ── VERSIONS ── --}}
+    <!--VERSIONS-->
     <div class="section-title">{{ __('Game Versions / Editions') }}</div>
 
     <div id="versions-list">
@@ -300,7 +300,7 @@
 
     <button type="button" class="add-btn" id="add-version">+ {{ __('Add Version') }}</button>
 
-    {{-- ── ACTIONS ── --}}
+    <!--ACTIONS-->
     <div class="actions">
         <form method="GET" action="{{ route('admin.games.delete', $game) }}"
               onsubmit="return confirm('{{ __('Delete :name permanently?', ['name' => $game->name]) }}')">
@@ -314,7 +314,7 @@
 </div>
 
 <script>
-    /* ── Gameplay screenshots ── */
+ 
     document.getElementById('add-gameplay').addEventListener('click', function () {
         const list = document.getElementById('gameplay-list')
         const div  = document.createElement('div')
@@ -328,7 +328,7 @@
         btn.addEventListener('click', () => btn.closest('.gameplay-item').remove())
     })
 
-    /* ── Versions ── */
+    
     let versionIndex = {{ $game->versions->count() }}
     const platformOptions = `@foreach($platforms as $p)<option value="{{ $p->id }}">{{ $p->name }}</option>@endforeach`
 

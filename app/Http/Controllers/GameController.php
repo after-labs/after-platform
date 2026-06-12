@@ -399,17 +399,10 @@ class GameController extends Controller
         }
     }
 
-    /**
-     * Converte qualquer formato de URL do YouTube para o link embed.
-     *
-     * Aceita:
-     *   https://www.youtube.com/watch?v=dQw4w9WgXcQ
-     *   https://youtu.be/dQw4w9WgXcQ
-     *   https://www.youtube.com/embed/dQw4w9WgXcQ  (já correto)
-     */
+    /*Converte qualquer formato de URL do YouTube para o link embed.*/
     private function resolveYoutubeUrl(string $url): string
     {
-        // Já é embed — retorna como está
+
         if (str_contains($url, 'youtube.com/embed/')) {
             return $url;
         }
@@ -419,30 +412,23 @@ class GameController extends Controller
             return 'https://www.youtube.com/embed/' . $m[1];
         }
 
-        // youtube.com/watch?v=ID  (ou shorts, live, etc.)
         if (preg_match('#[?&]v=([A-Za-z0-9_-]{11})#', $url, $m)) {
             return 'https://www.youtube.com/embed/' . $m[1];
         }
 
-        // youtube.com/shorts/ID
         if (preg_match('#youtube\.com/shorts/([A-Za-z0-9_-]{11})#', $url, $m)) {
             return 'https://www.youtube.com/embed/' . $m[1];
         }
 
-        // Não reconheceu — devolve como está
         return $url;
     }
 
-    /**
-     * Converte URLs de páginas de hospedagem para links diretos de imagem.
-     *
-     * ImgBB:  https://ibb.co/JRCf1Mp2
-     *      → busca o link direto via API e retorna https://i.ibb.co/.../img.jpg
-     *        Se a API falhar, tenta o padrão de URL direto.
-     */
+    /* Converte URLs de páginas de hospedagem para links diretos de imagem.
+     ImgBB:  https://ibb.co/JRCf1Mp2 busca o link direto via API e retorna https://i.ibb.co/.../img.jpg
+     Se a API falhar, tenta o padrão de URL direto.*/
     private function resolveImageUrl(string $url): string
     {
-        // Só processa URLs do ImgBB (página de visualização)
+        // Só processa URLs do ImgBB 
         if (!preg_match('#^https?://ibb\.co/([A-Za-z0-9]+)$#', $url, $m)) {
             return $url; // já é link direto ou outro host — usa como está
         }
@@ -450,7 +436,7 @@ class GameController extends Controller
         $albumId = $m[1];
 
         try {
-            // Tenta buscar o link direto via endpoint embed do ImgBB
+            // Tenta buscar o link direto via endpoint do ImgBB
             $apiUrl = "https://ibb.co/json?type=album&action=data&albumid={$albumId}";
             $ctx    = stream_context_create(['http' => [
                 'timeout' => 5,
@@ -467,7 +453,6 @@ class GameController extends Controller
             }
         } catch (\Throwable) {}
 
-        // Fallback: tenta scraping leve da página para encontrar og:image
         try {
             $ctx  = stream_context_create(['http' => ['timeout' => 5,
                 'header' => "User-Agent: Mozilla/5.0\r\n"]]);
@@ -477,7 +462,6 @@ class GameController extends Controller
             }
         } catch (\Throwable) {}
 
-        // Último recurso: devolve a URL original
         return $url;
     }
 }
