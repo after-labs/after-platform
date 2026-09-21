@@ -212,18 +212,3 @@ public/
 * Internacionalização
 * Boas práticas de organização Laravel
 * Modelagem de marketplace digital
-
----
-
-## Status
-
-O projeto encontra-se funcional e em evolução contínua.
-
-Novas funcionalidades planejadas incluem:
-
-* Dashboard analítico
-* Sistema de publishers
-* Avaliações de jogos
-* Biblioteca do usuário
-* Métricas avançadas para administradores
-* Pipeline CI/CD
